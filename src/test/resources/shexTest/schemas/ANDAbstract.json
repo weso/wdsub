@@ -1,0 +1,135 @@
+{
+  "@context": "http://www.w3.org/ns/shex.jsonld",
+  "type": "Schema",
+  "shapes": [
+    {
+      "id": "http://a.example/A",
+      "type": "ShapeDecl",
+      "abstract": true,
+      "shapeExpr": {
+        "type": "ShapeAnd",
+        "shapeExprs": [
+          {
+            "type": "NodeConstraint",
+            "pattern": "sA..........$"
+          },
+          {
+            "type": "Shape",
+            "expression": {
+              "type": "TripleConstraint",
+              "predicate": "http://a.example/p",
+              "valueExpr": {
+                "type": "NodeConstraint",
+                "values": [
+                  {
+                    "value": "0",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "1",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "2",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "3",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "4",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "5",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "6",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "7",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "8",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  },
+                  {
+                    "value": "9",
+                    "type": "http://www.w3.org/2001/XMLSchema#integer"
+                  }
+                ]
+              },
+              "min": 1,
+              "max": -1
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "http://a.example/B",
+      "type": "ShapeAnd",
+      "shapeExprs": [
+        { "type": "Shape", "extends": ["http://a.example/A"] },
+        {
+          "type": "NodeConstraint",
+          "pattern": "s.B.........$"
+        },
+        {
+          "type": "Shape",
+          "expression": {
+            "type": "TripleConstraint",
+            "predicate": "http://a.example/p",
+            "valueExpr": {
+              "type": "NodeConstraint",
+              "values": [
+                {
+                  "value": "0",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "1",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "3",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "4",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "5",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "6",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "7",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "8",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                },
+                {
+                  "value": "9",
+                  "type": "http://www.w3.org/2001/XMLSchema#integer"
+                }
+              ]
+            },
+            "min": 1,
+            "max": -1
+          }
+        }
+      ]
+    }
+  ]
+}

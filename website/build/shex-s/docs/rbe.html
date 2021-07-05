@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>RBE - Regular Bag Expressions · ShEx-s</title><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="generator" content="Docusaurus"/><meta name="description" content="# Bags"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="RBE - Regular Bag Expressions · ShEx-s"/><meta property="og:type" content="website"/><meta property="og:url" content="https://weso.github.io/shex-s/shex-s/"/><meta property="og:description" content="# Bags"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/shex-s/img/favicon/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css"/><script src="/shex-s/js/scrollSpy.js"></script><link rel="stylesheet" href="/shex-s/css/main.css"/><script src="/shex-s/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/shex-s/"><img class="logo" src="/shex-s/img/logo-weso.png" alt="ShEx-s"/><h2 class="headerTitleWithLogo">ShEx-s</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/shex-s/api/es/weso/index.html" target="_self">API Docs</a></li><li class="siteNavGroupActive"><a href="/shex-s/docs/overview" target="_self">Documentation</a></li><li class=""><a href="https://github.com/weso/shex-s" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Documentation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Documentation</h3><ul class=""><li class="navListItem"><a class="navItem" href="/shex-s/docs/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/shex-s/docs/shex">ShEx</a></li><li class="navListItem"><a class="navItem" href="/shex-s/docs/shapemaps">ShapeMaps</a></li><li class="navListItem"><a class="navItem" href="/shex-s/docs/shapepath">Shape Paths</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/shex-s/docs/rbe">RBE - Regular Bag Expressions</a></li><li class="navListItem"><a class="navItem" href="/shex-s/docs/depGraphs">Dependency graphs</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">RBE - Regular Bag Expressions</h1></header><article><div><span><h1><a class="anchor" aria-hidden="true" id="bags"></a><a href="#bags" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bags</h1>
+<p>Bags are sets which allow repeated elements.</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> es.weso.collection._
+
+<span class="hljs-keyword">val</span> bag = <span class="hljs-type">Bag</span>(<span class="hljs-string">"a"</span>,<span class="hljs-string">"b"</span>,<span class="hljs-string">"a"</span>)
+<span class="hljs-comment">// bag: Bag[String] = BagSortedMap(Map("a" -&gt; 2, "b" -&gt; 1))</span>
+</code></pre>
+<h1><a class="anchor" aria-hidden="true" id="rbe---regular-bag-expressions"></a><a href="#rbe---regular-bag-expressions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>RBE - Regular Bag Expressions</h1>
+<p>Regular Bag Expressions (RBE) are regular expressions where the order of the elements is not significant.</p>
+<h2><a class="anchor" aria-hidden="true" id="example-usage"></a><a href="#example-usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example usage</h2>
+<p>The following line declares <code>rbe</code> as a regular bag expressions that matches between 1 or 3 <code>a</code>s and 1 <code>b</code>:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> es.weso.rbe._
+
+<span class="hljs-keyword">val</span> rbe = <span class="hljs-type">And</span>(<span class="hljs-type">Symbol</span>(<span class="hljs-string">"a"</span>,<span class="hljs-number">1</span>,<span class="hljs-number">3</span>), <span class="hljs-type">Symbol</span>(<span class="hljs-string">"b"</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>))
+<span class="hljs-comment">// rbe: And[String] = And(</span>
+<span class="hljs-comment">//   Symbol("a", 1, IntLimit(3)),</span>
+<span class="hljs-comment">//   Symbol("b", 1, IntLimit(1))</span>
+<span class="hljs-comment">// )</span>
+</code></pre>
+<p>There are 2 algorithms to check if a bag matches a rbe.</p>
+<p>The interval algorithm is in PTime but only works if the rbe doesn't have repeated symbols.</p>
+<p>Example:</p>
+<pre><code class="hljs css language-scala"><span class="hljs-keyword">import</span> es.weso.rbe.interval._
+
+<span class="hljs-keyword">val</span> checker = <span class="hljs-type">IntervalChecker</span>(rbe)
+<span class="hljs-comment">// checker: IntervalChecker[String] = IntervalChecker(</span>
+<span class="hljs-comment">//   And(Symbol("a", 1, IntLimit(3)), Symbol("b", 1, IntLimit(1)))</span>
+<span class="hljs-comment">// )</span>
+
+<span class="hljs-keyword">val</span> check = checker.check(bag, <span class="hljs-literal">false</span>)
+<span class="hljs-comment">// check: checker.Matched[Bag[String]] = Right(</span>
+<span class="hljs-comment">//   BagSortedMap(Map("a" -&gt; 2, "b" -&gt; 1))</span>
+<span class="hljs-comment">// )</span>
+</code></pre>
+<pre><code class="hljs">
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/shex-s/docs/shapepath"><span class="arrow-prev">← </span><span>Shape Paths</span></a><a class="docs-next button" href="/shex-s/docs/depGraphs"><span>Dependency graphs</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#example-usage">Example usage</a></li></ul></nav></div><footer class="nav-footer" id="footer"><hr class="separator"/><section class="copyright">Copyright © 2019-2021 WESO Research group.</section></footer></div></body></html>

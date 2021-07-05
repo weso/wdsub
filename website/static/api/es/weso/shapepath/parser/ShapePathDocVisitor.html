@@ -1,0 +1,1409 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title>shex-s v0.1.86 - es.weso.shapepath.parser.ShapePathDocVisitor</title>
+          <meta name="description" content="shex - s v0.1.86 - es.weso.shapepath.parser.ShapePathDocVisitor" />
+          <meta name="keywords" content="shex s v0.1.86 es.weso.shapepath.parser.ShapePathDocVisitor" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      
+      <link href="../../../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/index.js"></script>
+      <script type="text/javascript" src="../../../../index.js"></script>
+      <script type="text/javascript" src="../../../../lib/scheduler.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      
+      <script type="text/javascript">
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../../../';
+      </script>
+    
+        </head>
+        <body>
+      <div id="search">
+        <span id="doc-title">shex-s<span id="doc-version">v0.1.86</span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="../../../../index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../../index.html"><span class="name">root</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.es" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="es"></a><a id="es:es"></a>
+      <span class="permalink">
+      <a href="../../../../es/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../index.html"><span class="name">es</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="es.weso" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="weso"></a><a id="weso:weso"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html"><span class="name">weso</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="es">es</a></dd></dl></div>
+    </li><li name="es.weso.shapepath" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="shapepath"></a><a id="shapepath:shapepath"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../index.html"><span class="name">shapepath</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="es.weso">weso</a></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parser"></a><a id="parser:parser"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="index.html"><span class="name">parser</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="es.weso.shapepath">shapepath</a></dd></dl></div>
+    </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="SchemaMappingsDocBaseListener.html" title="This class provides an empty implementation of SchemaMappingsDocListener, which can be extended to create a listener which only needs to handle a subset of the available methods."></a>
+                        <a href="SchemaMappingsDocBaseListener.html" title="This class provides an empty implementation of SchemaMappingsDocListener, which can be extended to create a listener which only needs to handle a subset of the available methods.">SchemaMappingsDocBaseListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="SchemaMappingsDocBaseVisitor.html" title="This class provides an empty implementation of SchemaMappingsDocVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods."></a>
+                        <a href="SchemaMappingsDocBaseVisitor.html" title="This class provides an empty implementation of SchemaMappingsDocVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods.">SchemaMappingsDocBaseVisitor</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="SchemaMappingsDocLexer.html" title=""></a>
+                        <a href="SchemaMappingsDocLexer.html" title="">SchemaMappingsDocLexer</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="SchemaMappingsDocListener.html" title="This interface defines a complete listener for a parse tree produced by SchemaMappingsDocParser."></a>
+                        <a href="SchemaMappingsDocListener.html" title="This interface defines a complete listener for a parse tree produced by SchemaMappingsDocParser.">SchemaMappingsDocListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="SchemaMappingsDocParser.html" title=""></a>
+                        <a href="SchemaMappingsDocParser.html" title="">SchemaMappingsDocParser</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="SchemaMappingsDocVisitor.html" title="This interface defines a complete generic visitor for a parse tree produced by SchemaMappingsDocParser."></a>
+                        <a href="SchemaMappingsDocVisitor.html" title="This interface defines a complete generic visitor for a parse tree produced by SchemaMappingsDocParser.">SchemaMappingsDocVisitor</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapePathDocBaseListener.html" title="This class provides an empty implementation of ShapePathDocListener, which can be extended to create a listener which only needs to handle a subset of the available methods."></a>
+                        <a href="ShapePathDocBaseListener.html" title="This class provides an empty implementation of ShapePathDocListener, which can be extended to create a listener which only needs to handle a subset of the available methods.">ShapePathDocBaseListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapePathDocBaseVisitor.html" title="This class provides an empty implementation of ShapePathDocVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods."></a>
+                        <a href="ShapePathDocBaseVisitor.html" title="This class provides an empty implementation of ShapePathDocVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods.">ShapePathDocBaseVisitor</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapePathDocLexer.html" title=""></a>
+                        <a href="ShapePathDocLexer.html" title="">ShapePathDocLexer</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="ShapePathDocListener.html" title="This interface defines a complete listener for a parse tree produced by ShapePathDocParser."></a>
+                        <a href="ShapePathDocListener.html" title="This interface defines a complete listener for a parse tree produced by ShapePathDocParser.">ShapePathDocListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapePathDocParser.html" title=""></a>
+                        <a href="ShapePathDocParser.html" title="">ShapePathDocParser</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="" title="This interface defines a complete generic visitor for a parse tree produced by ShapePathDocParser."></a>
+                        <a href="" title="This interface defines a complete generic visitor for a parse tree produced by ShapePathDocParser.">ShapePathDocVisitor</a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="trait type">
+      <div id="definition">
+        <div class="big-circle trait">t</div>
+        <p id="owner"><a href="../../../index.html" class="extype" name="es">es</a>.<a href="../../index.html" class="extype" name="es.weso">weso</a>.<a href="../index.html" class="extype" name="es.weso.shapepath">shapepath</a>.<a href="index.html" class="extype" name="es.weso.shapepath.parser">parser</a></p>
+        <h1>ShapePathDocVisitor<span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"></span></h3>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ShapePathDocVisitor</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">ParseTreeVisitor</span>[<span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span>]</span>
+      </span>
+      </h4>
+
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This interface defines a complete generic visitor for a parse tree produced
+by <code><a href="ShapePathDocParser.html" class="extype" name="es.weso.shapepath.parser.ShapePathDocParser">ShapePathDocParser</a></code>.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/weso/srdf/tree/v0.1.86/modules/shapepath/target/scala-2.12/src_managed/main/antlr4/es/weso/shapepath/parser/ShapePathDocVisitor.scala" target="_blank">ShapePathDocVisitor.java</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">
+            Linear Supertypes
+          </span>
+          <div class="superTypes hiddenContent"><span class="extype" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">ParseTreeVisitor</span>[<span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span>], <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></div>
+        </div><div class="toggleContainer block">
+            <span class="toggle">
+              Known Subclasses
+            </span>
+            <div class="subClasses hiddenContent"><a href="../compact/ShapePathMaker.html" class="extype" name="es.weso.shapepath.compact.ShapePathMaker">ShapePathMaker</a>, <a href="ShapePathDocBaseVisitor.html" class="extype" name="es.weso.shapepath.parser.ShapePathDocBaseVisitor">ShapePathDocBaseVisitor</a></div>
+          </div></div>
+        
+
+      <div id="mbrsel">
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
+            <ol>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
+            </ol>
+          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="es.weso.shapepath.parser.ShapePathDocVisitor"><span>ShapePathDocVisitor</span></li><li class="in" name="org.antlr.v4.runtime.tree.ParseTreeVisitor"><span>ParseTreeVisitor</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        
+
+        <div class="values members">
+              <h3>Abstract Value Members</h3>
+              <ol><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visit" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visit(x$1:org.antlr.v4.runtime.tree.ParseTree):T"></a><a id="visit(ParseTree):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visit(x$1:org.antlr.v4.runtime.tree.ParseTree):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visit</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.ParseTree">ParseTree</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitAnyKindTest" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitAnyKindTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.AnyKindTestContext):T"></a><a id="visitAnyKindTest(AnyKindTestContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitAnyKindTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.AnyKindTestContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitAnyKindTest</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.AnyKindTestContext">AnyKindTestContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#anyKindTest():es.weso.shapepath.parser.ShapePathDocParser.AnyKindTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#anyKindTest">ShapePathDocParser#anyKindTest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#anyKindTest():es.weso.shapepath.parser.ShapePathDocParser.AnyKindTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#anyKindTest">ShapePathDocParser#anyKindTest</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitAxisStep" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitAxisStep(ctx:es.weso.shapepath.parser.ShapePathDocParser.AxisStepContext):T"></a><a id="visitAxisStep(AxisStepContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitAxisStep(ctx:es.weso.shapepath.parser.ShapePathDocParser.AxisStepContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitAxisStep</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.AxisStepContext">AxisStepContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#axisStep():es.weso.shapepath.parser.ShapePathDocParser.AxisStepContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#axisStep">ShapePathDocParser#axisStep</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#axisStep():es.weso.shapepath.parser.ShapePathDocParser.AxisStepContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#axisStep">ShapePathDocParser#axisStep</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitBlankNode" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitBlankNode(ctx:es.weso.shapepath.parser.ShapePathDocParser.BlankNodeContext):T"></a><a id="visitBlankNode(BlankNodeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitBlankNode(ctx:es.weso.shapepath.parser.ShapePathDocParser.BlankNodeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitBlankNode</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.BlankNodeContext">BlankNodeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#blankNode():es.weso.shapepath.parser.ShapePathDocParser.BlankNodeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#blankNode">ShapePathDocParser#blankNode</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#blankNode():es.weso.shapepath.parser.ShapePathDocParser.BlankNodeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#blankNode">ShapePathDocParser#blankNode</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitBlankNodeLabel" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitBlankNodeLabel(ctx:es.weso.shapepath.parser.ShapePathDocParser.BlankNodeLabelContext):T"></a><a id="visitBlankNodeLabel(BlankNodeLabelContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitBlankNodeLabel(ctx:es.weso.shapepath.parser.ShapePathDocParser.BlankNodeLabelContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitBlankNodeLabel</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.BlankNodeLabelContext">BlankNodeLabelContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#blankNodeLabel():es.weso.shapepath.parser.ShapePathDocParser.BlankNodeLabelContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#blankNodeLabel">ShapePathDocParser#blankNodeLabel</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#blankNodeLabel():es.weso.shapepath.parser.ShapePathDocParser.BlankNodeLabelContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#blankNodeLabel">ShapePathDocParser#blankNodeLabel</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitChild" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitChild(ctx:es.weso.shapepath.parser.ShapePathDocParser.ChildContext):T"></a><a id="visitChild(ChildContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitChild(ctx:es.weso.shapepath.parser.ShapePathDocParser.ChildContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitChild</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ChildContext">ChildContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>child</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>child</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visitChildren" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitChildren(x$1:org.antlr.v4.runtime.tree.RuleNode):T"></a><a id="visitChildren(RuleNode):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitChildren(x$1:org.antlr.v4.runtime.tree.RuleNode):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitChildren</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.RuleNode">RuleNode</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitContextItemExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitContextItemExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.ContextItemExprContext):T"></a><a id="visitContextItemExpr(ContextItemExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitContextItemExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.ContextItemExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitContextItemExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ContextItemExprContext">ContextItemExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#contextItemExpr():es.weso.shapepath.parser.ShapePathDocParser.ContextItemExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#contextItemExpr">ShapePathDocParser#contextItemExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#contextItemExpr():es.weso.shapepath.parser.ShapePathDocParser.ContextItemExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#contextItemExpr">ShapePathDocParser#contextItemExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitDescendant" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitDescendant(ctx:es.weso.shapepath.parser.ShapePathDocParser.DescendantContext):T"></a><a id="visitDescendant(DescendantContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitDescendant(ctx:es.weso.shapepath.parser.ShapePathDocParser.DescendantContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitDescendant</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.DescendantContext">DescendantContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>descendant</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>descendant</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitEqName" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitEqName(ctx:es.weso.shapepath.parser.ShapePathDocParser.EqNameContext):T"></a><a id="visitEqName(EqNameContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitEqName(ctx:es.weso.shapepath.parser.ShapePathDocParser.EqNameContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitEqName</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.EqNameContext">EqNameContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#eqName():es.weso.shapepath.parser.ShapePathDocParser.EqNameContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#eqName">ShapePathDocParser#eqName</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#eqName():es.weso.shapepath.parser.ShapePathDocParser.EqNameContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#eqName">ShapePathDocParser#eqName</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visitErrorNode" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitErrorNode(x$1:org.antlr.v4.runtime.tree.ErrorNode):T"></a><a id="visitErrorNode(ErrorNode):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitErrorNode(x$1:org.antlr.v4.runtime.tree.ErrorNode):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitErrorNode</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.ErrorNode">ErrorNode</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.ExprContext):T"></a><a id="visitExpr(ExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.ExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ExprContext">ExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#expr():es.weso.shapepath.parser.ShapePathDocParser.ExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#expr">ShapePathDocParser#expr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#expr():es.weso.shapepath.parser.ShapePathDocParser.ExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#expr">ShapePathDocParser#expr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitExprIndex" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitExprIndex(ctx:es.weso.shapepath.parser.ShapePathDocParser.ExprIndexContext):T"></a><a id="visitExprIndex(ExprIndexContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitExprIndex(ctx:es.weso.shapepath.parser.ShapePathDocParser.ExprIndexContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitExprIndex</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ExprIndexContext">ExprIndexContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#exprIndex():es.weso.shapepath.parser.ShapePathDocParser.ExprIndexContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#exprIndex">ShapePathDocParser#exprIndex</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#exprIndex():es.weso.shapepath.parser.ShapePathDocParser.ExprIndexContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#exprIndex">ShapePathDocParser#exprIndex</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitFirstStepExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitFirstStepExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.FirstStepExprContext):T"></a><a id="visitFirstStepExpr(FirstStepExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitFirstStepExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.FirstStepExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitFirstStepExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.FirstStepExprContext">FirstStepExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#firstStepExpr():es.weso.shapepath.parser.ShapePathDocParser.FirstStepExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#firstStepExpr">ShapePathDocParser#firstStepExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#firstStepExpr():es.weso.shapepath.parser.ShapePathDocParser.FirstStepExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#firstStepExpr">ShapePathDocParser#firstStepExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitForwardStep" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitForwardStep(ctx:es.weso.shapepath.parser.ShapePathDocParser.ForwardStepContext):T"></a><a id="visitForwardStep(ForwardStepContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitForwardStep(ctx:es.weso.shapepath.parser.ShapePathDocParser.ForwardStepContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitForwardStep</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ForwardStepContext">ForwardStepContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#forwardStep():es.weso.shapepath.parser.ShapePathDocParser.ForwardStepContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardStep">ShapePathDocParser#forwardStep</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#forwardStep():es.weso.shapepath.parser.ShapePathDocParser.ForwardStepContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardStep">ShapePathDocParser#forwardStep</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitIntersectionExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitIntersectionExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.IntersectionExprContext):T"></a><a id="visitIntersectionExpr(IntersectionExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitIntersectionExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.IntersectionExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitIntersectionExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.IntersectionExprContext">IntersectionExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#intersectionExpr():es.weso.shapepath.parser.ShapePathDocParser.IntersectionExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#intersectionExpr">ShapePathDocParser#intersectionExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#intersectionExpr():es.weso.shapepath.parser.ShapePathDocParser.IntersectionExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#intersectionExpr">ShapePathDocParser#intersectionExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitIri" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitIri(ctx:es.weso.shapepath.parser.ShapePathDocParser.IriContext):T"></a><a id="visitIri(IriContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitIri(ctx:es.weso.shapepath.parser.ShapePathDocParser.IriContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitIri</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.IriContext">IriContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#iri():es.weso.shapepath.parser.ShapePathDocParser.IriContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#iri">ShapePathDocParser#iri</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#iri():es.weso.shapepath.parser.ShapePathDocParser.IriContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#iri">ShapePathDocParser#iri</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitKindTest" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitKindTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.KindTestContext):T"></a><a id="visitKindTest(KindTestContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitKindTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.KindTestContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitKindTest</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.KindTestContext">KindTestContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#kindTest():es.weso.shapepath.parser.ShapePathDocParser.KindTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#kindTest">ShapePathDocParser#kindTest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#kindTest():es.weso.shapepath.parser.ShapePathDocParser.KindTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#kindTest">ShapePathDocParser#kindTest</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitLiteral(ctx:es.weso.shapepath.parser.ShapePathDocParser.LiteralContext):T"></a><a id="visitLiteral(LiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitLiteral(ctx:es.weso.shapepath.parser.ShapePathDocParser.LiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.LiteralContext">LiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#literal():es.weso.shapepath.parser.ShapePathDocParser.LiteralContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#literal">ShapePathDocParser#literal</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#literal():es.weso.shapepath.parser.ShapePathDocParser.LiteralContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#literal">ShapePathDocParser#literal</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitNameTest" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNameTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.NameTestContext):T"></a><a id="visitNameTest(NameTestContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitNameTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.NameTestContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNameTest</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.NameTestContext">NameTestContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#nameTest():es.weso.shapepath.parser.ShapePathDocParser.NameTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#nameTest">ShapePathDocParser#nameTest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#nameTest():es.weso.shapepath.parser.ShapePathDocParser.NameTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#nameTest">ShapePathDocParser#nameTest</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitNestedShapeExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNestedShapeExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.NestedShapeExprContext):T"></a><a id="visitNestedShapeExpr(NestedShapeExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitNestedShapeExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.NestedShapeExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNestedShapeExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.NestedShapeExprContext">NestedShapeExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>nestedShapeExpr</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>nestedShapeExpr</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitNestedTripleExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNestedTripleExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.NestedTripleExprContext):T"></a><a id="visitNestedTripleExpr(NestedTripleExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitNestedTripleExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.NestedTripleExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNestedTripleExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.NestedTripleExprContext">NestedTripleExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>nestedTripleExpr</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>nestedTripleExpr</code>
+labeled alternative in <code><a href="ShapePathDocParser.html#forwardAxis():es.weso.shapepath.parser.ShapePathDocParser.ForwardAxisContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#forwardAxis">ShapePathDocParser#forwardAxis</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitNodeTest" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNodeTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.NodeTestContext):T"></a><a id="visitNodeTest(NodeTestContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitNodeTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.NodeTestContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNodeTest</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.NodeTestContext">NodeTestContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#nodeTest():es.weso.shapepath.parser.ShapePathDocParser.NodeTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#nodeTest">ShapePathDocParser#nodeTest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#nodeTest():es.weso.shapepath.parser.ShapePathDocParser.NodeTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#nodeTest">ShapePathDocParser#nodeTest</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitNumericLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNumericLiteral(ctx:es.weso.shapepath.parser.ShapePathDocParser.NumericLiteralContext):T"></a><a id="visitNumericLiteral(NumericLiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitNumericLiteral(ctx:es.weso.shapepath.parser.ShapePathDocParser.NumericLiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNumericLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.NumericLiteralContext">NumericLiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#numericLiteral():es.weso.shapepath.parser.ShapePathDocParser.NumericLiteralContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#numericLiteral">ShapePathDocParser#numericLiteral</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#numericLiteral():es.weso.shapepath.parser.ShapePathDocParser.NumericLiteralContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#numericLiteral">ShapePathDocParser#numericLiteral</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitParenthesizedExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitParenthesizedExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.ParenthesizedExprContext):T"></a><a id="visitParenthesizedExpr(ParenthesizedExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitParenthesizedExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.ParenthesizedExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitParenthesizedExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ParenthesizedExprContext">ParenthesizedExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#parenthesizedExpr():es.weso.shapepath.parser.ShapePathDocParser.ParenthesizedExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#parenthesizedExpr">ShapePathDocParser#parenthesizedExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#parenthesizedExpr():es.weso.shapepath.parser.ShapePathDocParser.ParenthesizedExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#parenthesizedExpr">ShapePathDocParser#parenthesizedExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitPathExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPathExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.PathExprContext):T"></a><a id="visitPathExpr(PathExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitPathExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.PathExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPathExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.PathExprContext">PathExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#pathExpr():es.weso.shapepath.parser.ShapePathDocParser.PathExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#pathExpr">ShapePathDocParser#pathExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#pathExpr():es.weso.shapepath.parser.ShapePathDocParser.PathExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#pathExpr">ShapePathDocParser#pathExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitPostfixExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPostfixExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.PostfixExprContext):T"></a><a id="visitPostfixExpr(PostfixExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitPostfixExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.PostfixExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPostfixExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.PostfixExprContext">PostfixExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#postfixExpr():es.weso.shapepath.parser.ShapePathDocParser.PostfixExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#postfixExpr">ShapePathDocParser#postfixExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#postfixExpr():es.weso.shapepath.parser.ShapePathDocParser.PostfixExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#postfixExpr">ShapePathDocParser#postfixExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitPredicate" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPredicate(ctx:es.weso.shapepath.parser.ShapePathDocParser.PredicateContext):T"></a><a id="visitPredicate(PredicateContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitPredicate(ctx:es.weso.shapepath.parser.ShapePathDocParser.PredicateContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPredicate</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.PredicateContext">PredicateContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#predicate():es.weso.shapepath.parser.ShapePathDocParser.PredicateContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#predicate">ShapePathDocParser#predicate</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#predicate():es.weso.shapepath.parser.ShapePathDocParser.PredicateContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#predicate">ShapePathDocParser#predicate</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitPredicateList" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPredicateList(ctx:es.weso.shapepath.parser.ShapePathDocParser.PredicateListContext):T"></a><a id="visitPredicateList(PredicateListContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitPredicateList(ctx:es.weso.shapepath.parser.ShapePathDocParser.PredicateListContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPredicateList</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.PredicateListContext">PredicateListContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#predicateList():es.weso.shapepath.parser.ShapePathDocParser.PredicateListContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#predicateList">ShapePathDocParser#predicateList</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#predicateList():es.weso.shapepath.parser.ShapePathDocParser.PredicateListContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#predicateList">ShapePathDocParser#predicateList</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitPrefixedName" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPrefixedName(ctx:es.weso.shapepath.parser.ShapePathDocParser.PrefixedNameContext):T"></a><a id="visitPrefixedName(PrefixedNameContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitPrefixedName(ctx:es.weso.shapepath.parser.ShapePathDocParser.PrefixedNameContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPrefixedName</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.PrefixedNameContext">PrefixedNameContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#prefixedName():es.weso.shapepath.parser.ShapePathDocParser.PrefixedNameContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#prefixedName">ShapePathDocParser#prefixedName</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#prefixedName():es.weso.shapepath.parser.ShapePathDocParser.PrefixedNameContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#prefixedName">ShapePathDocParser#prefixedName</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitPrimaryExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPrimaryExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.PrimaryExprContext):T"></a><a id="visitPrimaryExpr(PrimaryExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitPrimaryExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.PrimaryExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPrimaryExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.PrimaryExprContext">PrimaryExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#primaryExpr():es.weso.shapepath.parser.ShapePathDocParser.PrimaryExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#primaryExpr">ShapePathDocParser#primaryExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#primaryExpr():es.weso.shapepath.parser.ShapePathDocParser.PrimaryExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#primaryExpr">ShapePathDocParser#primaryExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitRegExpTest" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitRegExpTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.RegExpTestContext):T"></a><a id="visitRegExpTest(RegExpTestContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitRegExpTest(ctx:es.weso.shapepath.parser.ShapePathDocParser.RegExpTestContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitRegExpTest</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.RegExpTestContext">RegExpTestContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#regExpTest():es.weso.shapepath.parser.ShapePathDocParser.RegExpTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#regExpTest">ShapePathDocParser#regExpTest</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#regExpTest():es.weso.shapepath.parser.ShapePathDocParser.RegExpTestContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#regExpTest">ShapePathDocParser#regExpTest</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitShapeExprIndex" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeExprIndex(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeExprIndexContext):T"></a><a id="visitShapeExprIndex(ShapeExprIndexContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitShapeExprIndex(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeExprIndexContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeExprIndex</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ShapeExprIndexContext">ShapeExprIndexContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeExprIndex():es.weso.shapepath.parser.ShapePathDocParser.ShapeExprIndexContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeExprIndex">ShapePathDocParser#shapeExprIndex</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeExprIndex():es.weso.shapepath.parser.ShapePathDocParser.ShapeExprIndexContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeExprIndex">ShapePathDocParser#shapeExprIndex</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitShapeExprLabel" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeExprLabel(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeExprLabelContext):T"></a><a id="visitShapeExprLabel(ShapeExprLabelContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitShapeExprLabel(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeExprLabelContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeExprLabel</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ShapeExprLabelContext">ShapeExprLabelContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeExprLabel():es.weso.shapepath.parser.ShapePathDocParser.ShapeExprLabelContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeExprLabel">ShapePathDocParser#shapeExprLabel</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeExprLabel():es.weso.shapepath.parser.ShapePathDocParser.ShapeExprLabelContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeExprLabel">ShapePathDocParser#shapeExprLabel</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitShapeExprType" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeExprType(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeExprTypeContext):T"></a><a id="visitShapeExprType(ShapeExprTypeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitShapeExprType(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeExprTypeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeExprType</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ShapeExprTypeContext">ShapeExprTypeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeExprType():es.weso.shapepath.parser.ShapePathDocParser.ShapeExprTypeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeExprType">ShapePathDocParser#shapeExprType</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeExprType():es.weso.shapepath.parser.ShapePathDocParser.ShapeExprTypeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeExprType">ShapePathDocParser#shapeExprType</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitShapePathDoc" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapePathDoc(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapePathDocContext):T"></a><a id="visitShapePathDoc(ShapePathDocContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitShapePathDoc(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapePathDocContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapePathDoc</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ShapePathDocContext">ShapePathDocContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapePathDoc():es.weso.shapepath.parser.ShapePathDocParser.ShapePathDocContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapePathDoc">ShapePathDocParser#shapePathDoc</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapePathDoc():es.weso.shapepath.parser.ShapePathDocParser.ShapePathDocContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapePathDoc">ShapePathDocParser#shapePathDoc</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitShapeType" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeType(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeTypeContext):T"></a><a id="visitShapeType(ShapeTypeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitShapeType(ctx:es.weso.shapepath.parser.ShapePathDocParser.ShapeTypeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeType</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.ShapeTypeContext">ShapeTypeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeType():es.weso.shapepath.parser.ShapePathDocParser.ShapeTypeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeType">ShapePathDocParser#shapeType</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#shapeType():es.weso.shapepath.parser.ShapePathDocParser.ShapeTypeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#shapeType">ShapePathDocParser#shapeType</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitStepExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitStepExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.StepExprContext):T"></a><a id="visitStepExpr(StepExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitStepExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.StepExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitStepExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.StepExprContext">StepExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#stepExpr():es.weso.shapepath.parser.ShapePathDocParser.StepExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#stepExpr">ShapePathDocParser#stepExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#stepExpr():es.weso.shapepath.parser.ShapePathDocParser.StepExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#stepExpr">ShapePathDocParser#stepExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitStringLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitStringLiteral(ctx:es.weso.shapepath.parser.ShapePathDocParser.StringLiteralContext):T"></a><a id="visitStringLiteral(StringLiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitStringLiteral(ctx:es.weso.shapepath.parser.ShapePathDocParser.StringLiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitStringLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.StringLiteralContext">StringLiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#stringLiteral():es.weso.shapepath.parser.ShapePathDocParser.StringLiteralContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#stringLiteral">ShapePathDocParser#stringLiteral</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#stringLiteral():es.weso.shapepath.parser.ShapePathDocParser.StringLiteralContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#stringLiteral">ShapePathDocParser#stringLiteral</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visitTerminal" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitTerminal(x$1:org.antlr.v4.runtime.tree.TerminalNode):T"></a><a id="visitTerminal(TerminalNode):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitTerminal(x$1:org.antlr.v4.runtime.tree.TerminalNode):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitTerminal</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.TerminalNode">TerminalNode</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitTripleExprIndex" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitTripleExprIndex(ctx:es.weso.shapepath.parser.ShapePathDocParser.TripleExprIndexContext):T"></a><a id="visitTripleExprIndex(TripleExprIndexContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitTripleExprIndex(ctx:es.weso.shapepath.parser.ShapePathDocParser.TripleExprIndexContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitTripleExprIndex</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.TripleExprIndexContext">TripleExprIndexContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#tripleExprIndex():es.weso.shapepath.parser.ShapePathDocParser.TripleExprIndexContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#tripleExprIndex">ShapePathDocParser#tripleExprIndex</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#tripleExprIndex():es.weso.shapepath.parser.ShapePathDocParser.TripleExprIndexContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#tripleExprIndex">ShapePathDocParser#tripleExprIndex</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitTripleExprLabel" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitTripleExprLabel(ctx:es.weso.shapepath.parser.ShapePathDocParser.TripleExprLabelContext):T"></a><a id="visitTripleExprLabel(TripleExprLabelContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitTripleExprLabel(ctx:es.weso.shapepath.parser.ShapePathDocParser.TripleExprLabelContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitTripleExprLabel</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.TripleExprLabelContext">TripleExprLabelContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#tripleExprLabel():es.weso.shapepath.parser.ShapePathDocParser.TripleExprLabelContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#tripleExprLabel">ShapePathDocParser#tripleExprLabel</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#tripleExprLabel():es.weso.shapepath.parser.ShapePathDocParser.TripleExprLabelContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#tripleExprLabel">ShapePathDocParser#tripleExprLabel</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitTripleExprType" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitTripleExprType(ctx:es.weso.shapepath.parser.ShapePathDocParser.TripleExprTypeContext):T"></a><a id="visitTripleExprType(TripleExprTypeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitTripleExprType(ctx:es.weso.shapepath.parser.ShapePathDocParser.TripleExprTypeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitTripleExprType</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.TripleExprTypeContext">TripleExprTypeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#tripleExprType():es.weso.shapepath.parser.ShapePathDocParser.TripleExprTypeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#tripleExprType">ShapePathDocParser#tripleExprType</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#tripleExprType():es.weso.shapepath.parser.ShapePathDocParser.TripleExprTypeContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#tripleExprType">ShapePathDocParser#tripleExprType</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitUnionExpr" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitUnionExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.UnionExprContext):T"></a><a id="visitUnionExpr(UnionExprContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitUnionExpr(ctx:es.weso.shapepath.parser.ShapePathDocParser.UnionExprContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitUnionExpr</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.UnionExprContext">UnionExprContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#unionExpr():es.weso.shapepath.parser.ShapePathDocParser.UnionExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#unionExpr">ShapePathDocParser#unionExpr</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#unionExpr():es.weso.shapepath.parser.ShapePathDocParser.UnionExprContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#unionExpr">ShapePathDocParser#unionExpr</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapepath.parser.ShapePathDocVisitor#visitWildCard" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitWildCard(ctx:es.weso.shapepath.parser.ShapePathDocParser.WildCardContext):T"></a><a id="visitWildCard(WildCardContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#visitWildCard(ctx:es.weso.shapepath.parser.ShapePathDocParser.WildCardContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitWildCard</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocParser.WildCardContext">WildCardContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapePathDocParser.html#wildCard():es.weso.shapepath.parser.ShapePathDocParser.WildCardContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#wildCard">ShapePathDocParser#wildCard</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapePathDocParser.html#wildCard():es.weso.shapepath.parser.ShapePathDocParser.WildCardContext" class="extmbr" name="es.weso.shapepath.parser.ShapePathDocParser#wildCard">ShapePathDocParser#wildCard</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div class="values members">
+              <h3>Concrete Value Members</h3>
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Long.html#scala.Long" class="extype" name="scala.Long">Long</a></span>, <span name="arg1">arg1: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Long.html#scala.Long" class="extype" name="scala.Long">Long</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li>
+              </ol>
+            </div>
+
+        
+
+        <div class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapepath/parser/ShapePathDocVisitor.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: ">finalize</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+                <span class="name">@Deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"></dd></dl></div>
+    </li></ol>
+            </div>
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">
+              <h3>Inherited from <span class="extype" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">ParseTreeVisitor</span>[<span class="extype" name="es.weso.shapepath.parser.ShapePathDocVisitor.T">T</span>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+    </body>
+          </div>
+        </div>
+      </div>
+    </body>
+      </html>

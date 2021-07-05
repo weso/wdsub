@@ -1,0 +1,1347 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title>shex-s v0.1.86 - es.weso.shapemaps.parser.ShapeMapVisitor</title>
+          <meta name="description" content="shex - s v0.1.86 - es.weso.shapemaps.parser.ShapeMapVisitor" />
+          <meta name="keywords" content="shex s v0.1.86 es.weso.shapemaps.parser.ShapeMapVisitor" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      
+      <link href="../../../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../../lib/jquery.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../../../lib/index.js"></script>
+      <script type="text/javascript" src="../../../../index.js"></script>
+      <script type="text/javascript" src="../../../../lib/scheduler.js"></script>
+      <script type="text/javascript" src="../../../../lib/template.js"></script>
+      
+      <script type="text/javascript">
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../../../';
+      </script>
+    
+        </head>
+        <body>
+      <div id="search">
+        <span id="doc-title">shex-s<span id="doc-version">v0.1.86</span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="../../../../index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../../index.html"><span class="name">root</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.es" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="es"></a><a id="es:es"></a>
+      <span class="permalink">
+      <a href="../../../../es/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../index.html"><span class="name">es</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="es.weso" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="weso"></a><a id="weso:weso"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html"><span class="name">weso</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="es">es</a></dd></dl></div>
+    </li><li name="es.weso.shapemaps" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="shapemaps"></a><a id="shapemaps:shapemaps"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../index.html"><span class="name">shapemaps</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="es.weso">weso</a></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="parser"></a><a id="parser:parser"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="index.html"><span class="name">parser</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="es.weso.shapemaps">shapemaps</a></dd></dl></div>
+    </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="NodeSelectorBaseListener.html" title="This class provides an empty implementation of NodeSelectorListener, which can be extended to create a listener which only needs to handle a subset of the available methods."></a>
+                        <a href="NodeSelectorBaseListener.html" title="This class provides an empty implementation of NodeSelectorListener, which can be extended to create a listener which only needs to handle a subset of the available methods.">NodeSelectorBaseListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="NodeSelectorBaseVisitor.html" title="This class provides an empty implementation of NodeSelectorVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods."></a>
+                        <a href="NodeSelectorBaseVisitor.html" title="This class provides an empty implementation of NodeSelectorVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods.">NodeSelectorBaseVisitor</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="NodeSelectorLexer.html" title=""></a>
+                        <a href="NodeSelectorLexer.html" title="">NodeSelectorLexer</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="NodeSelectorListener.html" title="This interface defines a complete listener for a parse tree produced by NodeSelectorParser."></a>
+                        <a href="NodeSelectorListener.html" title="This interface defines a complete listener for a parse tree produced by NodeSelectorParser.">NodeSelectorListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="NodeSelectorParser.html" title=""></a>
+                        <a href="NodeSelectorParser.html" title="">NodeSelectorParser</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="NodeSelectorVisitor.html" title="This interface defines a complete generic visitor for a parse tree produced by NodeSelectorParser."></a>
+                        <a href="NodeSelectorVisitor.html" title="This interface defines a complete generic visitor for a parse tree produced by NodeSelectorParser.">NodeSelectorVisitor</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapeMapBaseListener.html" title="This class provides an empty implementation of ShapeMapListener, which can be extended to create a listener which only needs to handle a subset of the available methods."></a>
+                        <a href="ShapeMapBaseListener.html" title="This class provides an empty implementation of ShapeMapListener, which can be extended to create a listener which only needs to handle a subset of the available methods.">ShapeMapBaseListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapeMapBaseVisitor.html" title="This class provides an empty implementation of ShapeMapVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods."></a>
+                        <a href="ShapeMapBaseVisitor.html" title="This class provides an empty implementation of ShapeMapVisitor, which can be extended to create a visitor which only needs to handle a subset of the available methods.">ShapeMapBaseVisitor</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapeMapLexer.html" title=""></a>
+                        <a href="ShapeMapLexer.html" title="">ShapeMapLexer</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="ShapeMapListener.html" title="This interface defines a complete listener for a parse tree produced by ShapeMapParser."></a>
+                        <a href="ShapeMapListener.html" title="This interface defines a complete listener for a parse tree produced by ShapeMapParser.">ShapeMapListener</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="class" href="ShapeMapParser.html" title=""></a>
+                        <a href="ShapeMapParser.html" title="">ShapeMapParser</a>
+                      </li><li class="current-entities indented4">
+                        <span class="separator"></span>
+                        <a class="trait" href="" title="This interface defines a complete generic visitor for a parse tree produced by ShapeMapParser."></a>
+                        <a href="" title="This interface defines a complete generic visitor for a parse tree produced by ShapeMapParser.">ShapeMapVisitor</a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="trait type">
+      <div id="definition">
+        <div class="big-circle trait">t</div>
+        <p id="owner"><a href="../../../index.html" class="extype" name="es">es</a>.<a href="../../index.html" class="extype" name="es.weso">weso</a>.<a href="../index.html" class="extype" name="es.weso.shapemaps">shapemaps</a>.<a href="index.html" class="extype" name="es.weso.shapemaps.parser">parser</a></p>
+        <h1>ShapeMapVisitor<span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"></span></h3>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ShapeMapVisitor</span><span class="tparams">[<span name="T">T</span>]</span><span class="result"> extends <span class="extype" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">ParseTreeVisitor</span>[<span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span>]</span>
+      </span>
+      </h4>
+
+      
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>This interface defines a complete generic visitor for a parse tree produced
+by <code><a href="ShapeMapParser.html" class="extype" name="es.weso.shapemaps.parser.ShapeMapParser">ShapeMapParser</a></code>.
+</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/weso/srdf/tree/v0.1.86/modules/shapeMaps/target/scala-2.12/src_managed/main/antlr4/es/weso/shapemaps/parser/ShapeMapVisitor.scala" target="_blank">ShapeMapVisitor.java</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">
+            Linear Supertypes
+          </span>
+          <div class="superTypes hiddenContent"><span class="extype" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">ParseTreeVisitor</span>[<span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span>], <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></div>
+        </div><div class="toggleContainer block">
+            <span class="toggle">
+              Known Subclasses
+            </span>
+            <div class="subClasses hiddenContent"><a href="../ShapeMapsMaker.html" class="extype" name="es.weso.shapemaps.ShapeMapsMaker">ShapeMapsMaker</a>, <a href="ShapeMapBaseVisitor.html" class="extype" name="es.weso.shapemaps.parser.ShapeMapBaseVisitor">ShapeMapBaseVisitor</a></div>
+          </div></div>
+        
+
+      <div id="mbrsel">
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
+            <ol>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
+            </ol>
+          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="es.weso.shapemaps.parser.ShapeMapVisitor"><span>ShapeMapVisitor</span></li><li class="in" name="org.antlr.v4.runtime.tree.ParseTreeVisitor"><span>ParseTreeVisitor</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        
+
+        <div class="values members">
+              <h3>Abstract Value Members</h3>
+              <ol><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visit" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visit(x$1:org.antlr.v4.runtime.tree.ParseTree):T"></a><a id="visit(ParseTree):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visit(x$1:org.antlr.v4.runtime.tree.ParseTree):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visit</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.ParseTree">ParseTree</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitBlankNode" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitBlankNode(ctx:es.weso.shapemaps.parser.ShapeMapParser.BlankNodeContext):T"></a><a id="visitBlankNode(BlankNodeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitBlankNode(ctx:es.weso.shapemaps.parser.ShapeMapParser.BlankNodeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitBlankNode</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.BlankNodeContext">BlankNodeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#blankNode():es.weso.shapemaps.parser.ShapeMapParser.BlankNodeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#blankNode">ShapeMapParser#blankNode</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#blankNode():es.weso.shapemaps.parser.ShapeMapParser.BlankNodeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#blankNode">ShapeMapParser#blankNode</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitBooleanLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitBooleanLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.BooleanLiteralContext):T"></a><a id="visitBooleanLiteral(BooleanLiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitBooleanLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.BooleanLiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitBooleanLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.BooleanLiteralContext">BooleanLiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#booleanLiteral():es.weso.shapemaps.parser.ShapeMapParser.BooleanLiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#booleanLiteral">ShapeMapParser#booleanLiteral</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#booleanLiteral():es.weso.shapemaps.parser.ShapeMapParser.BooleanLiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#booleanLiteral">ShapeMapParser#booleanLiteral</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visitChildren" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitChildren(x$1:org.antlr.v4.runtime.tree.RuleNode):T"></a><a id="visitChildren(RuleNode):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitChildren(x$1:org.antlr.v4.runtime.tree.RuleNode):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitChildren</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.RuleNode">RuleNode</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitDatatype" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitDatatype(ctx:es.weso.shapemaps.parser.ShapeMapParser.DatatypeContext):T"></a><a id="visitDatatype(DatatypeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitDatatype(ctx:es.weso.shapemaps.parser.ShapeMapParser.DatatypeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitDatatype</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.DatatypeContext">DatatypeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#datatype():es.weso.shapemaps.parser.ShapeMapParser.DatatypeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#datatype">ShapeMapParser#datatype</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#datatype():es.weso.shapemaps.parser.ShapeMapParser.DatatypeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#datatype">ShapeMapParser#datatype</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visitErrorNode" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitErrorNode(x$1:org.antlr.v4.runtime.tree.ErrorNode):T"></a><a id="visitErrorNode(ErrorNode):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitErrorNode(x$1:org.antlr.v4.runtime.tree.ErrorNode):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitErrorNode</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.ErrorNode">ErrorNode</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitExtended" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitExtended(ctx:es.weso.shapemaps.parser.ShapeMapParser.ExtendedContext):T"></a><a id="visitExtended(ExtendedContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitExtended(ctx:es.weso.shapemaps.parser.ShapeMapParser.ExtendedContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitExtended</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.ExtendedContext">ExtendedContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#extended():es.weso.shapemaps.parser.ShapeMapParser.ExtendedContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#extended">ShapeMapParser#extended</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#extended():es.weso.shapemaps.parser.ShapeMapParser.ExtendedContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#extended">ShapeMapParser#extended</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitFocusObject" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitFocusObject(ctx:es.weso.shapemaps.parser.ShapeMapParser.FocusObjectContext):T"></a><a id="visitFocusObject(FocusObjectContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitFocusObject(ctx:es.weso.shapemaps.parser.ShapeMapParser.FocusObjectContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitFocusObject</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.FocusObjectContext">FocusObjectContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>focusObject</code>
+labeled alternative in <code><a href="ShapeMapParser.html#triplePattern():es.weso.shapemaps.parser.ShapeMapParser.TriplePatternContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#triplePattern">ShapeMapParser#triplePattern</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>focusObject</code>
+labeled alternative in <code><a href="ShapeMapParser.html#triplePattern():es.weso.shapemaps.parser.ShapeMapParser.TriplePatternContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#triplePattern">ShapeMapParser#triplePattern</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitFocusSubject" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitFocusSubject(ctx:es.weso.shapemaps.parser.ShapeMapParser.FocusSubjectContext):T"></a><a id="visitFocusSubject(FocusSubjectContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitFocusSubject(ctx:es.weso.shapemaps.parser.ShapeMapParser.FocusSubjectContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitFocusSubject</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.FocusSubjectContext">FocusSubjectContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>focusSubject</code>
+labeled alternative in <code><a href="ShapeMapParser.html#triplePattern():es.weso.shapemaps.parser.ShapeMapParser.TriplePatternContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#triplePattern">ShapeMapParser#triplePattern</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>focusSubject</code>
+labeled alternative in <code><a href="ShapeMapParser.html#triplePattern():es.weso.shapemaps.parser.ShapeMapParser.TriplePatternContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#triplePattern">ShapeMapParser#triplePattern</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitInverse" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitInverse(ctx:es.weso.shapemaps.parser.ShapeMapParser.InverseContext):T"></a><a id="visitInverse(InverseContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitInverse(ctx:es.weso.shapemaps.parser.ShapeMapParser.InverseContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitInverse</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.InverseContext">InverseContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#inverse():es.weso.shapemaps.parser.ShapeMapParser.InverseContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#inverse">ShapeMapParser#inverse</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#inverse():es.weso.shapemaps.parser.ShapeMapParser.InverseContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#inverse">ShapeMapParser#inverse</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitJsonAttributes" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitJsonAttributes(ctx:es.weso.shapemaps.parser.ShapeMapParser.JsonAttributesContext):T"></a><a id="visitJsonAttributes(JsonAttributesContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitJsonAttributes(ctx:es.weso.shapemaps.parser.ShapeMapParser.JsonAttributesContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitJsonAttributes</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.JsonAttributesContext">JsonAttributesContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#jsonAttributes():es.weso.shapemaps.parser.ShapeMapParser.JsonAttributesContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#jsonAttributes">ShapeMapParser#jsonAttributes</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#jsonAttributes():es.weso.shapemaps.parser.ShapeMapParser.JsonAttributesContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#jsonAttributes">ShapeMapParser#jsonAttributes</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.LiteralContext):T"></a><a id="visitLiteral(LiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.LiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.LiteralContext">LiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#literal():es.weso.shapemaps.parser.ShapeMapParser.LiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#literal">ShapeMapParser#literal</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#literal():es.weso.shapemaps.parser.ShapeMapParser.LiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#literal">ShapeMapParser#literal</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitNegation" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNegation(ctx:es.weso.shapemaps.parser.ShapeMapParser.NegationContext):T"></a><a id="visitNegation(NegationContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitNegation(ctx:es.weso.shapemaps.parser.ShapeMapParser.NegationContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNegation</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.NegationContext">NegationContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#negation():es.weso.shapemaps.parser.ShapeMapParser.NegationContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#negation">ShapeMapParser#negation</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#negation():es.weso.shapemaps.parser.ShapeMapParser.NegationContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#negation">ShapeMapParser#negation</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitNodeIri" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNodeIri(ctx:es.weso.shapemaps.parser.ShapeMapParser.NodeIriContext):T"></a><a id="visitNodeIri(NodeIriContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitNodeIri(ctx:es.weso.shapemaps.parser.ShapeMapParser.NodeIriContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNodeIri</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.NodeIriContext">NodeIriContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#nodeIri():es.weso.shapemaps.parser.ShapeMapParser.NodeIriContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#nodeIri">ShapeMapParser#nodeIri</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#nodeIri():es.weso.shapemaps.parser.ShapeMapParser.NodeIriContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#nodeIri">ShapeMapParser#nodeIri</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitNodeSelector" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNodeSelector(ctx:es.weso.shapemaps.parser.ShapeMapParser.NodeSelectorContext):T"></a><a id="visitNodeSelector(NodeSelectorContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitNodeSelector(ctx:es.weso.shapemaps.parser.ShapeMapParser.NodeSelectorContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNodeSelector</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.NodeSelectorContext">NodeSelectorContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#nodeSelector():es.weso.shapemaps.parser.ShapeMapParser.NodeSelectorContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#nodeSelector">ShapeMapParser#nodeSelector</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#nodeSelector():es.weso.shapemaps.parser.ShapeMapParser.NodeSelectorContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#nodeSelector">ShapeMapParser#nodeSelector</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitNumericLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitNumericLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.NumericLiteralContext):T"></a><a id="visitNumericLiteral(NumericLiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitNumericLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.NumericLiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitNumericLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.NumericLiteralContext">NumericLiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#numericLiteral():es.weso.shapemaps.parser.ShapeMapParser.NumericLiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#numericLiteral">ShapeMapParser#numericLiteral</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#numericLiteral():es.weso.shapemaps.parser.ShapeMapParser.NumericLiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#numericLiteral">ShapeMapParser#numericLiteral</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitObjectTerm" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitObjectTerm(ctx:es.weso.shapemaps.parser.ShapeMapParser.ObjectTermContext):T"></a><a id="visitObjectTerm(ObjectTermContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitObjectTerm(ctx:es.weso.shapemaps.parser.ShapeMapParser.ObjectTermContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitObjectTerm</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.ObjectTermContext">ObjectTermContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#objectTerm():es.weso.shapemaps.parser.ShapeMapParser.ObjectTermContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#objectTerm">ShapeMapParser#objectTerm</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#objectTerm():es.weso.shapemaps.parser.ShapeMapParser.ObjectTermContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#objectTerm">ShapeMapParser#objectTerm</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitOptional" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitOptional(ctx:es.weso.shapemaps.parser.ShapeMapParser.OptionalContext):T"></a><a id="visitOptional(OptionalContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitOptional(ctx:es.weso.shapemaps.parser.ShapeMapParser.OptionalContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitOptional</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.OptionalContext">OptionalContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>optional</code>
+labeled alternative in <code><a href="ShapeMapParser.html#pathMod():es.weso.shapemaps.parser.ShapeMapParser.PathModContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathMod">ShapeMapParser#pathMod</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>optional</code>
+labeled alternative in <code><a href="ShapeMapParser.html#pathMod():es.weso.shapemaps.parser.ShapeMapParser.PathModContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathMod">ShapeMapParser#pathMod</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPair" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPair(ctx:es.weso.shapemaps.parser.ShapeMapParser.PairContext):T"></a><a id="visitPair(PairContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPair(ctx:es.weso.shapemaps.parser.ShapeMapParser.PairContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPair</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PairContext">PairContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#pair():es.weso.shapemaps.parser.ShapeMapParser.PairContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pair">ShapeMapParser#pair</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#pair():es.weso.shapemaps.parser.ShapeMapParser.PairContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pair">ShapeMapParser#pair</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPath" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPath(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathContext):T"></a><a id="visitPath(PathContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPath(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPath</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PathContext">PathContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#path():es.weso.shapemaps.parser.ShapeMapParser.PathContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#path">ShapeMapParser#path</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#path():es.weso.shapemaps.parser.ShapeMapParser.PathContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#path">ShapeMapParser#path</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPathAlternative" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPathAlternative(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathAlternativeContext):T"></a><a id="visitPathAlternative(PathAlternativeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPathAlternative(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathAlternativeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPathAlternative</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PathAlternativeContext">PathAlternativeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathAlternative():es.weso.shapemaps.parser.ShapeMapParser.PathAlternativeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathAlternative">ShapeMapParser#pathAlternative</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathAlternative():es.weso.shapemaps.parser.ShapeMapParser.PathAlternativeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathAlternative">ShapeMapParser#pathAlternative</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPathElt" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPathElt(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathEltContext):T"></a><a id="visitPathElt(PathEltContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPathElt(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathEltContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPathElt</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PathEltContext">PathEltContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathElt():es.weso.shapemaps.parser.ShapeMapParser.PathEltContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathElt">ShapeMapParser#pathElt</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathElt():es.weso.shapemaps.parser.ShapeMapParser.PathEltContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathElt">ShapeMapParser#pathElt</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPathEltOrInverse" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPathEltOrInverse(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathEltOrInverseContext):T"></a><a id="visitPathEltOrInverse(PathEltOrInverseContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPathEltOrInverse(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathEltOrInverseContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPathEltOrInverse</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PathEltOrInverseContext">PathEltOrInverseContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathEltOrInverse():es.weso.shapemaps.parser.ShapeMapParser.PathEltOrInverseContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathEltOrInverse">ShapeMapParser#pathEltOrInverse</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathEltOrInverse():es.weso.shapemaps.parser.ShapeMapParser.PathEltOrInverseContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathEltOrInverse">ShapeMapParser#pathEltOrInverse</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPathPrimary" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPathPrimary(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathPrimaryContext):T"></a><a id="visitPathPrimary(PathPrimaryContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPathPrimary(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathPrimaryContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPathPrimary</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PathPrimaryContext">PathPrimaryContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathPrimary():es.weso.shapemaps.parser.ShapeMapParser.PathPrimaryContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathPrimary">ShapeMapParser#pathPrimary</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathPrimary():es.weso.shapemaps.parser.ShapeMapParser.PathPrimaryContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathPrimary">ShapeMapParser#pathPrimary</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPathSequence" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPathSequence(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathSequenceContext):T"></a><a id="visitPathSequence(PathSequenceContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPathSequence(ctx:es.weso.shapemaps.parser.ShapeMapParser.PathSequenceContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPathSequence</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PathSequenceContext">PathSequenceContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathSequence():es.weso.shapemaps.parser.ShapeMapParser.PathSequenceContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathSequence">ShapeMapParser#pathSequence</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#pathSequence():es.weso.shapemaps.parser.ShapeMapParser.PathSequenceContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathSequence">ShapeMapParser#pathSequence</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPlus" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPlus(ctx:es.weso.shapemaps.parser.ShapeMapParser.PlusContext):T"></a><a id="visitPlus(PlusContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPlus(ctx:es.weso.shapemaps.parser.ShapeMapParser.PlusContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPlus</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PlusContext">PlusContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>plus</code>
+labeled alternative in <code><a href="ShapeMapParser.html#pathMod():es.weso.shapemaps.parser.ShapeMapParser.PathModContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathMod">ShapeMapParser#pathMod</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>plus</code>
+labeled alternative in <code><a href="ShapeMapParser.html#pathMod():es.weso.shapemaps.parser.ShapeMapParser.PathModContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathMod">ShapeMapParser#pathMod</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPredicate" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPredicate(ctx:es.weso.shapemaps.parser.ShapeMapParser.PredicateContext):T"></a><a id="visitPredicate(PredicateContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPredicate(ctx:es.weso.shapemaps.parser.ShapeMapParser.PredicateContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPredicate</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PredicateContext">PredicateContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#predicate():es.weso.shapemaps.parser.ShapeMapParser.PredicateContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#predicate">ShapeMapParser#predicate</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#predicate():es.weso.shapemaps.parser.ShapeMapParser.PredicateContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#predicate">ShapeMapParser#predicate</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitPrefixedName" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitPrefixedName(ctx:es.weso.shapemaps.parser.ShapeMapParser.PrefixedNameContext):T"></a><a id="visitPrefixedName(PrefixedNameContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitPrefixedName(ctx:es.weso.shapemaps.parser.ShapeMapParser.PrefixedNameContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitPrefixedName</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.PrefixedNameContext">PrefixedNameContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#prefixedName():es.weso.shapemaps.parser.ShapeMapParser.PrefixedNameContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#prefixedName">ShapeMapParser#prefixedName</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#prefixedName():es.weso.shapemaps.parser.ShapeMapParser.PrefixedNameContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#prefixedName">ShapeMapParser#prefixedName</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitQuestionMark" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitQuestionMark(ctx:es.weso.shapemaps.parser.ShapeMapParser.QuestionMarkContext):T"></a><a id="visitQuestionMark(QuestionMarkContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitQuestionMark(ctx:es.weso.shapemaps.parser.ShapeMapParser.QuestionMarkContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitQuestionMark</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.QuestionMarkContext">QuestionMarkContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#questionMark():es.weso.shapemaps.parser.ShapeMapParser.QuestionMarkContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#questionMark">ShapeMapParser#questionMark</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#questionMark():es.weso.shapemaps.parser.ShapeMapParser.QuestionMarkContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#questionMark">ShapeMapParser#questionMark</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitRdfLiteral" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitRdfLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.RdfLiteralContext):T"></a><a id="visitRdfLiteral(RdfLiteralContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitRdfLiteral(ctx:es.weso.shapemaps.parser.ShapeMapParser.RdfLiteralContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitRdfLiteral</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.RdfLiteralContext">RdfLiteralContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#rdfLiteral():es.weso.shapemaps.parser.ShapeMapParser.RdfLiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#rdfLiteral">ShapeMapParser#rdfLiteral</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#rdfLiteral():es.weso.shapemaps.parser.ShapeMapParser.RdfLiteralContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#rdfLiteral">ShapeMapParser#rdfLiteral</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitRdfType" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitRdfType(ctx:es.weso.shapemaps.parser.ShapeMapParser.RdfTypeContext):T"></a><a id="visitRdfType(RdfTypeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitRdfType(ctx:es.weso.shapemaps.parser.ShapeMapParser.RdfTypeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitRdfType</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.RdfTypeContext">RdfTypeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#rdfType():es.weso.shapemaps.parser.ShapeMapParser.RdfTypeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#rdfType">ShapeMapParser#rdfType</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#rdfType():es.weso.shapemaps.parser.ShapeMapParser.RdfTypeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#rdfType">ShapeMapParser#rdfType</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitReason" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitReason(ctx:es.weso.shapemaps.parser.ShapeMapParser.ReasonContext):T"></a><a id="visitReason(ReasonContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitReason(ctx:es.weso.shapemaps.parser.ShapeMapParser.ReasonContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitReason</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.ReasonContext">ReasonContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#reason():es.weso.shapemaps.parser.ShapeMapParser.ReasonContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#reason">ShapeMapParser#reason</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#reason():es.weso.shapemaps.parser.ShapeMapParser.ReasonContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#reason">ShapeMapParser#reason</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitShapeIri" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeIri(ctx:es.weso.shapemaps.parser.ShapeMapParser.ShapeIriContext):T"></a><a id="visitShapeIri(ShapeIriContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitShapeIri(ctx:es.weso.shapemaps.parser.ShapeMapParser.ShapeIriContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeIri</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.ShapeIriContext">ShapeIriContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#shapeIri():es.weso.shapemaps.parser.ShapeMapParser.ShapeIriContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#shapeIri">ShapeMapParser#shapeIri</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#shapeIri():es.weso.shapemaps.parser.ShapeMapParser.ShapeIriContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#shapeIri">ShapeMapParser#shapeIri</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitShapeMap" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeMap(ctx:es.weso.shapemaps.parser.ShapeMapParser.ShapeMapContext):T"></a><a id="visitShapeMap(ShapeMapContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitShapeMap(ctx:es.weso.shapemaps.parser.ShapeMapParser.ShapeMapContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeMap</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.ShapeMapContext">ShapeMapContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#shapeMap():es.weso.shapemaps.parser.ShapeMapParser.ShapeMapContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#shapeMap">ShapeMapParser#shapeMap</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#shapeMap():es.weso.shapemaps.parser.ShapeMapParser.ShapeMapContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#shapeMap">ShapeMapParser#shapeMap</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitShapeSelector" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitShapeSelector(ctx:es.weso.shapemaps.parser.ShapeMapParser.ShapeSelectorContext):T"></a><a id="visitShapeSelector(ShapeSelectorContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitShapeSelector(ctx:es.weso.shapemaps.parser.ShapeMapParser.ShapeSelectorContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitShapeSelector</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.ShapeSelectorContext">ShapeSelectorContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#shapeSelector():es.weso.shapemaps.parser.ShapeMapParser.ShapeSelectorContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#shapeSelector">ShapeMapParser#shapeSelector</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#shapeSelector():es.weso.shapemaps.parser.ShapeMapParser.ShapeSelectorContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#shapeSelector">ShapeMapParser#shapeSelector</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitStar" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitStar(ctx:es.weso.shapemaps.parser.ShapeMapParser.StarContext):T"></a><a id="visitStar(StarContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitStar(ctx:es.weso.shapemaps.parser.ShapeMapParser.StarContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitStar</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.StarContext">StarContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by the <code>star</code>
+labeled alternative in <code><a href="ShapeMapParser.html#pathMod():es.weso.shapemaps.parser.ShapeMapParser.PathModContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathMod">ShapeMapParser#pathMod</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by the <code>star</code>
+labeled alternative in <code><a href="ShapeMapParser.html#pathMod():es.weso.shapemaps.parser.ShapeMapParser.PathModContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#pathMod">ShapeMapParser#pathMod</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitStatus" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitStatus(ctx:es.weso.shapemaps.parser.ShapeMapParser.StatusContext):T"></a><a id="visitStatus(StatusContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitStatus(ctx:es.weso.shapemaps.parser.ShapeMapParser.StatusContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitStatus</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.StatusContext">StatusContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#status():es.weso.shapemaps.parser.ShapeMapParser.StatusContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#status">ShapeMapParser#status</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#status():es.weso.shapemaps.parser.ShapeMapParser.StatusContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#status">ShapeMapParser#status</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitStatusAndShape" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitStatusAndShape(ctx:es.weso.shapemaps.parser.ShapeMapParser.StatusAndShapeContext):T"></a><a id="visitStatusAndShape(StatusAndShapeContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitStatusAndShape(ctx:es.weso.shapemaps.parser.ShapeMapParser.StatusAndShapeContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitStatusAndShape</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.StatusAndShapeContext">StatusAndShapeContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#statusAndShape():es.weso.shapemaps.parser.ShapeMapParser.StatusAndShapeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#statusAndShape">ShapeMapParser#statusAndShape</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#statusAndShape():es.weso.shapemaps.parser.ShapeMapParser.StatusAndShapeContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#statusAndShape">ShapeMapParser#statusAndShape</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitString" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitString(ctx:es.weso.shapemaps.parser.ShapeMapParser.StringContext):T"></a><a id="visitString(StringContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitString(ctx:es.weso.shapemaps.parser.ShapeMapParser.StringContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitString</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.StringContext">StringContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#string():es.weso.shapemaps.parser.ShapeMapParser.StringContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#string">ShapeMapParser#string</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#string():es.weso.shapemaps.parser.ShapeMapParser.StringContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#string">ShapeMapParser#string</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="es.weso.shapemaps.parser.ShapeMapVisitor#visitSubjectTerm" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitSubjectTerm(ctx:es.weso.shapemaps.parser.ShapeMapParser.SubjectTermContext):T"></a><a id="visitSubjectTerm(SubjectTermContext):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitSubjectTerm(ctx:es.weso.shapemaps.parser.ShapeMapParser.SubjectTermContext):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitSubjectTerm</span><span class="params">(<span name="ctx">ctx: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapParser.SubjectTermContext">SubjectTermContext</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <p class="shortcomment cmt">Visit a parse tree produced by <code><a href="ShapeMapParser.html#subjectTerm():es.weso.shapemaps.parser.ShapeMapParser.SubjectTermContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#subjectTerm">ShapeMapParser#subjectTerm</a></code>.</p><div class="fullcomment"><div class="comment cmt"><p>Visit a parse tree produced by <code><a href="ShapeMapParser.html#subjectTerm():es.weso.shapemaps.parser.ShapeMapParser.SubjectTermContext" class="extmbr" name="es.weso.shapemaps.parser.ShapeMapParser#subjectTerm">ShapeMapParser#subjectTerm</a></code>.</p></div><dl class="paramcmts block"><dt class="param">ctx</dt><dd class="cmt"><p>the parse tree</p></dd><dt>returns</dt><dd class="cmt"><p>the visitor result</p></dd></dl></div>
+    </li><li name="org.antlr.v4.runtime.tree.ParseTreeVisitor#visitTerminal" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="visitTerminal(x$1:org.antlr.v4.runtime.tree.TerminalNode):T"></a><a id="visitTerminal(TerminalNode):T"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#visitTerminal(x$1:org.antlr.v4.runtime.tree.TerminalNode):T" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">visitTerminal</span><span class="params">(<span name="arg0">arg0: <span class="extype" name="org.antlr.v4.runtime.tree.TerminalNode">TerminalNode</span></span>)</span><span class="result">: <span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>ParseTreeVisitor</dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div class="values members">
+              <h3>Concrete Value Members</h3>
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Long.html#scala.Long" class="extype" name="scala.Long">Long</a></span>, <span name="arg1">arg1: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Long.html#scala.Long" class="extype" name="scala.Long">Long</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li>
+              </ol>
+            </div>
+
+        
+
+        <div class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../../../../es/weso/shapemaps/parser/ShapeMapVisitor.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: ">finalize</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+                <span class="name">@Deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"></dd></dl></div>
+    </li></ol>
+            </div>
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">
+              <h3>Inherited from <span class="extype" name="org.antlr.v4.runtime.tree.ParseTreeVisitor">ParseTreeVisitor</span>[<span class="extype" name="es.weso.shapemaps.parser.ShapeMapVisitor.T">T</span>]</h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <a href="../../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+    </body>
+          </div>
+        </div>
+      </div>
+    </body>
+      </html>
