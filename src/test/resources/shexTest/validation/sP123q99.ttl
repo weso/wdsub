@@ -1,3 +1,0 @@
-BASE <http://a.example/>
-
-<s> <p> 1, 2, 3; <q> 99 .

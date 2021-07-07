@@ -1,6 +1,0 @@
-BASE <http://a.example/>
-
-<sABCDxxxxxxx> <p> 0 .
-<sxBCDxxxxxxx> <p> 0 .
-<sAxCDxxxxxxx> <p> 0 .
-<sABxDxxxxxxx> <p> 0 .

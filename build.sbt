@@ -1,13 +1,13 @@
 lazy val scala213 = "2.13.6"
 lazy val scala3   = "3.0.0"
 lazy val supportedScalaVersions = List(
-  scala213,
-  // scala3
+ // scala213,
+  scala3
 )
 
 val Java11 = "adopt@1.11"
 
-lazy val shexsVersion          = "0.1.91"
+lazy val shexsVersion          = "0.1.93"
 lazy val srdfVersion           = "0.1.102"
 lazy val utilsVersion          = "0.1.98"
 lazy val documentVersion       = "0.0.32"
@@ -15,12 +15,14 @@ lazy val documentVersion       = "0.0.32"
 // Dependency versions
 lazy val catsVersion           = "2.6.1"
 lazy val catsEffectVersion     = "3.1.1"
-lazy val declineVersion        = "2.0.0"
+lazy val declineVersion        = "2.1.0"
 lazy val circeVersion          = "0.14.1"
 lazy val fs2Version            = "3.0.4"
 lazy val jenaVersion           = "4.1.0"
+// lazy val log4jVersion          = "2.14.1"
 lazy val munitVersion          = "0.7.27"
 lazy val munitEffectVersion    = "1.0.5"
+lazy val slf4jVersion          = "1.7.31"
 lazy val pprintVersion         = "0.6.6"
 lazy val scalaCollCompatVersion  = "2.4.4"
 lazy val wikidataToolkitVersion = "0.12.1"
@@ -34,15 +36,22 @@ lazy val circeGeneric      = "io.circe"                   %% "circe-generic"    
 lazy val circeParser       = "io.circe"                   %% "circe-parser"        % circeVersion
 lazy val decline           = "com.monovore"               %% "decline"             % declineVersion
 lazy val declineEffect     = "com.monovore"               %% "decline-effect"      % declineVersion
-lazy val fs2               = "co.fs2"            %% "fs2-core" % fs2Version
-lazy val fs2io             = "co.fs2"            %% "fs2-io" % fs2Version
-lazy val jenaArq           = "org.apache.jena"   % "jena-arq"         % jenaVersion
-lazy val jenaFuseki        = "org.apache.jena"   % "jena-fuseki-main" % jenaVersion
-lazy val munit             = "org.scalameta"     %% "munit"           % munitVersion
-lazy val munitEffect       = "org.typelevel"     %% "munit-cats-effect-3" % munitEffectVersion
-lazy val MUnitFramework = new TestFramework("munit.Framework")
+lazy val fs2               = "co.fs2"                     %% "fs2-core"            % fs2Version
+lazy val fs2io             = "co.fs2"                     %% "fs2-io"              % fs2Version
+lazy val jenaArq           = "org.apache.jena"            % "jena-arq"             % jenaVersion
+lazy val jenaFuseki        = "org.apache.jena"            % "jena-fuseki-main"     % jenaVersion
 
-lazy val wikidataToolkit   = "org.wikidata.wdtk" % "wdtk-dumpfiles" % wikidataToolkitVersion
+lazy val munit             = "org.scalameta"              %% "munit"               % munitVersion
+lazy val munitEffect       = "org.typelevel"              %% "munit-cats-effect-3" % munitEffectVersion
+lazy val slf4j_api         = "org.slf4j"                   % "slf4j-api"           % slf4jVersion
+lazy val slf4j_log4j12     = "org.slf4j"                   % "slf4j-log4j12"       % slf4jVersion
+
+lazy val wdtk_dumpfiles   = "org.wikidata.wdtk" % "wdtk-dumpfiles"   % wikidataToolkitVersion
+lazy val wdtk_wikibaseapi = "org.wikidata.wdtk" % "wdtk-wikibaseapi" % wikidataToolkitVersion
+lazy val wdtk_datamodel   = "org.wikidata.wdtk" % "wdtk-datamodel"   % wikidataToolkitVersion
+lazy val wdtk_rdf         = "org.wikidata.wdtk" % "wdtk-rdf"         % wikidataToolkitVersion
+lazy val wdtk_storage     = "org.wikidata.wdtk" % "wdtk-storage"     % wikidataToolkitVersion
+lazy val wdtk_util        = "org.wikidata.wdtk" % "wdtk-util"        % wikidataToolkitVersion
 
 lazy val scalaCollCompat   = "org.scala-lang.modules"     %% "scala-collection-compat" % scalaCollCompatVersion
 
@@ -58,7 +67,9 @@ lazy val utilsTest         = "es.weso"                    %% "utilstest"       %
 lazy val testsuite         = "es.weso"                    %% "testsuite"       % utilsVersion
 
 
-lazy val pprint         = "com.lihaoyi"                %% "pprint"        % pprintVersion
+lazy val pprint            = "com.lihaoyi"                %% "pprint"        % pprintVersion
+
+lazy val MUnitFramework = new TestFramework("munit.Framework")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
 
@@ -118,7 +129,9 @@ lazy val wdsub = project
       utilsTest % Test,
       srdf,
       srdfJena % Test,
-      wikidataToolkit
+      wdtk_dumpfiles, 
+      wdtk_wikibaseapi,
+      slf4j_api, slf4j_log4j12
     ),
     testFrameworks += MUnitFramework
   )
@@ -174,8 +187,8 @@ lazy val sharedDependencies = Seq(
 )
 
 lazy val packagingSettings = Seq(
-  mainClass in Compile := Some("es.weso.wdsub.Main"),
-  mainClass in assembly := Some("es.weso.wdsub.Main"),
+  mainClass in Compile := Some("es.weso.wdsubmain.Main"),
+  mainClass in assembly := Some("es.weso.wdsubmain.Main"),
   test in assembly := {},
   assemblyJarName in assembly := "wdsub.jar",
   packageSummary in Linux := name.value,

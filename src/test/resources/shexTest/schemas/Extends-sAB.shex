@@ -1,7 +1,0 @@
-ABSTRACT <http://a.example/A>      /sA.........$/
-              AND { <http://a.example/p> [0 1 2 3 4 5 6 7 8 9]+}
-         <http://a.example/B> @<http://a.example/A> AND /s.B........$/
-              AND { <http://a.example/p> [0 1   3 4 5 6 7 8 9]+}
-
-# 0 1 2 3 4 5 6 7 8 9+                         
-# 0 1   3 4 5 6 7 8 9+                         

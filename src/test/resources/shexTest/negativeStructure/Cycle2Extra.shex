@@ -1,6 +1,0 @@
-# Circular reference on EXTRA property :a.
-PREFIX :       <http://example.org/>
-
-:S EXTRA :a {
-  :a @:S
-}

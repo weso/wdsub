@@ -1,5 +1,0 @@
-PREFIX :       <http://example.org/>
-
-:S ( @:T AND NOT @:U )
-:T { :a @:S } 
-:U { :b . } 
