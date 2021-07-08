@@ -6,7 +6,7 @@ import com.monovore.decline.effect._
 import buildinfo._
 import es.weso.wdsub._
 
-case class Dump(fileName: Option[String])
+case class Dump(fileName: Option[String], verbose: Boolean)
 case class ProcessEntity(entity: String)
 
 object Main extends CommandIOApp (
@@ -26,16 +26,19 @@ object Main extends CommandIOApp (
     "fileName", "Local dump file name", short = "f"
   ).orNone 
 
+  val verbose = Opts.flag("verbose", "Verbose mode").orFalse
+
+
   val dump: Opts[Dump] = 
     Opts.subcommand("dump", "Process example dump file.") {
-      (fileName).map(Dump)
+      (fileName, verbose).mapN(Dump)
   }  
 
 
   override def main: Opts[IO[ExitCode]] = 
     (processEntity orElse dump).map { 
       case ProcessEntity(entity) => processEntity(entity) 
-      case Dump(fileName) => dump(fileName)
+      case Dump(fileName, verbose) => dump(fileName, verbose)
     }
 
 
@@ -46,8 +49,9 @@ object Main extends CommandIOApp (
     _ <- IO.println(s"entity Type: ${entity.getType()}")
   } yield ExitCode.Success
 
-  def dump(optFileName: Option[String]): IO[ExitCode] = 
-    DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE)) *>
-    IO.pure(ExitCode.Success)
+  def dump(optFileName: Option[String], verbose: Boolean): IO[ExitCode] = for {
+    results <- DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE), verbose)
+    _ <- IO.println(results)
+  } yield ExitCode.Success
       
 }

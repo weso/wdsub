@@ -76,6 +76,7 @@ ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
 lazy val wdsubRoot = project
   .in(file("."))
   .enablePlugins(
+    DockerPlugin,
     ScalaUnidocPlugin,
     SiteScaladocPlugin,
     AsciidoctorPlugin,

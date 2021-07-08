@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-case class DumpResults(results: List[String])
+case class DumpResults(entities: Int)
 
 object DumpProcessor {
 
@@ -23,19 +23,23 @@ object DumpProcessor {
     def mkDumpFile(fileName: String): Resource[IO, MwLocalDumpFile] = 
        Resource.make(IO { new MwLocalDumpFile(fileName) })(mwFile => IO { mwFile.getDumpFileStream().close() })
     
-    def dumpProcess(fileName: String): IO[DumpResults] = for {
+    def dumpProcess(fileName: String, verbose: Boolean): IO[DumpResults] = {
+       val processor = new SimpleDumpProcessor(verbose)
+       for {
         results <- (mkEntityTimeProcessor, mkDumpFile(fileName)).tupled.use {
             case (entityTimerProcessor, mwDumpFile) => for {
               _ <- IO { LogConfig.configureLogging() }  
 //              _ <- IO { dumpProcessingController.registerEntityDocumentProcessor(entityTimerProcessor, null, true) }
-              _ <- IO { dumpProcessingController.registerEntityDocumentProcessor(new SimpleDumpProcessor(), null, true) }
+              _ <- IO { dumpProcessingController.registerEntityDocumentProcessor(processor, null, true) }
               _ <- logInfo(s"Processing local dump: $fileName")
               _ <- logInfo(s"DateStamp: ${mwDumpFile.getDateStamp()}")
               _ <- logInfo(s"Available?: ${mwDumpFile.isAvailable()}")
               _ <- IO { dumpProcessingController.processDump(mwDumpFile) }
-            } yield DumpResults(List("OK"))
+
+            } yield DumpResults(processor.getEntityCounter())
         }
-    } yield results
+       } yield results
+    }
 }
 
 
