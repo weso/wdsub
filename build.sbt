@@ -89,7 +89,8 @@ lazy val wdsubRoot = project
   .settings(
     commonSettings,
     packagingSettings,
-    wixSettings)
+    wixSettings,
+    dockerSettings)
   .aggregate(wdsub, docs)
   .dependsOn(wdsub)
   .settings(
@@ -227,6 +228,12 @@ lazy val wixSettings = Seq(
   wixProductId := "39b564d5-d381-4282-ada9-87244c76e14b",
   wixProductUpgradeId := "6a710435-9af4-4adb-a597-98d3dd0bade1"
 )
+
+lazy val dockerSettings = Seq(
+  dockerRepository := Some("wesogroup")
+
+)
+
 
 lazy val warnUnusedImport = Seq(
   scalacOptions in (Compile, console) ~= { _.filterNot(Set("-Ywarn-unused-import", "-Ywarn-unused:imports")) },
