@@ -1,5 +1,7 @@
 # wdsub
-Wikidata Subsetting tool
+This project is a Wikibase Subsetting tool based on [Shape Expressions(ShEx)](http://www.shex.io).
+
+The project processes wikidata dumps and extracts a subset based on a Shape Expression.
 
 ## Usage
 
@@ -22,11 +24,45 @@ Subcommands:
     Process dump files
 ```
 
+## Installation and compilation
 
-## Building
-
-The tool has been implemented in [Scala](https://www.scala-lang.org/). In order to build from source it is required to have [sbt](https://www.scala-sbt.org/) and run:
+The tool has been implemented in [Scala](https://www.scala-lang.org/) abd uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you can use:
 
 ```
 sbt packageBin
 ```
+
+### Publish docker image
+
+If you want to create a docker local image, you can run:
+
+```
+sbt docker:publishLocal
+```
+
+In order to create a docker image (it requires the right credentials):
+
+```
+sbt docker:publish
+```
+
+The docker image is published as [wesogroup/wdsub](https://hub.docker.com/repository/docker/wesogroup/wdsub)
+
+## Docs
+
+The documentation of the project is generated with [mdoc](https://scalameta.org/mdoc) and [Docusaurus](https://docusaurus.io/). 
+
+Although the documentation is generated automatically with github actions, you can generate the documentation locally using:
+
+```
+> sbt docs/mdoc
+> cd website && yarn install && yarn run build
+```
+
+## More information
+
+Another tool that creates subsets from wikidata dumps is [WDumper](https://github.com/bennofs/wdumper)
+
+## Author & contributors
+
+* Author: [Jose Emilio Labra Gayo](http://labra.weso.es)

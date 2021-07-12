@@ -1,17 +1,17 @@
-const repoUrl = "https://github.com/weso/shex-s";
+const repoUrl = "https://github.com/weso/wdsub";
 
-const apiUrl = "/shex-s/api/es/weso/index.html";
+const apiUrl = "/wdsub/api/es/weso/index.html";
 
 // See https://docusaurus.io/docs/site-config for available options.
 const siteConfig = {
-  title: "ShEx-s",
-  tagline: "ShEx-s",
-  url: "https://weso.github.io/shex-s",
-  baseUrl: "/shex-s/",
+  title: "wdsub",
+  tagline: "wdsub",
+  url: "https://weso.github.io/wdsub",
+  baseUrl: "/wdsub/",
 
-  customDocsPath: "shexs-docs/target/mdoc",
+  customDocsPath: "wdsub-docs/target/mdoc",
 
-  projectName: "shex-s",
+  projectName: "wdsub",
   organizationName: "weso",
 
   headerLinks: [

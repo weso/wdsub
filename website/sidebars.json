@@ -2,13 +2,7 @@
   "docs": {
     "Documentation": [
       "overview",
-      "commandline",
-      "java",
-      "shex",
-      "shapemaps",
-      "shapepath",
-      "rbe",
-      "depGraphs"
+      "commandline"
     ]
   }
 }

@@ -3,8 +3,18 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "ShEx-s",
-    "docs": {},
+    "tagline": "wdsub",
+    "docs": {
+      "commandline": {
+        "title": "Command line usage"
+      },
+      "overview": {
+        "title": "Overview"
+      },
+      "readme": {
+        "title": "Readme"
+      }
+    },
     "links": {
       "API Docs": "API Docs",
       "Documentation": "Documentation",

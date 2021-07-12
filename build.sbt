@@ -230,8 +230,9 @@ lazy val wixSettings = Seq(
 )
 
 lazy val dockerSettings = Seq(
-  dockerRepository := Some("wesogroup")
-
+  dockerRepository := Some("wesogroup"), 
+  Docker / packageName := "wdsub",
+//  dockerUsername := Some("wesogroup")
 )
 
 
