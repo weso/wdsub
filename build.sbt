@@ -61,11 +61,7 @@ lazy val srdf              = "es.weso"                    %% "srdf"            %
 lazy val srdfJena          = "es.weso"                    %% "srdfjena"        % srdfVersion
 lazy val srdf4j            = "es.weso"                    %% "srdf4j"          % srdfVersion
 lazy val utils             = "es.weso"                    %% "utils"           % utilsVersion
-lazy val typing            = "es.weso"                    %% "typing"          % utilsVersion
-lazy val validating        = "es.weso"                    %% "validating"      % utilsVersion
-lazy val utilsTest         = "es.weso"                    %% "utilstest"       % utilsVersion
-lazy val testsuite         = "es.weso"                    %% "testsuite"       % utilsVersion
-
+lazy val shex              = "es.weso"                    %% "shex"            % shexsVersion
 
 lazy val pprint            = "com.lihaoyi"                %% "pprint"        % pprintVersion
 
@@ -128,9 +124,8 @@ lazy val wdsub = project
       pprint,
       fs2, fs2io,
       utils     % "test -> test; compile -> compile",
-      utilsTest % Test,
-      srdf,
-      srdfJena % Test,
+      srdf, srdfJena % Test,
+      shex,
       wdtk_dumpfiles, 
       wdtk_wikibaseapi,
       slf4j_api, slf4j_log4j12

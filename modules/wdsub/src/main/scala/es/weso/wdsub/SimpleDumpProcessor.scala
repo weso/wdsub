@@ -3,9 +3,6 @@ package es.weso.wdsub
 import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
 
-case class PropertyValue(property: PropertyIdValue, value: EntityIdValue) {
-    override def toString: String = s"${property.getId()}/${value.getId()}"
-}
 
 class SimpleDumpProcessor(verbose: Boolean) extends EntityDocumentProcessor {
 

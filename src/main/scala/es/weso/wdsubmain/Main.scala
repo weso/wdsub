@@ -5,6 +5,8 @@ import com.monovore.decline._
 import com.monovore.decline.effect._
 import buildinfo._
 import es.weso.wdsub._
+import es.weso.rdf.nodes._
+import es.weso.rdf._
 
 case class Dump(fileName: Option[String], verbose: Boolean)
 case class ProcessEntity(entity: String)
@@ -49,9 +51,21 @@ object Main extends CommandIOApp (
     _ <- IO.println(s"entity Type: ${entity.getType()}")
   } yield ExitCode.Success
 
-  def dump(optFileName: Option[String], verbose: Boolean): IO[ExitCode] = for {
-    results <- DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE), verbose)
+  def dump(optFileName: Option[String], verbose: Boolean): IO[ExitCode] = {
+
+    // TODO: Remove hardcoded Schema
+    val shape = Shape(TripleConstraint(IRI("http://www.wikidata.org/entity/P31"), 
+          Some(ValueSet(List(IRIValue(IRI("http://www.wikidata.org/entity/Q515")))))))
+
+    val schema: Schema = Schema(
+        pm = PrefixMap.empty,
+        shapes = List(shape)
+    )
+
+    for {
+    results <- DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE), schema, verbose)
     _ <- IO.println(results)
-  } yield ExitCode.Success
+    } yield ExitCode.Success
+  }
       
 }
