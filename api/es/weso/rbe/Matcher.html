@@ -1,0 +1,1895 @@
+<!DOCTYPE html >
+<html>
+        <head>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+          <title>shex-s v0.1.86 - es.weso.rbe.Matcher</title>
+          <meta name="description" content="shex - s v0.1.86 - es.weso.rbe.Matcher" />
+          <meta name="keywords" content="shex s v0.1.86 es.weso.rbe.Matcher" />
+          <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+          
+      
+      <link href="../../../lib/index.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
+      <link href="../../../lib/diagrams.css" media="screen" type="text/css" rel="stylesheet" id="diagrams-css" />
+      <script type="text/javascript" src="../../../lib/jquery.min.js"></script>
+      <script type="text/javascript" src="../../../lib/jquery.panzoom.min.js"></script>
+      <script type="text/javascript" src="../../../lib/jquery.mousewheel.min.js"></script>
+      <script type="text/javascript" src="../../../lib/index.js"></script>
+      <script type="text/javascript" src="../../../index.js"></script>
+      <script type="text/javascript" src="../../../lib/scheduler.js"></script>
+      <script type="text/javascript" src="../../../lib/template.js"></script>
+      
+      <script type="text/javascript">
+        /* this variable can be used by the JS to determine the path to the root document */
+        var toRoot = '../../../';
+      </script>
+    
+        </head>
+        <body>
+      <div id="search">
+        <span id="doc-title">shex-s<span id="doc-version">v0.1.86</span></span>
+        <span class="close-results"><span class="left">&lt;</span> Back</span>
+        <div id="textfilter">
+          <span class="input">
+            <input autocapitalize="none" placeholder="Search" id="index-input" type="text" accesskey="/" />
+            <i class="clear material-icons"></i>
+            <i id="search-icon" class="material-icons"></i>
+          </span>
+        </div>
+    </div>
+      <div id="search-results">
+        <div id="search-progress">
+          <div id="progress-fill"></div>
+        </div>
+        <div id="results-content">
+          <div id="entity-results"></div>
+          <div id="member-results"></div>
+        </div>
+      </div>
+      <div id="content-scroll-container" style="-webkit-overflow-scrolling: touch;">
+        <div id="content-container" style="-webkit-overflow-scrolling: touch;">
+          <div id="subpackage-spacer">
+            <div id="packages">
+              <h1>Packages</h1>
+              <ul>
+                <li name="_root_.root" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="_root_"></a><a id="root:_root_"></a>
+      <span class="permalink">
+      <a href="../../../index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../../index.html"><span class="name">root</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="_root_.es" visbl="pub" class="indented1 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="es"></a><a id="es:es"></a>
+      <span class="permalink">
+      <a href="../../../es/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../../index.html"><span class="name">es</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../../index.html" class="extype" name="_root_">root</a></dd></dl></div>
+    </li><li name="es.weso" visbl="pub" class="indented2 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="weso"></a><a id="weso:weso"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="../index.html"><span class="name">weso</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../../index.html" class="extype" name="es">es</a></dd></dl></div>
+    </li><li name="es.weso.rbe" visbl="pub" class="indented3 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="rbe"></a><a id="rbe:rbe"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="index.html"><span class="name">rbe</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="../index.html" class="extype" name="es.weso">weso</a></dd></dl></div>
+    </li><li name="es.weso.rbe.deriv" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="deriv"></a><a id="deriv:deriv"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/deriv/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="deriv/index.html"><span class="name">deriv</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="es.weso.rbe">rbe</a></dd></dl></div>
+    </li><li name="es.weso.rbe.interval" visbl="pub" class="indented4 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="interval"></a><a id="interval:interval"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/interval/index.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">package</span>
+      </span>
+      <span class="symbol">
+        <a title="" href="interval/index.html"><span class="name">interval</span></a>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="index.html" class="extype" name="es.weso.rbe">rbe</a></dd></dl></div>
+    </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="And.html" title="And(v1,v2) represents both v1 and v2"></a>
+                        <a href="And.html" title="And(v1,v2) represents both v1 and v2">And</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="AndShape.html" title=""></a>
+                        <a href="AndShape.html" title="">AndShape</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Attempt.html" title=""></a>
+                        <a href="Attempt.html" title="">Attempt</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="BagChecker$.html" title=""></a>
+                        <a class="trait" href="BagChecker.html" title=""></a>
+                        <a href="BagChecker.html" title="">BagChecker</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="CardinalityZeroZeroDeriv.html" title=""></a>
+                        <a href="CardinalityZeroZeroDeriv.html" title="">CardinalityZeroZeroDeriv</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Direct.html" title="A neighbor of a node through a direct edge"></a>
+                        <a href="Direct.html" title="A neighbor of a node through a direct edge">Direct</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="DirectEdge.html" title=""></a>
+                        <a href="DirectEdge.html" title="">DirectEdge</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="trait" href="DirectedEdge.html" title="Represents directed edges"></a>
+                        <a href="DirectedEdge.html" title="Represents directed edges">DirectedEdge</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="Empty$.html" title="Empty RBE"></a>
+                        <a href="Empty$.html" title="Empty RBE">Empty</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Fail.html" title="Fail RBE doesn't match"></a>
+                        <a href="Fail.html" title="Fail RBE doesn't match">Fail</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="Graph$.html" title=""></a>
+                        <a class="trait" href="Graph.html" title="Generic representation of graphs"></a>
+                        <a href="Graph.html" title="Generic representation of graphs">Graph</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="GraphMap.html" title="Implementation of graph as a map"></a>
+                        <a href="GraphMap.html" title="Implementation of graph as a map">GraphMap</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="IntervalError.html" title=""></a>
+                        <a href="IntervalError.html" title="">IntervalError</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Inverse.html" title="A neighbor of a node through an inverse edge"></a>
+                        <a href="Inverse.html" title="A neighbor of a node through an inverse edge">Inverse</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="InverseEdge.html" title=""></a>
+                        <a href="InverseEdge.html" title="">InverseEdge</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="trait" href="" title=""></a>
+                        <a href="" title="">Matcher</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="MatcherLog.html" title=""></a>
+                        <a href="MatcherLog.html" title="">MatcherLog</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="MaxCardinalityZeroFoundValue.html" title=""></a>
+                        <a href="MaxCardinalityZeroFoundValue.html" title="">MaxCardinalityZeroFoundValue</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="MsgError.html" title=""></a>
+                        <a href="MsgError.html" title="">MsgError</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="trait" href="Neigh.html" title="Represents a neighbor of a node in a graph."></a>
+                        <a href="Neigh.html" title="Represents a neighbor of a node in a graph.">Neigh</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="NonNullableError.html" title=""></a>
+                        <a href="NonNullableError.html" title="">NonNullableError</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="NotShape.html" title=""></a>
+                        <a href="NotShape.html" title="">NotShape</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Or.html" title="Or(v1,v2) represents either v1 or v2"></a>
+                        <a href="Or.html" title="Or(v1,v2) represents either v1 or v2">Or</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Plus.html" title="Plus(v) represents 1 or more appearances of v"></a>
+                        <a href="Plus.html" title="Plus(v) represents 1 or more appearances of v">Plus</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="RangeLowerBoundBigger.html" title=""></a>
+                        <a href="RangeLowerBoundBigger.html" title="">RangeLowerBoundBigger</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="RangeNegativeLowerBound.html" title=""></a>
+                        <a href="RangeNegativeLowerBound.html" title="">RangeNegativeLowerBound</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="Rbe$.html" title=""></a>
+                        <a class="trait" href="Rbe.html" title="This trait defines Single Occurrence Regular Bag Expressions (Rbe)"></a>
+                        <a href="Rbe.html" title="This trait defines Single Occurrence Regular Bag Expressions (Rbe)">Rbe</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="RbeError.html" title=""></a>
+                        <a href="RbeError.html" title="">RbeError</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Repeat.html" title="Repeat(v,n,m) represents between n and m apperances of v"></a>
+                        <a href="Repeat.html" title="Repeat(v,n,m) represents between n and m apperances of v">Repeat</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="RepeatsError.html" title=""></a>
+                        <a href="RepeatsError.html" title="">RepeatsError</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="Schema$.html" title=""></a>
+                        <a class="class" href="Schema.html" title="Defines a Schema which is a map from Labels to Shapes"></a>
+                        <a href="Schema.html" title="Defines a Schema which is a map from Labels to Shapes">Schema</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="Shape$.html" title=""></a>
+                        <a class="class" href="Shape.html" title=""></a>
+                        <a href="Shape.html" title="">Shape</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="ShowRbe$.html" title=""></a>
+                        <a href="ShowRbe$.html" title="">ShowRbe</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="SingleShape.html" title="A shape contains a regular bag expression, a closed modifier and a list of extras"></a>
+                        <a href="SingleShape.html" title="A shape contains a regular bag expression, a closed modifier and a list of extras">SingleShape</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Star.html" title="Star(v) represents 0 or more v"></a>
+                        <a href="Star.html" title="Star(v) represents 0 or more v">Star</a>
+                      </li><li class="current-entities indented3">
+                        <a class="object" href="StringGraph$.html" title=""></a>
+                        <a class="trait" href="StringGraph.html" title="Simple graphs whose nodes and edges are strings They are used for testing purposes mainly"></a>
+                        <a href="StringGraph.html" title="Simple graphs whose nodes and edges are strings They are used for testing purposes mainly">StringGraph</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Symbol.html" title="Represents a symbol that is repeated between n and m times (m can be unbounded)"></a>
+                        <a href="Symbol.html" title="Represents a symbol that is repeated between n and m times (m can be unbounded)">Symbol</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="Unexpected.html" title=""></a>
+                        <a href="Unexpected.html" title="">Unexpected</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="class" href="UnexpectedEmpty.html" title=""></a>
+                        <a href="UnexpectedEmpty.html" title="">UnexpectedEmpty</a>
+                      </li><li class="current-entities indented3">
+                        <span class="separator"></span>
+                        <a class="object" href="nodeShape$.html" title=""></a>
+                        <a href="nodeShape$.html" title="">nodeShape</a>
+                      </li>
+              </ul>
+            </div>
+          </div>
+          <div id="content">
+            <body class="trait type">
+      <div id="definition">
+        <div class="big-circle trait">t</div>
+        <p id="owner"><a href="../../index.html" class="extype" name="es">es</a>.<a href="../index.html" class="extype" name="es.weso">weso</a>.<a href="index.html" class="extype" name="es.weso.rbe">rbe</a></p>
+        <h1>Matcher<span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span></h1>
+        <h3><span class="morelinks"></span></h3>
+      </div>
+
+      <h4 id="signature" class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">trait</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Matcher</span><span class="tparams">[<span name="Edge">Edge</span>, <span name="Node">Node</span>, <span name="Label">Label</span>, <span name="Evidence">Evidence</span>]</span><span class="result"> extends <a href="http://weso.github.io/utils/latest/api/es/weso/checking/CheckerCats.html#es.weso.checking.CheckerCats" class="extype" name="es.weso.checking.CheckerCats">CheckerCats</a></span>
+      </span>
+      </h4>
+
+      
+          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/weso/srdf/tree/v0.1.86/modules/rbe/src/main/scala/es/weso/rbe/Matcher.scala" target="_blank">Matcher.scala</a></dd></dl><div class="toggleContainer block">
+          <span class="toggle">
+            Linear Supertypes
+          </span>
+          <div class="superTypes hiddenContent"><a href="http://weso.github.io/utils/latest/api/es/weso/checking/CheckerCats.html#es.weso.checking.CheckerCats" class="extype" name="es.weso.checking.CheckerCats">CheckerCats</a>, <a href="http://weso.github.io/utils/latest/api/es/weso/checking/Checker.html#es.weso.checking.Checker" class="extype" name="es.weso.checking.Checker">Checker</a>, <a href="../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></div>
+        </div></div>
+        
+
+      <div id="mbrsel">
+        <div class="toggle"></div>
+        <div id="memberfilter">
+          <i class="material-icons arrow"></i>
+          <span class="input">
+            <input id="mbrsel-input" placeholder="Filter all members" type="text" accesskey="/" />
+          </span>
+          <i class="clear material-icons"></i>
+        </div>
+        <div id="filterby">
+          <div id="order">
+            <span class="filtertype">Ordering</span>
+            <ol>
+              
+              <li class="alpha in"><span>Alphabetic</span></li>
+              <li class="inherit out"><span>By Inheritance</span></li>
+            </ol>
+          </div>
+          <div class="ancestors">
+                  <span class="filtertype">Inherited<br />
+                  </span>
+                  <ol id="linearization">
+                    <li class="in" name="es.weso.rbe.Matcher"><span>Matcher</span></li><li class="in" name="es.weso.checking.CheckerCats"><span>CheckerCats</span></li><li class="in" name="es.weso.checking.Checker"><span>Checker</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  </ol>
+                </div><div class="ancestors">
+              <span class="filtertype"></span>
+              <ol>
+                <li class="hideall out"><span>Hide All</span></li>
+                <li class="showall in"><span>Show All</span></li>
+              </ol>
+            </div>
+          <div id="visbl">
+              <span class="filtertype">Visibility</span>
+              <ol><li class="public in"><span>Public</span></li><li class="all out"><span>All</span></li></ol>
+            </div>
+        </div>
+      </div>
+
+      <div id="template">
+        <div id="allMembers">
+        
+
+        <div id="types" class="types members">
+              <h3>Type Members</h3>
+              <ol><li name="es.weso.rbe.Matcher.Attempt_" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Attempt_=es.weso.rbe.Attempt[Node,Label]"></a><a id="Attempt_:Attempt_"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Attempt_=es.weso.rbe.Attempt[Node,Label]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Attempt_</span><span class="result alias"> = <a href="Attempt.html" class="extype" name="es.weso.rbe.Attempt">Attempt</a>[<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.checking.CheckerCats.Check" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]"></a><a id="Check[A]:Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Check</span><span class="tparams">[<span name="A">A</span>]</span><span class="result alias"> = <a href="http://typelevel.org/cats/api/cats/data/EitherT.html#cats.data.EitherT" class="extype" name="cats.data.EitherT">EitherT</a>[<a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.CheckerCats.Check.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher.CheckInfo" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CheckInfo=Matcher.this.Triples_"></a><a id="CheckInfo:CheckInfo"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#CheckInfo=Matcher.this.Triples_" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CheckInfo</span><span class="result alias"> = <a href="https://www.scala-lang.org/api/2.12.13/scala/collection/immutable/Set.html#scala.collection.immutable.Set" class="extype" name="scala.collection.immutable.Set">Set</a>[(<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Edge">Edge</span>, <span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>)]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher.CheckTyping" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="CheckTyping=Matcher.this.Check[Matcher.this.Typing_]"></a><a id="CheckTyping:CheckTyping"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#CheckTyping=Matcher.this.Check[Matcher.this.Typing_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">CheckTyping</span><span class="result alias"> = <a href="http://typelevel.org/cats/api/cats/data/EitherT.html#cats.data.EitherT" class="extype" name="cats.data.EitherT">EitherT</a>[<a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <a href="#Typing_=es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Typing_">Typing_</a>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher.Config" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Config=(Matcher.this.Schema_,Matcher.this.Graph_)"></a><a id="Config:Config"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Config</span><span class="result alias"> = (<a href="#Schema_=es.weso.rbe.Schema[Edge,Node,Label,Matcher.this.Err,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Schema_">Schema_</a>, <a href="#Graph_=es.weso.rbe.Graph[Edge,Node]" class="extmbr" name="es.weso.rbe.Matcher.Graph_">Graph_</a>)</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="es.weso.rbe.Matcher">Matcher</a> → Checker</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher.Env" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Env=Matcher.this.Typing_"></a><a id="Env:Env"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Env=Matcher.this.Typing_" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Env</span><span class="result alias"> = <a href="http://weso.github.io/utils/latest/api/es/weso/typing/Typing.html#es.weso.typing.Typing" class="extype" name="es.weso.typing.Typing">Typing</a>[<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.rbe.Matcher.Evidence">Evidence</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="es.weso.rbe.Matcher">Matcher</a> → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.Checker.Err" visbl="pub" class="indented0 " data-isabs="true" fullComment="yes" group="Ungrouped">
+      <a id="Err"></a><a id="Err:Err"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Err" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Err</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Checker</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher.Graph_" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Graph_=es.weso.rbe.Graph[Edge,Node]"></a><a id="Graph_:Graph_"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Graph_=es.weso.rbe.Graph[Edge,Node]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Graph_</span><span class="result alias"> = <a href="Graph.html" class="extype" name="es.weso.rbe.Graph">Graph</a>[<span class="extype" name="es.weso.rbe.Matcher.Edge">Edge</span>, <span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher.Log" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]"></a><a id="Log:Log"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Log</span><span class="result alias"> = <a href="MatcherLog.html" class="extype" name="es.weso.rbe.MatcherLog">MatcherLog</a>[<span class="extype" name="es.weso.rbe.Matcher.Edge">Edge</span>, <span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>, <span class="extype" name="es.weso.rbe.Matcher.Evidence">Evidence</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="es.weso.rbe.Matcher">Matcher</a> → Checker</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher.LogMessage" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="LogMessage=(Matcher.this.Attempt_,String)"></a><a id="LogMessage:LogMessage"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#LogMessage=(Matcher.this.Attempt_,String)" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">LogMessage</span><span class="result alias"> = (<a href="#Attempt_=es.weso.rbe.Attempt[Node,Label]" class="extmbr" name="es.weso.rbe.Matcher.Attempt_">Attempt_</a>, <span class="extype" name="scala.Predef.String">String</span>)</span>
+      </span>
+      
+      
+    </li><li name="es.weso.checking.CheckerCats.ReaderConfig" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ReaderConfig[A]=cats.data.Kleisli[cats.effect.IO,CheckerCats.this.Config,A]"></a><a id="ReaderConfig[A]:ReaderConfig[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#ReaderConfig[A]=cats.data.Kleisli[cats.effect.IO,CheckerCats.this.Config,A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ReaderConfig</span><span class="tparams">[<span name="A">A</span>]</span><span class="result alias"> = <a href="http://typelevel.org/cats/api/cats/data/Kleisli.html#cats.data.Kleisli" class="extype" name="cats.data.Kleisli">Kleisli</a>[<a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>, <a href="#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" class="extmbr" name="es.weso.rbe.Matcher.Config">Config</a>, <span class="extype" name="es.weso.checking.CheckerCats.ReaderConfig.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats.ReaderEC" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ReaderEC[A]=cats.data.Kleisli[CheckerCats.this.ReaderConfig,CheckerCats.this.Env,A]"></a><a id="ReaderEC[A]:ReaderEC[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#ReaderEC[A]=cats.data.Kleisli[CheckerCats.this.ReaderConfig,CheckerCats.this.Env,A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ReaderEC</span><span class="tparams">[<span name="A">A</span>]</span><span class="result alias"> = <a href="http://typelevel.org/cats/api/cats/data/Kleisli.html#cats.data.Kleisli" class="extype" name="cats.data.Kleisli">Kleisli</a>[<a href="#ReaderConfig[A]=cats.data.Kleisli[cats.effect.IO,CheckerCats.this.Config,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderConfig">ReaderConfig</a>, <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>, <span class="extype" name="es.weso.checking.CheckerCats.ReaderEC.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher.Schema_" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Schema_=es.weso.rbe.Schema[Edge,Node,Label,Matcher.this.Err,Evidence]"></a><a id="Schema_:Schema_"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Schema_=es.weso.rbe.Schema[Edge,Node,Label,Matcher.this.Err,Evidence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Schema_</span><span class="result alias"> = <a href="Schema.html" class="extype" name="es.weso.rbe.Schema">Schema</a>[<span class="extype" name="es.weso.rbe.Matcher.Edge">Edge</span>, <span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.rbe.Matcher.Evidence">Evidence</span>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher.Triples_" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Triples_=Set[(Node,Edge,Node)]"></a><a id="Triples_:Triples_"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Triples_=Set[(Node,Edge,Node)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Triples_</span><span class="result alias"> = <a href="https://www.scala-lang.org/api/2.12.13/scala/collection/immutable/Set.html#scala.collection.immutable.Set" class="extype" name="scala.collection.immutable.Set">Set</a>[(<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Edge">Edge</span>, <span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>)]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher.Typing_" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="Typing_=es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]"></a><a id="Typing_:Typing_"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#Typing_=es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">Typing_</span><span class="result alias"> = <a href="http://weso.github.io/utils/latest/api/es/weso/typing/Typing.html#es.weso.typing.Typing" class="extype" name="es.weso.typing.Typing">Typing</a>[<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.rbe.Matcher.Evidence">Evidence</span>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.checking.CheckerCats.WriterEC" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]"></a><a id="WriterEC[A]:WriterEC[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">type</span>
+      </span>
+      <span class="symbol">
+        <span class="name">WriterEC</span><span class="tparams">[<span name="A">A</span>]</span><span class="result alias"> = <a href="http://typelevel.org/cats/api/cats/data/WriterT.html#cats.data.WriterT" class="extype" name="cats.data.WriterT">WriterT</a>[<a href="#ReaderEC[A]=cats.data.Kleisli[CheckerCats.this.ReaderConfig,CheckerCats.this.Env,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderEC">ReaderEC</a>, <a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a>, <span class="extype" name="es.weso.checking.CheckerCats.WriterEC.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li></ol>
+            </div>
+
+        <div class="values members">
+              <h3>Abstract Value Members</h3>
+              <ol><li name="es.weso.rbe.Matcher#matchNodeLabel" visbl="pub" class="indented0 " data-isabs="true" fullComment="no" group="Ungrouped">
+      <a id="matchNodeLabel(node:Node,label:Label):Matcher.this.Check[es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]]"></a><a id="matchNodeLabel(Node,Label):Check[Typing[Node,Label,Err,Evidence]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#matchNodeLabel(node:Node,label:Label):Matcher.this.Check[es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">abstract </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">matchNodeLabel</span><span class="params">(<span name="node">node: <span class="extype" name="es.weso.rbe.Matcher.Node">Node</span></span>, <span name="label">label: <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="http://weso.github.io/utils/latest/api/es/weso/typing/Typing.html#es.weso.typing.Typing" class="extype" name="es.weso.typing.Typing">Typing</a>[<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.rbe.Matcher.Evidence">Evidence</span>]]</span>
+      </span>
+      
+      
+    </li></ol>
+            </div>
+
+        <div class="values members">
+              <h3>Concrete Value Members</h3>
+              <ol>
+                <li name="scala.AnyRef#!=" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="!=(x$1:Any):Boolean"></a><a id="!=(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#!=(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $bang$eq" class="name">!=</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef###" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="##():Int"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html###():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $hash$hash" class="name">##</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="scala.AnyRef#==" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="==(x$1:Any):Boolean"></a><a id="==(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#==(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span title="gt4s: $eq$eq" class="name">==</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#addLog" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="addLog(log:CheckerCats.this.Log):CheckerCats.this.Check[Unit]"></a><a id="addLog(Log):Check[Unit]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#addLog(log:CheckerCats.this.Log):CheckerCats.this.Check[Unit]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">addLog</span><span class="params">(<span name="log">log: <a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="scala.Any#asInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="asInstanceOf[T0]:T0"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#asInstanceOf[T0]:T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">asInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <span class="extype" name="scala.Any.asInstanceOf.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#attempt" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="attempt[A](c:CheckerCats.this.Check[A]):CheckerCats.this.Check[Either[CheckerCats.this.Err,A]]"></a><a id="attempt[A](Check[A]):Check[Either[Err,A]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#attempt[A](c:CheckerCats.this.Check[A]):CheckerCats.this.Check[Either[CheckerCats.this.Err,A]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">attempt</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.attempt.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="../../../scala/index.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.CheckerCats.attempt.A">A</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkAll[A](xs:List[CheckerCats.this.Check[A]]):CheckerCats.this.Check[List[A]]"></a><a id="checkAll[A](List[Check[A]]):Check[List[A]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkAll[A](xs:List[CheckerCats.this.Check[A]]):CheckerCats.this.Check[List[A]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkAll</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="xs">xs: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkAll.A">A</span>]]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkAll.A">A</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkAllFailFAtFirstFlag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkAllFailFAtFirstFlag[A,B,F[_]](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;F[(B,Boolean)],last:=&gt;B)(implicitevidence$5:cats.Monoid[B],implicitevidence$6:cats.Monad[F]):F[(B,Boolean)]"></a><a id="checkAllFailFAtFirstFlag[A,B,F[_]](⇒LazyList[A],(A)⇒F[(B,Boolean)],⇒B)(Monoid[B],Monad[F]):F[(B,Boolean)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkAllFailFAtFirstFlag[A,B,F[_]](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;F[(B,Boolean)],last:=&gt;B)(implicitevidence$5:cats.Monoid[B],implicitevidence$6:cats.Monad[F]):F[(B,Boolean)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkAllFailFAtFirstFlag</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span name="ls">ls: ⇒ <span class="extype" name="es.weso.utils.internal.CollectionCompat.LazyList">LazyList</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.A">A</span>) ⇒ <span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>, <span name="last">last: ⇒ <span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="cats.Monoid">Monoid</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.B">B</span>]</span>, <span name="arg1">arg1: <a href="http://typelevel.org/cats/api/cats/Monad.html#cats.Monad" class="extype" name="cats.Monad">Monad</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.F">F</span>]</span>)</span><span class="result">: <span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkAllFailFAtFirstFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkAllFlag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkAllFlag[A,B,F[_]](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;F[(B,Boolean)],last:=&gt;B)(implicitevidence$3:cats.Monoid[B],implicitevidence$4:cats.Monad[F]):F[(B,Boolean)]"></a><a id="checkAllFlag[A,B,F[_]](⇒LazyList[A],(A)⇒F[(B,Boolean)],⇒B)(Monoid[B],Monad[F]):F[(B,Boolean)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkAllFlag[A,B,F[_]](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;F[(B,Boolean)],last:=&gt;B)(implicitevidence$3:cats.Monoid[B],implicitevidence$4:cats.Monad[F]):F[(B,Boolean)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkAllFlag</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span name="ls">ls: ⇒ <span class="extype" name="es.weso.utils.internal.CollectionCompat.LazyList">LazyList</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.A">A</span>) ⇒ <span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>, <span name="last">last: ⇒ <span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="cats.Monoid">Monoid</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.B">B</span>]</span>, <span name="arg1">arg1: <a href="http://typelevel.org/cats/api/cats/Monad.html#cats.Monad" class="extype" name="cats.Monad">Monad</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.F">F</span>]</span>)</span><span class="result">: <span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkAllFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkList" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkList[A,B](ls:List[A],check:A=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[List[B]]"></a><a id="checkList[A,B](List[A],(A)⇒Check[B]):Check[List[B]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkList[A,B](ls:List[A],check:A=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[List[B]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkList</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="ls">ls: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkList.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.checkList.A">A</span>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkList.B">B</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkList.B">B</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkLs" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkLs[A](cs:List[CheckerCats.this.Check[A]]):CheckerCats.this.Check[List[A]]"></a><a id="checkLs[A](List[Check[A]]):Check[List[A]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkLs[A](cs:List[CheckerCats.this.Check[A]]):CheckerCats.this.Check[List[A]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkLs</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="cs">cs: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkLs.A">A</span>]]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkLs.A">A</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkOneOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkOneOf[A](cs:List[CheckerCats.this.Check[A]],errNone:CheckerCats.this.Err,errMoreThanOne:List[A]=&gt;CheckerCats.this.Err):CheckerCats.this.Check[A]"></a><a id="checkOneOf[A](List[Check[A]],Err,(List[A])⇒Err):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkOneOf[A](cs:List[CheckerCats.this.Check[A]],errNone:CheckerCats.this.Err,errMoreThanOne:List[A]=&gt;CheckerCats.this.Err):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkOneOf</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="cs">cs: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkOneOf.A">A</span>]]</span>, <span name="errNone">errNone: <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a></span>, <span name="errMoreThanOne">errMoreThanOne: (<a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkOneOf.A">A</span>]) ⇒ <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkOneOf.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkPair1st" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkPair1st[A,B](p:(CheckerCats.this.Check[A],B)):CheckerCats.this.Check[(A,B)]"></a><a id="checkPair1st[A,B]((Check[A],B)):Check[(A,B)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkPair1st[A,B](p:(CheckerCats.this.Check[A],B)):CheckerCats.this.Check[(A,B)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkPair1st</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="p">p: (<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkPair1st.A">A</span>], <span class="extype" name="es.weso.checking.CheckerCats.checkPair1st.B">B</span>)</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[(<span class="extype" name="es.weso.checking.CheckerCats.checkPair1st.A">A</span>, <span class="extype" name="es.weso.checking.CheckerCats.checkPair1st.B">B</span>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkPair2nd" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkPair2nd[A,B](p:(A,CheckerCats.this.Check[B])):CheckerCats.this.Check[(A,B)]"></a><a id="checkPair2nd[A,B]((A,Check[B])):Check[(A,B)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkPair2nd[A,B](p:(A,CheckerCats.this.Check[B])):CheckerCats.this.Check[(A,B)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkPair2nd</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="p">p: (<span class="extype" name="es.weso.checking.CheckerCats.checkPair2nd.A">A</span>, <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkPair2nd.B">B</span>])</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[(<span class="extype" name="es.weso.checking.CheckerCats.checkPair2nd.A">A</span>, <span class="extype" name="es.weso.checking.CheckerCats.checkPair2nd.B">B</span>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkSequenceFlag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkSequenceFlag[A,F[_]](ls:=&gt;List[F[(A,Boolean)]],last:A)(implicitevidence$7:cats.Monoid[A],implicitevidence$8:cats.Monad[F]):F[(A,Boolean)]"></a><a id="checkSequenceFlag[A,F[_]](⇒List[F[(A,Boolean)]],A)(Monoid[A],Monad[F]):F[(A,Boolean)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkSequenceFlag[A,F[_]](ls:=&gt;List[F[(A,Boolean)]],last:A)(implicitevidence$7:cats.Monoid[A],implicitevidence$8:cats.Monad[F]):F[(A,Boolean)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkSequenceFlag</span><span class="tparams">[<span name="A">A</span>, <span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span name="ls">ls: ⇒ <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.A">A</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]]</span>, <span name="last">last: <span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.A">A</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="cats.Monoid">Monoid</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.A">A</span>]</span>, <span name="arg1">arg1: <a href="http://typelevel.org/cats/api/cats/Monad.html#cats.Monad" class="extype" name="cats.Monad">Monad</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.F">F</span>]</span>)</span><span class="result">: <span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSequenceFlag.A">A</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkSome" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkSome[A](cs:es.weso.utils.internal.CollectionCompat.LazyList[CheckerCats.this.Check[A]])(implicitev:cats.Monoid[CheckerCats.this.Err]):CheckerCats.this.Check[A]"></a><a id="checkSome[A](LazyList[Check[A]])(Monoid[Err]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkSome[A](cs:es.weso.utils.internal.CollectionCompat.LazyList[CheckerCats.this.Check[A]])(implicitev:cats.Monoid[CheckerCats.this.Err]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkSome</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="cs">cs: <span class="extype" name="es.weso.utils.internal.CollectionCompat.LazyList">LazyList</span>[<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSome.A">A</span>]]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="ev">ev: <span class="extype" name="cats.Monoid">Monoid</span>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSome.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkSome" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkSome[A](cs:List[CheckerCats.this.Check[A]],errorIfNone:CheckerCats.this.Err):CheckerCats.this.Check[A]"></a><a id="checkSome[A](List[Check[A]],Err):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkSome[A](cs:List[CheckerCats.this.Check[A]],errorIfNone:CheckerCats.this.Err):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkSome</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="cs">cs: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSome.A">A</span>]]</span>, <span name="errorIfNone">errorIfNone: <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSome.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkSomeFlag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkSomeFlag[A,B,F[_]](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;F[(B,Boolean)],last:F[(B,Boolean)])(implicitevidence$1:cats.Monad[F]):F[(B,Boolean)]"></a><a id="checkSomeFlag[A,B,F[_]](⇒LazyList[A],(A)⇒F[(B,Boolean)],F[(B,Boolean)])(Monad[F]):F[(B,Boolean)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkSomeFlag[A,B,F[_]](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;F[(B,Boolean)],last:F[(B,Boolean)])(implicitevidence$1:cats.Monad[F]):F[(B,Boolean)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkSomeFlag</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>, <span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span name="ls">ls: ⇒ <span class="extype" name="es.weso.utils.internal.CollectionCompat.LazyList">LazyList</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.A">A</span>) ⇒ <span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>, <span name="last">last: <span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="http://typelevel.org/cats/api/cats/Monad.html#cats.Monad" class="extype" name="cats.Monad">Monad</a>[<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.F">F</span>]</span>)</span><span class="result">: <span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.F">F</span>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#checkSomeFlagCount" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="checkSomeFlagCount[A,B](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;CheckerCats.this.Check[(B,Boolean)],last:B)(implicitevidence$2:cats.Monoid[B]):CheckerCats.this.Check[(B,Int)]"></a><a id="checkSomeFlagCount[A,B](⇒LazyList[A],(A)⇒Check[(B,Boolean)],B)(Monoid[B]):Check[(B,Int)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#checkSomeFlagCount[A,B](ls:=&gt;es.weso.utils.internal.CollectionCompat.LazyList[A],check:A=&gt;CheckerCats.this.Check[(B,Boolean)],last:B)(implicitevidence$2:cats.Monoid[B]):CheckerCats.this.Check[(B,Int)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">checkSomeFlagCount</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="ls">ls: ⇒ <span class="extype" name="es.weso.utils.internal.CollectionCompat.LazyList">LazyList</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlagCount.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlagCount.A">A</span>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlagCount.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>, <span name="last">last: <span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlagCount.B">B</span></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <span class="extype" name="cats.Monoid">Monoid</span>[<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlagCount.B">B</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[(<span class="extype" name="es.weso.checking.CheckerCats.checkSomeFlagCount.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="scala.AnyRef#clone" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="clone():Object"></a><a id="clone():AnyRef"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#clone():Object" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">clone</span><span class="params">()</span><span class="result">: <a href="../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.CloneNotSupportedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#cond" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="cond[A,B](check:CheckerCats.this.Check[A],thenPart:A=&gt;CheckerCats.this.Check[B],elsePart:CheckerCats.this.Err=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[B]"></a><a id="cond[A,B](Check[A],(A)⇒Check[B],(Err)⇒Check[B]):Check[B]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#cond[A,B](check:CheckerCats.this.Check[A],thenPart:A=&gt;CheckerCats.this.Check[B],elsePart:CheckerCats.this.Err=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[B]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">cond</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="check">check: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.cond.A">A</span>]</span>, <span name="thenPart">thenPart: (<span class="extype" name="es.weso.checking.CheckerCats.cond.A">A</span>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.cond.B">B</span>]</span>, <span name="elsePart">elsePart: (<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.cond.B">B</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.cond.B">B</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#condFlag" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="condFlag[A,B](check:CheckerCats.this.Check[A],thenPart:A=&gt;CheckerCats.this.Check[B],elsePart:CheckerCats.this.Err=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[(B,Boolean)]"></a><a id="condFlag[A,B](Check[A],(A)⇒Check[B],(Err)⇒Check[B]):Check[(B,Boolean)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#condFlag[A,B](check:CheckerCats.this.Check[A],thenPart:A=&gt;CheckerCats.this.Check[B],elsePart:CheckerCats.this.Err=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[(B,Boolean)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">condFlag</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="check">check: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.condFlag.A">A</span>]</span>, <span name="thenPart">thenPart: (<span class="extype" name="es.weso.checking.CheckerCats.condFlag.A">A</span>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.condFlag.B">B</span>]</span>, <span name="elsePart">elsePart: (<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.condFlag.B">B</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[(<span class="extype" name="es.weso.checking.CheckerCats.condFlag.B">B</span>, <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher#envMonoid" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="envMonoid:cats.Monoid[Matcher.this.Env]"></a><a id="envMonoid:Monoid[Env]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#envMonoid:cats.Monoid[Matcher.this.Env]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">envMonoid</span><span class="result">: <span class="extype" name="cats.Monoid">Monoid</span>[<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>]</span>
+      </span>
+      
+      
+    </li><li name="scala.AnyRef#eq" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="eq(x$1:AnyRef):Boolean"></a><a id="eq(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#eq(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">eq</span><span class="params">(<span name="arg0">arg0: <a href="../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#equals" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="equals(x$1:Any):Boolean"></a><a id="equals(Any):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#equals(x$1:Any):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">equals</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#err" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="err[A](e:CheckerCats.this.Err):CheckerCats.this.Check[A]"></a><a id="err[A](Err):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#err[A](e:CheckerCats.this.Err):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">err</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="e">e: <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.err.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#filterSuccess" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="filterSuccess[A,B](ls:List[A],check:A=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[List[(A,B)]]"></a><a id="filterSuccess[A,B](List[A],(A)⇒Check[B]):Check[List[(A,B)]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#filterSuccess[A,B](ls:List[A],check:A=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[List[(A,B)]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">filterSuccess</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="ls">ls: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.filterSuccess.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.filterSuccess.A">A</span>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.filterSuccess.B">B</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[(<span class="extype" name="es.weso.checking.CheckerCats.filterSuccess.A">A</span>, <span class="extype" name="es.weso.checking.CheckerCats.filterSuccess.B">B</span>)]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#fromEither" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromEither[A](e:Either[CheckerCats.this.Err,A]):CheckerCats.this.Check[A]"></a><a id="fromEither[A](Either[Err,A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#fromEither[A](e:Either[CheckerCats.this.Err,A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromEither</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="e">e: <a href="../../../scala/index.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.CheckerCats.fromEither.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.fromEither.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#fromEitherIO" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromEitherIO[A](e:cats.data.EitherT[cats.effect.IO,CheckerCats.this.Err,A]):CheckerCats.this.Check[A]"></a><a id="fromEitherIO[A](EitherT[IO,Err,A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#fromEitherIO[A](e:cats.data.EitherT[cats.effect.IO,CheckerCats.this.Err,A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromEitherIO</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="e">e: <a href="http://typelevel.org/cats/api/cats/data/EitherT.html#cats.data.EitherT" class="extype" name="cats.data.EitherT">EitherT</a>[<a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.CheckerCats.fromEitherIO.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.fromEitherIO.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#fromIO" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="fromIO[A](io:cats.effect.IO[A]):CheckerCats.this.Check[A]"></a><a id="fromIO[A](IO[A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#fromIO[A](io:cats.effect.IO[A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">fromIO</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="io">io: <a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>[<span class="extype" name="es.weso.checking.CheckerCats.fromIO.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.fromIO.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="scala.AnyRef#getClass" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getClass():Class[_]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#getClass():Class[_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getClass</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.Class">Class</span>[_]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#getConfig" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getConfig:CheckerCats.this.Check[CheckerCats.this.Config]"></a><a id="getConfig:Check[Config]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#getConfig:CheckerCats.this.Check[CheckerCats.this.Config]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getConfig</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" class="extmbr" name="es.weso.rbe.Matcher.Config">Config</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#getEnv" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="getEnv:CheckerCats.this.Check[CheckerCats.this.Env]"></a><a id="getEnv:Check[Env]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#getEnv:CheckerCats.this.Check[CheckerCats.this.Env]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getEnv</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher#getGraph" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getGraph:Matcher.this.Check[Matcher.this.Graph_]"></a><a id="getGraph:Check[Graph_]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#getGraph:Matcher.this.Check[Matcher.this.Graph_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getGraph</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="#Graph_=es.weso.rbe.Graph[Edge,Node]" class="extmbr" name="es.weso.rbe.Matcher.Graph_">Graph_</a>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher#getSchema" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getSchema:Matcher.this.Check[Matcher.this.Schema_]"></a><a id="getSchema:Check[Schema_]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#getSchema:Matcher.this.Check[Matcher.this.Schema_]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getSchema</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="#Schema_=es.weso.rbe.Schema[Edge,Node,Label,Matcher.this.Err,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Schema_">Schema_</a>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.rbe.Matcher#getTyping" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="getTyping:Matcher.this.Check[es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]]"></a><a id="getTyping:Check[Typing[Node,Label,Err,Evidence]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#getTyping:Matcher.this.Check[es.weso.typing.Typing[Node,Label,Matcher.this.Err,Evidence]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">getTyping</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="http://weso.github.io/utils/latest/api/es/weso/typing/Typing.html#es.weso.typing.Typing" class="extype" name="es.weso.typing.Typing">Typing</a>[<span class="extype" name="es.weso.rbe.Matcher.Node">Node</span>, <span class="extype" name="es.weso.rbe.Matcher.Label">Label</span>, <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.rbe.Matcher.Evidence">Evidence</span>]]</span>
+      </span>
+      
+      
+    </li><li name="scala.AnyRef#hashCode" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="hashCode():Int"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#hashCode():Int" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">hashCode</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.Any#isInstanceOf" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="isInstanceOf[T0]:Boolean"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#isInstanceOf[T0]:Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">isInstanceOf</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#local" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="local[A](f:CheckerCats.this.Env=&gt;CheckerCats.this.Env)(c:CheckerCats.this.Check[A]):CheckerCats.this.Check[A]"></a><a id="local[A]((Env)⇒Env)(Check[A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#local[A](f:CheckerCats.this.Env=&gt;CheckerCats.this.Env)(c:CheckerCats.this.Check[A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">local</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>) ⇒ <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.local.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.local.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher#logMonoid" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="logMonoid:cats.Monoid[Matcher.this.Log]"></a><a id="logMonoid:Monoid[Log]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#logMonoid:cats.Monoid[Matcher.this.Log]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logMonoid</span><span class="result">: <span class="extype" name="cats.Monoid">Monoid</span>[<a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="es.weso.rbe.Matcher">Matcher</a> → CheckerCats</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher#logShow" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="logShow:cats.Show[Matcher.this.Log]"></a><a id="logShow:Show[Log]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#logShow:cats.Show[Matcher.this.Log]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">logShow</span><span class="result">: <a href="http://typelevel.org/cats/api/cats/Show.html#cats.Show" class="extype" name="cats.Show">Show</a>[<a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.checking.CheckerCats#mWriterEC" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mWriterEC:cats.Monad[CheckerCats.this.WriterEC]"></a><a id="mWriterEC:Monad[WriterEC]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#mWriterEC:cats.Monad[CheckerCats.this.WriterEC]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">lazy val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mWriterEC</span><span class="result">: <a href="http://typelevel.org/cats/api/cats/Monad.html#cats.Monad" class="extype" name="cats.Monad">Monad</a>[<a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected </dd><dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#mkErr" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="mkErr[F[_]](e:CheckerCats.this.Err)(implicitevidence$9:cats.Applicative[F]):F[CheckerCats.this.Err]"></a><a id="mkErr[F[_]](Err)(Applicative[F]):F[Err]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#mkErr[F[_]](e:CheckerCats.this.Err)(implicitevidence$9:cats.Applicative[F]):F[CheckerCats.this.Err]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">mkErr</span><span class="tparams">[<span name="F">F<span class="tparams">[<span name="_">_</span>]</span></span>]</span><span class="params">(<span name="e">e: <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a></span>)</span><span class="params">(<span class="implicit">implicit </span><span name="arg0">arg0: <a href="http://typelevel.org/cats/api/cats/Applicative.html#cats.Applicative" class="extype" name="cats.Applicative">Applicative</a>[<span class="extype" name="es.weso.checking.CheckerCats.mkErr.F">F</span>]</span>)</span><span class="result">: <span class="extype" name="es.weso.checking.CheckerCats.mkErr.F">F</span>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="scala.AnyRef#ne" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ne(x$1:AnyRef):Boolean"></a><a id="ne(AnyRef):Boolean"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#ne(x$1:AnyRef):Boolean" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ne</span><span class="params">(<span name="arg0">arg0: <a href="../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#notify" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notify():Unit"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#notify():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notify</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#notifyAll" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="notifyAll():Unit"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#notifyAll():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">notifyAll</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@native</span><span class="args">()</span>
+              
+                <span class="name">@HotSpotIntrinsicCandidate</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#ok" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="ok[A](x:A):CheckerCats.this.Check[A]"></a><a id="ok[A](A):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#ok[A](x:A):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">ok</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="x">x: <span class="extype" name="es.weso.checking.CheckerCats.ok.A">A</span></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.ok.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#optCheck" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="optCheck[A,B](c:Option[A],check:A=&gt;CheckerCats.this.Check[B],default:=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[B]"></a><a id="optCheck[A,B](Option[A],(A)⇒Check[B],⇒Check[B]):Check[B]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#optCheck[A,B](c:Option[A],check:A=&gt;CheckerCats.this.Check[B],default:=&gt;CheckerCats.this.Check[B]):CheckerCats.this.Check[B]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">optCheck</span><span class="tparams">[<span name="A">A</span>, <span name="B">B</span>]</span><span class="params">(<span name="c">c: <a href="https://www.scala-lang.org/api/2.12.13/scala/Option.html#scala.Option" class="extype" name="scala.Option">Option</a>[<span class="extype" name="es.weso.checking.CheckerCats.optCheck.A">A</span>]</span>, <span name="check">check: (<span class="extype" name="es.weso.checking.CheckerCats.optCheck.A">A</span>) ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.optCheck.B">B</span>]</span>, <span name="default">default: ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.optCheck.B">B</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.optCheck.B">B</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#orElse" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="orElse[A](c1:CheckerCats.this.Check[A],c2:=&gt;CheckerCats.this.Check[A]):CheckerCats.this.Check[A]"></a><a id="orElse[A](Check[A],⇒Check[A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#orElse[A](c1:CheckerCats.this.Check[A],c2:=&gt;CheckerCats.this.Check[A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">orElse</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c1">c1: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.orElse.A">A</span>]</span>, <span name="c2">c2: ⇒ <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.orElse.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.orElse.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#readerConfig2check" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="readerConfig2check[A](c:CheckerCats.this.ReaderConfig[A]):CheckerCats.this.Check[A]"></a><a id="readerConfig2check[A](ReaderConfig[A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#readerConfig2check[A](c:CheckerCats.this.ReaderConfig[A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">readerConfig2check</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#ReaderConfig[A]=cats.data.Kleisli[cats.effect.IO,CheckerCats.this.Config,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderConfig">ReaderConfig</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerConfig2check.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerConfig2check.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#readerConfig2readerEC" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="readerConfig2readerEC[A](c:CheckerCats.this.ReaderConfig[A]):CheckerCats.this.ReaderEC[A]"></a><a id="readerConfig2readerEC[A](ReaderConfig[A]):ReaderEC[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#readerConfig2readerEC[A](c:CheckerCats.this.ReaderConfig[A]):CheckerCats.this.ReaderEC[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">readerConfig2readerEC</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#ReaderConfig[A]=cats.data.Kleisli[cats.effect.IO,CheckerCats.this.Config,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderConfig">ReaderConfig</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerConfig2readerEC.A">A</span>]</span>)</span><span class="result">: <a href="#ReaderEC[A]=cats.data.Kleisli[CheckerCats.this.ReaderConfig,CheckerCats.this.Env,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderEC">ReaderEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerConfig2readerEC.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#readerEC2check" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="readerEC2check[A](c:CheckerCats.this.ReaderEC[A]):CheckerCats.this.Check[A]"></a><a id="readerEC2check[A](ReaderEC[A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#readerEC2check[A](c:CheckerCats.this.ReaderEC[A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">readerEC2check</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#ReaderEC[A]=cats.data.Kleisli[CheckerCats.this.ReaderConfig,CheckerCats.this.Env,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderEC">ReaderEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerEC2check.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerEC2check.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#readerEC2writer" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="readerEC2writer[A](c:CheckerCats.this.ReaderEC[A]):CheckerCats.this.WriterEC[A]"></a><a id="readerEC2writer[A](ReaderEC[A]):WriterEC[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#readerEC2writer[A](c:CheckerCats.this.ReaderEC[A]):CheckerCats.this.WriterEC[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">readerEC2writer</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#ReaderEC[A]=cats.data.Kleisli[CheckerCats.this.ReaderConfig,CheckerCats.this.Env,A]" class="extmbr" name="es.weso.rbe.Matcher.ReaderEC">ReaderEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerEC2writer.A">A</span>]</span>)</span><span class="result">: <a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.readerEC2writer.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#run" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="run[A](c:CheckerCats.this.Check[A])(config:CheckerCats.this.Config)(env:CheckerCats.this.Env):cats.effect.IO[(CheckerCats.this.Log,Either[CheckerCats.this.Err,A])]"></a><a id="run[A](Check[A])(Config)(Env):IO[(Log,Either[Err,A])]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#run[A](c:CheckerCats.this.Check[A])(config:CheckerCats.this.Config)(env:CheckerCats.this.Env):cats.effect.IO[(CheckerCats.this.Log,Either[CheckerCats.this.Err,A])]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">run</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.run.A">A</span>]</span>)</span><span class="params">(<span name="config">config: <a href="#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" class="extmbr" name="es.weso.rbe.Matcher.Config">Config</a></span>)</span><span class="params">(<span name="env">env: <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="result">: <a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>[(<a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a>, <a href="../../../scala/index.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.CheckerCats.run.A">A</span>])]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats → Checker</dd></dl></div>
+    </li><li name="es.weso.checking.Checker#runCheck" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runCheck[A](c:Checker.this.Check[A])(config:Checker.this.Config)(env:Checker.this.Env):cats.effect.IO[(Either[Checker.this.Err,A],Checker.this.Log)]"></a><a id="runCheck[A](Check[A])(Config)(Env):IO[(Either[Err,A],Log)]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#runCheck[A](c:Checker.this.Check[A])(config:Checker.this.Config)(env:Checker.this.Env):cats.effect.IO[(Either[Checker.this.Err,A],Checker.this.Log)]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runCheck</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.Checker.runCheck.A">A</span>]</span>)</span><span class="params">(<span name="config">config: <a href="#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" class="extmbr" name="es.weso.rbe.Matcher.Config">Config</a></span>)</span><span class="params">(<span name="env">env: <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="result">: <a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>[(<a href="../../../scala/index.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.Checker.runCheck.A">A</span>], <a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a>)]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#runLocal" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runLocal[A](c:CheckerCats.this.Check[A],f:CheckerCats.this.Env=&gt;CheckerCats.this.Env):CheckerCats.this.Check[A]"></a><a id="runLocal[A](Check[A],(Env)⇒Env):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#runLocal[A](c:CheckerCats.this.Check[A],f:CheckerCats.this.Env=&gt;CheckerCats.this.Env):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runLocal</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.runLocal.A">A</span>]</span>, <span name="f">f: (<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>) ⇒ <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.runLocal.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#runLocalSafe" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runLocalSafe[A](c:CheckerCats.this.Check[A],f:CheckerCats.this.Env=&gt;CheckerCats.this.Env,safe:(CheckerCats.this.Err,CheckerCats.this.Env)=&gt;A):CheckerCats.this.Check[A]"></a><a id="runLocalSafe[A](Check[A],(Env)⇒Env,(Err,Env)⇒A):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#runLocalSafe[A](c:CheckerCats.this.Check[A],f:CheckerCats.this.Env=&gt;CheckerCats.this.Env,safe:(CheckerCats.this.Err,CheckerCats.this.Env)=&gt;A):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runLocalSafe</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.runLocalSafe.A">A</span>]</span>, <span name="f">f: (<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>) ⇒ <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>, <span name="safe">safe: (<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>) ⇒ <span class="extype" name="es.weso.checking.CheckerCats.runLocalSafe.A">A</span></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.runLocalSafe.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#runLocalW" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runLocalW[A](f:CheckerCats.this.Env=&gt;CheckerCats.this.Env)(c:CheckerCats.this.WriterEC[A]):CheckerCats.this.WriterEC[A]"></a><a id="runLocalW[A]((Env)⇒Env)(WriterEC[A]):WriterEC[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#runLocalW[A](f:CheckerCats.this.Env=&gt;CheckerCats.this.Env)(c:CheckerCats.this.WriterEC[A]):CheckerCats.this.WriterEC[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runLocalW</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="f">f: (<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>) ⇒ <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="params">(<span name="c">c: <a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.runLocalW.A">A</span>]</span>)</span><span class="result">: <a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.runLocalW.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="es.weso.checking.Checker#runLog" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runLog[A](c:Checker.this.Check[A])(config:Checker.this.Config)(env:Checker.this.Env):cats.effect.IO[Checker.this.Log]"></a><a id="runLog[A](Check[A])(Config)(Env):IO[Log]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#runLog[A](c:Checker.this.Check[A])(config:Checker.this.Config)(env:Checker.this.Env):cats.effect.IO[Checker.this.Log]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runLog</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.Checker.runLog.A">A</span>]</span>)</span><span class="params">(<span name="config">config: <a href="#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" class="extmbr" name="es.weso.rbe.Matcher.Config">Config</a></span>)</span><span class="params">(<span name="env">env: <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="result">: <a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>[<a href="#Log=es.weso.rbe.MatcherLog[Edge,Node,Label,Evidence]" class="extmbr" name="es.weso.rbe.Matcher.Log">Log</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Checker</dd></dl></div>
+    </li><li name="es.weso.checking.Checker#runValue" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="runValue[A](c:Checker.this.Check[A])(config:Checker.this.Config)(env:Checker.this.Env):cats.effect.IO[Either[Checker.this.Err,A]]"></a><a id="runValue[A](Check[A])(Config)(Env):IO[Either[Err,A]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#runValue[A](c:Checker.this.Check[A])(config:Checker.this.Config)(env:Checker.this.Env):cats.effect.IO[Either[Checker.this.Err,A]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">runValue</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.Checker.runValue.A">A</span>]</span>)</span><span class="params">(<span name="config">config: <a href="#Config=(Matcher.this.Schema_,Matcher.this.Graph_)" class="extmbr" name="es.weso.rbe.Matcher.Config">Config</a></span>)</span><span class="params">(<span name="env">env: <a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a></span>)</span><span class="result">: <a href="https://typelevel.org/cats-effect/api/cats/effect/IO.html#cats.effect.IO" class="extype" name="cats.effect.IO">IO</a>[<a href="../../../scala/index.html#Either[+A,+B]=scala.util.Either[A,B]" class="extmbr" name="scala.Either">Either</a>[<a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a>, <span class="extype" name="es.weso.checking.Checker.runValue.A">A</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Checker</dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#sequence" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="sequence[A](xs:List[CheckerCats.this.Check[A]]):CheckerCats.this.Check[List[A]]"></a><a id="sequence[A](List[Check[A]]):Check[List[A]]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#sequence[A](xs:List[CheckerCats.this.Check[A]]):CheckerCats.this.Check[List[A]]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">sequence</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="xs">xs: <a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.sequence.A">A</span>]]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="../../../scala/index.html#List[+A]=List[A]" class="extmbr" name="scala.List">List</a>[<span class="extype" name="es.weso.checking.CheckerCats.sequence.A">A</span>]]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="scala.AnyRef#synchronized" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="synchronized[T0](x$1:=&gt;T0):T0"></a><a id="synchronized[T0](⇒T0):T0"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#synchronized[T0](x$1:=&gt;T0):T0" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">synchronized</span><span class="tparams">[<span name="T0">T0</span>]</span><span class="params">(<span name="arg0">arg0: ⇒ <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>)</span><span class="result">: <span class="extype" name="java.lang.AnyRef.synchronized.T0">T0</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd></dl></div>
+    </li><li name="scala.AnyRef#toString" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="toString():String"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#toString():String" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">toString</span><span class="params">()</span><span class="result">: <span class="extype" name="java.lang.String">String</span></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="es.weso.rbe.Matcher#typingShow" visbl="pub" class="indented0 " data-isabs="false" fullComment="no" group="Ungrouped">
+      <a id="typingShow:cats.Show[Matcher.this.Env]"></a><a id="typingShow:Show[Env]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#typingShow:cats.Show[Matcher.this.Env]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">implicit </span>
+        <span class="kind">val</span>
+      </span>
+      <span class="symbol">
+        <span class="name">typingShow</span><span class="result">: <a href="http://typelevel.org/cats/api/cats/Show.html#cats.Show" class="extype" name="cats.Show">Show</a>[<a href="#Env=Matcher.this.Typing_" class="extmbr" name="es.weso.rbe.Matcher.Env">Env</a>]</span>
+      </span>
+      
+      
+    </li><li name="es.weso.checking.CheckerCats#validateCheck" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="validateCheck(condition:Boolean,e:CheckerCats.this.Err):CheckerCats.this.Check[Unit]"></a><a id="validateCheck(Boolean,Err):Check[Unit]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#validateCheck(condition:Boolean,e:CheckerCats.this.Err):CheckerCats.this.Check[Unit]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">validateCheck</span><span class="params">(<span name="condition">condition: <a href="https://www.scala-lang.org/api/2.12.13/scala/Boolean.html#scala.Boolean" class="extype" name="scala.Boolean">Boolean</a></span>, <span name="e">e: <a href="#Err" class="extmbr" name="es.weso.rbe.Matcher.Err">Err</a></span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long,x$2:Int):Unit"></a><a id="wait(Long,Int):Unit"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#wait(x$1:Long,x$2:Int):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Long.html#scala.Long" class="extype" name="scala.Long">Long</a></span>, <span name="arg1">arg1: <a href="https://www.scala-lang.org/api/2.12.13/scala/Int.html#scala.Int" class="extype" name="scala.Int">Int</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait(x$1:Long):Unit"></a><a id="wait(Long):Unit"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#wait(x$1:Long):Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">(<span name="arg0">arg0: <a href="https://www.scala-lang.org/api/2.12.13/scala/Long.html#scala.Long" class="extype" name="scala.Long">Long</a></span>)</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+                <span class="name">@native</span><span class="args">()</span>
+              
+        </dd></dl></div>
+    </li><li name="scala.AnyRef#wait" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="wait():Unit"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#wait():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier">final </span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">wait</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="defval" name="classOf[java.lang.InterruptedException]">...</span>
+    </span>)</span>
+              
+        </dd></dl></div>
+    </li><li name="es.weso.checking.CheckerCats#writerEC2check" visbl="pub" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="writerEC2check[A](c:CheckerCats.this.WriterEC[A]):CheckerCats.this.Check[A]"></a><a id="writerEC2check[A](WriterEC[A]):Check[A]"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#writerEC2check[A](c:CheckerCats.this.WriterEC[A]):CheckerCats.this.Check[A]" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">writerEC2check</span><span class="tparams">[<span name="A">A</span>]</span><span class="params">(<span name="c">c: <a href="#WriterEC[A]=cats.data.WriterT[CheckerCats.this.ReaderEC,CheckerCats.this.Log,A]" class="extmbr" name="es.weso.rbe.Matcher.WriterEC">WriterEC</a>[<span class="extype" name="es.weso.checking.CheckerCats.writerEC2check.A">A</span>]</span>)</span><span class="result">: <a href="#Check[A]=cats.data.EitherT[CheckerCats.this.WriterEC,CheckerCats.this.Err,A]" class="extmbr" name="es.weso.rbe.Matcher.Check">Check</a>[<span class="extype" name="es.weso.checking.CheckerCats.writerEC2check.A">A</span>]</span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>CheckerCats</dd></dl></div>
+    </li>
+              </ol>
+            </div>
+
+        
+
+        <div class="values members">
+              <h3>Deprecated Value Members</h3>
+              <ol><li name="scala.AnyRef#finalize" visbl="prt" class="indented0 " data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="finalize():Unit"></a>
+      <span class="permalink">
+      <a href="../../../es/weso/rbe/Matcher.html#finalize():Unit" title="Permalink">
+        <i class="material-icons"></i>
+      </a>
+    </span>
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name deprecated" title="Deprecated: ">finalize</span><span class="params">()</span><span class="result">: <a href="https://www.scala-lang.org/api/2.12.13/scala/Unit.html#scala.Unit" class="extype" name="scala.Unit">Unit</a></span>
+      </span>
+      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Attributes</dt><dd>protected[<span class="extype" name="java.lang">lang</span>] </dd><dt>Definition Classes</dt><dd>AnyRef</dd><dt>Annotations</dt><dd>
+                <span class="name">@throws</span><span class="args">(<span>
+      
+      <span class="symbol">classOf[java.lang.Throwable]</span>
+    </span>)</span>
+              
+                <span class="name">@Deprecated</span>
+              
+        </dd><dt>Deprecated</dt><dd class="cmt"></dd></dl></div>
+    </li></ol>
+            </div>
+        </div>
+
+        <div id="inheritedMembers">
+        <div class="parent" name="es.weso.checking.CheckerCats">
+              <h3>Inherited from <a href="http://weso.github.io/utils/latest/api/es/weso/checking/CheckerCats.html#es.weso.checking.CheckerCats" class="extype" name="es.weso.checking.CheckerCats">CheckerCats</a></h3>
+            </div><div class="parent" name="es.weso.checking.Checker">
+              <h3>Inherited from <a href="http://weso.github.io/utils/latest/api/es/weso/checking/Checker.html#es.weso.checking.Checker" class="extype" name="es.weso.checking.Checker">Checker</a></h3>
+            </div><div class="parent" name="scala.AnyRef">
+              <h3>Inherited from <a href="../../../scala/index.html#AnyRef=Object" class="extmbr" name="scala.AnyRef">AnyRef</a></h3>
+            </div><div class="parent" name="scala.Any">
+              <h3>Inherited from <a href="https://www.scala-lang.org/api/2.12.13/scala/Any.html#scala.Any" class="extype" name="scala.Any">Any</a></h3>
+            </div>
+        
+        </div>
+
+        <div id="groupedMembers">
+        <div class="group" name="Ungrouped">
+              <h3>Ungrouped</h3>
+              
+            </div>
+        </div>
+
+      </div>
+
+      <div id="tooltip"></div>
+
+      <div id="footer">  </div>
+    </body>
+          </div>
+        </div>
+      </div>
+    </body>
+      </html>
