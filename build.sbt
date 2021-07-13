@@ -97,7 +97,7 @@ lazy val wdsubRoot = project
       decline,
       declineEffect,
       srdf,
-      srdfJena,
+      srdfJena, shex,
       pprint,
     ),
     fork := true,
