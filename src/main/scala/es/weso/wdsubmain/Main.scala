@@ -63,7 +63,7 @@ object Main extends CommandIOApp (
     )
 
     for {
-    results <- DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE), schema, verbose)
+     results <- DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE), schema, verbose, 0)
     _ <- IO.println(results)
     } yield ExitCode.Success
   }

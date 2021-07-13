@@ -5,9 +5,11 @@ import scala.collection.JavaConverters._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.slf4j.LoggerFactory
 
-case class Matcher(schema: Schema) {
+case class Matcher(schema: Schema, verbose: Boolean = false) {
 
-    lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
+  private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
+
+  private def info(msg: String): Unit = if (verbose) logger.info(msg)
 
     /**
       * Match an item document with the shapes in a schema
@@ -15,10 +17,10 @@ case class Matcher(schema: Schema) {
       * @param itemDocument item document
       * @return list of shapes that match an itemDocument
       */
-    def matchSomeShape(itemDocument: ItemDocument): List[ShapeExpr] =
+  def matchSomeShape(itemDocument: ItemDocument): List[ShapeExpr] =
       schema.shapes.filter(matchShape(itemDocument))
 
-    def matchShape(itemDocument: ItemDocument)(shapeExpr: ShapeExpr): Boolean =
+  private def matchShape(itemDocument: ItemDocument)(shapeExpr: ShapeExpr): Boolean =
       shapeExpr match {
           case Shape(TripleConstraint(predicate, Some(ValueSet(IRIValue(value)::Nil)), None, None)) => 
            matchPredicateValue(predicate, value, itemDocument)
@@ -31,7 +33,7 @@ case class Matcher(schema: Schema) {
       * @param iri
       * @return a pair with (localName, base)
       */
-    def splitIri(iri: IRI): (String, String) = {
+  private def splitIri(iri: IRI): (String, String) = {
         val iriStr = iri.getLexicalForm
         val separator = iriStr.lastIndexOf('/') + 1;
         try {
@@ -41,32 +43,31 @@ case class Matcher(schema: Schema) {
         }
     }
 
-    def matchPredicateValue(predicate: IRI, value: IRI, itemDocument: ItemDocument): Boolean = {
-      logger.debug(s"ItemDocument to match: $itemDocument")
-      logger.debug(s"Predicate: ${predicate.getLexicalForm}")
+  private def matchPredicateValue(predicate: IRI, value: IRI, itemDocument: ItemDocument): Boolean = {
       val (localName, base) = splitIri(predicate) 
       val propertyId = new PropertyIdValueImpl(localName, base)
       val statementGroup = itemDocument.findStatementGroup(propertyId)
       if (statementGroup == null) {
-          logger.debug(s"No statement group for property: $propertyId")
+          info(s"No statement group for property: $propertyId")
           false
       }
       else {
         val statements = statementGroup.getStatements().asScala
-        logger.debug(s"Some values for predicate matched: ${statements.size}")  
+        info(s"Statements with predicate $predicate that matched: ${statements}")  
         val matched = statements.filter(matchValueStatement(value))
-        println(s"Matched: $matched")
+        info(s"Statements with predicate $predicate that match also value ${value}: $matched")
         !matched.isEmpty
       }
     }
 
-    def matchValueStatement(value: IRI)(statement: Statement): Boolean = {
+  private def matchValueStatement(value: IRI)(statement: Statement): Boolean = {
       val statementValue = statement.getClaim().getValue()
       val valueVisitor: ValueVisitor[Boolean] = MatchVisitor(value)
       statementValue.accept(valueVisitor)
     }
 
- case class MatchVisitor(expectedIri: IRI) extends ValueVisitor[Boolean] {
+  private case class MatchVisitor(expectedIri: IRI) extends ValueVisitor[Boolean] {
+   
    val (localName, base) = splitIri(expectedIri) 
    val expectedEntityId = new ItemIdValueImpl(localName,base)
 

@@ -1,34 +1,47 @@
 package es.weso.wdsub
 
+import cats.effect._
 import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
 import org.slf4j.LoggerFactory
+import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
 
+/**
+  * WShEx processor
+  *
+  * @param schema ShEx schema
+  * @param verbose verbose
+  * @param timeout timeout in seconds or 0 if no timeout should be used
+  */
 class WShExProcessor(
   schema: Schema,
-  verbose: Boolean
-  ) extends EntityDocumentProcessor {
+  verbose: Boolean,
+  timeout: Int = 0
+  ) extends EntityTimerProcessor(timeout) {
 
-    var totalEntities: Int = 0
-    var matchedEntities: Int = 0
-    val matcher = new Matcher(schema)
-    lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
+    private var totalEntities: Int = 0
+    private var matchedEntities: Int = 0
+    private val matcher = new Matcher(schema)
+    private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
     
-    def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
+    private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
 
-    def properties(item: ItemDocument): List[PropertyValue] = 
+    private def properties(item: ItemDocument): List[PropertyValue] = 
       item.getStatementGroups().asScala.toList.map(getProperty)
 
+    private def info(msg: String): Unit =   
+      if (verbose) logger.info(msg)
+
+
     override def processItemDocument(itemDocument: ItemDocument): Unit = {
-        if (verbose) 
-          logger.info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
-        if (!matcher.matchSomeShape(itemDocument).isEmpty) 
-          matchedEntities += 1
+        info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
+        if (matcher.matchSomeShape(itemDocument).size > 0) matchedEntities += 1
         totalEntities += 1
     }
 
-    def getTotalEntities(): Int = totalEntities
+    def getTotalEntities(): IO[Int] = IO { totalEntities }
 
-    def getMatchedEntities(): Int = matchedEntities
+    def getMatchedEntities(): IO[Int] = IO { matchedEntities }
+
 
 }
