@@ -1,0 +1,6 @@
+prefix wd:  <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
+
+<cities> {
+    wdt:P31 [ wd:P515 ]
+}

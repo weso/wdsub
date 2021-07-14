@@ -5,6 +5,7 @@ import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
+import java.io.OutputStream
 
 /**
   * WShEx processor
@@ -15,6 +16,7 @@ import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
   */
 class WShExProcessor(
   schema: Schema,
+  out: OutputStream,
   verbose: Boolean,
   timeout: Int = 0
   ) extends EntityTimerProcessor(timeout) {
@@ -35,7 +37,10 @@ class WShExProcessor(
 
     override def processItemDocument(itemDocument: ItemDocument): Unit = {
         info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
-        if (matcher.matchSomeShape(itemDocument).size > 0) matchedEntities += 1
+        if (matcher.matchSomeShape(itemDocument).size > 0) { 
+          matchedEntities += 1
+          out.write(itemDocument.toString().getBytes())
+        }
         totalEntities += 1
     }
 
@@ -43,5 +48,9 @@ class WShExProcessor(
 
     def getMatchedEntities(): IO[Int] = IO { matchedEntities }
 
+    override def close(): Unit = {
+      out.close()
+      super.close()
+    }
 
 }

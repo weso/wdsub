@@ -7,8 +7,9 @@ import buildinfo._
 import es.weso.wdsub._
 import es.weso.rdf.nodes._
 import es.weso.rdf._
+import java.nio.file.Path
 
-case class Dump(fileName: Option[String], verbose: Boolean)
+case class Dump(filePath: Path, schemaPath: Path, outPath: Path, verbose: Boolean)
 case class ProcessEntity(entity: String)
 
 object Main extends CommandIOApp (
@@ -24,23 +25,25 @@ object Main extends CommandIOApp (
     Opts.option[String]("entity", "Entity name", short="e").map(ProcessEntity)
    }  
 
-  val fileName = Opts.option[String](
-    "fileName", "Local dump file name", short = "f"
-  ).orNone 
+  val filePath = Opts.argument[Path](metavar="dumpFile")
+
+  val schemaPath = Opts.option[Path]("schema", help="ShEx schema", short="s", metavar="file")
+
+  val outPath = Opts.option[Path]("out", help="output path", short="o", metavar="file")
 
   val verbose = Opts.flag("verbose", "Verbose mode").orFalse
 
 
   val dump: Opts[Dump] = 
     Opts.subcommand("dump", "Process example dump file.") {
-      (fileName, verbose).mapN(Dump)
+      (filePath, outPath, schemaPath, verbose).mapN(Dump)
   }  
 
 
   override def main: Opts[IO[ExitCode]] = 
     (processEntity orElse dump).map { 
       case ProcessEntity(entity) => processEntity(entity) 
-      case Dump(fileName, verbose) => dump(fileName, verbose)
+      case Dump(filePath, outPath: Path, schemaPath, verbose) => dump(filePath, outPath, schemaPath,verbose)
     }
 
 
@@ -51,19 +54,9 @@ object Main extends CommandIOApp (
     _ <- IO.println(s"entity Type: ${entity.getType()}")
   } yield ExitCode.Success
 
-  def dump(optFileName: Option[String], verbose: Boolean): IO[ExitCode] = {
-
-    // TODO: Remove hardcoded Schema
-    val shape = Shape(TripleConstraint(IRI("http://www.wikidata.org/entity/P31"), 
-          Some(ValueSet(List(IRIValue(IRI("http://www.wikidata.org/entity/Q515")))))))
-
-    val schema: Schema = Schema(
-        pm = PrefixMap.empty,
-        shapes = List(shape)
-    )
-
+  def dump(filePath: Path, outPath: Path, schema: Path, verbose: Boolean): IO[ExitCode] = {
     for {
-     results <- DumpProcessor.dumpProcess(optFileName.getOrElse(DUMP_FILE), schema, verbose, 0)
+     results <- DumpProcessor.dumpProcess(filePath, outPath, schema, verbose, 0)
     _ <- IO.println(results)
     } yield ExitCode.Success
   }
