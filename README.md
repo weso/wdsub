@@ -24,6 +24,14 @@ Subcommands:
     Process dump files
 ```
 
+As an example, the following command:
+
+```
+wdsub dump -s <schema.shex> -o <outputFile.json.gz> <dumpFile.json.gz>
+```
+
+
+
 ## Installation and compilation
 
 The tool has been implemented in [Scala](https://www.scala-lang.org/) abd uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you can use:
@@ -47,6 +55,13 @@ sbt docker:publish
 ```
 
 The docker image is published as [wesogroup/wdsub](https://hub.docker.com/repository/docker/wesogroup/wdsub)
+
+In order to process dumps from docker, you can run:
+
+```
+docker run -d -v [folder-with-dumps]:/data -v [folder-with-schemas]:/shex -v [output-folder]:/dumps wesogroup/wdsub:0.0.9 dump -o /dumps/resultDump.json.gz -s /shex/[shexFile].shex /data/[dumpFile].json.gz
+```
+
 
 ## Docs
 

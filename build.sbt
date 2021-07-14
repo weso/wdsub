@@ -1,3 +1,4 @@
+
 lazy val scala213 = "2.13.6"
 lazy val scala3   = "3.0.0"
 lazy val supportedScalaVersions = List(
@@ -223,9 +224,15 @@ lazy val wixSettings = Seq(
   wixProductUpgradeId := "6a710435-9af4-4adb-a597-98d3dd0bade1"
 )
 
+import com.typesafe.sbt.packager.docker.DockerChmodType
+
 lazy val dockerSettings = Seq(
   dockerRepository := Some("wesogroup"), 
   Docker / packageName := "wdsub",
+  dockerBaseImage := "openjdk:11",
+  dockerAdditionalPermissions ++= Seq((DockerChmodType.UserGroupWriteExecute, "/tmp")),
+  daemonUserUid in Docker := Some("0"),
+  daemonUser in Docker    := "root"
 //  dockerUsername := Some("wesogroup")
 )
 
