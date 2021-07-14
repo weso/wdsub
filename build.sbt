@@ -1,7 +1,6 @@
 lazy val scala213 = "2.13.6"
 lazy val scala3   = "3.0.0"
 lazy val supportedScalaVersions = List(
- // scala213,
   scala3
 )
 
@@ -23,8 +22,8 @@ lazy val jenaVersion           = "4.1.0"
 lazy val munitVersion          = "0.7.27"
 lazy val munitEffectVersion    = "1.0.5"
 lazy val slf4jVersion          = "1.7.31"
-lazy val pprintVersion         = "0.6.6"
-lazy val scalaCollCompatVersion  = "2.4.4"
+// lazy val pprintVersion         = "0.6.6"
+// lazy val scalaCollCompatVersion  = "2.5.0"
 lazy val wikidataToolkitVersion = "0.12.1"
 
 // Dependency modules
@@ -53,7 +52,7 @@ lazy val wdtk_rdf         = "org.wikidata.wdtk" % "wdtk-rdf"         % wikidataT
 lazy val wdtk_storage     = "org.wikidata.wdtk" % "wdtk-storage"     % wikidataToolkitVersion
 lazy val wdtk_util        = "org.wikidata.wdtk" % "wdtk-util"        % wikidataToolkitVersion
 
-lazy val scalaCollCompat   = "org.scala-lang.modules"     %% "scala-collection-compat" % scalaCollCompatVersion
+// lazy val scalaCollCompat   = "org.scala-lang.modules"     %% "scala-collection-compat" % scalaCollCompatVersion
 
 // WESO components
 lazy val document          = "es.weso"                    %% "document"        % documentVersion
@@ -63,7 +62,7 @@ lazy val srdf4j            = "es.weso"                    %% "srdf4j"          %
 lazy val utils             = "es.weso"                    %% "utils"           % utilsVersion
 lazy val shex              = "es.weso"                    %% "shex"            % shexsVersion
 
-lazy val pprint            = "com.lihaoyi"                %% "pprint"        % pprintVersion
+// lazy val pprint            = "com.lihaoyi"                %% "pprint"        % pprintVersion
 
 lazy val MUnitFramework = new TestFramework("munit.Framework")
 
@@ -97,8 +96,8 @@ lazy val wdsubRoot = project
       decline,
       declineEffect,
       srdf,
-      srdfJena,
-      pprint,
+      srdfJena, shex,
+//      pprint,
     ),
     fork := true,
     ThisBuild / turbo := true,
@@ -121,7 +120,7 @@ lazy val wdsub = project
       circeGeneric,
       circeParser,
       catsEffect,
-      pprint,
+//      pprint,
       fs2, fs2io,
       utils     % "test -> test; compile -> compile",
       srdf, srdfJena % Test,

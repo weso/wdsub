@@ -63,7 +63,9 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
   private def matchValueStatement(value: IRI)(statement: Statement): Boolean = {
       val statementValue = statement.getClaim().getValue()
       val valueVisitor: ValueVisitor[Boolean] = MatchVisitor(value)
-      statementValue.accept(valueVisitor)
+      if (statementValue == null) {
+        false
+      } else statementValue.accept(valueVisitor)
     }
 
   private case class MatchVisitor(expectedIri: IRI) extends ValueVisitor[Boolean] {
