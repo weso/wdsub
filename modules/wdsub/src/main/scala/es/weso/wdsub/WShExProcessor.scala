@@ -24,7 +24,9 @@ class WShExProcessor(
     private var totalEntities: Int = 0
     private var matchedEntities: Int = 0
     private val matcher = new Matcher(schema)
-    private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
+    private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
+    val jsonWriter = JsonDumpWriter(out)
+
     
     private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
 
@@ -39,7 +41,7 @@ class WShExProcessor(
         info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
         if (matcher.matchSomeShape(itemDocument).size > 0) { 
           matchedEntities += 1
-          out.write(itemDocument.toString().getBytes())
+          jsonWriter.writeItem(itemDocument)
         }
         totalEntities += 1
     }
@@ -47,6 +49,9 @@ class WShExProcessor(
     def getTotalEntities(): IO[Int] = IO { totalEntities }
 
     def getMatchedEntities(): IO[Int] = IO { matchedEntities }
+
+    def startJson(): Unit = jsonWriter.start()
+    def endJson(): Unit = jsonWriter.end()
 
     override def close(): Unit = {
       out.close()

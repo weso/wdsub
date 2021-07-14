@@ -69,8 +69,9 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
     }
 
   private case class MatchVisitor(expectedIri: IRI) extends ValueVisitor[Boolean] {
-   
    val (localName, base) = splitIri(expectedIri) 
+   println(s"LocalName: $localName, base: $base")
+   
    val expectedEntityId = new ItemIdValueImpl(localName,base)
 
    override def visit(v: EntityIdValue): Boolean = {

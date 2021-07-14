@@ -31,10 +31,17 @@ object DumpProcessor {
     private def acquireShExProcessor(schemaPath: Path, outputPath: Path, verbose: Boolean, timeout: Int): IO[WShExProcessor] = for {
       wshex <- acquireShEx(schemaPath, verbose) 
       out <- acquireOutput(outputPath)
-    } yield new WShExProcessor(wshex, out, verbose, timeout)
+      shexProcessor = new WShExProcessor(wshex, out, verbose, timeout)
+    } yield { 
+      shexProcessor.startJson()
+      shexProcessor
+    }
 
     private def mkShExProcessor(schema: Path, outputPath: Path, verbose: Boolean, timeout: Int): Resource[IO, WShExProcessor] = 
-       Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout))(e => IO { e.close() })
+      Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout))(shExProcessor => IO { 
+       shExProcessor.endJson()
+       shExProcessor.close() 
+      })
 
     private def acquireMwLocalDumpFile(file: Path, verbose: Boolean): IO[MwLocalDumpFile] = {
       val fileName = file.toFile().getAbsolutePath()
