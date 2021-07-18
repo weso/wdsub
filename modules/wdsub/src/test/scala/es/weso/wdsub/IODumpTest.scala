@@ -20,10 +20,25 @@ import cats.effect.unsafe.implicits.global
 
 class IODumpTest extends FunSuite {
 
+  test("Iten json parser") {
+    val q42 = new ItemIdValueImpl("Q42","http://www.wikidata.org/")
+    val p31 = new PropertyIdValueImpl("P31", "http://www.wikidata.org/")
+    val q515 = new ItemIdValueImpl("Q515","http://www.wikidata.org/")
+    val statementBuilder = 
+      StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
+    val itemDocument = 
+      ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
+    val item = Item(itemDocument)
+    val jsonStr = item.asJsonStr
+    
+    assertEquals(Item.fromJsonStr(jsonStr), Right(item))
+
+  }
+
   test("Simple processing") {
-    val q42 = new ItemIdValueImpl("Q42","http://www.wikidata.org/entity/")
-    val p31 = new PropertyIdValueImpl("P31", "http://www.wikidata.org/entity/")
-    val q515 = new ItemIdValueImpl("Q515","http://www.wikidata.org/entity/")
+    val q42 = new ItemIdValueImpl("Q42","http://www.wikidata.org/")
+    val p31 = new PropertyIdValueImpl("P31", "http://www.wikidata.org/")
+    val q515 = new ItemIdValueImpl("Q515","http://www.wikidata.org/")
     val statementBuilder = 
       StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
     val itemDocument = 
@@ -32,7 +47,7 @@ class IODumpTest extends FunSuite {
     val str = Item(itemDocument).asJsonStr()
     val is: InputStream = new ByteArrayInputStream(str.getBytes)
     val os: ByteArrayOutputStream = new ByteArrayOutputStream()
-    def withItem(i: ItemDocument): Option[String] = None
+    def withItem(i: ItemDocument): Option[String] = Some(Item(i).asJsonStr())
     IODumpProcessor.process(
       is,os,withItem, 
       DumpOptions.default.withoutDecompressInput.withoutCompressOutput
