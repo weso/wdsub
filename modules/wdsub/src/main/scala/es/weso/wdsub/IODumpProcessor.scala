@@ -10,7 +10,10 @@ import cats.effect._
 import java.io.InputStream
 import java.io.OutputStream
 import fs2.io.file.Files
+import java.nio.file.{Files => JavaFiles, Paths}
+import es.weso.shex
 
+case class DumpProcessorError(msg: String) extends RuntimeException(msg)
 
 sealed abstract class ParsedLine
 case object OpenBracket extends ParsedLine
@@ -35,7 +38,7 @@ object IODumpProcessor {
   def process(
     is: InputStream, 
     os: OutputStream, 
-    withItem: ItemDocument => Option[String], 
+    withItem: ItemDocument => IO[Option[String]], 
     opts: DumpOptions = DumpOptions.default
     ): IO[Unit] = {
     val x = 
@@ -52,6 +55,23 @@ object IODumpProcessor {
     x.compile.drain
   }
 
+  def ioDumpProcess(filePath: Path, outPath: Path, schemaPath: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
+       for {
+         is <- IO { JavaFiles.newInputStream(filePath) }
+         os <- IO { JavaFiles.newOutputStream(outPath) }
+         schema <- shex.Schema.fromFile(schemaPath.toFile().getAbsolutePath())
+         resolvedSchema <- shex.ResolvedSchema.resolve(schema, None)
+         wshex <- IO.fromEither(ShEx2WShEx.convertSchema(resolvedSchema))
+         matcher = new Matcher(wshex, verbose)
+         _ <- process(is, os, checkSchema(matcher))
+       } yield DumpResults(0,0)
+  }
+
+  private def checkSchema(matcher: Matcher)(itemDocument: ItemDocument): IO[Option[String]] = 
+     if (matcher.matchSomeShape(itemDocument).size > 0) Some(Item(itemDocument).asJsonStr()).pure[IO]
+     else none.pure[IO]
+
+
   private def decompress: Pipe[IO, Byte, Byte] = s =>
     s.through(Compression[IO].gunzip()).flatMap(_.content)
 
@@ -62,15 +82,16 @@ object IODumpProcessor {
      if (cond) s.through(action)
      else s 
 
-  private def processLines(withItem: ItemDocument => Option[String])(lines: Stream[IO, ParsedLine]): Stream[IO,String] = lines.map(_ match {
-    case CloseBracket => "]"
-    case OpenBracket => "["
-    case ParsedItem(item) => withItem(item.itemDocument) match {
-      case None => ""
-      case Some(str) => str
+  private def processLines(withItem: ItemDocument => IO[Option[String]]): Pipe[IO, ParsedLine, String] = s => for {
+    line <- s
+    str <- line match {
+      case OpenBracket => Stream.emit("[")
+      case CloseBracket => Stream.emit("]")
+      case ParsedItem(item) => Stream.eval(withItem(item.itemDocument).map(_.getOrElse("")))
+      case Error(msg) => Stream.raiseError[IO](DumpProcessorError(msg))
     }
-  })
-
+  } yield str
+    
   private def parseInput(s: Stream[IO, String]): Stream[IO,ParsedLine] = s.map(str => str match {
     case "[" => OpenBracket
     case "]" => CloseBracket

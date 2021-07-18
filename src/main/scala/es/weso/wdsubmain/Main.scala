@@ -56,7 +56,8 @@ object Main extends CommandIOApp (
 
   def dump(filePath: Path, outPath: Path, schema: Path, verbose: Boolean): IO[ExitCode] = {
     for {
-     results <- DumpProcessor.dumpProcess(filePath, outPath, schema, verbose, 0)
+//      results <- DumpProcessor.dumpProcess(filePath, outPath, schema, verbose, 0)
+    results <- IODumpProcessor.ioDumpProcess(filePath, outPath, schema, verbose, 0)
     _ <- IO.println(results)
     } yield ExitCode.Success
   }

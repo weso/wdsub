@@ -19,6 +19,7 @@ lazy val declineVersion        = "2.1.0"
 lazy val circeVersion          = "0.14.1"
 lazy val fs2Version            = "3.0.4"
 lazy val jenaVersion           = "4.1.0"
+lazy val jacksonVersion        = "2.12.3"
 // lazy val log4jVersion          = "2.14.1"
 lazy val munitVersion          = "0.7.27"
 lazy val munitEffectVersion    = "1.0.5"
@@ -40,7 +41,7 @@ lazy val fs2               = "co.fs2"                     %% "fs2-core"         
 lazy val fs2io             = "co.fs2"                     %% "fs2-io"              % fs2Version
 lazy val jenaArq           = "org.apache.jena"            % "jena-arq"             % jenaVersion
 lazy val jenaFuseki        = "org.apache.jena"            % "jena-fuseki-main"     % jenaVersion
-
+lazy val jacksonScala      = ""                           % ""
 lazy val munit             = "org.scalameta"              %% "munit"               % munitVersion
 lazy val munitEffect       = "org.typelevel"              %% "munit-cats-effect-3" % munitEffectVersion
 lazy val slf4j_api         = "org.slf4j"                   % "slf4j-api"           % slf4jVersion
