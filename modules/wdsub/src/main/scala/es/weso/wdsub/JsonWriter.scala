@@ -42,5 +42,3 @@ case class JsonDumpWriter(outStream: OutputStream) {
   }
 
 }
-
-
