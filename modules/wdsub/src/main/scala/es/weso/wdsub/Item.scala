@@ -9,17 +9,15 @@ import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 
 case class Item(itemDocument: ItemDocument) {
 
-    val mapper = new ObjectMapper()
-    mapper.configure(JsonGenerator.Feature.AUTO_CLOSE_TARGET, false)
-
     def asJsonStr(): String = {
-       mapper.writeValueAsString(itemDocument)
+       Item.mapper.writeValueAsString(itemDocument)
     }
 }
 
 object Item {
 
     val mapper = new ObjectMapper()
+    mapper.configure(JsonGenerator.Feature.AUTO_CLOSE_TARGET, false)
 
     def fromJsonStr(str: String): Either[String, Item] = {
        try {
