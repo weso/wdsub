@@ -15,6 +15,10 @@ import es.weso.shex
 import java.nio.file.StandardOpenOption._;
 import org.wikidata.wdtk.datamodel.interfaces.PropertyDocument
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.databind.JsonDeserializer
+import com.fasterxml.jackson.databind.exc.MismatchedInputException
 
 case class DumpProcessorError(msg: String) extends RuntimeException(msg)
 
@@ -25,19 +29,22 @@ case class ParsedEntity(entity: Entity) extends ParsedLine
 case class Error(str: String) extends ParsedLine
 case object EndStream extends ParsedLine
 
-// Attempt to create a dump processor based on fs2
+/**
+ * Dump processor based on fs2
+ **/
 object IODumpProcessor {
 
-  val ChunkSize: Int = 4096
+//  val ChunkSize: Int = 4096
+  private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
 
   /**
-    * Process all items in a file applying to each item the function `withItem` and storing the contents in `os` 
+    * Process all entities in a file applying to each entity the function `withEntity` and storing the contents in `os` 
     *
     * @param path
     * @param os
-    * @param withItem
+    * @param withEntity
     * @param opts
-    * @return
+    * @return an IO action
     */
   def process(
     is: InputStream, 
@@ -50,14 +57,36 @@ object IODumpProcessor {
       .through(when(opts.decompressInput, decompress))
       .through(text.utf8Decode)
       .through(text.lines)
-      .through(parseInput)
-      .through(processLines(withEntity))
-//      .intersperse("\n")
+      .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
       .through(text.utf8Encode)
       .through(when(opts.compressOutput, compress))
       .through(writeOutputStream(os.pure[IO]))
     x.compile.drain
   }
+
+  def processDump(
+    is: InputStream, 
+    os: OutputStream, 
+    withEntity: Entity => IO[Option[String]], 
+    opts: DumpOptions = DumpOptions.default
+    ): IO[Unit] = {
+      readInputStream(is.pure[IO], opts.chunkSize)
+      .through(Compression[IO].gunzip())
+      .flatMap(_.content)
+      .through(text.utf8Decode)
+      .through(text.lines)
+      .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
+      .through(text.utf8Encode)
+      .through(Compression[IO].gzip())
+      .through(writeOutputStream(os.pure[IO]))
+      .compile
+      .drain
+  }
+
+  def processLine(withEntity: Entity => IO[Option[String]], opts: DumpOptions)(line: String): IO[String] = for {
+    parsedLine <- parseLine(line, opts)
+    result <- processParsedLine(withEntity, parsedLine)
+  } yield result
 
   def ioDumpProcess(filePath: Path, outPath: Path, schemaPath: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
        for {
@@ -84,9 +113,6 @@ object IODumpProcessor {
     }
   }
 
-     
-
-
   private def decompress: Pipe[IO, Byte, Byte] = s =>
     s.through(Compression[IO].gunzip()).flatMap(_.content)
 
@@ -97,30 +123,25 @@ object IODumpProcessor {
      if (cond) s.through(action)
      else s 
 
-  private def processLines(
-    withEntity: Entity => IO[Option[String]]
-  ): Pipe[IO, ParsedLine, String] = s => for {
-    line <- s
-    str <- line match {
-      case OpenBracket => Stream.emit("[\n")
-      case CloseBracket => Stream.emit("]\n")
-      case ParsedEntity(e) => Stream.eval(withEntity(e).map(_.map(_ + ",\n")).map(_.getOrElse("")))
-      case EndStream => Stream.emit("\n")
-      case Error(msg) => Stream.raiseError[IO](DumpProcessorError(msg))
-    }
-  } yield str
+  private def processParsedLine(
+    withEntity: Entity => IO[Option[String]],
+    parsedLine: ParsedLine
+  ):IO[String] = parsedLine match {
+      case OpenBracket => "[\n".pure[IO]
+      case CloseBracket => "]\n".pure[IO]
+      case ParsedEntity(e) => withEntity(e).map(_.map(_ + ",\n")).map(_.getOrElse(""))
+      case Error(e) => "".pure[IO]
+      case EndStream => "".pure[IO]
+  }
     
-  private def parseInput(s: Stream[IO, String]): Stream[IO,ParsedLine] = s.map(str => str match {
-    case "[" => OpenBracket
-    case "]" => CloseBracket
-    case str   => Entity.fromJsonStr(str) match {
-      case Left(End) => EndStream
-      case Left(ParserError(exc)) => Error(s"Error parsing input: ${exc.getMessage()}\nStr: ${str}")
-      case Right(e) => ParsedEntity(e)
-    }
+  private def parseLine(line: String, opts: DumpOptions): IO[ParsedLine] = (line match {
+    case "[" => OpenBracket.pure[IO]
+    case "]" => CloseBracket.pure[IO]
+    case str   => Entity.fromJsonStr(str, opts.jsonDeserializer).map(ParsedEntity)
+  }).handleErrorWith(e => e match {
+    case e:MismatchedInputException => EndStream.pure[IO]
+    case _ => Error(e.getMessage()).pure[IO]
   })
-
-
 
 }
 

@@ -12,6 +12,9 @@ import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 import java.io.BufferedOutputStream
 
+/**
+ * Dump processor using Wikidata toolkit DumpProcessingController
+ **/
 object DumpProcessor {
 
     private lazy val dumpProcessingController: DumpProcessingController = new DumpProcessingController("wdsubDump")

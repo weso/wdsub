@@ -17,6 +17,7 @@ import java.io.ByteArrayInputStream
 import java.io.InputStream
 import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import cats.effect.unsafe.implicits.global
+import cats.effect._
 
 class IODumpTest extends FunSuite {
 
@@ -44,15 +45,17 @@ class IODumpTest extends FunSuite {
     val itemDocument = 
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
 
-    val str = Item(itemDocument).asJsonStr()
+    val str = Entity(itemDocument).asJsonStr()
     val is: InputStream = new ByteArrayInputStream(str.getBytes)
     val os: ByteArrayOutputStream = new ByteArrayOutputStream()
-    def withItem(i: ItemDocument): Option[String] = Some(Item(i).asJsonStr())
+    def withEntity(e: Entity): IO[Option[String]] = IO(Some(e.asJsonStr()))
     IODumpProcessor.process(
-      is,os,withItem, 
+      is,os,withEntity, 
       DumpOptions.default.withoutDecompressInput.withoutCompressOutput
     ).unsafeRunSync()
-    assertEquals(os.toString(), str)
+    val expected = str + ",\n"
+    val returned = os.toString()
+    assertEquals(returned, expected)
   }
 
 }

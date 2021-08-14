@@ -14,7 +14,7 @@ lazy val documentVersion       = "0.0.32"
 
 // Dependency versions
 lazy val catsVersion           = "2.6.1"
-lazy val catsEffectVersion     = "3.1.1"
+lazy val catsEffectVersion     = "3.2.2"
 lazy val declineVersion        = "2.1.0"
 lazy val circeVersion          = "0.14.1"
 lazy val fs2Version            = "3.0.4"

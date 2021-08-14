@@ -4,6 +4,12 @@ import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.slf4j.LoggerFactory
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+//import org.wikidata.wdtk.datamodel.interfaces.TermedStatementDocument
+//import org.wikidata.wdtk.datamodel.interfaces.StatementDocument
+//import org.wikidata.wdtk.datamodel.interfaces.TermedDocument
+
+
 
 case class Matcher(schema: Schema, verbose: Boolean = false) {
 
@@ -19,6 +25,17 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
       */
   def matchSomeShape(itemDocument: ItemDocument): List[ShapeExpr] =
       schema.shapes.filter(matchShape(itemDocument))
+
+  def matchShape(entityDocument: EntityDocument, shapeExpr: ShapeExpr): Boolean =
+      shapeExpr match {
+          case Shape(TripleConstraint(predicate, Some(ValueSet(IRIValue(value)::Nil)), None, None)) => 
+           entityDocument match {
+             case i: ItemDocument =>  matchPredicateValue(predicate, value, i)
+             case p: PropertyDocument => ???
+             case _ => ???
+          }
+          case _ => false 
+        }
 
   private def matchShape(itemDocument: ItemDocument)(shapeExpr: ShapeExpr): Boolean =
       shapeExpr match {

@@ -9,6 +9,8 @@ import cats.effect._
 import java.io.InputStream
 import java.io.OutputStream
 import fs2.io.file.Files
+import com.fasterxml.jackson.databind.JsonDeserializer
+import org.wikidata.wdtk.datamodel.helpers
 
 /**
   * Configuration options for DumpOptions
@@ -18,12 +20,22 @@ import fs2.io.file.Files
 case class DumpOptions(
   chunkSize: Int,
   decompressInput: Boolean,
-  compressOutput: Boolean
+  compressOutput: Boolean,
+  onlyCount: Boolean,
+  maxConcurrent: Int,
+  site: String
 ) {
+  val jsonDeserializer = new helpers.JsonDeserializer(site)
+
+  def withChunkSize(n: Int): DumpOptions = this.copy(chunkSize = n)
   def withoutDecompressInput: DumpOptions = this.copy(decompressInput = false)
   def withDecompressInput: DumpOptions = this.copy(decompressInput = true)
   def withoutCompressOutput: DumpOptions = this.copy(compressOutput = false)
   def withCompressOutput: DumpOptions = this.copy(compressOutput = true)
+  def withoutOnlyCount: DumpOptions = this.copy(onlyCount = false)
+  def withOnlyCount: DumpOptions = this.copy(onlyCount = true)
+  def withMaxConcurrent(n: Int): DumpOptions = this.copy(maxConcurrent = n)
+  def withSite(site: String): DumpOptions = this.copy(site = site)
 }
 
 object DumpOptions {
@@ -37,7 +49,10 @@ object DumpOptions {
     DumpOptions(
       chunkSize = 4096,
       decompressInput = true,
-      compressOutput = true
+      compressOutput = true,
+      onlyCount = true,
+      maxConcurrent = 200,
+      site = "http://www.wikidata.org/entity/"
     )
 }
 

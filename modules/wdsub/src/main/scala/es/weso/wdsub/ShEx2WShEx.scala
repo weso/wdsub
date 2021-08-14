@@ -14,7 +14,6 @@ case class UnsupportedTripleConstraint(tc: shex.TripleConstraint) extends Conver
 
 object ShEx2WShEx {
 
-
   def convertSchema(shexSchema: shex.AbstractSchema): Either[ConvertError, Schema] = for {
     shapes <- shexSchema.shapes.getOrElse(List()).map(convertShapeExpr).sequence
   } yield Schema(shexSchema.prefixMap, shapes)
