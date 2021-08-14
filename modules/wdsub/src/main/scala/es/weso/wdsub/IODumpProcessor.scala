@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
+import es.weso.wshex._
 
 case class DumpProcessorError(msg: String) extends RuntimeException(msg)
 
@@ -92,9 +93,10 @@ object IODumpProcessor {
        for {
          is <- IO { JavaFiles.newInputStream(filePath) }
          os <- IO { JavaFiles.newOutputStream(outPath, CREATE) }
-         schema <- shex.Schema.fromFile(schemaPath.toFile().getAbsolutePath())
+         /* schema <- shex.Schema.fromFile(schemaPath.toFile().getAbsolutePath())
          resolvedSchema <- shex.ResolvedSchema.resolve(schema, None)
-         wshex <- IO.fromEither(ShEx2WShEx.convertSchema(resolvedSchema))
+         wshex <- IO.fromEither(ShEx2WShEx.convertSchema(resolvedSchema)) */
+         wshex <- WShEx.fromPath(filePath)
          matcher = new Matcher(wshex, verbose)
          _ <- process(is, os, checkSchema(matcher))
        } yield DumpResults(0,0)

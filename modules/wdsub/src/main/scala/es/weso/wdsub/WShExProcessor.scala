@@ -6,6 +6,7 @@ import scala.collection.JavaConverters._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
 import java.io.OutputStream
+import es.weso.wshex._
 
 /**
   * WShEx processor
@@ -15,7 +16,7 @@ import java.io.OutputStream
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
 class WShExProcessor(
-  schema: Schema,
+  wShEx: WShEx,
   out: OutputStream,
   verbose: Boolean,
   timeout: Int = 0
@@ -23,7 +24,7 @@ class WShExProcessor(
 
     private var totalEntities: Int = 0
     private var matchedEntities: Int = 0
-    private val matcher = new Matcher(schema)
+    private val matcher = new Matcher(wShEx)
     private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
     val jsonWriter = JsonDumpWriter(out)
 

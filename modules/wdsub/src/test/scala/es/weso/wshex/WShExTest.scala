@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wshex
 import es.weso.rdf.nodes._
 import es.weso.rdf._
 
@@ -40,7 +40,7 @@ class WShExTest extends FunSuite {
         StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-      assertEquals(Matcher(schema, true).matchSomeShape(itemDocument.build()), List(shape))
+      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List(shape))
     }
 
     test("Don't match shape when fails value") {
@@ -51,7 +51,7 @@ class WShExTest extends FunSuite {
         StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-      assertEquals(Matcher(schema, true).matchSomeShape(itemDocument.build()), List())
+      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List())
     }
 
     test("Don't match shape when fails property") {
@@ -62,7 +62,7 @@ class WShExTest extends FunSuite {
         StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-      assertEquals(Matcher(schema, true).matchSomeShape(itemDocument.build()), List())
+      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List())
     }
 
     test("Match shape when some value matches") {
@@ -73,7 +73,7 @@ class WShExTest extends FunSuite {
       val s1 = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515).build()
       val s2 = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q516).build()
       val itemDocument = ItemDocumentBuilder.forItemId(q42).withStatement(s1).withStatement(s2)
-      assertEquals(Matcher(schema, true).matchSomeShape(itemDocument.build()), List(shape))
+      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List(shape))
     }
 
 }

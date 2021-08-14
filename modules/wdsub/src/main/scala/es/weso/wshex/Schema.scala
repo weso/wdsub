@@ -1,4 +1,5 @@
-package es.weso.wdsub
+package es.weso.wshex
+
 import es.weso.rdf._
 import es.weso.rdf.nodes._
 import es.weso.shex.Max
@@ -9,6 +10,8 @@ import es.weso.shex.Max
   * This syntax starts as a subset of ShEx abstract syntax
   * 
   * See: https://www.weso.es/shex-s/api/es/weso/shex/index.html
+  * 
+  * As future work, we will extend this abstract syntax with support to references, qualifiers, ranks, etc.
   */
 
 case class Schema(

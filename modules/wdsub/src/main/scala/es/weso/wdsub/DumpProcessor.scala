@@ -11,6 +11,7 @@ import org.apache.commons.compress.compressors.gzip._
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 import java.io.BufferedOutputStream
+import es.weso.wshex._
 
 /**
  * Dump processor using Wikidata toolkit DumpProcessingController
@@ -24,13 +25,9 @@ object DumpProcessor {
         logger.info(msg)
     }
 
-    private def acquireShEx(schemaPath: Path, verbose: Boolean): IO[Schema] = for {
-      schema <- shex.Schema.fromFile(schemaPath.toFile().getAbsolutePath())
-      resolvedSchema <- shex.ResolvedSchema.resolve(schema, None)
-      wshex <- IO.fromEither(ShEx2WShEx.convertSchema(resolvedSchema))
-      _ <- info(s"ShEx Schema: $wshex")
-    } yield wshex 
-    
+    private def acquireShEx(schemaPath: Path, verbose: Boolean): IO[WShEx] = 
+      WShEx.fromPath(schemaPath)
+          
     private def acquireShExProcessor(schemaPath: Path, outputPath: Path, verbose: Boolean, timeout: Int): IO[WShExProcessor] = for {
       wshex <- acquireShEx(schemaPath, verbose) 
       out <- acquireOutput(outputPath)

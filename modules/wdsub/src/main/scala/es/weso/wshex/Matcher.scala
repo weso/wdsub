@@ -1,17 +1,20 @@
-package es.weso.wdsub
+package es.weso.wshex
 import es.weso.rdf.nodes._
 import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
-//import org.wikidata.wdtk.datamodel.interfaces.TermedStatementDocument
-//import org.wikidata.wdtk.datamodel.interfaces.StatementDocument
-//import org.wikidata.wdtk.datamodel.interfaces.TermedDocument
+import java.nio.file.Path
+import cats.effect._
 
-
-
-case class Matcher(schema: Schema, verbose: Boolean = false) {
+/**
+  * Matcher contains methods to match a WShEx schema with Wikibase entities
+  *
+  * @param schema
+  * @param verbose
+  */
+case class Matcher(wShEx: WShEx, verbose: Boolean = false) {
 
   private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
 
@@ -23,25 +26,17 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
       * @param itemDocument item document
       * @return list of shapes that match an itemDocument
       */
-  def matchSomeShape(itemDocument: ItemDocument): List[ShapeExpr] =
-      schema.shapes.filter(matchShape(itemDocument))
+  def matchSomeShape(entityDocument: EntityDocument): List[ShapeExpr] =
+      wShEx.schema.shapes.filter(matchShape(entityDocument))
 
-  def matchShape(entityDocument: EntityDocument, shapeExpr: ShapeExpr): Boolean =
+  def matchShape(entityDocument: EntityDocument)(shapeExpr: ShapeExpr): Boolean =
       shapeExpr match {
           case Shape(TripleConstraint(predicate, Some(ValueSet(IRIValue(value)::Nil)), None, None)) => 
-           entityDocument match {
-             case i: ItemDocument =>  matchPredicateValue(predicate, value, i)
-             case p: PropertyDocument => ???
-             case _ => ???
-          }
-          case _ => false 
-        }
-
-  private def matchShape(itemDocument: ItemDocument)(shapeExpr: ShapeExpr): Boolean =
-      shapeExpr match {
-          case Shape(TripleConstraint(predicate, Some(ValueSet(IRIValue(value)::Nil)), None, None)) => 
-           matchPredicateValue(predicate, value, itemDocument)
-          case _ => false 
+           matchPredicateValue(predicate, value, entityDocument)
+          case _ => {
+            // TODO: Pending
+            false
+          } 
         }
 
     /**
@@ -60,20 +55,27 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
         }
     }
 
-  private def matchPredicateValue(predicate: IRI, value: IRI, itemDocument: ItemDocument): Boolean = {
+  private def matchPredicateValue(predicate: IRI, value: IRI, entityDocument: EntityDocument): Boolean = {
       val (localName, base) = splitIri(predicate) 
       val propertyId = new PropertyIdValueImpl(localName, base)
-      val statementGroup = itemDocument.findStatementGroup(propertyId)
-      if (statementGroup == null) {
+      entityDocument match {
+        case sd: StatementDocument => {
+         val statementGroup = sd.findStatementGroup(propertyId)
+         if (statementGroup == null) {
           info(s"No statement group for property: $propertyId")
           false
-      }
-      else {
+         } else {
         val statements = statementGroup.getStatements().asScala
         info(s"Statements with predicate $predicate that matched: ${statements}")  
         val matched = statements.filter(matchValueStatement(value))
         info(s"Statements with predicate $predicate that match also value ${value}: $matched")
         !matched.isEmpty
+       }
+       } 
+       case _ => {
+         // Should we do something special here?
+         false
+       }
       }
     }
 
@@ -88,7 +90,7 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
   private case class MatchVisitor(expectedIri: IRI) extends ValueVisitor[Boolean] {
    val (localName, base) = splitIri(expectedIri) 
    
-   val expectedEntityId = new ItemIdValueImpl(localName,base)
+   private val expectedEntityId = new ItemIdValueImpl(localName,base)
 
    override def visit(v: EntityIdValue): Boolean = {
      v == expectedEntityId
@@ -102,4 +104,33 @@ case class Matcher(schema: Schema, verbose: Boolean = false) {
    override def visit(v: UnsupportedValue): Boolean = false
  }
 
+}
+
+object Matcher {
+
+  /**
+    * Read a WShEx from a path
+    *
+    * @param schemaPath: Path where the WShEx schema can be found
+    * @param verbose: Print more messages during validation
+    * @param format: WShEx format 
+    * @return an IO action that returns a matcher
+    */  
+  def fromPath(schemaPath: Path, verbose: Boolean, format: String = "SHEXC"): IO[Matcher] = 
+    WShEx.fromPath(schemaPath,format).map(Matcher(_, verbose))
+
+  /**
+    * Read a WShEx from a path
+    * This is the synchronous and unsafe version
+    * An IO-based version is also available
+    *
+    * @param schemaPath: Path where the WShEx schema can be found
+    * @param verbose: Print more messages during validation
+    * @param format: WShEx format 
+    * @return a matcher
+    */  
+  def unsafeFromPath(schemaPath: Path, verbose: Boolean = false, format: String = "SHEXC"): Matcher = {
+    import cats.effect.unsafe.implicits.global
+    fromPath(schemaPath, verbose, format).unsafeRunSync()
+  }  
 }
