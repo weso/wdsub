@@ -43,7 +43,7 @@ class WShExTest extends FunSuite {
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
       assertEquals(
         Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()), 
-        Match(List(shape))
+        Matching(List(shape))
       )
     }
 
@@ -81,7 +81,7 @@ class WShExTest extends FunSuite {
       val itemDocument = ItemDocumentBuilder.forItemId(q42).withStatement(s1).withStatement(s2)
       assertEquals(
         Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()), 
-        Match(List(shape)))
+        Matching(List(shape)))
     }
 
 }

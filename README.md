@@ -83,7 +83,7 @@ Another tool that creates subsets from wikidata dumps is [WDumper](https://githu
 This project uses [the sbt ci release](https://github.com/olafurpg/sbt-ci-release) plugin for publishing to [OSS Sonatype](https://oss.sonatype.org/).
 
 ##### SNAPSHOT Releases
-Open a PR and merge it to watch the CI release a -SNAPSHOT version
+Open a PR and merge it to watch the CI release a -SNAPSHOT version [here](https://oss.sonatype.org/#view-repositories;releases~browsestorage)
 
 ##### Full Library Releases
 1. Push a tag and watch the CI do a regular release

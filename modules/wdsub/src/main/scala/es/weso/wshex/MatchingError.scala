@@ -23,3 +23,7 @@ case class NoStatementMatchesValue(
 case class NoStatementDocument(
     entityDocument: EntityDocument
     ) extends MatchingError(s"Entity is not an StatementDocument\nEntity: ${entityDocument}")    
+
+case class NotShapeFail(
+    se: ShapeExpr, 
+    entityDocument: EntityDocument) extends MatchingError(s"NOT failed because entity matches shapeExpr\nEntity: $entityDocument\nShapeExpr: $se")    

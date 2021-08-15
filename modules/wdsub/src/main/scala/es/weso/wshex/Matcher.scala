@@ -9,7 +9,7 @@ import java.nio.file.Path
 import cats.effect._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 import org.wikidata.wdtk.datamodel.helpers
-
+import es.weso.utils.internal.CollectionCompat._
 
 /**
   * Matcher contains methods to match a WShEx schema with Wikibase entities
@@ -39,7 +39,7 @@ case class Matcher(wShEx: WShEx,
   def matchStart(entityDocument: EntityDocument): MatchingStatus = {
     wShEx.startShapeExpr match {
       case None => NoMatching(List(NoShapeExprs(wShEx)))
-      case Some(se) => matchShape(entityDocument, se)
+      case Some(se) => matchShapeExpr(entityDocument, se)
     }
   }
 
@@ -54,10 +54,23 @@ case class Matcher(wShEx: WShEx,
     matchStart(entityDocument)
   }
 
-  def matchShape(entityDocument: EntityDocument, shapeExpr: ShapeExpr): MatchingStatus =
+  def matchShapeExpr(entityDocument: EntityDocument, shapeExpr: ShapeExpr): MatchingStatus =
       shapeExpr match {
           case Shape(id, TripleConstraint(predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None)) => 
            matchPredicateValue(predicate, value, entityDocument, shapeExpr)
+          case sand: ShapeAnd => {
+            val ls: LazyList[MatchingStatus] = sand.exprs.toLazyList.map(matchShapeExpr(entityDocument,_))
+            MatchingStatus.combineAnds(ls)
+          }
+          case sor: ShapeOr => {
+            val ls: LazyList[MatchingStatus] = sor.exprs.toLazyList.map(matchShapeExpr(entityDocument,_))
+            MatchingStatus.combineOrs(ls)
+          }
+          case snot: ShapeNot => {
+            val ms = matchShapeExpr(entityDocument,snot.shapeExpr)
+            if (ms.matches) NoMatching(List(NotShapeFail(snot.shapeExpr, entityDocument)))
+            else Matching(List(shapeExpr), ms.dependencies)
+          }
           case _ => {
             // TODO: Pending
             NoMatching(List(NotImplemented(s"matchShape: $shapeExpr")))
@@ -96,7 +109,7 @@ case class Matcher(wShEx: WShEx,
         info(s"Statements with predicate $predicate that match also value ${value}: $matched")
         if (matched.isEmpty) 
           NoMatching(List(NoStatementMatchesValue(predicate,value,entityDocument)))
-        else Match(List(se))   
+        else Matching(List(se))   
        }
        } 
        case _ => {
