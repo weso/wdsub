@@ -7,15 +7,23 @@ import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.datamodel.interfaces._
 import java.nio.file.Path
 import cats.effect._
+import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
+import org.wikidata.wdtk.datamodel.helpers
+
 
 /**
   * Matcher contains methods to match a WShEx schema with Wikibase entities
   *
-  * @param schema
-  * @param verbose
+  * @param wShEx schema
+  * @param site URL that identifies the site. By default: http://www.wikidata.org/entity/ 
+  * @param verbose by default false
   */
-case class Matcher(wShEx: WShEx, verbose: Boolean = false) {
+case class Matcher(wShEx: WShEx, 
+  site: String = "http://www.wikidata.org/entity/", 
+  verbose: Boolean = false) {
 
+  private lazy val jsonDeserializer = new helpers.JsonDeserializer(site)
+  
   private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName());
 
   private def info(msg: String): Unit = if (verbose) logger.info(msg)
@@ -33,6 +41,17 @@ case class Matcher(wShEx: WShEx, verbose: Boolean = false) {
       case None => NoMatching(List(NoShapeExprs(wShEx)))
       case Some(se) => matchShape(entityDocument, se)
     }
+  }
+
+  /**
+    * Match a JSON string that represents an Entity document against the start shape or the first shape 
+    *
+    * @param jsonStr
+    * @return a matching stsatus
+    */
+  def matchJsonStart(jsonStr: String): MatchingStatus = {
+    val entityDocument = jsonDeserializer.deserializeEntityDocument(jsonStr)
+    matchStart(entityDocument)
   }
 
   def matchShape(entityDocument: EntityDocument, shapeExpr: ShapeExpr): MatchingStatus =
@@ -123,8 +142,9 @@ object Matcher {
     * @param format: WShEx format 
     * @return an IO action that returns a matcher
     */  
-  def fromPath(schemaPath: Path, verbose: Boolean, format: String = "SHEXC"): IO[Matcher] = 
-    WShEx.fromPath(schemaPath,format).map(Matcher(_, verbose))
+  def fromPath(schemaPath: Path, verbose: Boolean, format: WShExFormat = CompactFormat): IO[Matcher] = 
+    WShEx.fromPath(schemaPath,format)
+    .map(s => Matcher(wShEx = s, verbose = verbose))
 
   /**
     * Read a WShEx from a path
@@ -136,8 +156,13 @@ object Matcher {
     * @param format: WShEx format 
     * @return a matcher
     */  
-  def unsafeFromPath(schemaPath: Path, verbose: Boolean = false, format: String = "SHEXC"): Matcher = {
+  def unsafeFromPath(schemaPath: Path, verbose: Boolean = false, format: WShExFormat = CompactFormat): Matcher = {
     import cats.effect.unsafe.implicits.global
     fromPath(schemaPath, verbose, format).unsafeRunSync()
   }  
+
+  def unsafeFromString(str: String, verbose: Boolean = false, format: WShExFormat = CompactFormat): Either[ParseError, Matcher] = {
+    WShEx.unsafeFromString(str, format)
+    .map(s => Matcher(wShEx = s, verbose = verbose))
+  }
 }

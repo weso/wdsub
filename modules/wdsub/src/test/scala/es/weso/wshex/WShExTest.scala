@@ -1,4 +1,5 @@
 package es.weso.wshex
+
 import es.weso.rdf.nodes._
 import es.weso.rdf._
 
@@ -41,7 +42,7 @@ class WShExTest extends FunSuite {
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
       assertEquals(
-        Matcher(WShEx(schema), true).matchStart(itemDocument.build()), 
+        Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()), 
         Match(List(shape))
       )
     }
@@ -55,7 +56,7 @@ class WShExTest extends FunSuite {
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
       assertEquals(
-        Matcher(WShEx(schema), true).matchStart(itemDocument.build())matches, false)
+        Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build())matches, false)
     }
 
     test("Don't match shape when fails property") {
@@ -67,7 +68,7 @@ class WShExTest extends FunSuite {
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
       assertEquals(
-        Matcher(WShEx(schema), true).matchStart(itemDocument.build()).matches, false)
+        Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()).matches, false)
     }
 
     test("Match shape when some value matches") {
@@ -79,7 +80,7 @@ class WShExTest extends FunSuite {
       val s2 = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q516).build()
       val itemDocument = ItemDocumentBuilder.forItemId(q42).withStatement(s1).withStatement(s2)
       assertEquals(
-        Matcher(WShEx(schema), true).matchStart(itemDocument.build()), 
+        Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()), 
         Match(List(shape)))
     }
 

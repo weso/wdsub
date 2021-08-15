@@ -97,7 +97,7 @@ object IODumpProcessor {
          resolvedSchema <- shex.ResolvedSchema.resolve(schema, None)
          wshex <- IO.fromEither(ShEx2WShEx.convertSchema(resolvedSchema)) */
          wshex <- WShEx.fromPath(filePath)
-         matcher = new Matcher(wshex, verbose)
+         matcher = new Matcher(wShEx = wshex, verbose = verbose)
          _ <- process(is, os, checkSchema(matcher))
        } yield DumpResults(0,0)
   }
