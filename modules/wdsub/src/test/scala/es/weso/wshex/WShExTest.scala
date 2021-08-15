@@ -24,8 +24,8 @@ object IRIHelpers {
 class WShExTest extends FunSuite {
     import IRIHelpers._
 
-    val shape = Shape(TripleConstraint(IRI("http://www.wikidata.org/entity/P31"), 
-          Some(ValueSet(List(IRIValue(IRI("http://www.wikidata.org/entity/Q515")))))))
+    val shape = Shape(None,TripleConstraint(IRI("http://www.wikidata.org/entity/P31"), 
+          Some(ValueSet(None,List(IRIValue(IRI("http://www.wikidata.org/entity/Q515")))))))
 
     val schema: Schema = Schema(
         pm = PrefixMap.empty,
@@ -40,7 +40,10 @@ class WShExTest extends FunSuite {
         StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List(shape))
+      assertEquals(
+        Matcher(WShEx(schema), true).matchStart(itemDocument.build()), 
+        Match(List(shape))
+      )
     }
 
     test("Don't match shape when fails value") {
@@ -51,7 +54,8 @@ class WShExTest extends FunSuite {
         StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List())
+      assertEquals(
+        Matcher(WShEx(schema), true).matchStart(itemDocument.build())matches, false)
     }
 
     test("Don't match shape when fails property") {
@@ -62,7 +66,8 @@ class WShExTest extends FunSuite {
         StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List())
+      assertEquals(
+        Matcher(WShEx(schema), true).matchStart(itemDocument.build()).matches, false)
     }
 
     test("Match shape when some value matches") {
@@ -73,7 +78,9 @@ class WShExTest extends FunSuite {
       val s1 = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515).build()
       val s2 = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q516).build()
       val itemDocument = ItemDocumentBuilder.forItemId(q42).withStatement(s1).withStatement(s2)
-      assertEquals(Matcher(WShEx(schema), true).matchSomeShape(itemDocument.build()), List(shape))
+      assertEquals(
+        Matcher(WShEx(schema), true).matchStart(itemDocument.build()), 
+        Match(List(shape)))
     }
 
 }

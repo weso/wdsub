@@ -5,6 +5,11 @@ import cats.effect._
 import java.nio.file.Path
 
 case class WShEx(schema: Schema, path: Option[Path] = None, format: Option[String] = None) {
+
+    /**
+      * Returns the start shape expression if declared, or the first shape expression
+      */
+    lazy val startShapeExpr: Option[ShapeExpr] = schema.startShapeExpr
   
 }
 

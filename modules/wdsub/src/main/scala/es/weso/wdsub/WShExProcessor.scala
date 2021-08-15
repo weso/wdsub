@@ -40,7 +40,7 @@ class WShExProcessor(
 
     override def processItemDocument(itemDocument: ItemDocument): Unit = {
         info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
-        if (matcher.matchSomeShape(itemDocument).size > 0) { 
+        if (matcher.matchStart(itemDocument).matches) { 
           matchedEntities += 1
           jsonWriter.writeItem(itemDocument)
         }

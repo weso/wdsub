@@ -4,7 +4,7 @@ import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.slf4j.LoggerFactory
-import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+import org.wikidata.wdtk.datamodel.interfaces._
 import java.nio.file.Path
 import cats.effect._
 
@@ -20,22 +20,28 @@ case class Matcher(wShEx: WShEx, verbose: Boolean = false) {
 
   private def info(msg: String): Unit = if (verbose) logger.info(msg)
 
-    /**
-      * Match an item document with the shapes in a schema
-      *
-      * @param itemDocument item document
-      * @return list of shapes that match an itemDocument
-      */
-  def matchSomeShape(entityDocument: EntityDocument): List[ShapeExpr] =
-      wShEx.schema.shapes.filter(matchShape(entityDocument))
+  /**
+    * Checks if an entityDocument matches the start shape of a WShEx schema
+    * If the schema doesn't have a start declaration, it tries to match 
+    * the first shape expression declared
+    * 
+    * @param entityDocument
+    * @return a matching report
+    */
+  def matchStart(entityDocument: EntityDocument): MatchingStatus = {
+    wShEx.startShapeExpr match {
+      case None => NoMatching(List(NoShapeExprs(wShEx)))
+      case Some(se) => matchShape(entityDocument, se)
+    }
+  }
 
-  def matchShape(entityDocument: EntityDocument)(shapeExpr: ShapeExpr): Boolean =
+  def matchShape(entityDocument: EntityDocument, shapeExpr: ShapeExpr): MatchingStatus =
       shapeExpr match {
-          case Shape(TripleConstraint(predicate, Some(ValueSet(IRIValue(value)::Nil)), None, None)) => 
-           matchPredicateValue(predicate, value, entityDocument)
+          case Shape(id, TripleConstraint(predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None)) => 
+           matchPredicateValue(predicate, value, entityDocument, shapeExpr)
           case _ => {
             // TODO: Pending
-            false
+            NoMatching(List(NotImplemented(s"matchShape: $shapeExpr")))
           } 
         }
 
@@ -55,7 +61,7 @@ case class Matcher(wShEx: WShEx, verbose: Boolean = false) {
         }
     }
 
-  private def matchPredicateValue(predicate: IRI, value: IRI, entityDocument: EntityDocument): Boolean = {
+  private def matchPredicateValue(predicate: IRI, value: IRI, entityDocument: EntityDocument, se: ShapeExpr): MatchingStatus = {
       val (localName, base) = splitIri(predicate) 
       val propertyId = new PropertyIdValueImpl(localName, base)
       entityDocument match {
@@ -63,18 +69,19 @@ case class Matcher(wShEx: WShEx, verbose: Boolean = false) {
          val statementGroup = sd.findStatementGroup(propertyId)
          if (statementGroup == null) {
           info(s"No statement group for property: $propertyId")
-          false
+          NoMatching(List(NoStatementGroupProperty(propertyId, entityDocument)))
          } else {
         val statements = statementGroup.getStatements().asScala
         info(s"Statements with predicate $predicate that matched: ${statements}")  
         val matched = statements.filter(matchValueStatement(value))
         info(s"Statements with predicate $predicate that match also value ${value}: $matched")
-        !matched.isEmpty
+        if (matched.isEmpty) 
+          NoMatching(List(NoStatementMatchesValue(predicate,value,entityDocument)))
+        else Match(List(se))   
        }
        } 
        case _ => {
-         // Should we do something special here?
-         false
+         NoMatching(List(NoStatementDocument(entityDocument)))
        }
       }
     }

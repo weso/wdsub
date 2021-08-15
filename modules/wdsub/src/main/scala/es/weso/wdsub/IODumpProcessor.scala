@@ -105,7 +105,7 @@ object IODumpProcessor {
   private def checkSchema(matcher: Matcher)(entity: Entity): IO[Option[String]] = {
     entity.entityDocument match {
       case id: ItemDocument => {
-        if (matcher.matchSomeShape(id).size > 0) {
+        if (matcher.matchStart(id).matches) {
           Some(Item(id).asJsonStr()).pure[IO]
         }
         else none.pure[IO]

@@ -24,16 +24,44 @@ protected object ShEx2WShEx {
   private def convertShapeExpr(se: shex.ShapeExpr): Either[ConvertError, ShapeExpr] = se match {
     case nc: shex.NodeConstraint => convertNodeConstraint(nc)
     case s: shex.Shape => convertShape(s)
+    case sand: shex.ShapeAnd => for {
+      ss <- sand.shapeExprs.map(convertShapeExpr(_)).sequence 
+    } yield ShapeAnd(id = convertId(sand.id), exprs = ss)
+    case sor: shex.ShapeOr => for {
+      ss <- sor.shapeExprs.map(convertShapeExpr(_)).sequence 
+    } yield ShapeOr(id = convertId(sor.id), exprs = ss) 
+    case snot: shex.ShapeNot =>  
+      convertShapeExpr(snot.shapeExpr)
+      .map(se => ShapeNot(id = convertId(snot.id), shapeExpr = se))
+    case sref: shex.ShapeRef => 
+      ShapeRef(reference = convertShapeLabel(sref.reference)).asRight  
     case _ => UnsupportedShapeExpr(se).asLeft
   }
 
+  private def convertId(id: Option[shex.ShapeLabel]): Option[ShapeLabel] =
+    id.map(convertShapeLabel)
+
+  private def convertShapeLabel(label: shex.ShapeLabel): ShapeLabel =
+    label match {
+      case shex.IRILabel(iri) => IRILabel(iri)
+      case shex.BNodeLabel(bnode) => BNodeLabel(bnode)
+      case shex.Start => Start
+    }
+
   private def convertNodeConstraint(nc: shex.NodeConstraint): Either[ConvertError, NodeConstraint] = 
    nc match {
-     case shex.NodeConstraint(id, None, None, List(), values, None, None) => convertValueSet(values.getOrElse(List())).map(ValueSet)
+     case shex.NodeConstraint(id, None, None, List(), Some(values), None, None) => 
+      convertValueSet(convertId(id), values)
+      // convertValueSet(values.getOrElse(List())).map(ValueSet(id, _))
      case _ => UnsupportedNodeConstraint(nc).asLeft
    }
 
-  private def convertValueSet(values: List[shex.ValueSetValue]): Either[ConvertError, List[ValueSetValue]] =
+  private def convertValueSet(id: Option[ShapeLabel], values: List[shex.ValueSetValue]): Either[ConvertError, ValueSet] = 
+    convertValueSetValues(values).map(vs => ValueSet(id, vs))
+
+  private def convertValueSetValues(
+    values: List[shex.ValueSetValue]
+    ): Either[ConvertError, List[ValueSetValue]] =
     values.map(convertValueSetValue).sequence
 
   private def convertValueSetValue(value: shex.ValueSetValue): Either[ConvertError, ValueSetValue] = 
@@ -43,8 +71,8 @@ protected object ShEx2WShEx {
     }
 
   private def convertShape(s: shex.Shape): Either[ConvertError,Shape] = s match {
-    case shex.Shape(_, None, None, None, Some(expr), None, None, None, None) => 
-      convertTripleExpr(expr).map(Shape(_))
+    case shex.Shape(id, None, None, None, Some(expr), None, None, None, None) => 
+      convertTripleExpr(expr).map(te => Shape(id = convertId(id),expression = te))
     case _ => UnsupportedShape(s).asLeft
   }
 
