@@ -24,12 +24,11 @@ case object Fs2 extends Processor { override val name = "Fs2" }
 sealed trait DumpAction
 case class FilterBySchema(schema: Path) extends DumpAction
 case object CountEntities extends DumpAction
-case object ShowEntities extends DumpAction
+case class ShowEntities(maxStatements: Option[Int]) extends DumpAction
 
 
 case class Dump(
   filePath: Path, 
-//  schemaPath: Path, 
   action: DumpAction,
   outPath: Option[Path], 
   verbose: Boolean,
@@ -56,6 +55,8 @@ object Main extends CommandIOApp (
   val processors = List(Fs2,WDTK)
   val processorNames = processors.map(_.name)
   val defaultProcessor = processors.head
+
+  val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
   
   val processor = 
     Opts.option[String]("processor", help=s"Dump processor library. Possible values: ${processorNames.mkString(",")}").mapValidated(
@@ -70,10 +71,23 @@ object Main extends CommandIOApp (
 
   val verbose = Opts.flag("verbose", "Verbose mode").orFalse
 
-  val countEntities = Opts.flag("count", "count entities").map(_ => CountEntities)
-  val showEntities = Opts.flag("show", "show entities").map(_ => ShowEntities)
-  val filterBySchema = schemaPath.map(path => FilterBySchema(path))
-  val action = countEntities orElse showEntities orElse filterBySchema 
+  val countEntities = 
+    Opts.flag("count", "count entities").map(_ => CountEntities)
+  
+
+  def f(x: Unit, maxStatements: Option[Int]): ShowEntities = 
+    ShowEntities(maxStatements)
+
+  val showEntities: Opts[Unit] = 
+    Opts.flag("show", "show entities") // _ => ShowEntities)
+
+  val showEntitiesMax = 
+    (showEntities, maxStatements).mapN(f)  
+  
+  val filterBySchema = 
+    schemaPath.map(path => FilterBySchema(path))
+  
+  val action: Opts[DumpAction] = countEntities orElse showEntitiesMax orElse filterBySchema 
 
   val dump: Opts[Dump] = 
     Opts.subcommand("dump", "Process example dump file.") {
@@ -129,15 +143,15 @@ object Main extends CommandIOApp (
       matcher = new Matcher(wShEx = wshex)
     } yield checkSchema(matcher)
     case CountEntities => withEntryCount(refResults).pure[IO]
-    case ShowEntities => withEntryShow(refResults).pure[IO]
+    case ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
   }
 
   private def withEntryCount(counter: Ref[IO,DumpResults]): Entity => IO[Option[String]] = _ => for {
     _ <- counter.update(_.addEntity) 
   } yield None
 
-  private def withEntryShow(counter: Ref[IO,DumpResults]): Entity => IO[Option[String]] = entity => for {
-    _ <- IO.println(entity.showShort)
+  private def withEntryShow(counter: Ref[IO,DumpResults], maxEntities: Option[Int]): Entity => IO[Option[String]] = entity => for {
+    _ <- IO.println(entity.show(ShowEntityOptions.default.witMaxStatements(maxEntities)))
     _ <- counter.update(_.addEntity) 
   } yield None
 

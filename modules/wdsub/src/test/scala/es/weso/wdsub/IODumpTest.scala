@@ -49,10 +49,12 @@ class IODumpTest extends FunSuite {
     val is: InputStream = new ByteArrayInputStream(str.getBytes)
     val os: ByteArrayOutputStream = new ByteArrayOutputStream()
     def withEntity(e: Entity): IO[Option[String]] = IO(Some(e.asJsonStr()))
-    IODumpProcessor.process(
-      is,os,withEntity, 
-      DumpOptions.default.withoutDecompressInput.withoutCompressOutput
-    ).unsafeRunSync()
+    val cmp = for {
+      ref <- Ref[IO].of(DumpResults.initial)
+      results <- IODumpProcessor.process(is,Some(os),withEntity, ref,
+         DumpOptions.default.withoutDecompressInput.withoutCompressOutput) 
+    } yield results
+    cmp.unsafeRunSync()
     val expected = str + ",\n"
     val returned = os.toString()
     assertEquals(returned, expected)
