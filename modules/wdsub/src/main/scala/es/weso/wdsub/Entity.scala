@@ -1,10 +1,11 @@
 package es.weso.wdsub
-import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+import org.wikidata.wdtk.datamodel.interfaces._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.exc._
 import cats.effect._
+import collection.JavaConverters._
 
 sealed abstract trait EntityParserError
 case class  ParserError(e: Throwable) extends EntityParserError
@@ -22,6 +23,25 @@ case class Entity(entityDocument: EntityDocument) {
     def asJsonStr(): String = {
         mapper.writeValueAsString(entityDocument)
     }
+
+    def showValue(value: Value): String = value match {
+      case e: EntityIdValue => e.getId() 
+      case m: MonolingualTextValue => m.getText()
+//      case p: PropertyIdValue => p.getId()
+      case _ => "other"
+    }
+
+    def showStatement(s: Statement): String = 
+        s"${s.getMainSnak().getPropertyId().getId()}/${showValue(s.getValue())}"
+
+    def showStatements: String = 
+        entityDocument match {
+            case s: StatementDocument => s.getAllStatements().asScala.toList.map(showStatement(_)).mkString(",")
+            case _ => "{}"
+        }
+
+    def showShort: String = 
+        s"${entityDocument.getEntityId().getId()} $showStatements"
 }
 
 object Entity {

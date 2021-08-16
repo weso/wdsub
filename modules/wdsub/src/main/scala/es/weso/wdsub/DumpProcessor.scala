@@ -28,16 +28,16 @@ object DumpProcessor {
     private def acquireShEx(schemaPath: Path, verbose: Boolean): IO[WShEx] = 
       WShEx.fromPath(schemaPath)
           
-    private def acquireShExProcessor(schemaPath: Path, outputPath: Path, verbose: Boolean, timeout: Int): IO[WShExProcessor] = for {
+    private def acquireShExProcessor(schemaPath: Path, outputPath: Path, verbose: Boolean, timeout: Int): IO[WDSubProcessor] = for {
       wshex <- acquireShEx(schemaPath, verbose) 
       out <- acquireOutput(outputPath)
-      shexProcessor = new WShExProcessor(wshex, out, verbose, timeout)
+      shexProcessor = new WDSubProcessor(wshex, out, verbose, timeout)
     } yield { 
       shexProcessor.startJson()
       shexProcessor
     }
 
-    private def mkShExProcessor(schema: Path, outputPath: Path, verbose: Boolean, timeout: Int): Resource[IO, WShExProcessor] = 
+    private def mkShExProcessor(schema: Path, outputPath: Path, verbose: Boolean, timeout: Int): Resource[IO, WDSubProcessor] = 
       Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout))(shExProcessor => IO { 
        shExProcessor.endJson()
        shExProcessor.close() 
@@ -95,5 +95,3 @@ object DumpProcessor {
        } yield results
     }
 }
-
-

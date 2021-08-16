@@ -56,8 +56,8 @@ case class Matcher(wShEx: WShEx,
 
   def matchShapeExpr(entityDocument: EntityDocument, shapeExpr: ShapeExpr): MatchingStatus =
       shapeExpr match {
-          case Shape(id, TripleConstraint(predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None)) => 
-           matchPredicateValue(predicate, value, entityDocument, shapeExpr)
+          case Shape(id, te) =>
+            matchTripleExpr(entityDocument,te, shapeExpr) 
           case sand: ShapeAnd => {
             val ls: LazyList[MatchingStatus] = sand.exprs.toLazyList.map(matchShapeExpr(entityDocument,_))
             MatchingStatus.combineAnds(ls)
@@ -77,6 +77,12 @@ case class Matcher(wShEx: WShEx,
           } 
         }
 
+  private def matchTripleExpr(entityDocument: EntityDocument, te: TripleExpr, se: ShapeExpr): MatchingStatus = te match {
+    case TripleConstraint(predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None) => 
+      matchPredicateValue(predicate, value, entityDocument, se)
+    case _ => 
+      NoMatching(List(NotImplemented(s"matchTripleExpr: $te")))
+  }      
     /**
       * Get local name and prefix of a IRI
       * This code has been adapted from WikidataToolkit ItemIdValueImpl

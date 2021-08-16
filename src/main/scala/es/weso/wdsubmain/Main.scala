@@ -9,7 +9,10 @@ import es.weso.rdf.nodes._
 import es.weso.rdf._
 import java.nio.file.Path
 import cats.data.Validated
-
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+import java.nio.file.{Files => JavaFiles, Paths}
+import java.nio.file.StandardOpenOption._
+import es.weso.wshex._
 
 sealed trait Processor {
   val name: String
@@ -17,9 +20,16 @@ sealed trait Processor {
 case object WDTK extends Processor  { override val name = "WDTK"}
 case object Fs2 extends Processor { override val name = "Fs2" } 
 
+sealed trait DumpAction
+case class FilterBySchema(schema: Path) extends DumpAction
+case object CountEntities extends DumpAction
+case object ShowEntities extends DumpAction
+
+
 case class Dump(
   filePath: Path, 
-  schemaPath: Path, 
+//  schemaPath: Path, 
+  action: DumpAction,
   outPath: Path, 
   verbose: Boolean,
   processor: Processor
@@ -59,17 +69,21 @@ object Main extends CommandIOApp (
 
   val verbose = Opts.flag("verbose", "Verbose mode").orFalse
 
+  val countEntities = Opts.flag("count", "count entities").map(_ => CountEntities)
+  val showEntities = Opts.flag("show", "show entities").map(_ => ShowEntities)
+  val filterBySchema = schemaPath.map(path => FilterBySchema(path))
+  val action = countEntities orElse showEntities orElse filterBySchema 
 
   val dump: Opts[Dump] = 
     Opts.subcommand("dump", "Process example dump file.") {
-      (filePath, outPath, schemaPath, verbose, processor).mapN(Dump)
+      (filePath, action, outPath, verbose, processor).mapN(Dump)
   }  
 
 
   override def main: Opts[IO[ExitCode]] = 
     (processEntity orElse dump).map { 
       case ProcessEntity(entity) => processEntity(entity) 
-      case Dump(filePath, outPath: Path, schemaPath, verbose, processor) => dump(filePath, outPath, schemaPath, verbose, processor)
+      case Dump(filePath, action, outPath: Path, verbose, processor) => dump(filePath, action, outPath, verbose, processor)
     }
 
   def processEntity(entityStr: String): IO[ExitCode] = for {
@@ -81,18 +95,59 @@ object Main extends CommandIOApp (
 
   def dump(
     filePath: Path, 
+    action: DumpAction, 
     outPath: Path, 
-    schema: Path, 
     verbose: Boolean, 
     processor: Processor
     ): IO[ExitCode] = {
     for {
-    results <- processor match {
-      case Fs2 => IODumpProcessor.ioDumpProcess(filePath, outPath, schema, verbose, 0)
-      case WDTK => DumpProcessor.dumpProcess(filePath, outPath, schema, verbose, 0)
-    }
-    _ <- IO.println(results)
+     is <- IO { JavaFiles.newInputStream(filePath) }
+     os <- IO { JavaFiles.newOutputStream(outPath, CREATE) }
+     refResults <- Ref[IO].of(DumpResults.initial)
+     withEntry <- getWithEntry(action, refResults)
+     results <- processor match {
+      case Fs2 => IODumpProcessor.process(is, os, withEntry, refResults)
+      case WDTK => action match {
+        case FilterBySchema(schemaPath) => DumpProcessor.dumpProcess(filePath, outPath, schemaPath, verbose, 0)
+        case _ => IO.println(s"Not implemented yet")
+      }
+     }
+     _ <- IO.println(s"End of dump processing: $results")
     } yield ExitCode.Success
   }
+
+  private def getWithEntry(
+    action: DumpAction, 
+    refResults: Ref[IO, DumpResults]
+    ): IO[Entity => IO[Option[String]]] = action match {
+    case FilterBySchema(schemaPath) => for {
+      wshex <- WShEx.fromPath(schemaPath)
+      matcher = new Matcher(wShEx = wshex)
+    } yield checkSchema(matcher)
+    case CountEntities => withEntryCount(refResults).pure[IO]
+    case ShowEntities => withEntryShow(refResults).pure[IO]
+  }
+
+  private def withEntryCount(counter: Ref[IO,DumpResults]): Entity => IO[Option[String]] = _ => for {
+    _ <- counter.update(_.addEntity) 
+  } yield None
+
+  private def withEntryShow(counter: Ref[IO,DumpResults]): Entity => IO[Option[String]] = entity => for {
+    _ <- IO.println(entity.showShort)
+    _ <- counter.update(_.addEntity) 
+  } yield None
+
+  private def checkSchema(matcher: Matcher)(entity: Entity): IO[Option[String]] = {
+    entity.entityDocument match {
+      case e: EntityDocument => {
+        if (matcher.matchStart(e).matches) {
+          Some(Entity(e).asJsonStr()).pure[IO]
+        }
+        else none.pure[IO]
+      }
+      case _ => none.pure[IO]
+    }
+  }
+
       
 }

@@ -15,7 +15,7 @@ import es.weso.wshex._
   * @param verbose verbose
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
-class WShExProcessor(
+class WDSubProcessor(
   wShEx: WShEx,
   out: OutputStream,
   verbose: Boolean,

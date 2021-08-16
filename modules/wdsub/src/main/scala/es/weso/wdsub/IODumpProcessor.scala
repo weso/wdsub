@@ -12,7 +12,7 @@ import java.io.OutputStream
 import fs2.io.file.Files
 import java.nio.file.{Files => JavaFiles, Paths}
 import es.weso.shex
-import java.nio.file.StandardOpenOption._;
+import java.nio.file.StandardOpenOption._
 import org.wikidata.wdtk.datamodel.interfaces.PropertyDocument
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 import org.slf4j.Logger;
@@ -51,8 +51,9 @@ object IODumpProcessor {
     is: InputStream, 
     os: OutputStream, 
     withEntity: Entity => IO[Option[String]], 
-    opts: DumpOptions = DumpOptions.default
-    ): IO[Unit] = {
+    refResults: Ref[IO,DumpResults],
+    opts: DumpOptions = DumpOptions.default,
+    ): IO[DumpResults] = {
     val x = 
       readInputStream(is.pure[IO], opts.chunkSize)
       .through(when(opts.decompressInput, decompress))
@@ -62,7 +63,10 @@ object IODumpProcessor {
       .through(text.utf8Encode)
       .through(when(opts.compressOutput, compress))
       .through(writeOutputStream(os.pure[IO]))
-    x.compile.drain
+    for { 
+      _ <- x.compile.drain
+      results <- refResults.get
+    } yield results  
   }
 
   def processDump(
@@ -89,7 +93,7 @@ object IODumpProcessor {
     result <- processParsedLine(withEntity, parsedLine)
   } yield result
 
-  def ioDumpProcess(filePath: Path, outPath: Path, schemaPath: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
+/*  def ioDumpProcess(filePath: Path, outPath: Path, schemaPath: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
        for {
          is <- IO { JavaFiles.newInputStream(filePath) }
          os <- IO { JavaFiles.newOutputStream(outPath, CREATE) }
@@ -100,20 +104,8 @@ object IODumpProcessor {
          matcher = new Matcher(wShEx = wshex, verbose = verbose)
          _ <- process(is, os, checkSchema(matcher))
        } yield DumpResults(0,0)
-  }
+  }*/
 
-  private def checkSchema(matcher: Matcher)(entity: Entity): IO[Option[String]] = {
-    entity.entityDocument match {
-      case id: ItemDocument => {
-        if (matcher.matchStart(id).matches) {
-          Some(Item(id).asJsonStr()).pure[IO]
-        }
-        else none.pure[IO]
-      }
-      case pd: PropertyDocument => none.pure[IO] // TODO. Check if it belongs to schema properties
-      case _ => none.pure[IO]
-    }
-  }
 
   private def decompress: Pipe[IO, Byte, Byte] = s =>
     s.through(Compression[IO].gunzip()).flatMap(_.content)
