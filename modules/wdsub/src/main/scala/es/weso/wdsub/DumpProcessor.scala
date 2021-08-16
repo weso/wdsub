@@ -28,7 +28,7 @@ object DumpProcessor {
     private def acquireShEx(schemaPath: Path, verbose: Boolean): IO[WShEx] = 
       WShEx.fromPath(schemaPath)
           
-    private def acquireShExProcessor(schemaPath: Path, outputPath: Path, verbose: Boolean, timeout: Int): IO[WDSubProcessor] = for {
+    private def acquireShExProcessor(schemaPath: Path, outputPath: Option[Path], verbose: Boolean, timeout: Int): IO[WDSubProcessor] = for {
       wshex <- acquireShEx(schemaPath, verbose) 
       out <- acquireOutput(outputPath)
       shexProcessor = new WDSubProcessor(wshex, out, verbose, timeout)
@@ -37,7 +37,7 @@ object DumpProcessor {
       shexProcessor
     }
 
-    private def mkShExProcessor(schema: Path, outputPath: Path, verbose: Boolean, timeout: Int): Resource[IO, WDSubProcessor] = 
+    private def mkShExProcessor(schema: Path, outputPath: Option[Path], verbose: Boolean, timeout: Int): Resource[IO, WDSubProcessor] = 
       Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout))(shExProcessor => IO { 
        shExProcessor.endJson()
        shExProcessor.close() 
@@ -56,18 +56,26 @@ object DumpProcessor {
     // TODO: Check if we can run this in a different thread?   
     // Some snippets have been taken from: 
     // https://github.com/bennofs/wdumper/blob/master/src/main/java/io/github/bennofs/wdumper/DumpRunner.java#L97
-    private def acquireOutput(outputPath: Path): IO[OutputStream] = IO {
-      val fileStream: OutputStream = Files.newOutputStream(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)
-      val bufferedStream: OutputStream = new BufferedOutputStream(fileStream, 10 * 1024 * 1024)
-      val gzipParams = new GzipParameters()
-      gzipParams.setCompressionLevel(1) 
-      val outputStream: OutputStream = new GzipCompressorOutputStream(bufferedStream, gzipParams)
-      outputStream
+    private def acquireOutput(maybeOutputPath: Option[Path]): IO[Option[OutputStream]] = maybeOutputPath match { 
+      case Some(outputPath) => IO {
+       val fileStream: OutputStream = 
+        Files.newOutputStream(outputPath, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE)
+       val bufferedStream: OutputStream = new BufferedOutputStream(fileStream, 10 * 1024 * 1024)
+       val gzipParams = new GzipParameters()
+       gzipParams.setCompressionLevel(1) 
+       val outputStream: OutputStream = new GzipCompressorOutputStream(bufferedStream, gzipParams)
+       Some(outputStream)
+      }
+      case None => none[OutputStream].pure[IO]
     }
 
-    private def releaseOutput(out: OutputStream): IO[Unit] = IO { out.close() }
-    private def mkOutput(outputPath: Path): Resource[IO, OutputStream] = 
-     Resource.make(acquireOutput(outputPath))(releaseOutput)
+    private def releaseOutput(maybeOut: Option[OutputStream]): IO[Unit] = 
+      maybeOut match {
+        case Some(out) => IO { out.close() } 
+        case None => ().pure[IO]
+      } 
+    private def mkOutput(maybeOutput: Option[Path]): Resource[IO, Option[OutputStream]] = 
+     Resource.make(acquireOutput(maybeOutput))(releaseOutput)
     
     /**
       * Dump process
@@ -78,7 +86,7 @@ object DumpProcessor {
       * @param timeout timeout in seconds or 0 if no timeout should be used
       * @return dump results
       */   
-    def dumpProcess(filePath: Path, outPath: Path, schema: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
+    def dumpProcess(filePath: Path, outPath: Option[Path], schema: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
        for {
         results <- (mkShExProcessor(schema,outPath,verbose,timeout), mkDumpFile(filePath, verbose)).tupled.use {
             case (processor, mwDumpFile) => for {

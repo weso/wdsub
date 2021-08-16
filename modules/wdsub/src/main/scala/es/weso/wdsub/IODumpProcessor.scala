@@ -7,8 +7,7 @@ import fs2.compression._
 import java.nio.file.Path
 import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import cats.effect._
-import java.io.InputStream
-import java.io.OutputStream
+import java.io._
 import fs2.io.file.Files
 import java.nio.file.{Files => JavaFiles, Paths}
 import es.weso.shex
@@ -49,7 +48,7 @@ object IODumpProcessor {
     */
   def process(
     is: InputStream, 
-    os: OutputStream, 
+    os: Option[OutputStream], 
     withEntity: Entity => IO[Option[String]], 
     refResults: Ref[IO,DumpResults],
     opts: DumpOptions = DumpOptions.default,
@@ -61,8 +60,8 @@ object IODumpProcessor {
       .through(text.lines)
       .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
       .through(text.utf8Encode)
-      .through(when(opts.compressOutput, compress))
-      .through(writeOutputStream(os.pure[IO]))
+      .through(when(opts.compressOutput && os.isDefined, compress))
+      .through(when(os.isDefined,writeOutputStream(os.get.pure[IO])))
     for { 
       _ <- x.compile.drain
       results <- refResults.get
@@ -113,7 +112,7 @@ object IODumpProcessor {
   private def compress: Pipe[IO, Byte, Byte] = s =>
     s.through(Compression[IO].gzip())
 
-  private def when[A](cond: Boolean, action: Stream[IO,A] => Stream[IO,A]): Pipe[IO, A, A] = s =>
+  private def when[A](cond: Boolean, action: => Stream[IO,A] => Stream[IO,A]): Pipe[IO, A, A] = s =>
      if (cond) s.through(action)
      else s 
 

@@ -13,6 +13,7 @@ import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 import java.nio.file.{Files => JavaFiles, Paths}
 import java.nio.file.StandardOpenOption._
 import es.weso.wshex._
+import java.io._
 
 sealed trait Processor {
   val name: String
@@ -30,7 +31,7 @@ case class Dump(
   filePath: Path, 
 //  schemaPath: Path, 
   action: DumpAction,
-  outPath: Path, 
+  outPath: Option[Path], 
   verbose: Boolean,
   processor: Processor
   )
@@ -65,7 +66,7 @@ object Main extends CommandIOApp (
 
   val schemaPath = Opts.option[Path]("schema", help="ShEx schema", short="s", metavar="file")
 
-  val outPath = Opts.option[Path]("out", help="output path", short="o", metavar="file")
+  val outPath = Opts.option[Path]("out", help="output path", short="o", metavar="file").orNone
 
   val verbose = Opts.flag("verbose", "Verbose mode").orFalse
 
@@ -83,7 +84,7 @@ object Main extends CommandIOApp (
   override def main: Opts[IO[ExitCode]] = 
     (processEntity orElse dump).map { 
       case ProcessEntity(entity) => processEntity(entity) 
-      case Dump(filePath, action, outPath: Path, verbose, processor) => dump(filePath, action, outPath, verbose, processor)
+      case Dump(filePath, action, outPath, verbose, processor) => dump(filePath, action, outPath, verbose, processor)
     }
 
   def processEntity(entityStr: String): IO[ExitCode] = for {
@@ -96,19 +97,22 @@ object Main extends CommandIOApp (
   def dump(
     filePath: Path, 
     action: DumpAction, 
-    outPath: Path, 
+    maybeOutPath: Option[Path], 
     verbose: Boolean, 
     processor: Processor
     ): IO[ExitCode] = {
     for {
      is <- IO { JavaFiles.newInputStream(filePath) }
-     os <- IO { JavaFiles.newOutputStream(outPath, CREATE) }
+     os <- maybeOutPath match { 
+       case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE)).pure[IO]
+       case None => none[OutputStream].pure[IO]
+     }
      refResults <- Ref[IO].of(DumpResults.initial)
      withEntry <- getWithEntry(action, refResults)
      results <- processor match {
       case Fs2 => IODumpProcessor.process(is, os, withEntry, refResults)
       case WDTK => action match {
-        case FilterBySchema(schemaPath) => DumpProcessor.dumpProcess(filePath, outPath, schemaPath, verbose, 0)
+        case FilterBySchema(schemaPath) => DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, verbose, 0)
         case _ => IO.println(s"Not implemented yet")
       }
      }
