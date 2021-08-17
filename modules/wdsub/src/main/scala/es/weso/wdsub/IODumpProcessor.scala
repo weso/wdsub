@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import es.weso.wshex._
+import es.weso.wikibase._
 
 case class DumpProcessorError(msg: String) extends RuntimeException(msg)
 

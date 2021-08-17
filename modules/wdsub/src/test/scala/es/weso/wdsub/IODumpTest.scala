@@ -18,6 +18,7 @@ import java.io.InputStream
 import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import cats.effect.unsafe.implicits.global
 import cats.effect._
+import es.weso.wikibase._
 
 class IODumpTest extends FunSuite {
 

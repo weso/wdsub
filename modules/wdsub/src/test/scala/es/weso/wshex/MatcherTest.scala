@@ -174,6 +174,6 @@ class MatcherTest extends FunSuite {
         assert(!matchStatus.matches, s"Match Q42 should fail when internal NOT passes\nMatchStatus=${matchStatus})")
       }
     )     
-  }
-
+  
+}
 }

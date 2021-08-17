@@ -13,6 +13,7 @@ import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 import java.nio.file.{Files => JavaFiles, Paths}
 import java.nio.file.StandardOpenOption._
 import es.weso.wshex._
+import es.weso.wikibase._
 import java.io._
 
 sealed trait Processor {
@@ -141,7 +142,7 @@ object Main extends CommandIOApp (
     case FilterBySchema(schemaPath) => for {
       wshex <- WShEx.fromPath(schemaPath)
       matcher = new Matcher(wShEx = wshex)
-    } yield checkSchema(matcher)
+    } yield checkSchema(matcher, refResults)
     case CountEntities => withEntryCount(refResults).pure[IO]
     case ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
   }
@@ -155,13 +156,15 @@ object Main extends CommandIOApp (
     _ <- counter.update(_.addEntity) 
   } yield None
 
-  private def checkSchema(matcher: Matcher)(entity: Entity): IO[Option[String]] = {
+  private def checkSchema(matcher: Matcher, refResults: Ref[IO,DumpResults])(entity: Entity): IO[Option[String]] = {
     entity.entityDocument match {
       case e: EntityDocument => {
         if (matcher.matchStart(e).matches) {
+          refResults.update(_.addMatched) *>
           Some(Entity(e).asJsonStr()).pure[IO]
         }
-        else none.pure[IO]
+        else refResults.update(_.addEntity) *> 
+        none.pure[IO]
       }
       case _ => none.pure[IO]
     }

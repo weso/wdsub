@@ -1,4 +1,5 @@
 package es.weso.wshex
+
 import es.weso.rdf.nodes._
 import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._
@@ -10,7 +11,7 @@ import cats.effect._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 import org.wikidata.wdtk.datamodel.helpers
 import es.weso.utils.internal.CollectionCompat._
-
+import es.weso.wikibase._
 /**
   * Matcher contains methods to match a WShEx schema with Wikibase entities
   *
@@ -39,7 +40,7 @@ case class Matcher(wShEx: WShEx,
   def matchStart(entityDocument: EntityDocument): MatchingStatus = {
     wShEx.startShapeExpr match {
       case None => NoMatching(List(NoShapeExprs(wShEx)))
-      case Some(se) => matchShapeExpr(entityDocument, se)
+      case Some(se) => matchShapeExpr(se, Entity(entityDocument))
     }
   }
 
@@ -54,21 +55,21 @@ case class Matcher(wShEx: WShEx,
     matchStart(entityDocument)
   }
 
-  def matchShapeExpr(entityDocument: EntityDocument, shapeExpr: ShapeExpr): MatchingStatus =
+  private def matchShapeExpr(shapeExpr: ShapeExpr, entity: Entity): MatchingStatus =
       shapeExpr match {
           case Shape(id, te) =>
-            matchTripleExpr(entityDocument,te, shapeExpr) 
+            matchTripleExpr(te, entity, shapeExpr) 
           case sand: ShapeAnd => {
-            val ls: LazyList[MatchingStatus] = sand.exprs.toLazyList.map(matchShapeExpr(entityDocument,_))
+            val ls: LazyList[MatchingStatus] = sand.exprs.toLazyList.map(matchShapeExpr(_, entity))
             MatchingStatus.combineAnds(ls)
           }
           case sor: ShapeOr => {
-            val ls: LazyList[MatchingStatus] = sor.exprs.toLazyList.map(matchShapeExpr(entityDocument,_))
+            val ls: LazyList[MatchingStatus] = sor.exprs.toLazyList.map(matchShapeExpr(_, entity))
             MatchingStatus.combineOrs(ls)
           }
           case snot: ShapeNot => {
-            val ms = matchShapeExpr(entityDocument,snot.shapeExpr)
-            if (ms.matches) NoMatching(List(NotShapeFail(snot.shapeExpr, entityDocument)))
+            val ms = matchShapeExpr(snot.shapeExpr, entity)
+            if (ms.matches) NoMatching(List(NotShapeFail(snot.shapeExpr, entity)))
             else Matching(List(shapeExpr), ms.dependencies)
           }
           case _ => {
@@ -77,18 +78,52 @@ case class Matcher(wShEx: WShEx,
           } 
         }
 
-  private def matchTripleExpr(entityDocument: EntityDocument, te: TripleExpr, se: ShapeExpr): MatchingStatus = te match {
-    case TripleConstraint(predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None) => 
-      matchPredicateValue(predicate, value, entityDocument, se)
+  private def matchTripleExpr(te: TripleExpr, entity: Entity, se: ShapeExpr): MatchingStatus = te match {
+    case tc: TripleConstraint =>
+    // (predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None) => 
+      matchTripleConstraint(tc, entity, se)
+    case EachOf(tcs) if tcs.forall(_.isInstanceOf[TripleConstraint])=> {
+      MatchingStatus.combineAnds(
+        tcs
+        .map(_.asInstanceOf[TripleConstraint])
+        .map(tc => matchTripleConstraint(tc,entity, se))
+        .to[LazyList]
+        )
+    }
     case _ => 
       NoMatching(List(NotImplemented(s"matchTripleExpr: $te")))
   }      
-    /**
-      * Get local name and prefix of a IRI
-      * This code has been adapted from WikidataToolkit ItemIdValueImpl
-      * @param iri
-      * @return a pair with (localName, base)
-      */
+
+  private def matchTripleConstraint(tc: TripleConstraint, e: Entity, se: ShapeExpr): MatchingStatus = 
+    /* TODO: We are ignoring cardinality by now */
+    matchPredicateValueExpr(tc.predicate,tc.valueExpr,e, se) 
+
+  private def matchPredicateValueExpr(predicate: IRI, valueExpr: Option[ShapeExpr], e: Entity, se: ShapeExpr): MatchingStatus = {
+   val propertyId = predicate2propertyIdValue(predicate) 
+   valueExpr match {
+    case None => 
+      if (e.getValues(propertyId).isEmpty) NoMatching(List(NoValuesProperty(predicate,e)))
+      else Matching(List(se)) 
+    case Some(ValueSet(_,vs)) => 
+      MatchingStatus
+      .combineAnds(vs.to[LazyList]
+      .map(value => matchPredicateValueSetValue(predicate, value, e, se)))
+    case _ => 
+      NoMatching(List(NotImplemented(s"matchPredicateValueExpr: ${predicate}, valueExpr: ${valueExpr}")))  
+   }
+  }
+
+  private def matchPredicateValueSetValue(predicate: IRI, value: ValueSetValue, e: Entity, se: ShapeExpr) = value match {
+    case IRIValue(iri) => matchPredicateIri(predicate, iri, e.entityDocument,se)
+    case _ => NoMatching(List(NotImplemented(s"matchPredicateValueSetValue different from IRI")))
+  }
+
+  /**
+    * Get local name and prefix of a IRI
+    * This code has been adapted from WikidataToolkit ItemIdValueImpl
+    * @param iri
+    * @return a pair with (localName, base)
+    */
   private def splitIri(iri: IRI): (String, String) = {
         val iriStr = iri.getLexicalForm
         val separator = iriStr.lastIndexOf('/') + 1;
@@ -99,10 +134,15 @@ case class Matcher(wShEx: WShEx,
         }
     }
 
-  private def matchPredicateValue(predicate: IRI, value: IRI, entityDocument: EntityDocument, se: ShapeExpr): MatchingStatus = {
-      val (localName, base) = splitIri(predicate) 
-      val propertyId = new PropertyIdValueImpl(localName, base)
-      entityDocument match {
+  private def predicate2propertyIdValue(predicate: IRI): PropertyIdValue = {
+   val (localName, base) = splitIri(predicate) 
+   val propertyId = new PropertyIdValueImpl(localName, base)
+   propertyId   
+  }
+
+  private def matchPredicateIri(predicate: IRI, iri: IRI, entityDocument: EntityDocument, se: ShapeExpr): MatchingStatus = {
+    val propertyId = predicate2propertyIdValue(predicate)
+    entityDocument match {
         case sd: StatementDocument => {
          val statementGroup = sd.findStatementGroup(propertyId)
          if (statementGroup == null) {
@@ -111,10 +151,10 @@ case class Matcher(wShEx: WShEx,
          } else {
         val statements = statementGroup.getStatements().asScala
         info(s"Statements with predicate $predicate that matched: ${statements}")  
-        val matched = statements.filter(matchValueStatement(value))
-        info(s"Statements with predicate $predicate that match also value ${value}: $matched")
+        val matched = statements.filter(matchValueStatement(iri))
+        info(s"Statements with predicate $predicate that match also value ${iri}: $matched")
         if (matched.isEmpty) 
-          NoMatching(List(NoStatementMatchesValue(predicate,value,entityDocument)))
+          NoMatching(List(NoStatementMatchesValue(predicate,iri,entityDocument)))
         else Matching(List(se))   
        }
        } 

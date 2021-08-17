@@ -1,4 +1,5 @@
-package es.weso.wdsub
+package es.weso.wikibase
+
 import org.wikidata.wdtk.datamodel.interfaces._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -6,27 +7,6 @@ import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.exc._
 import cats.effect._
 import collection.JavaConverters._
-import es.weso.rbe.interval.IntLimit
-
-sealed abstract trait EntityParserError
-case class  ParserError(e: Throwable) extends EntityParserError
-case object End extends EntityParserError
-
-case class ShowEntityOptions(
-    maxStatements: Option[Int],
-    showAllValues: Boolean
-) {
-    def witMaxStatements(m: Option[Int]): ShowEntityOptions =
-        this.copy(maxStatements = m)
-}
-
-object ShowEntityOptions {
-    lazy val default: ShowEntityOptions = 
-        ShowEntityOptions(
-            maxStatements = None, 
-            showAllValues = true
-            ) 
-}
 
 case class Entity(entityDocument: EntityDocument) {
 
@@ -36,6 +16,19 @@ case class Entity(entityDocument: EntityDocument) {
     def getID(): String = entityDocument.getEntityId().getId()
     def getType(): String = entityDocument.getEntityId().getEntityType()
 
+    lazy val valueMap: Map[PropertyIdValue,List[Value]] = entityDocument match {
+        case s: StatementDocument => { 
+          s.getStatementGroups()
+          .asScala
+          .toList
+          .map(sg => (sg.getProperty(), sg.getStatements().asScala.toList.map(_.getValue())))
+          .toMap
+        }
+        case _ => Map()
+    }
+
+    def getValues(property: PropertyIdValue): List[Value] = 
+        valueMap.get(property).getOrElse(List())
 
     def asJsonStr(): String = {
         mapper.writeValueAsString(entityDocument)
