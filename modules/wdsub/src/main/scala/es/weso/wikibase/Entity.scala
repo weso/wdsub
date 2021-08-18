@@ -84,10 +84,20 @@ case class Entity(entityDocument: EntityDocument) {
 
 object Entity {
 
+    /**
+      * Get Entity from a JSON string
+      * 
+      * The JSON format is the same as the one used by dumps
+      *
+      * @param str
+      * @param jsonDeserializer
+      * @return an action that once run will contain the Entity that represents the JSON entity
+      */
     def fromJsonStr(
         str: String, 
         jsonDeserializer: JsonDeserializer
         ): IO[Entity] = IO { Entity(jsonDeserializer.deserializeEntityDocument(str)) }
+
 
 
 }
