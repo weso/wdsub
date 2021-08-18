@@ -56,7 +56,7 @@ class WShExTest extends FunSuite {
       val itemDocument = 
         ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
       assertEquals(
-        Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build())matches, false)
+        Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()).matches, false)
     }
 
     test("Don't match shape when fails property") {

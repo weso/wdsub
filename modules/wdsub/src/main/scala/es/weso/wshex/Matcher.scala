@@ -82,12 +82,11 @@ case class Matcher(wShEx: WShEx,
     case tc: TripleConstraint =>
     // (predicate, Some(ValueSet(_, IRIValue(value)::Nil)), None, None) => 
       matchTripleConstraint(tc, entity, se)
-    case EachOf(tcs) if tcs.forall(_.isInstanceOf[TripleConstraint])=> {
+    case EachOf(es) if es.forall(_.isInstanceOf[TripleConstraint])=> {
+      val tcs: LazyList[TripleConstraint] = es.map(_.asInstanceOf[TripleConstraint]).toLazyList
       MatchingStatus.combineAnds(
         tcs
-        .map(_.asInstanceOf[TripleConstraint])
         .map(tc => matchTripleConstraint(tc,entity, se))
-        .to[LazyList]
         )
     }
     case _ => 
@@ -106,8 +105,10 @@ case class Matcher(wShEx: WShEx,
       else Matching(List(se)) 
     case Some(ValueSet(_,vs)) => 
       MatchingStatus
-      .combineAnds(vs.to[LazyList]
-      .map(value => matchPredicateValueSetValue(predicate, value, e, se)))
+      .combineAnds(vs
+       .toLazyList
+       .map(value => matchPredicateValueSetValue(predicate, value, e, se))
+       )
     case _ => 
       NoMatching(List(NotImplemented(s"matchPredicateValueExpr: ${predicate}, valueExpr: ${valueExpr}")))  
    }

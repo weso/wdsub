@@ -131,7 +131,7 @@ object IODumpProcessor {
   private def parseLine(line: String, opts: DumpOptions): IO[ParsedLine] = (line match {
     case "[" => OpenBracket.pure[IO]
     case "]" => CloseBracket.pure[IO]
-    case str   => Entity.fromJsonStr(str, opts.jsonDeserializer).map(ParsedEntity)
+    case str   => Entity.fromJsonStr(str, opts.jsonDeserializer).map(ParsedEntity(_))
   }).handleErrorWith(e => e match {
     case e:MismatchedInputException => EndStream.pure[IO]
     case _ => Error(e.getMessage()).pure[IO]

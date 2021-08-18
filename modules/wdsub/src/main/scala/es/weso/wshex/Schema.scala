@@ -72,7 +72,7 @@ abstract sealed trait NodeConstraint
  extends ShapeExpr 
  with Product with Serializable
 
- case class ValueSet(
+case class ValueSet(
     id: Option[ShapeLabel], 
     values: List[ValueSetValue]
     ) extends NodeConstraint

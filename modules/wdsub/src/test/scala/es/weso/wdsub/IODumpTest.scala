@@ -31,7 +31,7 @@ class IODumpTest extends FunSuite {
     val itemDocument = 
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
     val item = Item(itemDocument)
-    val jsonStr = item.asJsonStr
+    val jsonStr = item.asJsonStr()
     
     assertEquals(Item.fromJsonStr(jsonStr), Right(item))
 
