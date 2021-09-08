@@ -87,8 +87,10 @@ lazy val wdsubRoot = project
   .settings(
     commonSettings,
     packagingSettings,
-    wixSettings,
-    dockerSettings)
+//    wixSettings,
+    universalSettings,
+    dockerSettings
+   )
   .aggregate(wdsub, docs)
   .dependsOn(wdsub)
   .settings(
@@ -221,10 +223,16 @@ def priorTo2_13(scalaVersion: String): Boolean =
     case _                              => false
   }
 
-lazy val wixSettings = Seq(
+/*lazy val wixSettings = Seq(
   wixProductId := "39b564d5-d381-4282-ada9-87244c76e14b",
   wixProductUpgradeId := "6a710435-9af4-4adb-a597-98d3dd0bade1"
+)*/
+
+lazy val universalSettings = Seq(
+  Universal / name := "wdsub",
+  maintainer := "Jose Emilio Labra Gayo"
 )
+
 
 import com.typesafe.sbt.packager.docker.DockerChmodType
 
@@ -233,8 +241,8 @@ lazy val dockerSettings = Seq(
   Docker / packageName := "wdsub",
   dockerBaseImage := "openjdk:11",
   dockerAdditionalPermissions ++= Seq((DockerChmodType.UserGroupWriteExecute, "/tmp")),
-  daemonUserUid in Docker := Some("0"),
-  daemonUser in Docker    := "root"
+  Docker / daemonUserUid := Some("0"),
+  Docker / daemonUser    := "root"
 //  dockerUsername := Some("wesogroup")
 )
 

@@ -37,8 +37,16 @@ wdsub dump -s <schema.shex> -o <outputFile.json.gz> <dumpFile.json.gz>
 The tool has been implemented in [Scala](https://www.scala-lang.org/) abd uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you can use:
 
 ```
-sbt packageBin
+sbt universal:packageBin
 ```
+
+Once it has been run, the binary will be available as a compressed file at: 
+
+```
+target/universal/wdsubroot-version.zip
+```
+
+Once that file is uncompressed, the executable script is in folder `bin` and is called `wdsubroot`
 
 ### Publish docker image
 
