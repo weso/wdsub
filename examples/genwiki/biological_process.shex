@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<biological_process> {
+  :P31 [ :Q14331103 ]
+}

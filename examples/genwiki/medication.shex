@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<medication>  {
+  :P31 [ :Q12140 ]
+}

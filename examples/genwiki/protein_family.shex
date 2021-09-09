@@ -1,0 +1,6 @@
+prefix : <http://www.wikidata.org/entity/>
+
+
+<protein_family>  {
+  :P31  [ :Q417841 ] ;
+}

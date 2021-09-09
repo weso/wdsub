@@ -1,8 +1,0 @@
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX :    <http://example.org/>
-PREFIX wd: <http://www.wikidata.org/entity/>
-
-
-:symptom EXTRA wdt:P31 {
-  wdt:P31 [ wd:Q169872 ] ;
-}

@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<disease>  {
+  :P31   [ :Q12136 ] 
+}

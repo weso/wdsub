@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<anatomical_structure> {
+  :P31  [ :Q4936952 ] 
+}

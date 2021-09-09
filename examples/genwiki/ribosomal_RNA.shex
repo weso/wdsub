@@ -1,0 +1,6 @@
+prefix : <http://www.wikidata.org/entity/>
+
+
+<ribosomal_RNA>  {
+  :P31  [ :Q28885102 ] ;
+}

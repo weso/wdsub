@@ -1,0 +1,6 @@
+prefix : <http://www.wikidata.org/entity/>
+
+
+<taxon>  {
+  :P31 [ :Q16521 ] ; 
+}

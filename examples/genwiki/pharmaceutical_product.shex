@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<pharmaceutical_product>  {
+  :P31  [ :Q28885102 ] ;
+}

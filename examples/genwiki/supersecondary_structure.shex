@@ -1,0 +1,6 @@
+prefix : <http://www.wikidata.org/entity/>
+
+
+<supersecondary_structure>  {
+  :P31 [ :Q7644128 ] ;
+}

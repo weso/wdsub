@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<pharmacologic_action>  {
+  :P31 [:Q50377224 ] ;
+}

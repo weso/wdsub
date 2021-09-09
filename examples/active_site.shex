@@ -1,7 +1,0 @@
-PREFIX :    <http://example.org/>
-PREFIX wdt: <http://www.wikidata.org/prop/direct/>
-PREFIX wd: <http://www.wikidata.org/entity/>
-
-:active_site EXTRA wdt:P31 {
-  wdt:P31  [ wd:Q423026 ]     
-}

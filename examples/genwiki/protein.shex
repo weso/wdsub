@@ -1,0 +1,6 @@
+prefix : <http://www.wikidata.org/entity/>
+
+
+<protein>  {
+  :P31  [ :Q8054 ] ;
+}

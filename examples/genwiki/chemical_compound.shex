@@ -1,0 +1,5 @@
+prefix : <http://www.wikidata.org/entity/>
+
+<chemical_compound>  {
+  :P31  [ :Q11173 ]
+}

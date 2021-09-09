@@ -1,0 +1,6 @@
+prefix : <http://www.wikidata.org/entity/>
+
+
+<mechanism_of_action>  {
+  :P31 [ :Q3271540 ] 
+}
