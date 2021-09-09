@@ -15,7 +15,7 @@ docker pull wesogroup/wdsub:0.0.11;
 for shex_file_name in "${shex_file_names[@]}"
 do
     echo "Creating subset for ${shex_files_path}${shex_file_name}.shex";
-    docker run -d -v /gfs/projects/weso-scholia/dumps/:/data \
+    docker run -v /gfs/projects/weso-scholia/dumps/:/data \
         -v $shex_files_path:/shex \
         -v $results_files_path:/dumps \
         wesogroup/wdsub:0.0.11 dump \
