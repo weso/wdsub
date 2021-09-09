@@ -1,8 +1,0 @@
-prefix wde: <http://www.wikidata.org/entity/>
-
-# Defines Cities in Wikidata
-Start = @<City>
-
-<City> {
- wde:P31 [ wde:Q515 ]
-}
