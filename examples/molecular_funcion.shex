@@ -1,0 +1,7 @@
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX :    <http://example.org/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+:molecular_function {
+  wdt:P31 [ wd:Q14860489 ] ;
+}
