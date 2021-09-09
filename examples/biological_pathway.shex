@@ -1,0 +1,7 @@
+PREFIX :    <http://example.org/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wd: <http://www.wikidata.org/entity/>
+
+:biological_pathway EXTRA wdt:P31 {
+  wdt:P31 [ wd:Q4915012 ]
+}
