@@ -48,7 +48,7 @@ object Main extends CommandIOApp (
 
   val processEntity: Opts[ProcessEntity] = 
    Opts.subcommand("extract", "Show information about an entity.") {
-    Opts.option[String]("entity", "Entity name", short="e").map(ProcessEntity)
+   Opts.option[String]("entity", "Entity name", short="e").map(ProcessEntity)
    }  
 
   val filePath = Opts.argument[Path](metavar="dumpFile")

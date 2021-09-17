@@ -2,13 +2,15 @@ package es.weso.wikibase
 
 import org.wikidata.wdtk.datamodel.interfaces._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
+import org.wikidata.wdtk.datamodel.helpers.JsonSerializer
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.exc._
 import cats.effect._
 import collection.JavaConverters._
+import _root_.java.io.ByteArrayOutputStream
 
-case class Entity(entityDocument: EntityDocument) {
+case class Entity(entityDocument: EntityDocument) extends Serializable {
 
     private val mapper = new ObjectMapper()
     mapper.configure(JsonGenerator.Feature.AUTO_CLOSE_TARGET, false)
@@ -80,6 +82,16 @@ case class Entity(entityDocument: EntityDocument) {
 
     def show(options: ShowEntityOptions = ShowEntityOptions.default): String = 
         s"${entityDocument.getEntityId().getId()} ${showStatements(options)}"
+
+    def toJsonStr(): String = {
+      val os = new ByteArrayOutputStream()  
+      val jsonSerializer = new JsonSerializer(os)
+      jsonSerializer.open()
+      val str = jsonSerializer.getJsonString(entityDocument)
+      jsonSerializer.open()
+      str
+    }
+
 }
 
 object Entity {
@@ -96,7 +108,11 @@ object Entity {
     def fromJsonStr(
         str: String, 
         jsonDeserializer: JsonDeserializer
-        ): IO[Entity] = IO { Entity(jsonDeserializer.deserializeEntityDocument(str)) }
+        ): IO[Entity] = IO { 
+      Entity(jsonDeserializer.deserializeEntityDocument(str)) 
+    }
+
+
 
 
 

@@ -130,7 +130,7 @@ lazy val wdsub = project
       shex,
       wdtk_dumpfiles, 
       wdtk_wikibaseapi,
-      slf4j_api, slf4j_log4j12
+      slfj_api, slf4j_log4j12
     ),
     testFrameworks += MUnitFramework
   )

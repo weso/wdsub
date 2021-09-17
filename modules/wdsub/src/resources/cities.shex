@@ -1,5 +1,6 @@
 prefix :  <http://www.wikidata.org/entity/>
 
-<cities> {
-    :P31 [ :Q515 ]
+<cities> EXTRA :P31 {
+    :P31 @<CityCode>
 }
+<CityCode> [ :Q515 ]
