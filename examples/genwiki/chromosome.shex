@@ -1,5 +1,0 @@
-prefix : <http://www.wikidata.org/entity/>
-
-<chromosome>  {
-  :P31 [ :Q37748 ]
-}

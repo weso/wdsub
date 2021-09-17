@@ -1,6 +1,0 @@
-prefix : <http://www.wikidata.org/entity/>
-
-
-<symptom>  {
-  :P31 [ :Q169872 ] ;
-}

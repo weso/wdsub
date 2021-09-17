@@ -105,7 +105,7 @@ case class Matcher(wShEx: WShEx,
       else Matching(List(se)) 
     case Some(ValueSet(_,vs)) => 
       MatchingStatus
-      .combineAnds(vs
+      .combineOrs(vs
        .toLazyList
        .map(value => matchPredicateValueSetValue(predicate, value, e, se))
        )

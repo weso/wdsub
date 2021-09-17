@@ -1,5 +1,0 @@
-prefix : <http://www.wikidata.org/entity/>
-
-<active_site> {
-  :P31 [ :Q423026 ] ;
-}

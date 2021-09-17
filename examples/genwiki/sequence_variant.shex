@@ -1,6 +1,0 @@
-prefix : <http://www.wikidata.org/entity/>
-
-
-<sequence_variant>  {
-  :P31   [ :Q15304597 ] ;
-}

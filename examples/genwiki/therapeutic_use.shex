@@ -1,6 +1,0 @@
-prefix : <http://www.wikidata.org/entity/>
-
-
-<therapeutic_use>  {
-  :P31   [ :Q50379781 ] ;
-}

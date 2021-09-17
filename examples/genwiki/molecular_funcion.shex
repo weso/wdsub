@@ -1,5 +1,0 @@
-prefix : <http://www.wikidata.org/entity/>
-
-<molecular_function> {
-  :P31 [ :Q14860489 ] ;
-}
