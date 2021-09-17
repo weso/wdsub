@@ -34,7 +34,12 @@ class JsonTest extends FunSuite {
            |{"type":"item","id":"Q42","labels":{},"descriptions":{},"aliases":{},"claims":{"P31":[{"rank":"normal","mainsnak":{"property":"P31","datatype":"wikibase-item","datavalue":{"value":{"id":"Q515","numeric-id":515,"entity-type":"item"},"type":"wikibase-entityid"},"snaktype":"value"},"type":"statement"}]},"sitelinks":{}}
            |]""".stripMargin  
       
-      assertEquals(outStream.toString(), expected)
+      val outStr = outStream.toString()
+/*      if (outStr==expected) println(s"Strings are equal")
+      else {
+        println(s"Strings are different")
+      } */
+      assertNoDiff(outStr, expected)
     }
 
     test("Test Json generation with two items") {
@@ -57,7 +62,7 @@ class JsonTest extends FunSuite {
            |{"type":"item","id":"Q42","labels":{},"descriptions":{},"aliases":{},"claims":{"P31":[{"rank":"normal","mainsnak":{"property":"P31","datatype":"wikibase-item","datavalue":{"value":{"id":"Q515","numeric-id":515,"entity-type":"item"},"type":"wikibase-entityid"},"snaktype":"value"},"type":"statement"}]},"sitelinks":{}}
            |]""".stripMargin  
       
-      assertEquals(outStream.toString(), expected)
+      assertNoDiff(outStream.toString(), expected)
     }
 
 }
