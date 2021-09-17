@@ -1,5 +1,5 @@
 
-lazy val scala212 = "2.12.14"
+lazy val scala212 = "2.12.15"
 lazy val scala3   = "3.0.0"
 lazy val supportedScalaVersions = List(
   scala212,
@@ -132,7 +132,7 @@ lazy val wdsub = project
       shex,
       wdtk_dumpfiles, 
       wdtk_wikibaseapi,
-      slfj_api, slf4j_log4j12
+      slf4j_api, slf4j_log4j12
     ),
     testFrameworks += MUnitFramework
   )

@@ -83,14 +83,14 @@ case class Entity(entityDocument: EntityDocument) extends Serializable {
     def show(options: ShowEntityOptions = ShowEntityOptions.default): String = 
         s"${entityDocument.getEntityId().getId()} ${showStatements(options)}"
 
-    def toJsonStr(): String = {
+/*    def toJsonStr(): String = {
       val os = new ByteArrayOutputStream()  
       val jsonSerializer = new JsonSerializer(os)
       jsonSerializer.open()
       val str = jsonSerializer.getJsonString(entityDocument)
       jsonSerializer.open()
       str
-    }
+    } */
 
 }
 

@@ -176,10 +176,20 @@ case class Matcher(wShEx: WShEx,
   private case class MatchVisitor(expectedIri: IRI) extends ValueVisitor[Boolean] {
    val (localName, base) = splitIri(expectedIri) 
    
-   private val expectedEntityId = new ItemIdValueImpl(localName,base)
+   private val expectedEntityId: Option[EntityIdValue] = {
+    val itemRegex = """Q(\d+)""".r
+    val lexemeRegex = """L(\d+)-S(\d*)""".r
+    val propRegex = """P(\d+)""".r
+    localName match {
+      case itemRegex(_) => Some(new ItemIdValueImpl(localName,base))
+      case propRegex(_) => Some(new PropertyIdValueImpl(localName,base))
+      case _ => None
+    }
+   }
 
-   override def visit(v: EntityIdValue): Boolean = {
-     v == expectedEntityId
+   override def visit(v: EntityIdValue): Boolean = expectedEntityId match {
+    case None => false
+    case Some(eid) => v == eid
    }
      
    override def visit(v: GlobeCoordinatesValue): Boolean = false
