@@ -1,6 +1,5 @@
-
 lazy val scala212 = "2.12.15"
-lazy val scala3   = "3.0.0"
+lazy val scala3   = "3.1.0"
 lazy val supportedScalaVersions = List(
   scala212,
   scala3
@@ -8,23 +7,22 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = "adopt@1.11"
 
-lazy val shexsVersion          = "0.1.93"
-lazy val srdfVersion           = "0.1.102"
-lazy val utilsVersion          = "0.1.98"
-lazy val documentVersion       = "0.0.32"
+lazy val shexsVersion          = "0.1.104"
+lazy val srdfVersion           = "0.1.105"
+lazy val utilsVersion          = "0.2.2"
 
 // Dependency versions
-lazy val catsVersion           = "2.6.1"
-lazy val catsEffectVersion     = "3.2.2"
+lazy val catsVersion           = "2.7.0"
+lazy val catsEffectVersion     = "3.3.0"
 lazy val circeVersion          = "0.14.1"
-lazy val declineVersion        = "2.1.0"
-lazy val fs2Version            = "3.0.4"
+lazy val declineVersion        = "2.2.0"
+lazy val fs2Version            = "3.2.3"
 lazy val jenaVersion           = "4.1.0"
 lazy val jacksonVersion        = "2.12.3"
 // lazy val log4jVersion          = "2.14.1"
-lazy val munitVersion          = "0.7.27"
-lazy val munitEffectVersion    = "1.0.5"
-lazy val slf4jVersion          = "1.7.31"
+lazy val munitVersion          = "0.7.29"
+lazy val munitEffectVersion    = "1.0.7"
+lazy val slf4jVersion          = "1.7.32"
 // lazy val pprintVersion         = "0.6.6"
 // lazy val scalaCollCompatVersion  = "2.5.0"
 lazy val wikidataToolkitVersion = "0.12.1"
@@ -58,12 +56,12 @@ lazy val wdtk_util        = "org.wikidata.wdtk" % "wdtk-util"        % wikidataT
 // lazy val scalaCollCompat   = "org.scala-lang.modules"     %% "scala-collection-compat" % scalaCollCompatVersion
 
 // WESO components
-lazy val document          = "es.weso"                    %% "document"        % documentVersion
 lazy val srdf              = "es.weso"                    %% "srdf"            % srdfVersion
 lazy val srdfJena          = "es.weso"                    %% "srdfjena"        % srdfVersion
 lazy val srdf4j            = "es.weso"                    %% "srdf4j"          % srdfVersion
 lazy val utils             = "es.weso"                    %% "utils"           % utilsVersion
 lazy val shex              = "es.weso"                    %% "shex"            % shexsVersion
+lazy val wshex             = "es.weso"                    %% "wshex"           % shexsVersion
 
 // lazy val pprint            = "com.lihaoyi"                %% "pprint"        % pprintVersion
 
@@ -101,8 +99,7 @@ lazy val wdsubRoot = project
       decline,
       declineEffect,
       srdf,
-      srdfJena, shex,
-//      pprint,
+      srdfJena, shex
     ),
     fork := true,
     ThisBuild / turbo := true,
@@ -129,7 +126,7 @@ lazy val wdsub = project
       fs2, fs2io,
       utils     % "test -> test; compile -> compile",
       srdf, srdfJena % Test,
-      shex,
+      shex, wshex, 
       wdtk_dumpfiles, 
       wdtk_wikibaseapi,
       slf4j_api, slf4j_log4j12
