@@ -1,4 +1,4 @@
-package es.weso.wshex
+package es.weso.wdshex
 
 import es.weso.wikibase._
 import org.wikidata.wdtk.datamodel.implementation._

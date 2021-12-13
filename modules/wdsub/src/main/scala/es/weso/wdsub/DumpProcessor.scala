@@ -11,7 +11,7 @@ import org.apache.commons.compress.compressors.gzip._
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 import java.io.BufferedOutputStream
-import es.weso.wshex._
+import es.weso.wdshex._
 
 /**
  * Dump processor using Wikidata toolkit DumpProcessingController

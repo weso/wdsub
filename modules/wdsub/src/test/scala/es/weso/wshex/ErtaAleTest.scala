@@ -1,4 +1,4 @@
-package es.weso.wshex
+package es.weso.wdshex
 import munit._
 
 class ErtaAleTest extends FunSuite {

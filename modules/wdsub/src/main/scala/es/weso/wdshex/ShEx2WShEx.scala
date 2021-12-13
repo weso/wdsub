@@ -1,4 +1,4 @@
-package es.weso.wshex
+package es.weso.wdshex
 
 import es.weso.rdf._
 import es.weso.rdf.nodes._

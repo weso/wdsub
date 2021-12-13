@@ -12,7 +12,7 @@ import cats.data.Validated
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 import java.nio.file.{Files => JavaFiles, Paths}
 import java.nio.file.StandardOpenOption._
-import es.weso.wshex._
+import es.weso.wdshex._
 import es.weso.wikibase._
 import java.io._
 

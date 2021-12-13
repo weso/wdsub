@@ -1,4 +1,4 @@
-package es.weso.wshex
+package es.weso.wdshex
 
 import java.io.InputStream
 import cats.effect._

@@ -6,7 +6,7 @@ import scala.collection.JavaConverters._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
 import java.io.OutputStream
-import es.weso.wshex._
+import es.weso.wdshex._
 
 /**
   * WShEx processor
