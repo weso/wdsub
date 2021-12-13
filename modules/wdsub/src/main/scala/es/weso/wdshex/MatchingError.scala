@@ -4,6 +4,7 @@ import es.weso.wikibase._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.wikidata.wdtk.datamodel.interfaces._
 import es.weso.rdf.nodes._
+import es.weso.wshex._
 
 sealed abstract class MatchingError(msg: String) extends Product with Serializable
 case class Pending(

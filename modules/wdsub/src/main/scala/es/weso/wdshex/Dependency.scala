@@ -1,6 +1,7 @@
 package es.weso.wdshex
 
 import es.weso.rdf.nodes.IRI
+import es.weso.wshex._
 
 sealed abstract trait Dependency extends Product with Serializable {
  val node: IRI

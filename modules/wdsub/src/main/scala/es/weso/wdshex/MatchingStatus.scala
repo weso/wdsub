@@ -4,6 +4,7 @@ import es.weso.rdf.nodes.IRI
 import cats._
 import cats.data._
 import es.weso.utils.internal.CollectionCompat._
+import es.weso.wshex._
 
 abstract class MatchingStatus {
     def matches: Boolean

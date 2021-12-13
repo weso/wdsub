@@ -1,12 +1,14 @@
 package es.weso.wdshex
 
+import es.weso.rbe.interval.Unbounded
 import es.weso.rdf.nodes._
 import es.weso.rdf._
-
+import es.weso.wbmodel.PropertyId
 import munit._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.wikidata.wdtk.datamodel.helpers.ItemDocumentBuilder
 import org.wikidata.wdtk.datamodel.helpers.StatementBuilder
+import es.weso.wshex._
 
 object IRIHelpers {
 
@@ -25,12 +27,17 @@ object IRIHelpers {
 class WShExTest extends FunSuite {
     import IRIHelpers._
 
-    val shape = Shape(None,TripleConstraint(IRI("http://www.wikidata.org/entity/P31"), 
-          Some(ValueSet(None,List(IRIValue(IRI("http://www.wikidata.org/entity/Q515")))))))
+    val shape = Shape(None,
+      false,
+      List(),
+      Some(TripleConstraintLocal(
+        PropertyId.fromIRI(IRI("http://www.wikidata.org/entity/P31")),
+        ValueSet(None,List(IRIValueSetValue(IRI("http://www.wikidata.org/entity/Q515")))), 1, Unbounded
+      )))
 
     val schema: Schema = Schema(
         pm = PrefixMap.empty,
-        shapes = List(shape)
+        shapesMap = Map(Start -> shape)
     )
 
     test("Match shape") {

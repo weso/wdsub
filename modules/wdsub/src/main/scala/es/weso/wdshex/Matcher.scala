@@ -2,16 +2,21 @@ package es.weso.wdshex
 
 import es.weso.rdf.nodes._
 import org.wikidata.wdtk.datamodel.interfaces._
+
 import scala.collection.JavaConverters._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.datamodel.interfaces._
+
 import java.nio.file.Path
 import cats.effect._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 import org.wikidata.wdtk.datamodel.helpers
 import es.weso.utils.internal.CollectionCompat._
+import es.weso.wbmodel.{IRIValue, PropertyId}
 import es.weso.wikibase._
+import es.weso.wshex._ 
+
 /**
   * Matcher contains methods to match a WShEx schema with Wikibase entities
   *
@@ -57,8 +62,12 @@ case class Matcher(wShEx: WShEx,
 
   private def matchShapeExpr(shapeExpr: ShapeExpr, entity: Entity): MatchingStatus =
       shapeExpr match {
-          case Shape(id, te) =>
-            matchTripleExpr(te, entity, shapeExpr) 
+          case s: Shape =>
+            s.expression match {
+              case Some(te) => matchTripleExpr(te, entity, shapeExpr)
+              case None => MatchingStatus.matchEmpty
+          }
+
           case sand: ShapeAnd => {
             val ls: LazyList[MatchingStatus] = sand.exprs.toLazyList.map(matchShapeExpr(_, entity))
             MatchingStatus.combineAnds(ls)
@@ -93,11 +102,37 @@ case class Matcher(wShEx: WShEx,
       NoMatching(List(NotImplemented(s"matchTripleExpr: $te")))
   }      
 
-  private def matchTripleConstraint(tc: TripleConstraint, e: Entity, se: ShapeExpr): MatchingStatus = 
+  private def matchTripleConstraint(tc: TripleConstraint, e: Entity, se: ShapeExpr): MatchingStatus = {
     /* TODO: We are ignoring cardinality by now */
-    matchPredicateValueExpr(tc.predicate,tc.valueExpr,e, se) 
+    // matchPredicateValueExpr(tc.predicate,tc.valueExpr,e, se)
+    tc match {
+      case tcr: TripleConstraintRef => matchPropertyIdValueExpr(tc.property, Some(tcr.value),e,se)
+      case tcl: TripleConstraintLocal => matchPropertyIdValueExpr(tc.property, Some(tcl.value),e,se)
+    }
+  }
 
-  private def matchPredicateValueExpr(predicate: IRI, valueExpr: Option[ShapeExpr], e: Entity, se: ShapeExpr): MatchingStatus = {
+  private def matchPropertyIdValueExpr(propertyId: PropertyId, valueExpr: Option[ShapeExpr], e: Entity, se: ShapeExpr): MatchingStatus = {
+    val predicate = propertyId.iri
+    val pidValue: PropertyIdValue = predicate2propertyIdValue(predicate)
+    valueExpr match {
+      case None =>
+        if (e.getValues(pidValue).isEmpty) NoMatching(List(NoValuesProperty(predicate,e)))
+        else Matching(List(se))
+      case Some(ValueSet(_,vs)) =>
+        MatchingStatus
+          .combineOrs(vs
+            .toLazyList
+            .map(value => matchPredicateValueSetValue(predicate, value, e, se))
+          )
+      case Some(EmptyExpr) => 
+        if (e.getValues(pidValue).isEmpty) NoMatching(List(NoValuesProperty(predicate,e)))
+        else Matching(List(se))
+      case _ =>
+        NoMatching(List(NotImplemented(s"matchPropertyIdValueExpr: ${predicate}, valueExpr: ${valueExpr}")))
+    }
+  }
+
+/*  private def matchPredicateValueExpr(predicate: IRI, valueExpr: Option[ShapeExpr], e: Entity, se: ShapeExpr): MatchingStatus = {
    val propertyId = predicate2propertyIdValue(predicate) 
    valueExpr match {
     case None => 
@@ -112,11 +147,12 @@ case class Matcher(wShEx: WShEx,
     case _ => 
       NoMatching(List(NotImplemented(s"matchPredicateValueExpr: ${predicate}, valueExpr: ${valueExpr}")))  
    }
-  }
+  } */
 
   private def matchPredicateValueSetValue(predicate: IRI, value: ValueSetValue, e: Entity, se: ShapeExpr) = value match {
-    case IRIValue(iri) => matchPredicateIri(predicate, iri, e.entityDocument,se)
-    case _ => NoMatching(List(NotImplemented(s"matchPredicateValueSetValue different from IRI")))
+    case IRIValueSetValue(iri) => matchPredicateIri(predicate, iri, e.entityDocument,se)
+    case EntityIdValueSetValue(id) => matchPredicateIri(predicate, id.iri, e.entityDocument,se)
+    case _ => NoMatching(List(NotImplemented(s"matchPredicateValueSetValue different from IRI: $value")))
   }
 
   /**
