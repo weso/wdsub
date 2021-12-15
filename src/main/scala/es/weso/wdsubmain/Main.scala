@@ -1,20 +1,18 @@
 package es.weso.wdsubmain
+import buildinfo._
+import cats.data.Validated
 import cats.effect._
 import cats.implicits._
 import com.monovore.decline._
 import com.monovore.decline.effect._
-import buildinfo._
-import es.weso.wdsub._
-import es.weso.rdf.nodes._
-import es.weso.rdf._
-import java.nio.file.Path
-import cats.data.Validated
-import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
-import java.nio.file.{Files => JavaFiles, Paths}
-import java.nio.file.StandardOpenOption._
 import es.weso.wdshex._
+import es.weso.wdsub._
 import es.weso.wikibase._
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+
 import java.io._
+import java.nio.file.StandardOpenOption._
+import java.nio.file.{Path, Files => JavaFiles}
 
 sealed trait Processor {
   val name: String
@@ -27,13 +25,13 @@ case class FilterBySchema(schema: Path) extends DumpAction
 case object CountEntities extends DumpAction
 case class ShowEntities(maxStatements: Option[Int]) extends DumpAction
 
-
 case class Dump(
   filePath: Path, 
   action: DumpAction,
   outPath: Option[Path], 
   verbose: Boolean,
-  processor: Processor
+  processor: Processor,
+  outputFormat: OutputFormat
   )
 
 case class ProcessEntity(entity: String)
@@ -51,55 +49,65 @@ object Main extends CommandIOApp (
    Opts.option[String]("entity", "Entity name", short="e").map(ProcessEntity)
    }  
 
-  val filePath = Opts.argument[Path](metavar="dumpFile")
+  private val filePath = Opts.argument[Path](metavar="dumpFile")
+  private val processors = List(Fs2,WDTK)
+  private val processorNames = processors.map(_.name)
+  private val defaultProcessor = processors.head
 
-  val processors = List(Fs2,WDTK)
-  val processorNames = processors.map(_.name)
-  val defaultProcessor = processors.head
+  private val outputFormats = List(JsonDump,TurtleDump)
+  private val outputFormatNames = outputFormats.map(_.name)
+  private val defaultOutputFormat = outputFormats.head
 
-  val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
+  private val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
   
-  val processor = 
+  private val processor =
     Opts.option[String]("processor", help=s"Dump processor library. Possible values: ${processorNames.mkString(",")}").mapValidated(
       str => processors.find(_.name == str) match {
         case None => Validated.invalidNel(s"Invalid processor name: $str. Available processors: ${processorNames.mkString(",")}")
         case Some(p) => Validated.valid(p)
       }).withDefault(defaultProcessor)
 
-  val schemaPath = Opts.option[Path]("schema", help="ShEx schema", short="s", metavar="file")
+  private val outputFormat =
+    Opts.option[String]("outputFormat", help=s"Output format. Possible values: ${outputFormatNames.mkString(",")}").mapValidated(
+      str => outputFormats.find(_.name == str) match {
+        case None => Validated.invalidNel(s"Invalid output format: $str. Available processors: ${outputFormatNames.mkString(",")}")
+        case Some(p) => Validated.valid(p)
+      }).withDefault(defaultOutputFormat)
 
-  val outPath = Opts.option[Path]("out", help="output path", short="o", metavar="file").orNone
+  private val schemaPath = Opts.option[Path]("schema", help="ShEx schema", short="s", metavar="file")
 
-  val verbose = Opts.flag("verbose", "Verbose mode").orFalse
+  private val outPath = Opts.option[Path]("out", help="output path", short="o", metavar="file").orNone
 
-  val countEntities = 
+  private val verbose = Opts.flag("verbose", "Verbose mode").orFalse
+
+  private val countEntities =
     Opts.flag("count", "count entities").map(_ => CountEntities)
   
 
-  def f(x: Unit, maxStatements: Option[Int]): ShowEntities = 
-    ShowEntities(maxStatements)
+/*  def f(x: Unit, maxStatements: Option[Int]): ShowEntities =
+    ShowEntities(maxStatements) */
 
-  val showEntities: Opts[Unit] = 
+  private val showEntities: Opts[Unit] =
     Opts.flag("show", "show entities") // _ => ShowEntities)
 
-  val showEntitiesMax = 
-    (showEntities, maxStatements).mapN(f)  
+  private val showEntitiesMax =
+    (showEntities, maxStatements).mapN{ case (_,max) => ShowEntities(max) }
   
-  val filterBySchema = 
+  private val filterBySchema =
     schemaPath.map(path => FilterBySchema(path))
   
-  val action: Opts[DumpAction] = countEntities orElse showEntitiesMax orElse filterBySchema 
+  private val action: Opts[DumpAction] = countEntities orElse showEntitiesMax orElse filterBySchema
 
-  val dump: Opts[Dump] = 
+  private val dump: Opts[Dump] =
     Opts.subcommand("dump", "Process example dump file.") {
-      (filePath, action, outPath, verbose, processor).mapN(Dump)
+      (filePath, action, outPath, verbose, processor, outputFormat).mapN(Dump)
   }  
 
 
   override def main: Opts[IO[ExitCode]] = 
     (processEntity orElse dump).map { 
       case ProcessEntity(entity) => processEntity(entity) 
-      case Dump(filePath, action, outPath, verbose, processor) => dump(filePath, action, outPath, verbose, processor)
+      case Dump(filePath, action, outPath, verbose, processor, outputFormat) => dump(filePath, action, outPath, verbose, processor, outputFormat)
     }
 
   def processEntity(entityStr: String): IO[ExitCode] = for {
@@ -114,7 +122,8 @@ object Main extends CommandIOApp (
     action: DumpAction, 
     maybeOutPath: Option[Path], 
     verbose: Boolean, 
-    processor: Processor
+    processor: Processor,
+    outputFormat: OutputFormat
     ): IO[ExitCode] = {
     for {
      is <- IO { JavaFiles.newInputStream(filePath) }
@@ -127,13 +136,14 @@ object Main extends CommandIOApp (
      results <- processor match {
       case Fs2 => IODumpProcessor.process(is, os, withEntry, refResults)
       case WDTK => action match {
-        case FilterBySchema(schemaPath) => DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, verbose, 0)
+        case FilterBySchema(schemaPath) => DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, verbose, 0, outputFormat)
         case _ => IO.println(s"Not implemented yet")
       }
      }
      _ <- IO.println(s"End of dump processing: $results")
     } yield ExitCode.Success
   }
+
 
   private def getWithEntry(
     action: DumpAction, 

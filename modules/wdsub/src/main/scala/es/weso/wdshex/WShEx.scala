@@ -27,14 +27,14 @@ object WShEx {
         try {
           val schema = es.weso.shex.Schema.fromString(str,cnvFormat(format)).unsafeRunSync()
           val wShEx = ShEx2WShEx().convertSchema(schema)
-          wShEx.bimap(ConversionError(_), WShEx(_))
+          wShEx.bimap(ConversionError, WShEx(_))
         } catch {
             case e: Exception => ParseException(e).asLeft
         }
     }
 
     def fromPath(path: Path, format: WShExFormat = CompactFormat): IO[WShEx] = for {
-        schema <- es.weso.shex.Schema.fromFile(path.toFile().getAbsolutePath(), cnvFormat(format))
+        schema <- es.weso.shex.Schema.fromFile(path.toFile.getAbsolutePath, cnvFormat(format))
         resolvedSchema <- es.weso.shex.ResolvedSchema.resolve(schema, None)
         wshex <- IO.fromEither(ShEx2WShEx().convertSchema(resolvedSchema))
     } yield WShEx(wshex, Some(path), Some(format))

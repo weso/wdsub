@@ -17,7 +17,8 @@ import es.weso.wdshex._
   */
 class WDSubProcessor(
   wShEx: WShEx,
-  maybeOut: Option[OutputStream],
+  // maybeOut: Option[OutputStream],
+  dumpWriter: Option[DumpWriter],
   verbose: Boolean,
   timeout: Int = 0
   ) extends EntityTimerProcessor(timeout) {
@@ -26,7 +27,7 @@ class WDSubProcessor(
     private var matchedEntities: Int = 0
     private val matcher = new Matcher(wShEx)
     private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
-    val jsonWriter:Option[JsonDumpWriter] = maybeOut.map(out => JsonDumpWriter(out))
+    // val jsonWriter:Option[JsonDumpWriter] = maybeOut.map(out => JsonDumpWriter(out))
 
     
     private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
@@ -42,8 +43,8 @@ class WDSubProcessor(
         info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
         if (matcher.matchStart(itemDocument).matches) { 
           matchedEntities += 1
-          jsonWriter match { 
-            case Some(jw) => jw.writeItem(itemDocument)
+          dumpWriter match {
+            case Some(dw) => dw.writeItem(itemDocument)
             case None => None
           }
         }
@@ -54,13 +55,13 @@ class WDSubProcessor(
 
     def getMatchedEntities(): IO[Int] = IO { matchedEntities }
 
-    def startJson(): Unit = jsonWriter.map(_.start())
-    def endJson(): Unit = jsonWriter.map(_.end())
+    def startJson(): Unit = dumpWriter.map(_.start())
+    def endJson(): Unit = dumpWriter.map(_.end())
 
     override def close(): Unit = {
-      maybeOut match {
+      dumpWriter match {
         case None => None
-        case Some(out) => out.close()
+        case Some(dw) => dw.close()
       }
       super.close()
     }

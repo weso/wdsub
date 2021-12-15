@@ -28,17 +28,35 @@ object DumpProcessor {
     private def acquireShEx(schemaPath: Path, verbose: Boolean): IO[WShEx] = 
       WShEx.fromPath(schemaPath)
           
-    private def acquireShExProcessor(schemaPath: Path, outputPath: Option[Path], verbose: Boolean, timeout: Int): IO[WDSubProcessor] = for {
+    private def acquireShExProcessor(schemaPath: Path,
+                                     outputPath: Option[Path],
+                                     verbose: Boolean,
+                                     timeout: Int,
+                                     outputFormat: OutputFormat): IO[WDSubProcessor] = for {
       wshex <- acquireShEx(schemaPath, verbose) 
       out <- acquireOutput(outputPath)
-      shexProcessor = new WDSubProcessor(wshex, out, verbose, timeout)
+      dumpWriter <- acquireDumpWriter(out, outputFormat)
+      shexProcessor = new WDSubProcessor(wshex, dumpWriter, verbose, timeout)
     } yield { 
       shexProcessor.startJson()
       shexProcessor
     }
 
-    private def mkShExProcessor(schema: Path, outputPath: Option[Path], verbose: Boolean, timeout: Int): Resource[IO, WDSubProcessor] = 
-      Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout))(shExProcessor => IO { 
+    private def acquireDumpWriter(maybeStream: Option[OutputStream], format: OutputFormat): IO[Option[DumpWriter]] =
+      maybeStream match {
+        case None => none[DumpWriter].pure[IO]
+        case Some(out) => format match {
+          case JsonDump => IO(Some(JsonDumpWriter(out)))
+          case _ => IO.raiseError(new RuntimeException(s"Not supported yet other output formats: $format"))
+        }
+      }
+
+    private def mkShExProcessor(schema: Path,
+                                outputPath: Option[Path],
+                                verbose: Boolean,
+                                timeout: Int,
+                                outputFormat: OutputFormat): Resource[IO, WDSubProcessor] =
+      Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout, outputFormat))(shExProcessor => IO {
        shExProcessor.endJson()
        shExProcessor.close() 
       })
@@ -84,11 +102,17 @@ object DumpProcessor {
       * @param schema ShEx schema
       * @param verbose if true, show info messages
       * @param timeout timeout in seconds or 0 if no timeout should be used
+      * @param outputFormat output format
       * @return dump results
       */   
-    def dumpProcess(filePath: Path, outPath: Option[Path], schema: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
+    def dumpProcess(filePath: Path,
+                    outPath: Option[Path],
+                    schema: Path,
+                    verbose: Boolean,
+                    timeout: Int,
+                    outputFormat: OutputFormat): IO[DumpResults] = {
        for {
-        results <- (mkShExProcessor(schema,outPath,verbose,timeout), mkDumpFile(filePath, verbose)).tupled.use {
+        results <- (mkShExProcessor(schema,outPath,verbose,timeout, outputFormat), mkDumpFile(filePath, verbose)).tupled.use {
             case (processor, mwDumpFile) => for {
               _ <- IO { LogConfig.configureLogging() }  
               _ <- IO { dumpProcessingController.registerEntityDocumentProcessor(processor, null, true) }
