@@ -57,6 +57,7 @@ object DumpProcessor {
                                 timeout: Int,
                                 outputFormat: OutputFormat): Resource[IO, WDSubProcessor] =
       Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout, outputFormat))(shExProcessor => IO {
+       println(s"End of process...")
        shExProcessor.endJson()
        shExProcessor.close() 
       })

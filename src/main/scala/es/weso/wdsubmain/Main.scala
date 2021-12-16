@@ -50,7 +50,7 @@ object Main extends CommandIOApp (
    }  
 
   private val filePath = Opts.argument[Path](metavar="dumpFile")
-  private val processors = List(Fs2,WDTK)
+  private val processors = List(WDTK, Fs2)
   private val processorNames = processors.map(_.name)
   private val defaultProcessor = processors.head
 
@@ -83,9 +83,6 @@ object Main extends CommandIOApp (
   private val countEntities =
     Opts.flag("count", "count entities").map(_ => CountEntities)
   
-
-/*  def f(x: Unit, maxStatements: Option[Int]): ShowEntities =
-    ShowEntities(maxStatements) */
 
   private val showEntities: Opts[Unit] =
     Opts.flag("show", "show entities") // _ => ShowEntities)

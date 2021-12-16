@@ -57,10 +57,12 @@ object IODumpProcessor {
     val x = 
       readInputStream(is.pure[IO], opts.chunkSize)
       .through(when(opts.decompressInput, decompress))
-      .through(text.utf8Decode)
+      .through(text.utf8.decode)
       .through(text.lines)
+      .zipWithIndex
       .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
-      .through(text.utf8Encode)
+      .map(_._1)
+      .through(text.utf8.encode)
       .through(when(opts.compressOutput && os.isDefined, compress))
       .through(when(os.isDefined,writeOutputStream(os.get.pure[IO])))
     for { 
@@ -71,41 +73,33 @@ object IODumpProcessor {
 
   def processDump(
     is: InputStream, 
-    os: OutputStream, 
+    os: OutputStream,
+    errStream: OutputStream,
     withEntity: Entity => IO[Option[String]], 
     opts: DumpOptions = DumpOptions.default
     ): IO[Unit] = {
       readInputStream(is.pure[IO], opts.chunkSize)
       .through(Compression[IO].gunzip())
       .flatMap(_.content)
-      .through(text.utf8Decode)
+      .through(text.utf8.decode)
       .through(text.lines)
+      .zipWithIndex
       .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
-      .through(text.utf8Encode)
+      .map(pair => pair._1)
+      .through(text.utf8.encode)
       .through(Compression[IO].gzip())
       .through(writeOutputStream(os.pure[IO]))
       .compile
       .drain
   }
 
-  def processLine(withEntity: Entity => IO[Option[String]], opts: DumpOptions)(line: String): IO[String] = for {
-    parsedLine <- parseLine(line, opts)
-    result <- processParsedLine(withEntity, parsedLine)
-  } yield result
-
-/*  def ioDumpProcess(filePath: Path, outPath: Path, schemaPath: Path, verbose: Boolean, timeout: Int): IO[DumpResults] = {
-       for {
-         is <- IO { JavaFiles.newInputStream(filePath) }
-         os <- IO { JavaFiles.newOutputStream(outPath, CREATE) }
-         /* schema <- shex.Schema.fromFile(schemaPath.toFile().getAbsolutePath())
-         resolvedSchema <- shex.ResolvedSchema.resolve(schema, None)
-         wshex <- IO.fromEither(ShEx2WShEx.convertSchema(resolvedSchema)) */
-         wshex <- WShEx.fromPath(filePath)
-         matcher = new Matcher(wShEx = wshex, verbose = verbose)
-         _ <- process(is, os, checkSchema(matcher))
-       } yield DumpResults(0,0)
-  }*/
-
+  def processLine(withEntity: Entity => IO[Option[String]], opts: DumpOptions)(pair: (String, Long)): IO[(String, Long)] = {
+    val (line, index) = pair
+    for {
+      parsedLine <- parseLine(line, opts)
+      result <- processParsedLine(withEntity, parsedLine, index)
+    } yield (result, index)
+  }
 
   private def decompress: Pipe[IO, Byte, Byte] = s =>
     s.through(Compression[IO].gunzip()).flatMap(_.content)
@@ -119,21 +113,22 @@ object IODumpProcessor {
 
   private def processParsedLine(
     withEntity: Entity => IO[Option[String]],
-    parsedLine: ParsedLine
+    parsedLine: ParsedLine,
+    lineNumber: Long
   ):IO[String] = parsedLine match {
       case OpenBracket => "[\n".pure[IO]
       case CloseBracket => "]\n".pure[IO]
       case ParsedEntity(e) => withEntity(e).map(_.map(_ + ",\n")).map(_.getOrElse(""))
-      case Error(e) => "".pure[IO]
+      case Error(e) => IO { println(s"Error at line $lineNumber: $e")} >> "".pure[IO]
       case EndStream => "".pure[IO]
   }
-    
-  private def parseLine(line: String, opts: DumpOptions): IO[ParsedLine] = (line match {
+
+  private def parseLine(line: String, opts: DumpOptions): IO[ParsedLine] = (line.trim match {
     case "[" => OpenBracket.pure[IO]
     case "]" => CloseBracket.pure[IO]
     case str   => Entity.fromJsonStr(str, opts.jsonDeserializer).map(ParsedEntity(_))
   }).handleErrorWith(e => e match {
-    case e:MismatchedInputException => EndStream.pure[IO]
+    case e : MismatchedInputException => EndStream.pure[IO]
     case _ => Error(e.getMessage()).pure[IO]
   })
 

@@ -27,9 +27,11 @@ Subcommands:
 As an example, the following command:
 
 ```
-wdsub dump -s <schema.shex> -o <outputFile.json.gz> <dumpFile.json.gz>
+wdsub dump -s examples/humans.shex -o target/outputFile.json.gz examples/100lines.json.gz
 ```
 
+processes the dump file `examples/100lines.json` using the ShEx schema `examples/humans.shex` 
+ generating the file `target/outputFile.json.gz` 
 
 
 ## Installation and compilation
