@@ -12,7 +12,10 @@ import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 import java.io.BufferedOutputStream
 import es.weso.wdshex._
-
+import org.wikidata.wdtk.datamodel.implementation.SitesImpl
+import org.wikidata.wdtk.rdf.PropertyRegister
+import org.eclipse.rdf4j.rio.RDFFormat
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocumentDumpProcessor
 /**
  * Dump processor using Wikidata toolkit DumpProcessingController
  **/
@@ -32,13 +35,18 @@ object DumpProcessor {
                                      outputPath: Option[Path],
                                      verbose: Boolean,
                                      timeout: Int,
-                                     outputFormat: OutputFormat): IO[WDSubProcessor] = for {
+                                     outputFormat: OutputFormat): IO[EntityDocumentDumpProcessor] = for {
       wshex <- acquireShEx(schemaPath, verbose) 
-      out <- acquireOutput(outputPath)
-      dumpWriter <- acquireDumpWriter(out, outputFormat)
-      shexProcessor = new WDSubProcessor(wshex, dumpWriter, verbose, timeout)
+      maybeOut <- acquireOutput(outputPath)
+      shexProcessor = outputFormat match { 
+       case JsonDump => new WDSubJsonProcessor(wshex, maybeOut, verbose, timeout)
+       case TurtleDump => {
+         val out = maybeOut.getOrElse(System.out)
+         new WDSubRDFProcessor(wshex, RDFFormat.TURTLE, out, new SitesImpl(), PropertyRegister.getWikidataPropertyRegister(), verbose)
+       }
+      }
     } yield { 
-      shexProcessor.startJson()
+      shexProcessor.open()
       shexProcessor
     }
 
@@ -55,12 +63,12 @@ object DumpProcessor {
                                 outputPath: Option[Path],
                                 verbose: Boolean,
                                 timeout: Int,
-                                outputFormat: OutputFormat): Resource[IO, WDSubProcessor] =
-      Resource.make(acquireShExProcessor(schema,outputPath,verbose,timeout, outputFormat))(shExProcessor => IO {
-       println(s"End of process...")
-       shExProcessor.endJson()
-       shExProcessor.close() 
-      })
+                                outputFormat: OutputFormat): Resource[IO, EntityDocumentDumpProcessor] =
+      Resource.make(acquireShExProcessor(schema, outputPath, verbose, timeout, outputFormat))(shExProcessor => IO {
+           println(s"End of process...")
+           shExProcessor.close() 
+         })
+      
 
     private def acquireMwLocalDumpFile(file: Path, verbose: Boolean): IO[MwLocalDumpFile] = {
       val fileName = file.toFile().getAbsolutePath()
@@ -121,9 +129,9 @@ object DumpProcessor {
               _ <- info(s"DateStamp: ${mwDumpFile.getDateStamp()}")
               _ <- info(s"Available?: ${mwDumpFile.isAvailable()}")
               _ <- IO { dumpProcessingController.processDump(mwDumpFile) }
-              totalEntities <- processor.getTotalEntities()
-              matchedEntities <- processor.getMatchedEntities()
-            } yield DumpResults(totalEntities, matchedEntities)
+              // totalEntities <- processor.getTotalEntities()
+              // matchedEntities <- processor.getMatchedEntities()
+            } yield DumpResults(0,0) // totalEntities, matchedEntities)
         }
        } yield results
     }

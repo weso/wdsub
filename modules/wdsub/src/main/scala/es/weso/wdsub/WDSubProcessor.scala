@@ -15,7 +15,7 @@ import es.weso.wdshex._
   * @param verbose verbose
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
-class WDSubProcessor(
+abstract class WDSubProcessor(
   wShEx: WShEx,
   verbose: Boolean,
   ) extends EntityDocumentDumpProcessor {
@@ -28,9 +28,7 @@ class WDSubProcessor(
     protected def info(msg: String): Unit =
       if (verbose) logger.info(msg)
 
-
     override def processItemDocument(itemDocument: ItemDocument): Unit = {
-        info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
         if (matcher.matchStart(itemDocument).matches) { 
           matchedEntities += 1
           super.processItemDocument(itemDocument)
