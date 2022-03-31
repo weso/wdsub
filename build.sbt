@@ -7,24 +7,22 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = "adopt@1.11"
 
-lazy val shexsVersion          = "0.1.105"
-lazy val srdfVersion           = "0.1.105"
-lazy val utilsVersion          = "0.2.2"
+lazy val shexsVersion          = "0.2.0"
+lazy val srdfVersion           = "0.1.107"
+lazy val utilsVersion          = "0.2.4"
 
 // Dependency versions
 lazy val catsVersion           = "2.7.0"
-lazy val catsEffectVersion     = "3.3.0"
+lazy val catsEffectVersion     = "3.3.7"
 lazy val circeVersion          = "0.14.1"
 lazy val declineVersion        = "2.2.0"
-lazy val fs2Version            = "3.2.3"
-lazy val jenaVersion           = "4.1.0"
+lazy val fs2Version            = "3.2.5"
+lazy val jenaVersion           = "4.3.2"
 lazy val jacksonVersion        = "2.12.3"
 // lazy val log4jVersion          = "2.14.1"
 lazy val munitVersion          = "0.7.29"
 lazy val munitEffectVersion    = "1.0.7"
 lazy val slf4jVersion          = "1.7.32"
-// lazy val pprintVersion         = "0.6.6"
-// lazy val scalaCollCompatVersion  = "2.5.0"
 lazy val wikidataToolkitVersion = "0.12.1"
 
 // Dependency modules

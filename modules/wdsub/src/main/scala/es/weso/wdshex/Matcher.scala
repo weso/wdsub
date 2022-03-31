@@ -16,6 +16,7 @@ import es.weso.utils.internal.CollectionCompat._
 import es.weso.wbmodel.{IRIValue, PropertyId}
 import es.weso.wikibase._
 import es.weso.wshex._ 
+import es.weso.utils.VerboseLevel
 
 /**
   * Matcher contains methods to match a WShEx schema with Wikibase entities
@@ -249,7 +250,7 @@ object Matcher {
     * @return an IO action that returns a matcher
     */  
   def fromPath(schemaPath: Path, verbose: Boolean, format: WShExFormat = CompactFormat): IO[Matcher] = 
-    WShEx.fromPath(schemaPath,format)
+    WShEx.fromPath(schemaPath,format, if (verbose) VerboseLevel.Debug else VerboseLevel.Info)
     .map(s => Matcher(wShEx = s, verbose = verbose))
 
   /**

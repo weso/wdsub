@@ -13,6 +13,7 @@ import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 import java.io._
 import java.nio.file.StandardOpenOption._
 import java.nio.file.{Path, Files => JavaFiles}
+import es.weso.utils.VerboseLevel
 
 sealed trait Processor {
   val name: String
@@ -147,7 +148,7 @@ object Main extends CommandIOApp (
     refResults: Ref[IO, DumpResults]
     ): IO[Entity => IO[Option[String]]] = action match {
     case FilterBySchema(schemaPath) => for {
-      wshex <- WShEx.fromPath(schemaPath)
+      wshex <- WShEx.fromPath(schemaPath, CompactFormat, VerboseLevel.Info)
       matcher = new Matcher(wShEx = wshex)
     } yield checkSchema(matcher, refResults)
     case CountEntities => withEntryCount(refResults).pure[IO]

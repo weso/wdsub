@@ -16,6 +16,7 @@ import org.wikidata.wdtk.datamodel.implementation.SitesImpl
 import org.wikidata.wdtk.rdf.PropertyRegister
 import org.eclipse.rdf4j.rio.RDFFormat
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocumentDumpProcessor
+import es.weso.utils.VerboseLevel
 /**
  * Dump processor using Wikidata toolkit DumpProcessingController
  **/
@@ -29,7 +30,7 @@ object DumpProcessor {
     }
 
     private def acquireShEx(schemaPath: Path, verbose: Boolean): IO[WShEx] = 
-      WShEx.fromPath(schemaPath)
+      WShEx.fromPath(schemaPath, CompactFormat, if (verbose) VerboseLevel.Debug else VerboseLevel.Info)
           
     private def acquireShExProcessor(schemaPath: Path,
                                      outputPath: Option[Path],
