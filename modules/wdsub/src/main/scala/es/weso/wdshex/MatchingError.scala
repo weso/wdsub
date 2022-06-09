@@ -11,9 +11,7 @@ case class Pending(
     msg:String
     ) extends MatchingError(s"Pending: $msg")
 
-case class NotImplemented(
-    msg: String
-    ) extends MatchingError(s"Not Implemented: $msg")
+case class NotImplemented(msg: String) extends MatchingError(s"Not Implemented: $msg")
 
 case class NoShapeExprs(
     wShEx: WShEx

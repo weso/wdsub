@@ -6,6 +6,7 @@ import cats.implicits._
 import com.monovore.decline._
 import com.monovore.decline.effect._
 import es.weso.wdshex._
+
 import es.weso.wdsub._
 import es.weso.wikibase._
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
@@ -14,6 +15,7 @@ import java.io._
 import java.nio.file.StandardOpenOption._
 import java.nio.file.{Path, Files => JavaFiles}
 import es.weso.utils.VerboseLevel
+import es.weso.wshex.CompactFormat
 
 sealed trait Processor {
   val name: String

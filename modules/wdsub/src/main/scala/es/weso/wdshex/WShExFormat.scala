@@ -10,7 +10,6 @@ import cats.effect._
 import org.wikidata.wdtk.datamodel.helpers.JsonDeserializer
 import org.wikidata.wdtk.datamodel.helpers
 
-sealed trait WShExFormat
-case object CompactFormat extends WShExFormat 
-case object JSONFormat extends WShExFormat
-
+// sealed trait WShExFormat
+// case object CompactFormat extends WShExFormat
+// case object JSONFormat extends WShExFormat

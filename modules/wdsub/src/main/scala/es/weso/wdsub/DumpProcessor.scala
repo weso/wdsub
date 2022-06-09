@@ -17,6 +17,7 @@ import org.wikidata.wdtk.rdf.PropertyRegister
 import org.eclipse.rdf4j.rio.RDFFormat
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocumentDumpProcessor
 import es.weso.utils.VerboseLevel
+import es.weso.wshex
 
 /**
   * Dump processor using Wikidata toolkit DumpProcessingController
@@ -31,7 +32,7 @@ object DumpProcessor {
   }
 
   private def acquireShEx(schemaPath: Path, opts: DumpOptions): IO[WShEx] =
-    WShEx.fromPath(schemaPath, CompactFormat, if (opts.verbose) VerboseLevel.Debug else VerboseLevel.Info)
+    WShEx.fromPath(schemaPath, wshex.CompactFormat, if (opts.verbose) VerboseLevel.Debug else VerboseLevel.Info)
 
   private def acquireShExProcessor(
       schemaPath: Path,
@@ -165,7 +166,10 @@ object DumpProcessor {
               _ <- info(s"DateStamp: ${mwDumpFile.getDateStamp()}")
               _ <- info(s"Available?: ${mwDumpFile.isAvailable()}")
               _ <- IO { dumpProcessingController.processDump(mwDumpFile) }
-            } yield DumpResults(processor.entityCounter.getTotalEntities, processor.entityCounter.getMatchedEntities)
+            } yield DumpResults(
+              processor.entityCounter.getTotalEntities(),
+              processor.entityCounter.getMatchedEntities()
+            )
         }
     } yield results
   }
