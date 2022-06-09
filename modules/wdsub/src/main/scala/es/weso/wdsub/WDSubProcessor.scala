@@ -16,28 +16,37 @@ import es.weso.wdshex._
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
 abstract class WDSubProcessor(
-  wShEx: WShEx,
-  verbose: Boolean,
-  ) extends EntityDocumentDumpProcessor {
+    wShEx: WShEx,
+    dumpWriter: Option[DumpWriter],
+    opts: DumpOptions
+) extends EntityDocumentDumpProcessor
+    with EntityCounter {
 
-    private var totalEntities: Int = 0
-    private var matchedEntities: Int = 0
-    private val matcher = new Matcher(wShEx)
-    private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
+  private val matcher     = new Matcher(wShEx)
+  private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
 
-    protected def info(msg: String): Unit =
-      if (verbose) logger.info(msg)
+  protected def info(msg: String): Unit =
+    if (opts.verbose) logger.info(msg)
 
-    override def processItemDocument(itemDocument: ItemDocument): Unit = {
-        if (matcher.matchStart(itemDocument).matches) { 
-          matchedEntities += 1
-          super.processItemDocument(itemDocument)
-        }
-        totalEntities += 1
+  override def processItemDocument(itemDocument: ItemDocument): Unit = {
+    if (matcher.matchStart(itemDocument).matches) {
+      incrementMatched()
+      dumpWriter.map(dw => dw.writeItem(itemDocument))
+      super.processItemDocument(itemDocument)
+    } else incrementTotal()
+  }
+
+  override def open(): Unit = {
+    resetCounter()
+    dumpWriter.map(_.start())
+  }
+
+  override def close(): Unit = {
+    if (opts.showCounter) {
+      info(s"Counter: ${showCounter}")
     }
-
-    def getTotalEntities(): IO[Int] = IO { totalEntities }
-
-    def getMatchedEntities(): IO[Int] = IO { matchedEntities }
+    dumpWriter.map(_.end())
+    dumpWriter.map(_.close())
+  }
 
 }

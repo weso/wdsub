@@ -17,34 +17,30 @@ import java.io.OutputStream
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
 class WDSubJsonProcessor(
-  wShEx: WShEx,
-  maybeOut: Option[OutputStream],
-  verbose: Boolean,
-  timeout: Int = 0
-  ) extends WDSubProcessor(wShEx, verbose) {
+    wShEx: WShEx,
+    maybeOut: Option[OutputStream],
+    opts: DumpOptions,
+    timeout: Int = 0
+) extends WDSubProcessor(wShEx, maybeOut.map(out => JsonDumpWriter(out)), opts) {
 
-    private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
-    private lazy val dumpWriter: Option[DumpWriter] = maybeOut.map(out => JsonDumpWriter(out))
+  var totalEntities: Int   = 0
+  var matchedEntities: Int = 0
 
-    private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
+  private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
 
-    private def properties(item: ItemDocument): List[PropertyValue] =
-      item.getStatementGroups().asScala.toList.map(getProperty)
+  private def getProperty(sg: StatementGroup): PropertyValue =
+    PropertyValue(sg.getProperty(), sg.getSubject())
 
-    override def processItemDocument(itemDocument: ItemDocument): Unit = {
-      info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
-      dumpWriter match {
-        case Some(dw) => dw.writeItem(itemDocument)
-        case None => ()
-      }
-      super.processItemDocument(itemDocument)
-    }
+  private def properties(item: ItemDocument): List[PropertyValue] =
+    item.getStatementGroups().asScala.toList.map(getProperty)
 
-    override def open(): Unit = dumpWriter.map(_.start())
-
-    override def close(): Unit = {
-      dumpWriter.map(_.end())
-      dumpWriter.map(_.close())
-    }
+  override def processItemDocument(itemDocument: ItemDocument): Unit = {
+    info(
+      s"Item document($showCounter): ${itemDocument.getEntityId().getId()} [${properties(
+        itemDocument
+      ).map(_.toString()).mkString(",")}]"
+    )
+    super.processItemDocument(itemDocument)
+  }
 
 }

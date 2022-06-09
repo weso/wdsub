@@ -18,43 +18,49 @@ import scala.collection.JavaConverters._
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
 class WDSubRDFProcessor(
-  wShEx: WShEx,
-  format: RDFFormat,
-  output: OutputStream,
-  sites: Sites,
-  propertyRegister: PropertyRegister,
-  verbose: Boolean,
-  ) extends RdfSerializer(format, output, sites, propertyRegister) {
+    wShEx: WShEx,
+    format: RDFFormat,
+    output: OutputStream,
+    sites: Sites,
+    propertyRegister: PropertyRegister,
+    opts: DumpOptions
+) extends RdfSerializer(format, output, sites, propertyRegister)
+    with EntityCounter {
 
-    private var totalEntities: Int = 0
-    private var matchedEntities: Int = 0
-    private val matcher = new Matcher(wShEx)
-    private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
+  var totalEntities: Int   = 0
+  var matchedEntities: Int = 0
 
-    private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
+  private val matcher     = new Matcher(wShEx)
+  private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
 
-    private def properties(item: ItemDocument): List[PropertyValue] = 
-      item.getStatementGroups().asScala.toList.map(getProperty)
+  private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())
 
-    private def info(msg: String): Unit =   
-      if (verbose) logger.info(msg)
+  private def properties(item: ItemDocument): List[PropertyValue] =
+    item.getStatementGroups().asScala.toList.map(getProperty)
 
+  private def info(msg: String): Unit =
+    if (opts.verbose) logger.info(msg)
 
-    override def processItemDocument(itemDocument: ItemDocument): Unit = {
-        info(s"Item document: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]")
-        if (matcher.matchStart(itemDocument).matches) { 
-          matchedEntities += 1
-          super.processItemDocument(itemDocument)
-        }
-        totalEntities += 1
-    }
+  override def processItemDocument(itemDocument: ItemDocument): Unit = {
+    info(
+      s"Item document[$showCounter]: ${itemDocument.getEntityId().getId()} [${properties(itemDocument).map(_.toString()).mkString(",")}]"
+    )
+    if (matcher.matchStart(itemDocument).matches) {
+      incrementMatched()
+      // Write to dump?
+      super.processItemDocument(itemDocument)
+    } else
+      incrementTotal()
+  }
 
-    def getTotalEntities(): IO[Int] = IO { totalEntities }
+  override def open(): Unit = {
+    resetCounter()
+    super.open()
+  }
 
-    def getMatchedEntities(): IO[Int] = IO { matchedEntities }
-
-    override def close(): Unit = {
-      super.close()
-    }
+  override def close(): Unit = {
+    if (opts.showCounter) println(showCounter)
+    super.close()
+  }
 
 }
