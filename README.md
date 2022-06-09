@@ -34,9 +34,26 @@ processes the dump file `examples/100lines.json` using the ShEx schema `examples
  generating the file `target/outputFile.json` 
 
 
-## Installation and compilation
 
-The tool has been implemented in [Scala](https://www.scala-lang.org/) abd uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you can use:
+## Prerequisites 
+### Install scala
+
+The tool has been implemented in [Scala](https://www.scala-lang.org/) and uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you first need to install sbt. 
+
+Install instructions scala:
+* Linux: https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html
+
+### Clone this repository
+Once scala is installed clone this repository from github.
+```
+git clone https://github.com/weso/wdsub.git
+``` 
+### Go to the cloned directory
+``` 
+cd wdsub
+``` 
+
+## Installation and compilation
 
 ```
 sbt universal:packageBin
