@@ -61,21 +61,21 @@ case class Matcher(wShEx: WShEx, site: String = "http://www.wikidata.org/entity/
 
   private def matchShapeExpr(shapeExpr: ShapeExpr, entity: Entity): MatchingStatus =
     shapeExpr match {
-      case s: Shape =>
+      case s: WShape =>
         s.expression match {
           case Some(te) => matchTripleExpr(te, entity, shapeExpr)
           case None     => MatchingStatus.matchEmpty
         }
 
-      case sand: ShapeAnd => {
+      case sand: WShapeAnd => {
         val ls: LazyList[MatchingStatus] = sand.exprs.toLazyList.map(matchShapeExpr(_, entity))
         MatchingStatus.combineAnds(ls)
       }
-      case sor: ShapeOr => {
+      case sor: WShapeOr => {
         val ls: LazyList[MatchingStatus] = sor.exprs.toLazyList.map(matchShapeExpr(_, entity))
         MatchingStatus.combineOrs(ls)
       }
-      case snot: ShapeNot => {
+      case snot: WShapeNot => {
         val ms = matchShapeExpr(snot.shapeExpr, entity)
         if (ms.matches) NoMatching(List(NotShapeFail(snot.shapeExpr, entity)))
         else Matching(List(shapeExpr), ms.dependencies)
@@ -109,13 +109,24 @@ case class Matcher(wShEx: WShEx, site: String = "http://www.wikidata.org/entity/
   }
 
   private def matchTripleConstraint(tc: TripleConstraint, e: Entity, se: ShapeExpr): MatchingStatus = {
-    /* TODO: We are ignoring cardinality by now */
-    // matchPredicateValueExpr(tc.predicate,tc.valueExpr,e, se)
     tc match {
-      case tcr: TripleConstraintRef   => matchPropertyIdValueExpr(tc.property, Some(tcr.value), e, se)
-      case tcl: TripleConstraintLocal => matchPropertyIdValueExpr(tc.property, Some(tcl.value), e, se)
+      case tcr: TripleConstraintRef =>
+        val matchPid = matchPropertyIdValueExpr(tc.property, Some(tcr.value), e, se)
+        tcr.qs match {
+          case None     => matchPid
+          case Some(qs) => matchPid.and(matchQs(qs, e))
+        }
+      case tcl: TripleConstraintLocal =>
+        val matchPid = matchPropertyIdValueExpr(tc.property, Some(tcl.value), e, se)
+        tcl.qs match {
+          case None     => matchPid
+          case Some(qs) => matchPid.and(matchQs(qs, e))
+        }
     }
   }
+
+  // TODO...add matching on qualifiers
+  private def matchQs(qs: QualifierSpec, e: Entity): MatchingStatus = MatchingStatus.matchEmpty
 
   private def matchPropertyIdValueExpr(
       propertyId: PropertyId,
@@ -266,7 +277,7 @@ object Matcher {
     * @param format: WShEx format
     * @return an IO action that returns a matcher
     */
-  def fromPath(schemaPath: Path, verbose: Boolean, format: WShExFormat = CompactFormat): IO[Matcher] =
+  def fromPath(schemaPath: Path, verbose: Boolean, format: WShExFormat = WShExFormat.CompactWShExFormat): IO[Matcher] =
     WShEx
       .fromPath(schemaPath, format, if (verbose) VerboseLevel.Debug else VerboseLevel.Info)
       .map(s => Matcher(wShEx = s, verbose = verbose))
@@ -281,7 +292,11 @@ object Matcher {
     * @param format: WShEx format
     * @return a matcher
     */
-  def unsafeFromPath(schemaPath: Path, verbose: Boolean = false, format: WShExFormat = CompactFormat): Matcher = {
+  def unsafeFromPath(
+      schemaPath: Path,
+      verbose: Boolean = false,
+      format: WShExFormat = WShExFormat.CompactWShExFormat
+  ): Matcher = {
     import cats.effect.unsafe.implicits.global
     fromPath(schemaPath, verbose, format).unsafeRunSync()
   }
@@ -289,7 +304,7 @@ object Matcher {
   def unsafeFromString(
       str: String,
       verbose: Boolean = false,
-      format: WShExFormat = CompactFormat
+      format: WShExFormat = WShExFormat.CompactWShExFormat
   ): Either[ParseError, Matcher] = {
     WShEx
       .unsafeFromString(str, format)

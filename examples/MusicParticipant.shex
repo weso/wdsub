@@ -1,0 +1,9 @@
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX p: <http://www.wikidata.org/prop/>
+
+<MusicParticipant> {
+  p:P1344 {
+    pq:P2868 [ wd:Q639669 ] 
+  }
+}

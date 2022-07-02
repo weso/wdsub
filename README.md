@@ -86,7 +86,7 @@ The docker image is published as [wesogroup/wdsub](https://hub.docker.com/reposi
 In order to process dumps from docker, you can run:
 
 ```
-docker run -d -v [folder-with-dumps]:/data -v [folder-with-schemas]:/shex -v [output-folder]:/dumps wesogroup/wdsub:0.0.9 dump -o /dumps/resultDump.json -s /shex/[shexFile].shex /data/[dumpFile].json.gz
+docker run -d -v [folder-with-dumps]:/data -v [folder-with-schemas]:/shex -v [output-folder]:/dumps wesogroup/wdsub:{version} dump -o /dumps/resultDump.json -s /shex/[shexFile].shex /data/[dumpFile].json.gz
 ```
 
 

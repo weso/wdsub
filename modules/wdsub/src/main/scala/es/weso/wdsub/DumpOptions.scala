@@ -29,17 +29,15 @@ case class DumpOptions(
 ) {
   val jsonDeserializer = new helpers.JsonDeserializer(site)
 
-  def withChunkSize(n: Int): DumpOptions        = this.copy(chunkSize = n)
-  def withoutDecompressInput: DumpOptions       = this.copy(decompressInput = false)
-  def withDecompressInput: DumpOptions          = this.copy(decompressInput = true)
-  def withoutCompressOutput: DumpOptions        = this.copy(compressOutput = false)
-  def withCompressOutput: DumpOptions           = this.copy(compressOutput = true)
-  def withoutOnlyCount: DumpOptions             = this.copy(onlyCount = false)
-  def withOnlyCount: DumpOptions                = this.copy(onlyCount = true)
-  def withMaxConcurrent(n: Int): DumpOptions    = this.copy(maxConcurrent = n)
-  def withSite(site: String): DumpOptions       = this.copy(site = site)
-  def withShowCounter(sc: Boolean): DumpOptions = this.copy(showCounter = sc)
-  def withVerbose(v: Boolean): DumpOptions      = this.copy(verbose = v)
+  def withChunkSize(n: Int): DumpOptions            = this.copy(chunkSize = n)
+  def withDecompressInput(di: Boolean): DumpOptions = this.copy(decompressInput = di)
+  def withCompressOutput(co: Boolean): DumpOptions  = this.copy(compressOutput = co)
+  def withoutOnlyCount: DumpOptions                 = this.copy(onlyCount = false)
+  def withOnlyCount: DumpOptions                    = this.copy(onlyCount = true)
+  def withMaxConcurrent(n: Int): DumpOptions        = this.copy(maxConcurrent = n)
+  def withSite(site: String): DumpOptions           = this.copy(site = site)
+  def withShowCounter(sc: Boolean): DumpOptions     = this.copy(showCounter = sc)
+  def withVerbose(v: Boolean): DumpOptions          = this.copy(verbose = v)
 }
 
 object DumpOptions {

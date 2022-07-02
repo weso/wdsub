@@ -23,37 +23,42 @@ import es.weso.wikibase._
 class IODumpTest extends FunSuite {
 
   test("Iten json parser") {
-    val q42 = new ItemIdValueImpl("Q42","http://www.wikidata.org/")
-    val p31 = new PropertyIdValueImpl("P31", "http://www.wikidata.org/")
-    val q515 = new ItemIdValueImpl("Q515","http://www.wikidata.org/")
-    val statementBuilder = 
+    val q42  = new ItemIdValueImpl("Q42", "http://www.wikidata.org/")
+    val p31  = new PropertyIdValueImpl("P31", "http://www.wikidata.org/")
+    val q515 = new ItemIdValueImpl("Q515", "http://www.wikidata.org/")
+    val statementBuilder =
       StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
-    val itemDocument = 
+    val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
-    val item = Item(itemDocument)
+    val item    = Item(itemDocument)
     val jsonStr = item.asJsonStr()
-    
+
     assertEquals(Item.fromJsonStr(jsonStr), Right(item))
 
   }
 
   test("Simple processing") {
-    val q42 = new ItemIdValueImpl("Q42","http://www.wikidata.org/")
-    val p31 = new PropertyIdValueImpl("P31", "http://www.wikidata.org/")
-    val q515 = new ItemIdValueImpl("Q515","http://www.wikidata.org/")
-    val statementBuilder = 
+    val q42  = new ItemIdValueImpl("Q42", "http://www.wikidata.org/")
+    val p31  = new PropertyIdValueImpl("P31", "http://www.wikidata.org/")
+    val q515 = new ItemIdValueImpl("Q515", "http://www.wikidata.org/")
+    val statementBuilder =
       StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
-    val itemDocument = 
+    val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
 
-    val str = Entity(itemDocument).asJsonStr()
-    val is: InputStream = new ByteArrayInputStream(str.getBytes)
-    val os: ByteArrayOutputStream = new ByteArrayOutputStream()
+    val str                                       = Entity(itemDocument).asJsonStr()
+    val is: InputStream                           = new ByteArrayInputStream(str.getBytes)
+    val os: ByteArrayOutputStream                 = new ByteArrayOutputStream()
     def withEntity(e: Entity): IO[Option[String]] = IO(Some(e.asJsonStr()))
     val cmp = for {
       ref <- Ref[IO].of(DumpResults.initial)
-      results <- IODumpProcessor.process(is,Some(os),withEntity, ref,
-         DumpOptions.default.withoutDecompressInput.withoutCompressOutput) 
+      results <- IODumpProcessor.process(
+        is,
+        Some(os),
+        withEntity,
+        ref,
+        DumpOptions.default.withDecompressInput(false).withCompressOutput(false)
+      )
     } yield results
     cmp.unsafeRunSync()
     val expected = str + ",\n"

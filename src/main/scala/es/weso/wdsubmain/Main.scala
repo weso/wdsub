@@ -15,18 +15,30 @@ import java.io._
 import java.nio.file.StandardOpenOption._
 import java.nio.file.{Path, Files => JavaFiles}
 import es.weso.utils.VerboseLevel
-import es.weso.wshex.CompactFormat
+import es.weso.wshex.WShExFormat._
 
 sealed trait Processor {
   val name: String
 }
-case object WDTK extends Processor { override val name = "WDTK" }
-case object Fs2  extends Processor { override val name = "Fs2"  }
+object Processor {
+  case object WDTK extends Processor { override val name = "WDTK" }
+  case object Fs2  extends Processor { override val name = "Fs2"  }
+}
+
+sealed trait SchemaFormat {
+  val name: String
+}
+object SchemaFormat {
+  case object ShExCEntitySchema extends SchemaFormat { override val name = "CompactES"    }
+  case object ShExCWShEx        extends SchemaFormat { override val name = "CompactWShEx" }
+}
 
 sealed trait DumpAction
-case class FilterBySchema(schema: Path)             extends DumpAction
-case object CountEntities                           extends DumpAction
-case class ShowEntities(maxStatements: Option[Int]) extends DumpAction
+object DumpAction {
+  case class FilterBySchema(schema: Path, schemaFormat: SchemaFormat) extends DumpAction
+  case object CountEntities                                           extends DumpAction
+  case class ShowEntities(maxStatements: Option[Int])                 extends DumpAction
+}
 
 case class Dump(
     filePath: Path,
@@ -54,13 +66,17 @@ object Main
     }
 
   private val filePath         = Opts.argument[Path](metavar = "dumpFile")
-  private val processors       = List(WDTK, Fs2)
+  private val processors       = List(Processor.WDTK, Processor.Fs2)
   private val processorNames   = processors.map(_.name)
   private val defaultProcessor = processors.head
 
   private val outputFormats       = List(JsonDump, TurtleDump)
   private val outputFormatNames   = outputFormats.map(_.name)
   private val defaultOutputFormat = outputFormats.head
+
+  private val schemaFormats       = List(SchemaFormat.ShExCWShEx, SchemaFormat.ShExCWShEx)
+  private val schemaFormatNames   = schemaFormats.map(_.name)
+  private val defaultSchemaFormat = schemaFormats.head
 
   private val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
 
@@ -77,6 +93,22 @@ object Main
           }
       )
       .withDefault(defaultProcessor)
+
+  private val schemaFormat =
+    Opts
+      .option[String]("schemaFormat", help = s"Schema format: ${schemaFormatNames.mkString(",")}")
+      .mapValidated(
+        str =>
+          schemaFormats.find(_.name == str) match {
+            case None =>
+              Validated
+                .invalidNel(
+                  s"Invalid processor name: $str. Available schema formats: ${schemaFormatNames.mkString(",")}"
+                )
+            case Some(p) => Validated.valid(p)
+          }
+      )
+      .withDefault(defaultSchemaFormat)
 
   private val outputFormat =
     Opts
@@ -96,27 +128,29 @@ object Main
 
   private val outPath = Opts.option[Path]("out", help = "output path", short = "o", metavar = "file").orNone
 
-  private val verbose     = Opts.flag("verbose", "Verbose mode").orFalse
-  private val showCounter = Opts.flag("showCounter", "Show counter at the end of process").orTrue
+  private val verbose        = Opts.flag("verbose", "Verbose mode").orFalse
+  private val showCounter    = Opts.flag("showCounter", "Show counter at the end of process").orTrue
+  private val compressOutput = Opts.flag("compressOutput", "compress output").orTrue
 
-  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter).mapN {
-    case (v, sc) =>
+  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter, compressOutput).mapN {
+    case (v, sc, co) =>
       DumpOptions.default
         .withVerbose(v)
         .withShowCounter(sc)
+        .withCompressOutput(sc)
   }
 
   private val countEntities =
-    Opts.flag("count", "count entities").map(_ => CountEntities)
+    Opts.flag("count", "count entities").map(_ => DumpAction.CountEntities)
 
   private val showEntities: Opts[Unit] =
     Opts.flag("show", "show entities") // _ => ShowEntities)
 
   private val showEntitiesMax =
-    (showEntities, maxStatements).mapN { case (_, max) => ShowEntities(max) }
+    (showEntities, maxStatements).mapN { case (_, max) => DumpAction.ShowEntities(max) }
 
   private val filterBySchema =
-    schemaPath.map(path => FilterBySchema(path))
+    (schemaPath, schemaFormat).mapN(DumpAction.FilterBySchema)
 
   private val action: Opts[DumpAction] = countEntities orElse showEntitiesMax orElse filterBySchema
 
@@ -157,10 +191,10 @@ object Main
       refResults <- Ref[IO].of(DumpResults.initial)
       withEntry  <- getWithEntry(action, refResults)
       results <- processor match {
-        case Fs2 => IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
-        case WDTK =>
+        case Processor.Fs2 => IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
+        case Processor.WDTK =>
           action match {
-            case FilterBySchema(schemaPath) =>
+            case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
               DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, dumpOptions, 0, outputFormat)
             case _ => IO.println(s"Not implemented yet")
           }
@@ -173,13 +207,13 @@ object Main
       action: DumpAction,
       refResults: Ref[IO, DumpResults]
   ): IO[Entity => IO[Option[String]]] = action match {
-    case FilterBySchema(schemaPath) =>
+    case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
       for {
-        wshex <- WShEx.fromPath(schemaPath, CompactFormat, VerboseLevel.Info)
+        wshex <- WShEx.fromPath(schemaPath, CompactWShExFormat, VerboseLevel.Info)
         matcher = new Matcher(wShEx = wshex)
       } yield checkSchema(matcher, refResults)
-    case CountEntities     => withEntryCount(refResults).pure[IO]
-    case ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
+    case DumpAction.CountEntities     => withEntryCount(refResults).pure[IO]
+    case DumpAction.ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
   }
 
   private def withEntryCount(counter: Ref[IO, DumpResults]): Entity => IO[Option[String]] =

@@ -32,7 +32,11 @@ object DumpProcessor {
   }
 
   private def acquireShEx(schemaPath: Path, opts: DumpOptions): IO[WShEx] =
-    WShEx.fromPath(schemaPath, wshex.CompactFormat, if (opts.verbose) VerboseLevel.Debug else VerboseLevel.Info)
+    WShEx.fromPath(
+      schemaPath,
+      wshex.WShExFormat.CompactWShExFormat,
+      if (opts.verbose) VerboseLevel.Debug else VerboseLevel.Info
+    )
 
   private def acquireShExProcessor(
       schemaPath: Path,
