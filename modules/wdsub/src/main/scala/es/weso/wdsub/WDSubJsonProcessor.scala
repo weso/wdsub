@@ -1,7 +1,7 @@
 package es.weso.wdsub
 
 import cats.effect._
-import es.weso.wdshex._
+import es.weso.wshex._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.datamodel.interfaces._
 import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
@@ -17,7 +17,7 @@ import java.io.OutputStream
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
 class WDSubJsonProcessor(
-    wShEx: WShEx,
+    wShEx: WSchema,
     maybeOut: Option[OutputStream],
     opts: DumpOptions,
     timeout: Int = 0

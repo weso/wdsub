@@ -5,10 +5,10 @@ import cats.effect._
 import cats.implicits._
 import com.monovore.decline._
 import com.monovore.decline.effect._
-import es.weso.wdshex._
-
+import es.weso.wshex._
+import es.weso.wshex.matcher._
 import es.weso.wdsub._
-import es.weso.wikibase._
+import es.weso.wbmodel._
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 
 import java.io._
@@ -25,19 +25,11 @@ object Processor {
   case object Fs2  extends Processor { override val name = "Fs2"  }
 }
 
-sealed trait SchemaFormat {
-  val name: String
-}
-object SchemaFormat {
-  case object ShExCEntitySchema extends SchemaFormat { override val name = "CompactES"    }
-  case object ShExCWShEx        extends SchemaFormat { override val name = "CompactWShEx" }
-}
-
 sealed trait DumpAction
 object DumpAction {
-  case class FilterBySchema(schema: Path, schemaFormat: SchemaFormat) extends DumpAction
-  case object CountEntities                                           extends DumpAction
-  case class ShowEntities(maxStatements: Option[Int])                 extends DumpAction
+  case class FilterBySchema(schema: Path, schemaFormat: WShExFormat) extends DumpAction
+  case object CountEntities                                          extends DumpAction
+  case class ShowEntities(maxStatements: Option[Int])                extends DumpAction
 }
 
 case class Dump(
@@ -65,18 +57,18 @@ object Main
       Opts.option[String]("entity", "Entity name", short = "e").map(ProcessEntity)
     }
 
-  private val filePath         = Opts.argument[Path](metavar = "dumpFile")
-  private val processors       = List(Processor.WDTK, Processor.Fs2)
-  private val processorNames   = processors.map(_.name)
-  private val defaultProcessor = processors.head
+  private lazy val filePath         = Opts.argument[Path](metavar = "dumpFile")
+  private lazy val processors       = List(Processor.WDTK, Processor.Fs2)
+  private lazy val processorNames   = processors.map(_.name)
+  private lazy val defaultProcessor = processors.head
 
-  private val outputFormats       = List(JsonDump, TurtleDump)
-  private val outputFormatNames   = outputFormats.map(_.name)
-  private val defaultOutputFormat = outputFormats.head
+  private lazy val outputFormats       = List(JsonDump, TurtleDump)
+  private lazy val outputFormatNames   = outputFormats.map(_.name)
+  private lazy val defaultOutputFormat = outputFormats.head
 
-  private val schemaFormats       = List(SchemaFormat.ShExCWShEx, SchemaFormat.ShExCWShEx)
-  private val schemaFormatNames   = schemaFormats.map(_.name)
-  private val defaultSchemaFormat = schemaFormats.head
+  private lazy val schemaFormats       = List(ESCompactFormat, CompactWShExFormat)
+  private lazy val schemaFormatNames   = schemaFormats.map(_.name)
+  private lazy val defaultSchemaFormat = schemaFormats.head
 
   private val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
 
@@ -130,14 +122,16 @@ object Main
 
   private val verbose        = Opts.flag("verbose", "Verbose mode").orFalse
   private val showCounter    = Opts.flag("showCounter", "Show counter at the end of process").orTrue
+  private val showSchema     = Opts.flag("showSchema", "Show schema").orFalse
   private val compressOutput = Opts.flag("compressOutput", "compress output").orTrue
 
-  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter, compressOutput).mapN {
-    case (v, sc, co) =>
+  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter, compressOutput, showSchema).mapN {
+    case (v, sc, co, ss) =>
       DumpOptions.default
         .withVerbose(v)
         .withShowCounter(sc)
         .withCompressOutput(sc)
+        .withShowSchema(ss)
   }
 
   private val countEntities =
@@ -195,7 +189,7 @@ object Main
         case Processor.WDTK =>
           action match {
             case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
-              DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, dumpOptions, 0, outputFormat)
+              DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, schemaFormat, dumpOptions, 0, outputFormat)
             case _ => IO.println(s"Not implemented yet")
           }
       }
@@ -206,35 +200,40 @@ object Main
   private def getWithEntry(
       action: DumpAction,
       refResults: Ref[IO, DumpResults]
-  ): IO[Entity => IO[Option[String]]] = action match {
+  ): IO[EntityDocumentWrapper => IO[Option[String]]] = action match {
     case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
       for {
-        wshex <- WShEx.fromPath(schemaPath, CompactWShExFormat, VerboseLevel.Info)
-        matcher = new Matcher(wShEx = wshex)
+        schema <- WSchema.fromPath(schemaPath, schemaFormat, VerboseLevel.Info)
+        matcher = new Matcher(wShEx = schema)
       } yield checkSchema(matcher, refResults)
     case DumpAction.CountEntities     => withEntryCount(refResults).pure[IO]
     case DumpAction.ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
   }
 
-  private def withEntryCount(counter: Ref[IO, DumpResults]): Entity => IO[Option[String]] =
+  private def withEntryCount(counter: Ref[IO, DumpResults]): EntityDocumentWrapper => IO[Option[String]] =
     _ =>
       for {
         _ <- counter.update(_.addEntity)
       } yield None
 
-  private def withEntryShow(counter: Ref[IO, DumpResults], maxEntities: Option[Int]): Entity => IO[Option[String]] =
+  private def withEntryShow(
+      counter: Ref[IO, DumpResults],
+      maxEntities: Option[Int]
+  ): EntityDocumentWrapper => IO[Option[String]] =
     entity =>
       for {
         _ <- IO.println(entity.show(ShowEntityOptions.default.witMaxStatements(maxEntities)))
         _ <- counter.update(_.addEntity)
       } yield None
 
-  private def checkSchema(matcher: Matcher, refResults: Ref[IO, DumpResults])(entity: Entity): IO[Option[String]] = {
+  private def checkSchema(matcher: Matcher, refResults: Ref[IO, DumpResults])(
+      entity: EntityDocumentWrapper
+  ): IO[Option[String]] = {
     entity.entityDocument match {
       case e: EntityDocument => {
         if (matcher.matchStart(e).matches) {
           refResults.update(_.addMatched) *>
-            Some(Entity(e).asJsonStr()).pure[IO]
+            Some(EntityDocumentWrapper(e).asJsonStr()).pure[IO]
         } else
           refResults.update(_.addEntity) *>
             none.pure[IO]

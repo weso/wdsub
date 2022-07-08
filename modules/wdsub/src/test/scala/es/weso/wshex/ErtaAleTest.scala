@@ -1,5 +1,6 @@
 package es.weso.wdshex
 import munit._
+import es.weso.wshex.matcher.Matcher
 
 class ErtaAleTest extends FunSuite {
 

@@ -1,6 +1,8 @@
-prefix :  <http://www.wikidata.org/entity/>
+prefix wd:  <http://www.wikidata.org/entity/>
+prefix wdt: <http://www.wikidata.org/prop/direct/>
 
-<Human> {
-    :P31 [ :Q5 ] ;
-    :P19 .
+start = @<Human>
+
+<Human> EXTRA wdt:P31 {
+  wdt:P31 [ wd:Q5 ]
 }

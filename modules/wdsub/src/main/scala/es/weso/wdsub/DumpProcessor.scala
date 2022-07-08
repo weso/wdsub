@@ -17,7 +17,7 @@ import org.wikidata.wdtk.rdf.PropertyRegister
 import org.eclipse.rdf4j.rio.RDFFormat
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocumentDumpProcessor
 import es.weso.utils.VerboseLevel
-import es.weso.wshex
+import es.weso.wshex._
 
 /**
   * Dump processor using Wikidata toolkit DumpProcessingController
@@ -31,22 +31,26 @@ object DumpProcessor {
     logger.info(msg)
   }
 
-  private def acquireShEx(schemaPath: Path, opts: DumpOptions): IO[WShEx] =
-    WShEx.fromPath(
+  private def acquireShEx(schemaPath: Path, schemaFormat: WShExFormat, opts: DumpOptions): IO[WSchema] =
+    WSchema.fromPath(
       schemaPath,
-      wshex.WShExFormat.CompactWShExFormat,
+      schemaFormat,
       if (opts.verbose) VerboseLevel.Debug else VerboseLevel.Info
     )
 
   private def acquireShExProcessor(
       schemaPath: Path,
+      schemaFormat: WShExFormat,
       outputPath: Option[Path],
       opts: DumpOptions,
       timeout: Int,
       outputFormat: OutputFormat
   ): IO[ShExProcessor] =
     for {
-      wshex    <- acquireShEx(schemaPath, opts)
+      wshex <- acquireShEx(schemaPath, schemaFormat, opts)
+      _ <- if (opts.showSchema) {
+        IO.println(s"Schema: $wshex")
+      } else IO.unit
       maybeOut <- acquireOutput(outputPath)
       shexProcessor = outputFormat match {
         case JsonDump => new WDSubJsonProcessor(wshex, maybeOut, opts, timeout)
@@ -78,13 +82,14 @@ object DumpProcessor {
     }
 
   private def mkShExProcessor(
-      schema: Path,
+      schemaPath: Path,
+      schemaFormat: WShExFormat,
       outputPath: Option[Path],
       opts: DumpOptions,
       timeout: Int,
       outputFormat: OutputFormat
   ): Resource[IO, ShExProcessor] =
-    Resource.make(acquireShExProcessor(schema, outputPath, opts, timeout, outputFormat))(
+    Resource.make(acquireShExProcessor(schemaPath, schemaFormat, outputPath, opts, timeout, outputFormat))(
       shExProcessor =>
         IO {
           if (opts.verbose) println(s"End of process...")
@@ -145,14 +150,15 @@ object DumpProcessor {
   def dumpProcess(
       filePath: Path,
       outPath: Option[Path],
-      schema: Path,
+      schemaPath: Path,
+      schemaFormat: WShExFormat,
       opts: DumpOptions,
       timeout: Int,
       outputFormat: OutputFormat
   ): IO[DumpResults] = {
     for {
       results <- (
-        mkShExProcessor(schema, outPath, opts, timeout, outputFormat),
+        mkShExProcessor(schemaPath, schemaFormat, outPath, opts, timeout, outputFormat),
         mkDumpFile(filePath, opts.verbose)
       ).tupled
         .use {

@@ -18,7 +18,7 @@ import java.io.InputStream
 import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import cats.effect.unsafe.implicits.global
 import cats.effect._
-import es.weso.wikibase._
+import es.weso.wbmodel._
 
 class IODumpTest extends FunSuite {
 
@@ -46,10 +46,10 @@ class IODumpTest extends FunSuite {
     val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
 
-    val str                                       = Entity(itemDocument).asJsonStr()
-    val is: InputStream                           = new ByteArrayInputStream(str.getBytes)
-    val os: ByteArrayOutputStream                 = new ByteArrayOutputStream()
-    def withEntity(e: Entity): IO[Option[String]] = IO(Some(e.asJsonStr()))
+    val str                                                      = EntityDocumentWrapper(itemDocument).asJsonStr()
+    val is: InputStream                                          = new ByteArrayInputStream(str.getBytes)
+    val os: ByteArrayOutputStream                                = new ByteArrayOutputStream()
+    def withEntity(e: EntityDocumentWrapper): IO[Option[String]] = IO(Some(e.asJsonStr()))
     val cmp = for {
       ref <- Ref[IO].of(DumpResults.initial)
       results <- IODumpProcessor.process(

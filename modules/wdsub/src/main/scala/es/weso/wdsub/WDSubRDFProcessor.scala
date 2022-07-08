@@ -1,7 +1,8 @@
 package es.weso.wdsub
 
 import cats.effect._
-import es.weso.wdshex._
+import es.weso.wshex._
+import es.weso.wshex.matcher._
 import org.eclipse.rdf4j.rio.RDFFormat
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.datamodel.interfaces._
@@ -18,7 +19,7 @@ import scala.collection.JavaConverters._
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
 class WDSubRDFProcessor(
-    wShEx: WShEx,
+    wShEx: WSchema,
     format: RDFFormat,
     output: OutputStream,
     sites: Sites,
@@ -30,7 +31,7 @@ class WDSubRDFProcessor(
   var totalEntities: Int   = 0
   var matchedEntities: Int = 0
 
-  private val matcher     = new Matcher(wShEx)
+  private val matcher     = Matcher(wShEx)
   private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
 
   private def getProperty(sg: StatementGroup): PropertyValue = PropertyValue(sg.getProperty(), sg.getSubject())

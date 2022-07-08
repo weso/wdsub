@@ -25,6 +25,7 @@ case class DumpOptions(
     maxConcurrent: Int,
     site: String,
     showCounter: Boolean,
+    showSchema: Boolean,
     verbose: Boolean
 ) {
   val jsonDeserializer = new helpers.JsonDeserializer(site)
@@ -37,6 +38,7 @@ case class DumpOptions(
   def withMaxConcurrent(n: Int): DumpOptions        = this.copy(maxConcurrent = n)
   def withSite(site: String): DumpOptions           = this.copy(site = site)
   def withShowCounter(sc: Boolean): DumpOptions     = this.copy(showCounter = sc)
+  def withShowSchema(sc: Boolean): DumpOptions      = this.copy(showSchema = sc)
   def withVerbose(v: Boolean): DumpOptions          = this.copy(verbose = v)
 }
 
@@ -56,6 +58,7 @@ object DumpOptions {
       maxConcurrent = 200,
       site = "http://www.wikidata.org/entity/",
       showCounter = true,
+      showSchema = false,
       verbose = false
     )
 }

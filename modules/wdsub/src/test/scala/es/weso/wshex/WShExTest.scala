@@ -9,6 +9,7 @@ import org.wikidata.wdtk.datamodel.implementation._
 import org.wikidata.wdtk.datamodel.helpers.ItemDocumentBuilder
 import org.wikidata.wdtk.datamodel.helpers.StatementBuilder
 import es.weso.wshex._
+import es.weso.wshex.matcher._
 
 object IRIHelpers {
 
@@ -38,7 +39,8 @@ class WShExTest extends FunSuite {
         1,
         Unbounded
       )
-    )
+    ),
+    List()
   )
 
   val schema: WSchema = WSchema(
@@ -55,7 +57,7 @@ class WShExTest extends FunSuite {
     val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
     assertEquals(
-      Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()),
+      Matcher(wShEx = schema).matchStart(itemDocument.build()),
       Matching(List(shape))
     )
   }
@@ -68,7 +70,7 @@ class WShExTest extends FunSuite {
       StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
     val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-    assertEquals(Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()).matches, false)
+    assertEquals(Matcher(wShEx = schema).matchStart(itemDocument.build()).matches, false)
   }
 
   test("Don't match shape when fails property") {
@@ -79,7 +81,7 @@ class WShExTest extends FunSuite {
       StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
     val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-    assertEquals(Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()).matches, false)
+    assertEquals(Matcher(wShEx = schema).matchStart(itemDocument.build()).matches, false)
   }
 
   test("Match shape when some value matches") {
@@ -90,7 +92,10 @@ class WShExTest extends FunSuite {
     val s1           = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515).build()
     val s2           = StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q516).build()
     val itemDocument = ItemDocumentBuilder.forItemId(q42).withStatement(s1).withStatement(s2)
-    assertEquals(Matcher(wShEx = WShEx(schema), verbose = true).matchStart(itemDocument.build()), Matching(List(shape)))
+    assertEquals(
+      Matcher(wShEx = schema).matchStart(itemDocument.build()),
+      Matching(List(shape))
+    )
   }
 
 }

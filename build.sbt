@@ -1,5 +1,5 @@
-lazy val scala212 = "2.12.15"
-lazy val scala3   = "3.1.2"
+lazy val scala212 = "2.12.16"
+lazy val scala3   = "3.1.3"
 lazy val supportedScalaVersions = List(
   scala212,
   scala3
@@ -7,15 +7,15 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = JavaSpec.temurin("11") // "adopt@1.11"
 
-lazy val shexsVersion = "0.2.5"
+lazy val shexsVersion = "0.2.7"
 lazy val srdfVersion  = "0.1.112"
 lazy val utilsVersion = "0.2.24"
 
 // Dependency versions
-lazy val catsVersion       = "2.7.0"
-lazy val catsEffectVersion = "3.3.12"
+lazy val catsVersion       = "2.8.0"
+lazy val catsEffectVersion = "3.3.13"
 lazy val circeVersion      = "0.14.2"
-lazy val declineVersion    = "2.2.0"
+lazy val declineVersion    = "2.3.0"
 lazy val fs2Version        = "3.2.7"
 lazy val jenaVersion       = "4.3.2"
 lazy val jacksonVersion    = "2.12.3"
@@ -23,7 +23,7 @@ lazy val jacksonVersion    = "2.12.3"
 lazy val munitVersion           = "0.7.29"
 lazy val munitEffectVersion     = "1.0.7"
 lazy val slf4jVersion           = "1.7.32"
-lazy val wikidataToolkitVersion = "0.12.1"
+lazy val wikidataToolkitVersion = "0.13.5"
 
 // Dependency modules
 lazy val catsCore      = "org.typelevel"   %% "cats-core" % catsVersion
