@@ -16,6 +16,7 @@ import java.nio.file.StandardOpenOption._
 import java.nio.file.{Path, Files => JavaFiles}
 import es.weso.utils.VerboseLevel
 import es.weso.wshex.WShExFormat._
+import es.weso.wikibasedel.EntityFetcher
 
 sealed trait Processor {
   val name: String
@@ -70,6 +71,10 @@ object Main
   private lazy val schemaFormatNames   = schemaFormats.map(_.name)
   private lazy val defaultSchemaFormat = schemaFormats.head
 
+  private lazy val dumpModes       = DumpMode.availableModes
+  private lazy val dumpModesNames  = dumpModes.map(_.name)
+  private lazy val defaultDumpMode = dumpModes.head
+
   private val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
 
   private val processor =
@@ -77,7 +82,7 @@ object Main
       .option[String]("processor", help = s"Dump processor library. Possible values: ${processorNames.mkString(",")}")
       .mapValidated(
         str =>
-          processors.find(_.name == str) match {
+          processors.find(_.name.toLowerCase == str.toLowerCase()) match {
             case None =>
               Validated
                 .invalidNel(s"Invalid processor name: $str. Available processors: ${processorNames.mkString(",")}")
@@ -120,18 +125,53 @@ object Main
 
   private val outPath = Opts.option[Path]("out", help = "output path", short = "o", metavar = "file").orNone
 
-  private val verbose        = Opts.flag("verbose", "Verbose mode").orFalse
-  private val showCounter    = Opts.flag("showCounter", "Show counter at the end of process").orTrue
-  private val showSchema     = Opts.flag("showSchema", "Show schema").orFalse
-  private val compressOutput = Opts.flag("compressOutput", "compress output").orTrue
+  private val verbose     = Opts.flag("verbose", "Verbose mode").orFalse
+  private val showCounter = Opts.flag("showCounter", "Show counter at the end of process").orTrue
+  private val showSchema  = Opts.flag("showSchema", "Show schema").orFalse
 
-  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter, compressOutput, showSchema).mapN {
-    case (v, sc, co, ss) =>
+//  private val compressOutput = Opts.flag("compressOutput", "compress output").orTrue
+  lazy val booleans = List("true", "false")
+  private val compressOutput =
+    Opts
+      .option[String]("compressOutput", help = s"Compress output. Possible values: ${booleans.mkString(",")}")
+      .mapValidated(
+        str =>
+          booleans.find(_ == str.toLowerCase()) match {
+            case None =>
+              Validated
+                .invalidNel(s"Invalid compressOutput value: $str. Available values: ${booleans.mkString(",")}")
+            case Some("true")  => Validated.valid(true)
+            case Some("false") => Validated.valid(false)
+            case x =>
+              Validated
+                .invalidNel(s"Invalid compressOutput value: $x. Available values: ${booleans.mkString(",")}")
+
+          }
+      )
+      .withDefault(true)
+
+  def validatedList[A <: Named](optName: String, ls: List[A]): Opts[A] =
+    Opts
+      .option[String](optName, help = s"$optName. Possible values:...")
+      .mapValidated(
+        str =>
+          ls.find(v => v.name.toLowerCase() == str.toLowerCase()) match {
+            case None    => Validated.invalidNel(s"Invalid $optName")
+            case Some(p) => Validated.valid(p)
+          }
+      )
+
+  private val dumpMode =
+    validatedList("dumpMode", DumpMode.availableModes)
+
+  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter, compressOutput, showSchema, dumpMode).mapN {
+    case (v, sc, co, ss, dm) =>
       DumpOptions.default
         .withVerbose(v)
         .withShowCounter(sc)
         .withCompressOutput(sc)
         .withShowSchema(ss)
+        .withDumpMode(dm)
   }
 
   private val countEntities =
@@ -200,7 +240,7 @@ object Main
   private def getWithEntry(
       action: DumpAction,
       refResults: Ref[IO, DumpResults]
-  ): IO[EntityDocumentWrapper => IO[Option[String]]] = action match {
+  ): IO[EntityDoc => IO[Option[String]]] = action match {
     case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
       for {
         schema <- WSchema.fromPath(schemaPath, schemaFormat, VerboseLevel.Info)
@@ -210,7 +250,7 @@ object Main
     case DumpAction.ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
   }
 
-  private def withEntryCount(counter: Ref[IO, DumpResults]): EntityDocumentWrapper => IO[Option[String]] =
+  private def withEntryCount(counter: Ref[IO, DumpResults]): EntityDoc => IO[Option[String]] =
     _ =>
       for {
         _ <- counter.update(_.addEntity)
@@ -219,7 +259,7 @@ object Main
   private def withEntryShow(
       counter: Ref[IO, DumpResults],
       maxEntities: Option[Int]
-  ): EntityDocumentWrapper => IO[Option[String]] =
+  ): EntityDoc => IO[Option[String]] =
     entity =>
       for {
         _ <- IO.println(entity.show(ShowEntityOptions.default.witMaxStatements(maxEntities)))
@@ -227,13 +267,13 @@ object Main
       } yield None
 
   private def checkSchema(matcher: Matcher, refResults: Ref[IO, DumpResults])(
-      entity: EntityDocumentWrapper
+      entity: EntityDoc
   ): IO[Option[String]] = {
     entity.entityDocument match {
       case e: EntityDocument => {
         if (matcher.matchStart(e).matches) {
-          refResults.update(_.addMatched) *>
-            Some(EntityDocumentWrapper(e).asJsonStr()).pure[IO]
+          refResults.update(_.addMatched(e)) *>
+            Some(EntityDoc(e).asJsonStr()).pure[IO]
         } else
           refResults.update(_.addEntity) *>
             none.pure[IO]

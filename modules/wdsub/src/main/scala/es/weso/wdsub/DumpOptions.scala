@@ -26,6 +26,7 @@ case class DumpOptions(
     site: String,
     showCounter: Boolean,
     showSchema: Boolean,
+    dumpMode: DumpMode,
     verbose: Boolean
 ) {
   val jsonDeserializer = new helpers.JsonDeserializer(site)
@@ -40,6 +41,7 @@ case class DumpOptions(
   def withShowCounter(sc: Boolean): DumpOptions     = this.copy(showCounter = sc)
   def withShowSchema(sc: Boolean): DumpOptions      = this.copy(showSchema = sc)
   def withVerbose(v: Boolean): DumpOptions          = this.copy(verbose = v)
+  def withDumpMode(dm: DumpMode): DumpOptions       = this.copy(dumpMode = dm)
 }
 
 object DumpOptions {
@@ -59,6 +61,7 @@ object DumpOptions {
       site = "http://www.wikidata.org/entity/",
       showCounter = true,
       showSchema = false,
+      dumpMode = DumpMode.DumpOnlyMatched,
       verbose = false
     )
 }

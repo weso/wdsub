@@ -26,7 +26,7 @@ case class DumpProcessorError(msg: String) extends RuntimeException(msg)
 sealed abstract class ParsedLine
 case object OpenBracket                                extends ParsedLine
 case object CloseBracket                               extends ParsedLine
-case class ParsedEntity(entity: EntityDocumentWrapper) extends ParsedLine
+case class ParsedEntity(entity: EntityDoc)             extends ParsedLine
 case class Error(str: String)                          extends ParsedLine
 case object EndStream                                  extends ParsedLine
 
@@ -50,7 +50,7 @@ object IODumpProcessor {
   def process(
       is: InputStream,
       os: Option[OutputStream],
-      withEntity: EntityDocumentWrapper => IO[Option[String]],
+      withEntity: EntityDoc => IO[Option[String]],
       refResults: Ref[IO, DumpResults],
       opts: DumpOptions = DumpOptions.default
   ): IO[DumpResults] = {
@@ -75,7 +75,7 @@ object IODumpProcessor {
       is: InputStream,
       os: OutputStream,
       errStream: OutputStream,
-      withEntity: EntityDocumentWrapper => IO[Option[String]],
+      withEntity: EntityDoc => IO[Option[String]],
       opts: DumpOptions = DumpOptions.default
   ): IO[Unit] = {
     readInputStream(is.pure[IO], opts.chunkSize)
@@ -93,7 +93,7 @@ object IODumpProcessor {
       .drain
   }
 
-  def processLine(withEntity: EntityDocumentWrapper => IO[Option[String]], opts: DumpOptions)(
+  def processLine(withEntity: EntityDoc => IO[Option[String]], opts: DumpOptions)(
       pair: (String, Long)
   ): IO[(String, Long)] = {
     val (line, index) = pair
@@ -113,7 +113,7 @@ object IODumpProcessor {
       else s
 
   private def processParsedLine(
-      withEntity: EntityDocumentWrapper => IO[Option[String]],
+      withEntity: EntityDoc => IO[Option[String]],
       parsedLine: ParsedLine,
       lineNumber: Long
   ): IO[String] = parsedLine match {
@@ -128,7 +128,7 @@ object IODumpProcessor {
     (line.trim match {
       case "[" => OpenBracket.pure[IO]
       case "]" => CloseBracket.pure[IO]
-      case str => EntityDocumentWrapper.fromJsonStr(str, opts.jsonDeserializer).map(e => ParsedEntity(e))
+      case str => EntityDoc.fromJsonStr(str, opts.jsonDeserializer).map(e => ParsedEntity(e))
     }).handleErrorWith(
       e =>
         e match {

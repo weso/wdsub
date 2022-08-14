@@ -7,13 +7,13 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = JavaSpec.temurin("11") // "adopt@1.11"
 
-lazy val shexsVersion = "0.2.7"
+lazy val shexsVersion = "0.2.8"
 lazy val srdfVersion  = "0.1.112"
 lazy val utilsVersion = "0.2.24"
 
 // Dependency versions
 lazy val catsVersion       = "2.8.0"
-lazy val catsEffectVersion = "3.3.13"
+lazy val catsEffectVersion = "3.3.14"
 lazy val circeVersion      = "0.14.2"
 lazy val declineVersion    = "2.3.0"
 lazy val fs2Version        = "3.2.7"

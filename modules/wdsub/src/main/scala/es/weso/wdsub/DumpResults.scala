@@ -1,9 +1,18 @@
 package es.weso.wdsub
 
-case class DumpResults(totalEntities: Int, matchedEntities: Int) {
-    def addMatched = this.copy(totalEntities = this.totalEntities + 1, matchedEntities = this.matchedEntities + 1)
-    def addEntity = this.copy(totalEntities = this.totalEntities + 1) 
-    override def toString=s"Matched/total entities = $matchedEntities/$totalEntities"
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+
+case class DumpResults(
+ totalEntities: Int, 
+ matchedEntities: Int
+ ) {
+ def addMatched(e: EntityDocument) = 
+    this.copy(
+     totalEntities = this.totalEntities + 1, 
+     matchedEntities = this.matchedEntities + 1
+     )
+ def addEntity = this.copy(totalEntities = this.totalEntities + 1) 
+ override def toString=s"Matched/total entities = $matchedEntities/$totalEntities"
 }
 
 object DumpResults {

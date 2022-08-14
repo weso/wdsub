@@ -1,14 +1,13 @@
 package es.weso.wdsub
 
-import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 
 import java.io.OutputStream
-
 
 abstract class DumpWriter {
   val outStream: OutputStream
 
-  def writeItem(itemDocument: ItemDocument): Unit
+  def writeEntity(entityDocument: EntityDocument): Unit
 
   def start(): Unit
   def end(): Unit
@@ -16,5 +15,3 @@ abstract class DumpWriter {
   def close(): Unit = outStream.close()
 
 }
-
-

@@ -11,6 +11,8 @@ import es.weso.wshex.matcher.Matcher
 import es.weso.wshex.WSchema
 import es.weso.wshex.matcher.Matching
 import es.weso.wshex.matcher.NoMatching
+import es.weso.wdsub.DumpMode.DumpOnlyMatched
+import es.weso.wdsub.DumpMode.DumpWholeEntity
 
 /**
   * WShEx processor
@@ -35,12 +37,16 @@ abstract class WDSubProcessor(
   override def processItemDocument(itemDocument: ItemDocument): Unit = {
 
     matcher.matchStart(itemDocument) match {
-      case _: Matching => {
+      case m: Matching => {
         if (opts.verbose) {
           println(s"Item: ${itemDocument.getEntityId().getId()} matched")
         }
         incrementMatched()
-        dumpWriter.map(dw => dw.writeItem(itemDocument))
+        val entityToDump = opts.dumpMode match {
+          case DumpOnlyMatched => m.entity.entityDocument
+          case DumpWholeEntity => itemDocument
+        }
+        dumpWriter.map(dw => dw.writeEntity(entityToDump))
         super.processItemDocument(itemDocument)
       }
       case NoMatching(es, ds) => {
