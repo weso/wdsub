@@ -9,10 +9,12 @@ import cats.implicits._
 import es.weso.wdsub.DumpResults
 import es.weso.wbmodel.ShowEntityOptions
 import es.weso.wshex.WSchema
-import es.weso.wshex.matcher.Matcher
+import es.weso.wshex.matcher._
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 import es.weso.utils.VerboseLevel
 import es.weso.utils.named._
+import es.weso.wdsub.DumpOptions
+import es.weso.wdsub.DumpMode
 
 sealed trait DumpAction {
   def withEntry(r: Ref[IO, DumpResults])(e: EntityDoc): IO[Option[String]]
@@ -20,21 +22,34 @@ sealed trait DumpAction {
 
 object DumpAction {
 
-  def filterBySchema(schemaPath: Path, schemaFormat: WShExFormat, verbosity: VerboseLevel): IO[FilterBySchema] =
-    WSchema.fromPath(schemaPath, schemaFormat, VerboseLevel.Info).map(FilterBySchema)
+  def filterBySchema(
+      schemaPath: Path,
+      schemaFormat: WShExFormat,
+      verbosity: VerboseLevel,
+      opts: DumpOptions
+  ): IO[FilterBySchema] =
+    WSchema.fromPath(schemaPath, schemaFormat, VerboseLevel.Info).map(FilterBySchema(_, opts))
 
-  case class FilterBySchema(schema: WSchema) extends DumpAction {
+  case class FilterBySchema(schema: WSchema, opts: DumpOptions) extends DumpAction {
 
     val matcher = Matcher(schema)
     override def withEntry(refResults: Ref[IO, DumpResults])(entity: EntityDoc): IO[Option[String]] =
       entity.entityDocument match {
         case e: EntityDocument => {
-          if (matcher.matchStart(e).matches) {
-            refResults.update(_.addMatched(e)) *>
-              EntityDoc(e).asJsonStr().some.pure[IO]
-          } else
-            refResults.update(_.addEntity).void *>
-              none.pure[IO]
+          matcher.matchStart(e) match {
+            case m: Matching =>
+              refResults.update(_.addMatched(e)) *> 
+              IO.println(s"Matched...${m.entity.entityDocument.getEntityId().getId()} ${opts.dumpMode}") *> {
+                opts.dumpMode match {
+                  case DumpMode.DumpWholeEntity => EntityDoc(e).asJsonStr().some.pure[IO]
+                  case DumpMode.DumpOnlyMatched => m.entity.asJsonStr().some.pure[IO]
+                  case DumpMode.DumpOnlyId      => m.entity.entityDocument.getEntityId().getId().some.pure[IO]
+                }
+              }
+            case n: NoMatching =>
+              refResults.update(_.addEntity).void *>
+                none.pure[IO]
+          }
         }
         case _ => none.pure[IO]
       }

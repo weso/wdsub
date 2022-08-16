@@ -12,7 +12,9 @@ case class DumpResults(
       totalEntities = this.totalEntities + 1,
       matchedEntities = this.matchedEntities + 1
     )
-  def addEntity         = this.copy(totalEntities = this.totalEntities + 1)
+
+  def addEntity = this.copy(totalEntities = this.totalEntities + 1)
+
   override def toString = s"Matched/total entities = $matchedEntities/$totalEntities"
 
   def toExitCode: ExitCode = ExitCode.Success

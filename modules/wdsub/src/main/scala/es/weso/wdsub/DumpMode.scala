@@ -13,5 +13,10 @@ object DumpMode {
     override val name: String = "WholeEntity"
   }
 
-  lazy val availableModes = List(DumpOnlyMatched, DumpWholeEntity)
+  case object DumpOnlyId extends DumpMode {
+    override val name: String = "OnlyId"
+  }
+
+  lazy val availableModes = List(DumpOnlyMatched, DumpWholeEntity, DumpOnlyId)
+
 }

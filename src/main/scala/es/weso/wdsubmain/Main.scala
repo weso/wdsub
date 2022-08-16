@@ -32,20 +32,20 @@ object Processor {
 }
 
 sealed abstract class DumpActionOpt extends Named {
-  def toDumpAction: IO[DumpAction]
+  def toDumpAction(opts: DumpOptions): IO[DumpAction]
 }
 object DumpActionOpt {
   case class FilterBySchemaOpt(path: Path, format: WShExFormat, verbosity: VerboseLevel) extends DumpActionOpt {
-    val name                         = "Filter"
-    def toDumpAction: IO[DumpAction] = DumpAction.filterBySchema(path, format, verbosity)
+    val name                                            = "Filter"
+    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.filterBySchema(path, format, verbosity, opts)
   }
   case object CountEntitiesOpt extends DumpActionOpt {
-    val name                         = "countEntities"
-    def toDumpAction: IO[DumpAction] = DumpAction.CountEntities.pure[IO]
+    val name                                            = "countEntities"
+    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.CountEntities.pure[IO]
   }
   case class ShowEntitiesOpt(maxEntities: Option[Int]) extends DumpActionOpt {
-    val name                         = "showEntities"
-    def toDumpAction: IO[DumpAction] = DumpAction.ShowEntities(maxEntities).pure[IO]
+    val name                                            = "showEntities"
+    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.ShowEntities(maxEntities).pure[IO]
   }
 }
 
@@ -235,7 +235,7 @@ object Main
   ): IO[ExitCode] = processor match {
     case Processor.Fs2 =>
       for {
-        action <- actionOpt.toDumpAction
+        action <- actionOpt.toDumpAction(dumpOptions)
         is     <- IO { JavaFiles.newInputStream(filePath) }
         os <- maybeOutPath match {
           case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE)).pure[IO]
@@ -247,12 +247,12 @@ object Main
       } yield results.toExitCode
     case Processor.WDTK =>
       for {
-        action <- actionOpt.toDumpAction
+        action <- actionOpt.toDumpAction(dumpOptions)
         exitCode <- action match {
-          case DumpAction.FilterBySchema(schema) =>
+          case da: DumpAction.FilterBySchema =>
             for {
               results <- DumpProcessor
-                .dumpProcess(filePath, maybeOutPath, schema, dumpOptions, 0, outputFormat)
+                .dumpProcess(filePath, maybeOutPath, da.schema, dumpOptions, 0, outputFormat)
             } yield results.toExitCode
           case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
         }
