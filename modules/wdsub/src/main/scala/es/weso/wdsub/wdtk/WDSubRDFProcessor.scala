@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wdsub.wdtk
 
 import cats.effect._
 import es.weso.wshex._
@@ -10,6 +10,8 @@ import org.wikidata.wdtk.rdf.{PropertyRegister, RdfSerializer}
 
 import java.io.OutputStream
 import scala.collection.JavaConverters._
+import es.weso.wdsub.DumpOptions
+
 
 /**
   * WShEx processor

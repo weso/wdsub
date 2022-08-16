@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wdsub.writer
 
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 

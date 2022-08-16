@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wdsub.writer
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.ObjectMapper

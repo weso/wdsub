@@ -1,4 +1,5 @@
-package es.weso.wdsub
+package es.weso.wdsub.wdtk 
+
 import org.wikidata.wdtk.datamodel.interfaces._
 
 case class PropertyValue(property: PropertyIdValue, subject: EntityIdValue) {

@@ -1,4 +1,5 @@
-package es.weso.wdsub
+package es.weso.wdsub.fs2processor
+
 import cats.implicits._
 import fs2._
 import fs2.{Stream, text}
@@ -20,15 +21,17 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.exc.MismatchedInputException
 import es.weso.wshex._
 import es.weso.wbmodel._
+import es.weso.wdsub.DumpResults
+import es.weso.wdsub.DumpOptions
 
 case class DumpProcessorError(msg: String) extends RuntimeException(msg)
 
 sealed abstract class ParsedLine
-case object OpenBracket                                extends ParsedLine
-case object CloseBracket                               extends ParsedLine
-case class ParsedEntity(entity: EntityDoc)             extends ParsedLine
-case class Error(str: String)                          extends ParsedLine
-case object EndStream                                  extends ParsedLine
+case object OpenBracket                    extends ParsedLine
+case object CloseBracket                   extends ParsedLine
+case class ParsedEntity(entity: EntityDoc) extends ParsedLine
+case class Error(str: String)              extends ParsedLine
+case object EndStream                      extends ParsedLine
 
 /**
   * Dump processor based on fs2
@@ -71,7 +74,7 @@ object IODumpProcessor {
     } yield results
   }
 
-  def processDump(
+/*  def processDump(
       is: InputStream,
       os: OutputStream,
       errStream: OutputStream,
@@ -91,7 +94,7 @@ object IODumpProcessor {
       .through(writeOutputStream(os.pure[IO]))
       .compile
       .drain
-  }
+  } */
 
   def processLine(withEntity: EntityDoc => IO[Option[String]], opts: DumpOptions)(
       pair: (String, Long)

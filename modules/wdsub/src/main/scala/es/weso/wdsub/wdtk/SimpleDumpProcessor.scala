@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wdsub.wdtk 
 
 import org.wikidata.wdtk.datamodel.interfaces._
 import scala.collection.JavaConverters._

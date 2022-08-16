@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wdsub.wdtk 
 
 // This is a "very imperative" entity counter implementation
 trait EntityCounter {

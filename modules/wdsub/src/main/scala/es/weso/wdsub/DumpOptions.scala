@@ -8,7 +8,7 @@ import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import cats.effect._
 import java.io.InputStream
 import java.io.OutputStream
-import fs2.io.file.Files
+// import fs2.io.file.Files
 import com.fasterxml.jackson.databind.JsonDeserializer
 import org.wikidata.wdtk.datamodel.helpers
 

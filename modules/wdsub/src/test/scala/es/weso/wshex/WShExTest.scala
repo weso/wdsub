@@ -3,7 +3,7 @@ package es.weso.wshex
 import es.weso.rbe.interval.Unbounded
 import es.weso.rdf.nodes._
 import es.weso.rdf._
-import es.weso.wbmodel.PropertyId
+import es.weso.wbmodel._
 import munit._
 import org.wikidata.wdtk.datamodel.implementation._
 import org.wikidata.wdtk.datamodel.helpers.ItemDocumentBuilder
@@ -42,22 +42,22 @@ class WShExTest extends FunSuite {
   )
 
   val schema: WSchema = WSchema(
-    pm = PrefixMap.empty,
-    shapesMap = Map(Start -> shape)
+    shapesMap = Map(Start -> shape),
+    prefixes = Some(PrefixMap.empty)
   )
 
   test("Match shape".only) {
-    val q42 = new ItemIdValueImpl("Q42", "http://www.wikidata.org/entity/")
-    val p31 = new PropertyIdValueImpl("P31", "http://www.wikidata.org/entity/")
+    val q42  = new ItemIdValueImpl("Q42", "http://www.wikidata.org/entity/")
+    val p31  = new PropertyIdValueImpl("P31", "http://www.wikidata.org/entity/")
     val q515 = new ItemIdValueImpl("Q515", "http://www.wikidata.org/entity/")
     val statementBuilder =
       StatementBuilder.forSubjectAndProperty(q42, p31).withValue(q515)
     val itemDocument =
-      ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build())
-    val expected = Matching(List(shape), itemDocument)
+      ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
+    val expected = Matching(List(shape), EntityDoc(itemDocument))
     println(s"#### Expected: $expected")
     assertEquals(
-      Matcher(wShEx = schema).matchStart(itemDocument.build()),
+      Matcher(wShEx = schema).matchStart(itemDocument),
       expected
     )
   }
@@ -97,5 +97,5 @@ class WShExTest extends FunSuite {
       Matching(List(shape))
     )
   }
-   */
+ */
 }

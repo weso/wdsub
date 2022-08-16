@@ -5,6 +5,8 @@ import cats.effect._
 import cats.implicits._
 import com.monovore.decline._
 import com.monovore.decline.effect._
+import es.weso.utils.decline._
+import es.weso.utils.named._
 import es.weso.wshex._
 import es.weso.wshex.matcher._
 import es.weso.wdsub._
@@ -17,6 +19,9 @@ import java.nio.file.{Path, Files => JavaFiles}
 import es.weso.utils.VerboseLevel
 import es.weso.wshex.WShExFormat._
 import es.weso.wikibasedel.EntityFetcher
+import es.weso.wdsub.fs2processor._
+import es.weso.wdsub.wdtk.DumpProcessor
+import es.weso.utils.VerboseLevel._
 
 sealed trait Processor {
   val name: String
@@ -26,16 +31,27 @@ object Processor {
   case object Fs2  extends Processor { override val name = "Fs2"  }
 }
 
-sealed trait DumpAction
-object DumpAction {
-  case class FilterBySchema(schema: Path, schemaFormat: WShExFormat) extends DumpAction
-  case object CountEntities                                          extends DumpAction
-  case class ShowEntities(maxStatements: Option[Int])                extends DumpAction
+sealed abstract class DumpActionOpt extends Named {
+  def toDumpAction: IO[DumpAction]
+}
+object DumpActionOpt {
+  case class FilterBySchemaOpt(path: Path, format: WShExFormat, verbosity: VerboseLevel) extends DumpActionOpt {
+    val name                         = "Filter"
+    def toDumpAction: IO[DumpAction] = DumpAction.filterBySchema(path, format, verbosity)
+  }
+  case object CountEntitiesOpt extends DumpActionOpt {
+    val name                         = "countEntities"
+    def toDumpAction: IO[DumpAction] = DumpAction.CountEntities.pure[IO]
+  }
+  case class ShowEntitiesOpt(maxEntities: Option[Int]) extends DumpActionOpt {
+    val name                         = "showEntities"
+    def toDumpAction: IO[DumpAction] = DumpAction.ShowEntities(maxEntities).pure[IO]
+  }
 }
 
 case class Dump(
     filePath: Path,
-    action: DumpAction,
+    action: DumpActionOpt,
     outPath: Option[Path],
     opts: DumpOptions,
     processor: Processor,
@@ -63,7 +79,7 @@ object Main
   private lazy val processorNames   = processors.map(_.name)
   private lazy val defaultProcessor = processors.head
 
-  private lazy val outputFormats       = List(JsonDump, TurtleDump)
+  private lazy val outputFormats       = List(OutputFormat.JsonDump, OutputFormat.TurtleDump)
   private lazy val outputFormatNames   = outputFormats.map(_.name)
   private lazy val defaultOutputFormat = outputFormats.head
 
@@ -150,17 +166,6 @@ object Main
       )
       .withDefault(true)
 
-  def validatedList[A <: Named](optName: String, ls: List[A]): Opts[A] =
-    Opts
-      .option[String](optName, help = s"$optName. Possible values:...")
-      .mapValidated(
-        str =>
-          ls.find(v => v.name.toLowerCase() == str.toLowerCase()) match {
-            case None    => Validated.invalidNel(s"Invalid $optName")
-            case Some(p) => Validated.valid(p)
-          }
-      )
-
   private val dumpMode =
     validatedList("dumpMode", DumpMode.availableModes)
 
@@ -175,18 +180,30 @@ object Main
   }
 
   private val countEntities =
-    Opts.flag("count", "count entities").map(_ => DumpAction.CountEntities)
+    Opts.flag("count", "count entities").map(_ => DumpActionOpt.CountEntitiesOpt)
 
   private val showEntities: Opts[Unit] =
     Opts.flag("show", "show entities") // _ => ShowEntities)
 
   private val showEntitiesMax =
-    (showEntities, maxStatements).mapN { case (_, max) => DumpAction.ShowEntities(max) }
+    (showEntities, maxStatements).mapN { case (_, max) => DumpActionOpt.ShowEntitiesOpt(max) }
+
+  def verboseLevel: Opts[VerboseLevel] =
+    Opts
+      .option[String]("verbose", short = "v", help = s"verbose level ($showVerboseLevels)")
+      .mapValidated(
+        n =>
+          VerboseLevel.fromString(n) match {
+            case Some(v) => Validated.valid(v)
+            case None    => Validated.invalidNel(s"Unknown value for verbose level: $n")
+          }
+      )
+      .withDefault(Nothing)
 
   private val filterBySchema =
-    (schemaPath, schemaFormat).mapN(DumpAction.FilterBySchema)
+    (schemaPath, schemaFormat, verboseLevel).mapN(DumpActionOpt.FilterBySchemaOpt)
 
-  private val action: Opts[DumpAction] = countEntities orElse showEntitiesMax orElse filterBySchema
+  private val action: Opts[DumpActionOpt] = countEntities orElse showEntitiesMax orElse filterBySchema
 
   private val dump: Opts[Dump] =
     Opts.subcommand("dump", "Process example dump file.") {
@@ -210,61 +227,42 @@ object Main
 
   def dump(
       filePath: Path,
-      action: DumpAction,
+      actionOpt: DumpActionOpt,
       maybeOutPath: Option[Path],
       dumpOptions: DumpOptions,
       processor: Processor,
       outputFormat: OutputFormat
-  ): IO[ExitCode] = {
-    for {
-      is <- IO { JavaFiles.newInputStream(filePath) }
-      os <- maybeOutPath match {
-        case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE)).pure[IO]
-        case None          => none[OutputStream].pure[IO]
-      }
-      refResults <- Ref[IO].of(DumpResults.initial)
-      withEntry  <- getWithEntry(action, refResults)
-      results <- processor match {
-        case Processor.Fs2 => IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
-        case Processor.WDTK =>
-          action match {
-            case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
-              DumpProcessor.dumpProcess(filePath, maybeOutPath, schemaPath, schemaFormat, dumpOptions, 0, outputFormat)
-            case _ => IO.println(s"Not implemented yet")
-          }
-      }
-      _ <- IO.println(s"End of dump processing: $results")
-    } yield ExitCode.Success
+  ): IO[ExitCode] = processor match {
+    case Processor.Fs2 =>
+      for {
+        action <- actionOpt.toDumpAction
+        is     <- IO { JavaFiles.newInputStream(filePath) }
+        os <- maybeOutPath match {
+          case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE)).pure[IO]
+          case None          => none[OutputStream].pure[IO]
+        }
+        refResults <- Ref[IO].of(DumpResults.initial)
+        withEntry  <- getWithEntry(action, refResults)
+        results    <- IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
+      } yield results.toExitCode
+    case Processor.WDTK =>
+      for {
+        action <- actionOpt.toDumpAction
+        exitCode <- action match {
+          case DumpAction.FilterBySchema(schema) =>
+            for {
+              results <- DumpProcessor
+                .dumpProcess(filePath, maybeOutPath, schema, dumpOptions, 0, outputFormat)
+            } yield results.toExitCode
+          case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
+        }
+      } yield exitCode
   }
 
   private def getWithEntry(
       action: DumpAction,
       refResults: Ref[IO, DumpResults]
-  ): IO[EntityDoc => IO[Option[String]]] = action match {
-    case DumpAction.FilterBySchema(schemaPath, schemaFormat) =>
-      for {
-        schema <- WSchema.fromPath(schemaPath, schemaFormat, VerboseLevel.Info)
-        matcher = new Matcher(wShEx = schema)
-      } yield checkSchema(matcher, refResults)
-    case DumpAction.CountEntities     => withEntryCount(refResults).pure[IO]
-    case DumpAction.ShowEntities(max) => withEntryShow(refResults, max).pure[IO]
-  }
-
-  private def withEntryCount(counter: Ref[IO, DumpResults]): EntityDoc => IO[Option[String]] =
-    _ =>
-      for {
-        _ <- counter.update(_.addEntity)
-      } yield None
-
-  private def withEntryShow(
-      counter: Ref[IO, DumpResults],
-      maxEntities: Option[Int]
-  ): EntityDoc => IO[Option[String]] =
-    entity =>
-      for {
-        _ <- IO.println(entity.show(ShowEntityOptions.default.witMaxStatements(maxEntities)))
-        _ <- counter.update(_.addEntity)
-      } yield None
+  ): IO[EntityDoc => IO[Option[String]]] = (action.withEntry(refResults) _).pure[IO]
 
   private def checkSchema(matcher: Matcher, refResults: Ref[IO, DumpResults])(
       entity: EntityDoc
@@ -273,9 +271,9 @@ object Main
       case e: EntityDocument => {
         if (matcher.matchStart(e).matches) {
           refResults.update(_.addMatched(e)) *>
-            Some(EntityDoc(e).asJsonStr()).pure[IO]
+            EntityDoc(e).asJsonStr().some.pure[IO]
         } else
-          refResults.update(_.addEntity) *>
+          refResults.update(_.addEntity).void *>
             none.pure[IO]
       }
       case _ => none.pure[IO]

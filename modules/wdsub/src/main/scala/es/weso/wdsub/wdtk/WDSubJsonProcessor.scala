@@ -1,10 +1,12 @@
-package es.weso.wdsub
+package es.weso.wdsub.wdtk
 
 import cats.effect._
 import es.weso.wshex._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.datamodel.interfaces._
 import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
+import es.weso.wdsub.writer._
+import es.weso.wdsub.DumpOptions
 
 import scala.collection.JavaConverters._
 import java.io.OutputStream

@@ -1,4 +1,4 @@
-package es.weso.wdsub
+package es.weso.wdsub.wdtk
 
 import cats.effect._
 import org.wikidata.wdtk.datamodel.interfaces._
@@ -11,8 +11,11 @@ import es.weso.wshex.matcher.Matcher
 import es.weso.wshex.WSchema
 import es.weso.wshex.matcher.Matching
 import es.weso.wshex.matcher.NoMatching
-import es.weso.wdsub.DumpMode.DumpOnlyMatched
-import es.weso.wdsub.DumpMode.DumpWholeEntity
+import es.weso.wdsub.DumpMode._
+import es.weso.wdsub.writer._
+import es.weso.wdsub.DumpOptions
+
+
 
 /**
   * WShEx processor
