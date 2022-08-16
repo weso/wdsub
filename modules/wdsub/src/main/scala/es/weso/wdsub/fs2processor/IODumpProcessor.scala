@@ -64,7 +64,7 @@ object IODumpProcessor {
         .through(text.lines)
         .zipWithIndex
         .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
-        .map(_._1)
+        // .map(_._1)
         .through(text.utf8.encode)
         .through(when(opts.compressOutput && os.isDefined, compress))
         .through(when(os.isDefined, writeOutputStream(os.get.pure[IO])))
@@ -74,7 +74,7 @@ object IODumpProcessor {
     } yield results
   }
 
-/*  def processDump(
+  /*  def processDump(
       is: InputStream,
       os: OutputStream,
       errStream: OutputStream,
@@ -98,12 +98,12 @@ object IODumpProcessor {
 
   def processLine(withEntity: EntityDoc => IO[Option[String]], opts: DumpOptions)(
       pair: (String, Long)
-  ): IO[(String, Long)] = {
+  ): IO[String] = { // IO[(String, Long)] = {
     val (line, index) = pair
     for {
       parsedLine <- parseLine(line, opts)
-      result     <- processParsedLine(withEntity, parsedLine, index)
-    } yield (result, index)
+      result     <- processParsedLine(withEntity, parsedLine, index, opts.dumpFormat.sep)
+    } yield result // (result, index)
   }
 
   private def decompress: Pipe[IO, Byte, Byte] = s => s.through(Compression[IO].gunzip()).flatMap(_.content)
@@ -118,11 +118,12 @@ object IODumpProcessor {
   private def processParsedLine(
       withEntity: EntityDoc => IO[Option[String]],
       parsedLine: ParsedLine,
-      lineNumber: Long
+      lineNumber: Long,
+      sep: String
   ): IO[String] = parsedLine match {
     case OpenBracket     => "[\n".pure[IO]
     case CloseBracket    => "]\n".pure[IO]
-    case ParsedEntity(e) => withEntity(e).map(_.map(_ + ",\n")).map(_.getOrElse(""))
+    case ParsedEntity(e) => withEntity(e).map(_.map(_ + sep)).map(_.getOrElse(""))
     case Error(e)        => IO { println(s"Error at line $lineNumber: $e") } >> "".pure[IO]
     case EndStream       => "".pure[IO]
   }

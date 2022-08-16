@@ -15,8 +15,6 @@ import es.weso.wdsub.DumpMode._
 import es.weso.wdsub.writer._
 import es.weso.wdsub.DumpOptions
 
-
-
 /**
   * WShEx processor
   *
@@ -48,6 +46,7 @@ abstract class WDSubProcessor(
         val entityToDump = opts.dumpMode match {
           case DumpOnlyMatched => m.entity.entityDocument
           case DumpWholeEntity => itemDocument
+          case DumpOnlyId      => m.entity.entityDocument
         }
         dumpWriter.map(dw => dw.writeEntity(entityToDump))
         super.processItemDocument(itemDocument)

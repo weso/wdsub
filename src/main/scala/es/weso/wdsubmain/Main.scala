@@ -238,7 +238,7 @@ object Main
         action <- actionOpt.toDumpAction(dumpOptions)
         is     <- IO { JavaFiles.newInputStream(filePath) }
         os <- maybeOutPath match {
-          case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE)).pure[IO]
+          case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE_NEW)).pure[IO]
           case None          => none[OutputStream].pure[IO]
         }
         refResults <- Ref[IO].of(DumpResults.initial)
