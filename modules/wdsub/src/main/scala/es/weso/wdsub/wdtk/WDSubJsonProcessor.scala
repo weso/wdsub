@@ -21,8 +21,7 @@ import java.io.OutputStream
 class WDSubJsonProcessor(
     wShEx: WSchema,
     maybeOut: Option[OutputStream],
-    opts: DumpOptions,
-    timeout: Int = 0
+    opts: DumpOptions
 ) extends WDSubProcessor(wShEx, maybeOut.map(out => JsonDumpWriter(out)), opts) {
 
   var totalEntities: Int   = 0

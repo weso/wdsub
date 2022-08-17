@@ -22,6 +22,6 @@ object DumpFormat {
     override val sep: String  = "\n"
   }
 
-  lazy val availableModes = List(Turtle, JSON, Plain)
+  lazy val availableFormats = List(Turtle, JSON, Plain)
 
 }

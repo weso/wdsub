@@ -20,11 +20,10 @@ import org.wikidata.wdtk.datamodel.interfaces.EntityDocumentDumpProcessor
 import es.weso.utils.VerboseLevel
 import es.weso.wshex._
 import es.weso.wdsub.DumpOptions
-import es.weso.wdsub.OutputFormat
-import es.weso.wdsub.OutputFormat._
 import es.weso.wdsub.writer._
 import es.weso.wdsub.DumpResults
 import es.weso.wdsub.LogConfig
+import es.weso.wdsub.DumpFormat
 
 /**
   * Dump processor using Wikidata toolkit DumpProcessingController
@@ -48,19 +47,17 @@ object DumpProcessor {
   private def acquireShExProcessor(
       wshex: WSchema,
       outputPath: Option[Path],
-      opts: DumpOptions,
-      timeout: Int,
-      outputFormat: OutputFormat
+      opts: DumpOptions
   ): IO[ShExProcessor] =
     for {
       _ <- if (opts.showSchema) {
         IO.println(s"Schema: $wshex")
       } else IO.unit
       maybeOut <- acquireOutput(outputPath)
-      shexProcessor = outputFormat match {
-        case JsonDump =>
-          new WDSubJsonProcessor(wshex, maybeOut, opts, timeout)
-        case TurtleDump => {
+      shexProcessor = opts.dumpFormat match {
+        case DumpFormat.JSON =>
+          new WDSubJsonProcessor(wshex, maybeOut, opts)
+        case DumpFormat.Turtle => {
           val out = maybeOut.getOrElse(System.out)
           new WDSubRDFProcessor(
             wshex,
@@ -71,30 +68,30 @@ object DumpProcessor {
             opts
           )
         }
+        case DumpFormat.Plain =>
+          new PlainProcessor(wshex, maybeOut, opts)
       }
     } yield {
       shexProcessor.open()
       ShExProcessor(shexProcessor, shexProcessor)
     }
 
-  private def acquireDumpWriter(maybeStream: Option[OutputStream], format: OutputFormat): IO[Option[DumpWriter]] =
+  private def acquireDumpWriter(maybeStream: Option[OutputStream], format: DumpFormat): IO[Option[DumpWriter]] =
     maybeStream match {
       case None => none[DumpWriter].pure[IO]
       case Some(out) =>
         format match {
-          case JsonDump => IO(Some(JsonDumpWriter(out)))
-          case _        => IO.raiseError(new RuntimeException(s"Not supported yet other output formats: $format"))
+          case DumpFormat.JSON => IO(Some(JsonDumpWriter(out)))
+          case _               => IO.raiseError(new RuntimeException(s"Not supported yet other output formats: $format"))
         }
     }
 
   private def mkShExProcessor(
       schema: WSchema,
       outputPath: Option[Path],
-      opts: DumpOptions,
-      timeout: Int,
-      outputFormat: OutputFormat
+      opts: DumpOptions
   ): Resource[IO, ShExProcessor] =
-    Resource.make(acquireShExProcessor(schema, outputPath, opts, timeout, outputFormat))(
+    Resource.make(acquireShExProcessor(schema, outputPath, opts))(
       shExProcessor =>
         IO {
           if (opts.verbose) println(s"End of process...")
@@ -156,13 +153,11 @@ object DumpProcessor {
       filePath: Path,
       outPath: Option[Path],
       schema: WSchema,
-      opts: DumpOptions,
-      timeout: Int,
-      outputFormat: OutputFormat
+      opts: DumpOptions
   ): IO[DumpResults] = {
     for {
       results <- (
-        mkShExProcessor(schema, outPath, opts, timeout, outputFormat),
+        mkShExProcessor(schema, outPath, opts),
         mkDumpFile(filePath, opts.verbose)
       ).tupled
         .use {

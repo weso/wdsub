@@ -23,21 +23,39 @@ import es.weso.wdsub.fs2processor._
 import es.weso.wdsub.wdtk.DumpProcessor
 import es.weso.utils.VerboseLevel._
 
-sealed trait Processor {
-  val name: String
-}
+sealed trait Processor extends Named
+
 object Processor {
   case object WDTK extends Processor { override val name = "WDTK" }
   case object Fs2  extends Processor { override val name = "Fs2"  }
+
+  val availableProcessors = List(WDTK, Fs2)
+}
+
+sealed trait SchemaFormat extends Named {
+  val wshexFormat: WShExFormat
+}
+object SchemaFormat {
+  case object WShExC extends SchemaFormat {
+    override val name        = "WShExC"
+    override val wshexFormat = WShExFormat.CompactWShExFormat
+  }
+
+  case object ES_ShExC extends SchemaFormat {
+    override val name        = "ShExC"
+    override val wshexFormat = WShExFormat.ESCompactFormat
+  }
+  val availableSchemaFormats = List(WShExC, ES_ShExC)
+
 }
 
 sealed abstract class DumpActionOpt extends Named {
   def toDumpAction(opts: DumpOptions): IO[DumpAction]
 }
 object DumpActionOpt {
-  case class FilterBySchemaOpt(path: Path, format: WShExFormat, verbosity: VerboseLevel) extends DumpActionOpt {
+  case class FilterBySchemaOpt(path: Path, format: SchemaFormat, verbosity: VerboseLevel) extends DumpActionOpt {
     val name                                            = "Filter"
-    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.filterBySchema(path, format, verbosity, opts)
+    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.filterBySchema(path, format.wshexFormat, verbosity, opts)
   }
   case object CountEntitiesOpt extends DumpActionOpt {
     val name                                            = "countEntities"
@@ -54,8 +72,7 @@ case class Dump(
     action: DumpActionOpt,
     outPath: Option[Path],
     opts: DumpOptions,
-    processor: Processor,
-    outputFormat: OutputFormat
+    processor: Processor
 )
 
 case class ProcessEntity(entity: String)
@@ -67,6 +84,7 @@ object Main
       version = BuildInfo.version
     ) {
 
+  // default file for testing dumps
   lazy val DUMP_FILE = "modules/wdsub/src/resources/sample-dump-20150815.json.gz"
 
   val processEntity: Opts[ProcessEntity] =
@@ -74,14 +92,7 @@ object Main
       Opts.option[String]("entity", "Entity name", short = "e").map(ProcessEntity)
     }
 
-  private lazy val filePath         = Opts.argument[Path](metavar = "dumpFile")
-  private lazy val processors       = List(Processor.WDTK, Processor.Fs2)
-  private lazy val processorNames   = processors.map(_.name)
-  private lazy val defaultProcessor = processors.head
-
-  private lazy val outputFormats       = List(OutputFormat.JsonDump, OutputFormat.TurtleDump)
-  private lazy val outputFormatNames   = outputFormats.map(_.name)
-  private lazy val defaultOutputFormat = outputFormats.head
+  private lazy val filePath = Opts.argument[Path](metavar = "dumpFile")
 
   private lazy val schemaFormats       = List(ESCompactFormat, CompactWShExFormat)
   private lazy val schemaFormatNames   = schemaFormats.map(_.name)
@@ -93,49 +104,10 @@ object Main
 
   private val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
 
-  private val processor =
-    Opts
-      .option[String]("processor", help = s"Dump processor library. Possible values: ${processorNames.mkString(",")}")
-      .mapValidated(
-        str =>
-          processors.find(_.name.toLowerCase == str.toLowerCase()) match {
-            case None =>
-              Validated
-                .invalidNel(s"Invalid processor name: $str. Available processors: ${processorNames.mkString(",")}")
-            case Some(p) => Validated.valid(p)
-          }
-      )
-      .withDefault(defaultProcessor)
+  private val processor = validatedList("processor", Processor.availableProcessors, Some(Processor.WDTK))
 
   private val schemaFormat =
-    Opts
-      .option[String]("schemaFormat", help = s"Schema format: ${schemaFormatNames.mkString(",")}")
-      .mapValidated(
-        str =>
-          schemaFormats.find(_.name == str) match {
-            case None =>
-              Validated
-                .invalidNel(
-                  s"Invalid processor name: $str. Available schema formats: ${schemaFormatNames.mkString(",")}"
-                )
-            case Some(p) => Validated.valid(p)
-          }
-      )
-      .withDefault(defaultSchemaFormat)
-
-  private val outputFormat =
-    Opts
-      .option[String]("outputFormat", help = s"Output format. Possible values: ${outputFormatNames.mkString(",")}")
-      .mapValidated(
-        str =>
-          outputFormats.find(_.name == str) match {
-            case None =>
-              Validated
-                .invalidNel(s"Invalid output format: $str. Available processors: ${outputFormatNames.mkString(",")}")
-            case Some(p) => Validated.valid(p)
-          }
-      )
-      .withDefault(defaultOutputFormat)
+    validatedList("schemaFormat", SchemaFormat.availableSchemaFormats, Some(SchemaFormat.WShExC))
 
   private val schemaPath = Opts.option[Path]("schema", help = "ShEx schema", short = "s", metavar = "file")
 
@@ -167,17 +139,22 @@ object Main
       .withDefault(true)
 
   private val dumpMode =
-    validatedList("dumpMode", DumpMode.availableModes)
+    validatedList("dumpMode", DumpMode.availableModes, Some(DumpMode.DumpOnlyMatched))
 
-  private val dumpOpts: Opts[DumpOptions] = (verbose, showCounter, compressOutput, showSchema, dumpMode).mapN {
-    case (v, sc, co, ss, dm) =>
-      DumpOptions.default
-        .withVerbose(v)
-        .withShowCounter(sc)
-        .withCompressOutput(sc)
-        .withShowSchema(ss)
-        .withDumpMode(dm)
-  }
+  private val dumpFormat =
+    validatedList("dumpFormat", DumpFormat.availableFormats, Some(DumpFormat.JSON))
+
+  private val dumpOpts: Opts[DumpOptions] =
+    (verbose, showCounter, compressOutput, showSchema, dumpMode, dumpFormat).mapN {
+      case (v, sc, co, ss, dm, df) =>
+        DumpOptions.default
+          .withVerbose(v)
+          .withShowCounter(sc)
+          .withCompressOutput(sc)
+          .withShowSchema(ss)
+          .withDumpMode(dm)
+          .withDumpFormat(df)
+    }
 
   private val countEntities =
     Opts.flag("count", "count entities").map(_ => DumpActionOpt.CountEntitiesOpt)
@@ -207,14 +184,14 @@ object Main
 
   private val dump: Opts[Dump] =
     Opts.subcommand("dump", "Process example dump file.") {
-      (filePath, action, outPath, dumpOpts, processor, outputFormat).mapN(Dump)
+      (filePath, action, outPath, dumpOpts, processor).mapN(Dump)
     }
 
   override def main: Opts[IO[ExitCode]] =
     (processEntity orElse dump).map {
       case ProcessEntity(entity) => processEntity(entity)
-      case Dump(filePath, action, outPath, verbose, processor, outputFormat) =>
-        dump(filePath, action, outPath, verbose, processor, outputFormat)
+      case Dump(filePath, action, outPath, verbose, processor) =>
+        dump(filePath, action, outPath, verbose, processor)
     }
 
   def processEntity(entityStr: String): IO[ExitCode] =
@@ -230,8 +207,7 @@ object Main
       actionOpt: DumpActionOpt,
       maybeOutPath: Option[Path],
       dumpOptions: DumpOptions,
-      processor: Processor,
-      outputFormat: OutputFormat
+      processor: Processor
   ): IO[ExitCode] = processor match {
     case Processor.Fs2 =>
       for {
@@ -252,7 +228,7 @@ object Main
           case da: DumpAction.FilterBySchema =>
             for {
               results <- DumpProcessor
-                .dumpProcess(filePath, maybeOutPath, da.schema, dumpOptions, 0, outputFormat)
+                .dumpProcess(filePath, maybeOutPath, da.schema, dumpOptions)
             } yield results.toExitCode
           case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
         }

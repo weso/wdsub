@@ -7,9 +7,9 @@ import es.weso.utils.named._
 
 package object decline {
 
-  def validatedList[A <: Named](optName: String, ls: List[A]): Opts[A] = {
+  def validatedList[A <: Named](optName: String, ls: List[A], default: Option[A]): Opts[A] = {
     val lsStr = ls.map(_.name).mkString(",")
-    Opts
+    val os = Opts
       .option[String](optName, help = s"$optName. Possible values: $lsStr")
       .mapValidated(
         str =>
@@ -18,5 +18,7 @@ package object decline {
             case Some(p) => Validated.valid(p)
           }
       )
+    // if default is specified, we add it  
+    default.fold(os)(v => os.withDefault(v))  
   }
 }
