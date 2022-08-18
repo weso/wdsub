@@ -23,58 +23,6 @@ import es.weso.wdsub.fs2processor._
 import es.weso.wdsub.wdtk.DumpProcessor
 import es.weso.utils.VerboseLevel._
 
-sealed trait Processor extends Named
-
-object Processor {
-  case object WDTK extends Processor { override val name = "WDTK" }
-  case object Fs2  extends Processor { override val name = "Fs2"  }
-
-  val availableProcessors = List(WDTK, Fs2)
-}
-
-sealed trait SchemaFormat extends Named {
-  val wshexFormat: WShExFormat
-}
-object SchemaFormat {
-  case object WShExC extends SchemaFormat {
-    override val name        = "WShExC"
-    override val wshexFormat = WShExFormat.CompactWShExFormat
-  }
-
-  case object ES_ShExC extends SchemaFormat {
-    override val name        = "ShExC"
-    override val wshexFormat = WShExFormat.ESCompactFormat
-  }
-  val availableSchemaFormats = List(WShExC, ES_ShExC)
-
-}
-
-sealed abstract class DumpActionOpt extends Named {
-  def toDumpAction(opts: DumpOptions): IO[DumpAction]
-}
-object DumpActionOpt {
-  case class FilterBySchemaOpt(path: Path, format: SchemaFormat, verbosity: VerboseLevel) extends DumpActionOpt {
-    val name                                            = "Filter"
-    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.filterBySchema(path, format.wshexFormat, verbosity, opts)
-  }
-  case object CountEntitiesOpt extends DumpActionOpt {
-    val name                                            = "countEntities"
-    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.CountEntities.pure[IO]
-  }
-  case class ShowEntitiesOpt(maxEntities: Option[Int]) extends DumpActionOpt {
-    val name                                            = "showEntities"
-    def toDumpAction(opts: DumpOptions): IO[DumpAction] = DumpAction.ShowEntities(maxEntities).pure[IO]
-  }
-}
-
-case class Dump(
-    filePath: Path,
-    action: DumpActionOpt,
-    outPath: Option[Path],
-    opts: DumpOptions,
-    processor: Processor
-)
-
 case class ProcessEntity(entity: String)
 
 object Main
@@ -84,23 +32,12 @@ object Main
       version = BuildInfo.version
     ) {
 
-  // default file for testing dumps
-  lazy val DUMP_FILE = "modules/wdsub/src/resources/sample-dump-20150815.json.gz"
-
   val processEntity: Opts[ProcessEntity] =
     Opts.subcommand("extract", "Show information about an entity.") {
       Opts.option[String]("entity", "Entity name", short = "e").map(ProcessEntity)
     }
 
   private lazy val filePath = Opts.argument[Path](metavar = "dumpFile")
-
-  private lazy val schemaFormats       = List(ESCompactFormat, CompactWShExFormat)
-  private lazy val schemaFormatNames   = schemaFormats.map(_.name)
-  private lazy val defaultSchemaFormat = schemaFormats.head
-
-  private lazy val dumpModes       = DumpMode.availableModes
-  private lazy val dumpModesNames  = dumpModes.map(_.name)
-  private lazy val defaultDumpMode = dumpModes.head
 
   private val maxStatements = Opts.option[Int]("maxStatements", "max statements to show").orNone
 
@@ -218,8 +155,8 @@ object Main
           case None          => none[OutputStream].pure[IO]
         }
         refResults <- Ref[IO].of(DumpResults.initial)
-        withEntry  <- getWithEntry(action, refResults)
-        results    <- IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
+        withEntry = (action.withEntry(refResults) _)
+        results <- IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
       } yield results.toExitCode
     case Processor.WDTK =>
       for {
@@ -233,27 +170,6 @@ object Main
           case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
         }
       } yield exitCode
-  }
-
-  private def getWithEntry(
-      action: DumpAction,
-      refResults: Ref[IO, DumpResults]
-  ): IO[EntityDoc => IO[Option[String]]] = (action.withEntry(refResults) _).pure[IO]
-
-  private def checkSchema(matcher: Matcher, refResults: Ref[IO, DumpResults])(
-      entity: EntityDoc
-  ): IO[Option[String]] = {
-    entity.entityDocument match {
-      case e: EntityDocument => {
-        if (matcher.matchStart(e).matches) {
-          refResults.update(_.addMatched(e)) *>
-            EntityDoc(e).asJsonStr().some.pure[IO]
-        } else
-          refResults.update(_.addEntity).void *>
-            none.pure[IO]
-      }
-      case _ => none.pure[IO]
-    }
   }
 
 }
