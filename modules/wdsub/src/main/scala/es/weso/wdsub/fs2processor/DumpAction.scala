@@ -17,6 +17,7 @@ import es.weso.wdsub.DumpOptions
 import es.weso.wdsub.DumpMode
 import es.weso.wdsub.DumpFormat
 import es.weso.wbmodel.Value
+import java.io.OutputStream
 
 sealed trait DumpAction {
   def withEntry(r: Ref[IO, DumpResults])(e: EntityDoc): IO[Option[String]]
@@ -30,28 +31,37 @@ object DumpAction {
       verbosity: VerboseLevel,
       opts: DumpOptions
   ): IO[FilterBySchema] =
-    WSchema.fromPath(schemaPath, schemaFormat, VerboseLevel.Info).map(FilterBySchema(_, opts))
+    Serializer
+      .makeSerializer(opts.dumpFormat)
+      .use(
+        serializer =>
+          WSchema
+            .fromPath(schemaPath, schemaFormat, VerboseLevel.Info)
+            .map(FilterBySchema(_, opts, serializer))
+      )
 
-  case class FilterBySchema(schema: WSchema, opts: DumpOptions) extends DumpAction {
+  case class FilterBySchema(schema: WSchema, opts: DumpOptions, serializer: Serializer) extends DumpAction {
 
     val matcher = Matcher(schema)
-    val serializer = opts.dumpFormat match {
+    /*    val serializer = opts.dumpFormat match {
       case DumpFormat.JSON   => JSONSerializer()
       case DumpFormat.Turtle => RDFSerializer()
       case DumpFormat.Plain  => PlainSerializer()
-    }
+    } */
     override def withEntry(refResults: Ref[IO, DumpResults])(entity: EntityDoc): IO[Option[String]] =
       entity.entityDocument match {
         case e: EntityDocument => {
           matcher.matchStart(e) match {
             case m: Matching =>
               refResults.update(_.addMatched(e)) *>
-                IO.println(s"Matched...${m.entity.entityDocument.getEntityId().getId()} ${opts.dumpMode} ${opts.dumpFormat}") *> {
+                IO.println(
+                  s"Matched...${m.entity.entityDocument.getEntityId().getId()} ${opts.dumpMode} ${opts.dumpFormat}"
+                ) *> {
                 opts.dumpMode match {
                   case DumpMode.DumpWholeEntity =>
-                    serializer.serialize(entity).map(_.some) 
+                    serializer.serialize(entity).map(_.some)
                   case DumpMode.DumpOnlyMatched =>
-                    serializer.serialize(m.entity).map(_.some) 
+                    serializer.serialize(m.entity).map(_.some)
                   case DumpMode.DumpOnlyId =>
                     m.entity.entityDocument.getEntityId().getId().some.pure[IO]
                 }
