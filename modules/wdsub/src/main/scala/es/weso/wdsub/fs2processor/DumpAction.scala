@@ -20,6 +20,9 @@ import es.weso.wbmodel.Value
 import java.io.OutputStream
 
 sealed trait DumpAction {
+  def start: IO[String]
+  def end: IO[String]
+  def sep: String
   def withEntry(r: Ref[IO, DumpResults])(e: EntityDoc): IO[Option[String]]
 }
 
@@ -42,12 +45,11 @@ object DumpAction {
 
   case class FilterBySchema(schema: WSchema, opts: DumpOptions, serializer: Serializer) extends DumpAction {
 
+    def start = serializer.start
+    def end   = serializer.end
+    def sep   = serializer.sep
+
     val matcher = Matcher(schema)
-    /*    val serializer = opts.dumpFormat match {
-      case DumpFormat.JSON   => JSONSerializer()
-      case DumpFormat.Turtle => RDFSerializer()
-      case DumpFormat.Plain  => PlainSerializer()
-    } */
     override def withEntry(refResults: Ref[IO, DumpResults])(entity: EntityDoc): IO[Option[String]] =
       entity.entityDocument match {
         case e: EntityDocument => {
@@ -78,6 +80,10 @@ object DumpAction {
 
   case object CountEntities extends DumpAction {
 
+    override def start = "".pure[IO]
+    override def end   = "".pure[IO]
+    override def sep   = ""
+
     override def withEntry(counter: Ref[IO, DumpResults])(e: EntityDoc): IO[Option[String]] =
       for {
         _ <- counter.update(_.addEntity)
@@ -85,6 +91,10 @@ object DumpAction {
   }
 
   case class ShowEntities(maxStatements: Option[Int]) extends DumpAction {
+
+    override def start = "".pure[IO]
+    override def end   = "".pure[IO]
+    override def sep   = ""
 
     override def withEntry(ref: Ref[IO, DumpResults])(entity: EntityDoc): IO[Option[String]] =
       for {

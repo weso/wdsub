@@ -53,7 +53,10 @@ object IODumpProcessor {
   def process(
       is: InputStream,
       os: Option[OutputStream],
+      start: IO[String],
       withEntity: EntityDoc => IO[Option[String]],
+      sep: String,
+      end: IO[String],
       refResults: Ref[IO, DumpResults],
       opts: DumpOptions = DumpOptions.default
   ): IO[DumpResults] = {
@@ -63,7 +66,7 @@ object IODumpProcessor {
         .through(text.utf8.decode)
         .through(text.lines)
         .zipWithIndex
-        .parEvalMap(opts.maxConcurrent)(processLine(withEntity, opts))
+        .parEvalMap(opts.maxConcurrent)(processLine(start, withEntity, sep, end, opts))
         // .map(_._1)
         .through(text.utf8.encode)
         .through(when(opts.compressOutput && os.isDefined, compress))
@@ -96,13 +99,19 @@ object IODumpProcessor {
       .drain
   } */
 
-  def processLine(withEntity: EntityDoc => IO[Option[String]], opts: DumpOptions)(
+  def processLine(
+      start: IO[String],
+      withEntity: EntityDoc => IO[Option[String]],
+      sep: String,
+      end: IO[String],
+      opts: DumpOptions
+  )(
       pair: (String, Long)
   ): IO[String] = { // IO[(String, Long)] = {
     val (line, index) = pair
     for {
       parsedLine <- parseLine(line, opts)
-      result     <- processParsedLine(withEntity, parsedLine, index, opts.dumpFormat.sep)
+      result     <- processParsedLine(withEntity, parsedLine, index, start, sep, end)
     } yield result // (result, index)
   }
 
@@ -119,10 +128,12 @@ object IODumpProcessor {
       withEntity: EntityDoc => IO[Option[String]],
       parsedLine: ParsedLine,
       lineNumber: Long,
-      sep: String
+      start: IO[String],
+      sep: String,
+      end: IO[String]
   ): IO[String] = parsedLine match {
-    case OpenBracket     => "[\n".pure[IO]
-    case CloseBracket    => "]\n".pure[IO]
+    case OpenBracket     => start
+    case CloseBracket    => end
     case ParsedEntity(e) => withEntity(e).map(_.map(_ + sep)).map(_.getOrElse(""))
     case Error(e)        => IO { println(s"Error at line $lineNumber: $e") } >> "".pure[IO]
     case EndStream       => "".pure[IO]

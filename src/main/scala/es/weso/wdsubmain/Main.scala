@@ -156,7 +156,7 @@ object Main
         }
         refResults <- Ref[IO].of(DumpResults.initial)
         withEntry = (action.withEntry(refResults) _)
-        results <- IODumpProcessor.process(is, os, withEntry, refResults, dumpOptions)
+        results <- IODumpProcessor.process(is, os, action.start, withEntry, action.sep, action.end, refResults, dumpOptions)
       } yield results.toExitCode
     case Processor.WDTK =>
       for {

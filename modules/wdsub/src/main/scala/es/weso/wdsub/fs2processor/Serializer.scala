@@ -10,6 +10,12 @@ abstract class Serializer {
 
   def serialize(entityDoc: EntityDoc): IO[String]
 
+  // Beginning string
+  def start: IO[String] 
+
+  // Last string
+  def end: IO[String]
+
   // Line separator
   def sep: String
 }

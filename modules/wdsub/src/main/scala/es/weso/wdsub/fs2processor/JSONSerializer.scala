@@ -7,7 +7,10 @@ import cats.implicits._
 case class JSONSerializer() extends Serializer {
   def serialize(entityDoc: EntityDoc): IO[String] = entityDoc.asJsonStr().pure[IO]
 
-  def sep = ",\n"
+  def start = "[\n".pure[IO]
+  def sep   = ",\n"
+
+  def end = "]".pure[IO]
 }
 
 object JSONSerializer {
