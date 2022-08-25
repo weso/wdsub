@@ -45,6 +45,7 @@ import org.wikidata.wdtk.datamodel.interfaces.LexemeIdValue
 import org.wikidata.wdtk.rdf.Vocabulary
 import org.antlr.v4
 import es.weso.wdsub.DumpOptions
+import org.wikidata.wdtk.datamodel.interfaces.Claim
 
 case class RDFSerializerErrorUnknownEntity(ed: EntityDoc)
     extends RuntimeException(s"Unexpected entitydoc: $ed. Should be item or property")
@@ -68,6 +69,7 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
   val pr       = IRI(Vocabulary.PREFIX_PROPERTY_REFERENCE)
   val prov     = IRI(Vocabulary.PREFIX_PROV)
   val rdfs     = IRI(Vocabulary.PREFIX_RDFS)
+  val wds      = IRI(Vocabulary.PREFIX_WIKIDATA_STATEMENT)
   val skos     = IRI(Vocabulary.PREFIX_SKOS)
   val schema   = IRI(Vocabulary.PREFIX_SCHEMA)
   val wikibase = IRI(Vocabulary.PREFIX_WBONTO)
@@ -90,6 +92,7 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
       Prefix("prov")     -> prov,
       Prefix("rdf")      -> rdf,
       Prefix("rdfs")     -> rdfs,
+      Prefix("wds")      -> wds,
       Prefix("skos")     -> skos,
       Prefix("schema")   -> schema,
       Prefix("wd")       -> wd,
@@ -164,7 +167,7 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
   def mkSimpleStatement(statement: Statement, rdf: RDFBuilder): IO[RDFBuilder] = {
     val subj             = IRI(statement.getSubject().getIri())
     val pred             = wdt + statement.getMainSnak().getPropertyId().getId()
-    val snakRdfConverter = SnakRdfConverter(subj: IRI, pred: IRI, rdf: RDFBuilder)
+    val snakRdfConverter = SnakRdfConverter(subj, pred, rdf)
     statement.getMainSnak().accept(snakRdfConverter)
   }
 
@@ -209,10 +212,17 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
 
   def mkFullStatement(statement: Statement, rdf: RDFBuilder): IO[RDFBuilder] = {
     val iriStatement = IRI(Vocabulary.getStatementUri(statement))
-    val subj             = IRI(statement.getSubject().getIri())
-    val pred             = p + statement.getMainSnak().getPropertyId().getId()
+    val subj         = IRI(statement.getSubject().getIri())
+    val propId       = statement.getMainSnak().getPropertyId().getId()
+    val pred         = p + propId
     rdf.addTriple(RDFTriple(subj, pred, iriStatement)) *>
-    rdf.addType(iriStatement, IRI(Vocabulary.WB_PROPERTY_TYPE))
+      rdf.addType(iriStatement, IRI(Vocabulary.WB_STATEMENT)) *>
+      mkClaim(iriStatement, ps + propId, statement.getClaim(), rdf)
+  }
+
+  def mkClaim(subj: IRI, pred: IRI, claim: Claim, rdf: RDFBuilder): IO[RDFBuilder] = {
+    val snakRdfConverter = SnakRdfConverter(subj, pred, rdf)
+    claim.getMainSnak().accept(snakRdfConverter)
   }
 
   def mkStatement(statement: Statement, rdf: RDFBuilder, bestRank: Option[StatementRank]): IO[RDFBuilder] = {
