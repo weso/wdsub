@@ -3,9 +3,10 @@ This project is a Wikibase Subsetting tool based on [Shape Expressions(ShEx)](ht
 
 The project processes wikidata dumps and extracts a subset based on a Shape Expression.
 
-## Usage
+## Usage as a command line tool
 
-Command line options:
+If you have a binary executable `wdsub`, it's usage is similar to linux command line tools. The tool has the following options:
+
 
 ```
 Usage:
@@ -33,10 +34,61 @@ wdsub dump -s examples/humans.shex -o target/outputFile.json examples/100lines.j
 processes the dump file `examples/100lines.json` using the ShEx schema `examples/humans.shex` 
  generating the file `target/outputFile.json` 
 
+The dump options are:
+
+```shell
+ Usage:
+     wdsub dump --count [--out <file>] [--verbose] [--showCounter] [--compressOutput <string>] [--showSchema] [--dumpMode <string>] [--dumpFormat <string>] [--processor <string>] <dumpFile>
+     wdsub dump --show [--maxStatements <integer>] [--out <file>] [--verbose] [--showCounter] [--compressOutput <string>] [--showSchema] [--dumpMode <string>] [--dumpFormat <string>] [--processor <string>] <dumpFile>
+     wdsub dump --schema <file> [--schemaFormat <string>] [--verbose <string>] [--out <file>] [--verbose] [--showCounter] [--compressOutput <string>] [--showSchema] [--dumpMode <string>] [--dumpFormat <string>] [--processor <string>] <dumpFile>
+ Process example dump file.
+ Options and flags:
+     --help
+         Display this help text.
+     --count
+         count entities
+     --show
+         show entities
+     --maxStatements <integer>
+         max statements to show
+     --schema <file>, -s <file>
+         ShEx schema
+     --schemaFormat <string>
+         schemaFormat. Possible values: WShExC,ShExC
+     --verbose <string>, -v <string>
+         verbose level (0-nothing,1-basic,2-info,3-details,4-debug,5-step,6-all)
+     --out <file>, -o <file>
+         output path
+     --verbose
+         Verbose mode
+     --showCounter
+         Show counter at the end of process
+     --compressOutput <string>
+         Compress output. Possible values: true,false
+     --showSchema
+         Show schema
+     --dumpMode <string>
+         dumpMode. Possible values: OnlyMatched,WholeEntity,OnlyId
+     --dumpFormat <string>
+         dumpFormat. Possible values: Turtle,JSON,Text
+     --processor <string>
+         processor. Possible values: WDTK,Fs2
+```
+
+## Usage from docker
+
+The docker image is published as [wesogroup/wdsub](https://hub.docker.com/repository/docker/wesogroup/wdsub)
+
+In order to process dumps from docker, you can run:
+
+```
+docker run -d -v [folder-with-dumps]:/data -v [folder-with-schemas]:/shex -v [output-folder]:/dumps wesogroup/wdsub:{version} dump -o /dumps/resultDump.json -s /shex/[shexFile].shex /data/[dumpFile].json.gz
+```
 
 
-## Prerequisites 
-### Install scala
+## Building and compiling
+
+### Prerrequisites: Install scala
 
 The tool has been implemented in [Scala](https://www.scala-lang.org/) and uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you first need to install sbt. 
 
@@ -53,7 +105,7 @@ git clone https://github.com/weso/wdsub.git
 cd wdsub
 ``` 
 
-## Installation and compilation
+### Compilation to local binary
 
 ```
 sbt universal:packageBin
@@ -81,43 +133,11 @@ In order to create a docker image (it requires the right credentials):
 sbt docker:publish
 ```
 
-The docker image is published as [wesogroup/wdsub](https://hub.docker.com/repository/docker/wesogroup/wdsub)
-
-In order to process dumps from docker, you can run:
-
-```
-docker run -d -v [folder-with-dumps]:/data -v [folder-with-schemas]:/shex -v [output-folder]:/dumps wesogroup/wdsub:{version} dump -o /dumps/resultDump.json -s /shex/[shexFile].shex /data/[dumpFile].json.gz
-```
-
-
-## Docs
-
-The documentation of the project is generated with [mdoc](https://scalameta.org/mdoc) and [Docusaurus](https://docusaurus.io/). 
-
-Although the documentation is generated automatically with github actions, you can generate the documentation locally using:
-
-```
-> sbt docs/mdoc
-> cd website && yarn install && yarn run build
-```
-
 ## More information
 
 Another tool that creates subsets from wikidata dumps is [WDumper](https://github.com/bennofs/wdumper)
 
-## Publishing to OSS-Sonatype
-
-This project uses [the sbt ci release](https://github.com/olafurpg/sbt-ci-release) plugin for publishing to [OSS Sonatype](https://oss.sonatype.org/).
-
-##### SNAPSHOT Releases
-Open a PR and merge it to watch the CI release a -SNAPSHOT version [here](https://oss.sonatype.org/#view-repositories;releases~browsestorage)
-
-##### Full Library Releases
-1. Push a tag and watch the CI do a regular release
-2. `git tag -a v0.1.0 -m "v0.1.0"`
-3. `git push origin v0.1.0`
-_Note that the tag version MUST start with v._
-
 ## Author & contributors
 
 * Author: [Jose Emilio Labra Gayo](http://labra.weso.es)
+
