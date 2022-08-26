@@ -2,6 +2,7 @@ package es.weso.wdsub
 
 import munit._
 import es.weso.wdsub.fs2processor.RDFSerializer._
+import es.weso.wdsub.fs2processor.RDFSerializer
 
 class RDFSerializerTest extends FunSuite {
 
@@ -15,6 +16,6 @@ class RDFSerializerTest extends FunSuite {
                  |""".stripMargin
     val expected = """| :x a :T .
                       |""".stripMargin
-    assertNoDiff(removePrefixes(str), expected)
+    assertNoDiff(RDFSerializer.removePrefixes(str), expected)
   }
 }

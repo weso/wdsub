@@ -23,26 +23,28 @@ lazy val jacksonVersion    = "2.12.3"
 lazy val munitVersion           = "0.7.29"
 lazy val munitEffectVersion     = "1.0.7"
 lazy val slf4jVersion           = "1.7.32"
+lazy val log4catsVersion        = "2.4.0"
 lazy val wikidataToolkitVersion = "0.13.5"
 
 // Dependency modules
-lazy val catsCore      = "org.typelevel"   %% "cats-core" % catsVersion
-lazy val catsKernel    = "org.typelevel"   %% "cats-kernel" % catsVersion
-lazy val catsEffect    = "org.typelevel"   %% "cats-effect" % catsEffectVersion
-lazy val circeCore     = "io.circe"        %% "circe-core" % circeVersion
-lazy val circeGeneric  = "io.circe"        %% "circe-generic" % circeVersion
-lazy val circeParser   = "io.circe"        %% "circe-parser" % circeVersion
-lazy val decline       = "com.monovore"    %% "decline" % declineVersion
-lazy val declineEffect = "com.monovore"    %% "decline-effect" % declineVersion
-lazy val fs2           = "co.fs2"          %% "fs2-core" % fs2Version
-lazy val fs2io         = "co.fs2"          %% "fs2-io" % fs2Version
-lazy val jenaArq       = "org.apache.jena" % "jena-arq" % jenaVersion
-lazy val jenaFuseki    = "org.apache.jena" % "jena-fuseki-main" % jenaVersion
-lazy val jacksonScala  = ""                % ""
-lazy val munit         = "org.scalameta"   %% "munit" % munitVersion
-lazy val munitEffect   = "org.typelevel"   %% "munit-cats-effect-3" % munitEffectVersion
-lazy val slf4j_api     = "org.slf4j"       % "slf4j-api" % slf4jVersion
-lazy val slf4j_log4j12 = "org.slf4j"       % "slf4j-log4j12" % slf4jVersion
+lazy val catsCore       = "org.typelevel"   %% "cats-core" % catsVersion
+lazy val catsKernel     = "org.typelevel"   %% "cats-kernel" % catsVersion
+lazy val catsEffect     = "org.typelevel"   %% "cats-effect" % catsEffectVersion
+lazy val circeCore      = "io.circe"        %% "circe-core" % circeVersion
+lazy val circeGeneric   = "io.circe"        %% "circe-generic" % circeVersion
+lazy val circeParser    = "io.circe"        %% "circe-parser" % circeVersion
+lazy val decline        = "com.monovore"    %% "decline" % declineVersion
+lazy val declineEffect  = "com.monovore"    %% "decline-effect" % declineVersion
+lazy val fs2            = "co.fs2"          %% "fs2-core" % fs2Version
+lazy val fs2io          = "co.fs2"          %% "fs2-io" % fs2Version
+lazy val jenaArq        = "org.apache.jena" % "jena-arq" % jenaVersion
+lazy val jenaFuseki     = "org.apache.jena" % "jena-fuseki-main" % jenaVersion
+lazy val jacksonScala   = ""                % ""
+lazy val munit          = "org.scalameta"   %% "munit" % munitVersion
+lazy val munitEffect    = "org.typelevel"   %% "munit-cats-effect-3" % munitEffectVersion
+lazy val slf4j_api      = "org.slf4j"       % "slf4j-api" % slf4jVersion
+lazy val slf4j_log4j12  = "org.slf4j"       % "slf4j-log4j12" % slf4jVersion
+lazy val log4cats_slf4j = "org.typelevel"   %% "log4cats-slf4j" % log4catsVersion
 
 lazy val wdtk_dumpfiles   = "org.wikidata.wdtk" % "wdtk-dumpfiles"   % wikidataToolkitVersion
 lazy val wdtk_wikibaseapi = "org.wikidata.wdtk" % "wdtk-wikibaseapi" % wikidataToolkitVersion
@@ -132,7 +134,8 @@ lazy val wdsub = project
       wdtk_dumpfiles,
       wdtk_wikibaseapi,
       slf4j_api,
-      slf4j_log4j12
+      slf4j_log4j12,
+      log4cats_slf4j
     ),
     testFrameworks += MUnitFramework
   )

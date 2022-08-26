@@ -46,6 +46,7 @@ import org.wikidata.wdtk.rdf.Vocabulary
 import org.antlr.v4
 import es.weso.wdsub.DumpOptions
 import org.wikidata.wdtk.datamodel.interfaces.Claim
+import org.wikidata.wdtk.rdf.values.TimeValueConverter
 
 case class RDFSerializerErrorUnknownEntity(ed: EntityDoc)
     extends RuntimeException(s"Unexpected entitydoc: $ed. Should be item or property")
@@ -54,6 +55,8 @@ case class RDFSerializerErrorUnknownEntityIdValue(ed: EntityIdValue)
 
 case class RDFSerializer(format: RDFFormat) extends Serializer {
 
+  // val logger = Logger
+
   /* I would prefer to reuse the definitions from Wikidata-toolkit
      https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/AbstractRdfConverter.java
     However, that code is based on OutputStreams which make the code imperative
@@ -61,6 +64,7 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
    */
 
   val wd       = IRI("http://www.wikidata.org/entity/")
+  val geo      = IRI(Vocabulary.PREFIX_GEO)
   val wdt      = IRI(Vocabulary.PREFIX_PROPERTY_DIRECT)
   val rdf      = IRI(Vocabulary.PREFIX_RDF)
   val p        = IRI(Vocabulary.PREFIX_PROPERTY)
@@ -85,6 +89,7 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
 
   val wikibasePrefixMap = PrefixMap(
     Map(
+      Prefix("geo")      -> geo,
       Prefix("p")        -> p,
       Prefix("ps")       -> ps,
       Prefix("pq")       -> pq,
@@ -97,7 +102,8 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
       Prefix("schema")   -> schema,
       Prefix("wd")       -> wd,
       Prefix("wdt")      -> wdt,
-      Prefix("wikibase") -> wikibase
+      Prefix("wikibase") -> wikibase,
+      Prefix("xsd")      -> xsd
     )
   )
 
@@ -186,7 +192,8 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
     }
 
     override def visit(value: GlobeCoordinatesValue): IO[RDFBuilder] =
-      IO.println(s"Not implemented GlobeCoordinates visitor for $subj - $pred") *> rdf.pure[IO]
+      rdf.addTriple(RDFTriple(subj, pred, GlobeCoordinatesConverter.getLiteral(value)))
+    // TODO add complex representation...
 
     override def visit(value: EntityIdValue): IO[RDFBuilder] = value match {
       case id: ItemIdValue     => rdf.addTriple(RDFTriple(subj, pred, IRI(id.getIri())))
@@ -197,13 +204,18 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
     }
     override def visit(value: MonolingualTextValue): IO[RDFBuilder] =
       rdf.addTriple(RDFTriple(subj, pred, mkLangString(value)))
-    override def visit(x: QuantityValue): IO[RDFBuilder] =
-      IO.println(s"Not implemented Quantity visitor for $subj - $pred") *> rdf.pure[IO]
+
+    override def visit(value: QuantityValue): IO[RDFBuilder] =
+      rdf.addTriple(RDFTriple(subj, pred, QuantityConverter.getQuantityLiteral(value)))
 
     override def visit(x: StringValue): IO[RDFBuilder] =
       rdf.addTriple(RDFTriple(subj, pred, StringLiteral(x.getString())))
-    override def visit(x: TimeValue): IO[RDFBuilder] =
-      IO.println(s"Not implemented TimeValue visitor for $subj - $pred") *> rdf.pure[IO]
+
+    override def visit(timeValue: TimeValue): IO[RDFBuilder] = {
+      val literal = TimeConverter.getTimeLiteral(timeValue)
+      rdf.addTriple(RDFTriple(subj, pred, literal))
+      // TODO: Add complex representation of time values
+    }
 
     override def visit(x: UnsupportedValue): IO[RDFBuilder] =
       rdf.addTriple(RDFTriple(subj, pred, StringLiteral(x.getTypeJsonString())))
@@ -218,11 +230,18 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
     rdf.addTriple(RDFTriple(subj, pred, iriStatement)) *>
       rdf.addType(iriStatement, IRI(Vocabulary.WB_STATEMENT)) *>
       mkClaim(iriStatement, ps + propId, statement.getClaim(), rdf)
+    // TODO: references, sitelinks
   }
 
   def mkClaim(subj: IRI, pred: IRI, claim: Claim, rdf: RDFBuilder): IO[RDFBuilder] = {
     val snakRdfConverter = SnakRdfConverter(subj, pred, rdf)
-    claim.getMainSnak().accept(snakRdfConverter)
+    claim.getMainSnak().accept(snakRdfConverter) *>
+      claim.getAllQualifiers().asScala.toList.foldM(rdf) {
+        case (current, snak) => {
+          val qualifierConverter = SnakRdfConverter(subj, pq + snak.getPropertyId().getId(), rdf)
+          snak.accept(qualifierConverter)
+        }
+      }
   }
 
   def mkStatement(statement: Statement, rdf: RDFBuilder, bestRank: Option[StatementRank]): IO[RDFBuilder] = {
@@ -306,7 +325,7 @@ object RDFSerializer {
     else None
   }
 
-  private def removePrefixes(str: String): String = {
+  def removePrefixes(str: String): String = {
     removePrefix(str) match {
       case None          => str
       case Some(removed) => removePrefixes(removed)

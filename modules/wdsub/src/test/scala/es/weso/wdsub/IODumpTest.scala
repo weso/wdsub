@@ -20,6 +20,7 @@ import cats.effect.unsafe.implicits.global
 import cats.effect._
 import es.weso.wbmodel._
 import es.weso.wdsub.fs2processor.IODumpProcessor
+import cats.implicits._
 
 class IODumpTest extends FunSuite {
 
@@ -51,18 +52,25 @@ class IODumpTest extends FunSuite {
     val is: InputStream                              = new ByteArrayInputStream(str.getBytes)
     val os: ByteArrayOutputStream                    = new ByteArrayOutputStream()
     def withEntity(e: EntityDoc): IO[Option[String]] = IO(Some(e.asJsonStr()))
+    val start                                        = "[\n".pure[IO]
+    val sep                                          = ","
+    val end                                          = "]".pure[IO]
+
     val cmp = for {
       ref <- Ref[IO].of(DumpResults.initial)
       results <- IODumpProcessor.process(
         is,
         Some(os),
+        start,
         withEntity,
+        sep,
+        end,
         ref,
         DumpOptions.default.withDecompressInput(false).withCompressOutput(false)
       )
     } yield results
     cmp.unsafeRunSync()
-    val expected = str + ",\n"
+    val expected = str + ","
     val returned = os.toString()
     assertEquals(returned, expected)
   }
