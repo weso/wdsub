@@ -17,6 +17,7 @@ import es.weso.wdsub.DumpOptions
 import es.weso.wdsub.DumpMode
 import es.weso.wdsub.DumpFormat
 import es.weso.wbmodel.Value
+import es.weso.wbmodel.serializer._
 import java.io.OutputStream
 
 sealed trait DumpAction {

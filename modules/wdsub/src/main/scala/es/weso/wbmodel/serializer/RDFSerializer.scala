@@ -1,4 +1,4 @@
-package es.weso.wdsub.fs2processor
+package es.weso.wbmodel.serializer
 
 import cats.effect._
 import cats.implicits._

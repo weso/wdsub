@@ -1,4 +1,4 @@
-package es.weso.wdsub.fs2processor
+package es.weso.wbmodel.serializer
 
 import cats.effect._
 import es.weso.wbmodel.EntityDoc
@@ -10,8 +10,14 @@ abstract class Serializer {
 
   def serialize(entityDoc: EntityDoc): IO[String]
 
+  def serializeOutputStream(entityDoc: EntityDoc, os: OutputStream): Unit = {
+    import cats.effect.unsafe.implicits.global
+    val str = serialize(entityDoc).unsafeRunSync()
+    os.write(str.getBytes(Charset.forName("UTF-8")))
+  }
+
   // Beginning string
-  def start: IO[String] 
+  def start: IO[String]
 
   // Last string
   def end: IO[String]

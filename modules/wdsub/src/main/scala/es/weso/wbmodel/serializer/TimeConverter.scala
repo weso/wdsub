@@ -1,4 +1,4 @@
-package es.weso.wdsub.fs2processor
+package es.weso.wbmodel.serializer
 
 // The following code has been translated from Wikidata-toolkit to Scala
 // Original code at: https://github.com/Wikidata/Wikidata-Toolkit/blob/master/wdtk-rdf/src/main/java/org/wikidata/wdtk/rdf/values/TimeValueConverter.java
