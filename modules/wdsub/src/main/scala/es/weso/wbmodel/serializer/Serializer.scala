@@ -4,7 +4,7 @@ import cats.effect._
 import es.weso.wbmodel.EntityDoc
 import es.weso.wdsub.DumpFormat
 import org.eclipse.rdf4j.rio.RDFFormat
-import java.io.OutputStream
+import java.io._
 
 abstract class Serializer {
 
