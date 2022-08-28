@@ -56,10 +56,10 @@ object DumpProcessor {
       maybeOut <- acquireOutput(outputPath)
       shexProcessor = opts.dumpFormat match {
         case DumpFormat.JSON =>
-          new WDSubJsonProcessor(wshex, maybeOut, opts)
+          new WDTKJsonProcessor(wshex, maybeOut, opts)
         case DumpFormat.Turtle => {
           val out = maybeOut.getOrElse(System.out)
-          new WDSubRDFProcessor(
+          new WDTKRDFProcessor(
             wshex,
             RDFFormat.TURTLE,
             out,
@@ -69,7 +69,7 @@ object DumpProcessor {
           )
         }
         case DumpFormat.Plain =>
-          new PlainProcessor(wshex, maybeOut, opts)
+          new PlainProcessor(wshex, maybeOut, opts) 
       }
     } yield {
       shexProcessor.open()

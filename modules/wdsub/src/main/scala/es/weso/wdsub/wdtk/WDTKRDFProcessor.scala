@@ -20,7 +20,7 @@ import es.weso.wdsub.DumpOptions
   * @param verbose verbose
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
-class WDSubRDFProcessor(
+class WDTKRDFProcessor(
     wShEx: WSchema,
     format: RDFFormat,
     output: OutputStream,

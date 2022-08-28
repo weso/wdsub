@@ -22,7 +22,7 @@ import es.weso.wdsub.DumpOptions
   * @param verbose verbose
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
-abstract class WDSubProcessor(
+abstract class WDTKProcessor(
     wShEx: WSchema,
     dumpWriter: Option[DumpWriter],
     opts: DumpOptions

@@ -18,11 +18,11 @@ import java.io.OutputStream
   * @param verbose verbose
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
-class WDSubJsonProcessor(
+class WDTKJsonProcessor(
     wShEx: WSchema,
     maybeOut: Option[OutputStream],
     opts: DumpOptions
-) extends WDSubProcessor(wShEx, maybeOut.map(out => JsonDumpWriter(out)), opts) {
+) extends WDTKProcessor(wShEx, maybeOut.map(out => JsonDumpWriter(out)), opts) {
 
   var totalEntities: Int   = 0
   var matchedEntities: Int = 0

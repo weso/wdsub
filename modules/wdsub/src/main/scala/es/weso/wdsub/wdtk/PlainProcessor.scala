@@ -22,7 +22,7 @@ class PlainProcessor(
     wShEx: WSchema,
     maybeOut: Option[OutputStream],
     opts: DumpOptions,
-) extends WDSubProcessor(wShEx, maybeOut.map(out => PlainDumpWriter(out)), opts) 
+) extends WDTKProcessor(wShEx, maybeOut.map(out => PlainDumpWriter(out)), opts) 
   with EntityCounter {
 
     var totalEntities: Int = 0
