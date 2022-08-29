@@ -1,8 +1,8 @@
 package es.weso.wdsub
 
 import munit._
-import es.weso.wdsub.fs2processor.RDFSerializer._
-import es.weso.wdsub.fs2processor.RDFSerializer
+import es.weso.wbmodel.serializer.RDFSerializer._
+import es.weso.wbmodel.serializer.RDFSerializer
 
 class RDFSerializerTest extends FunSuite {
 
