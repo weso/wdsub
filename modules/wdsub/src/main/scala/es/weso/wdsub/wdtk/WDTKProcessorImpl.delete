@@ -1,0 +1,34 @@
+package es.weso.wdsub.wdtk
+
+import cats.effect._
+import org.wikidata.wdtk.datamodel.interfaces._
+import scala.collection.JavaConverters._
+import org.slf4j.LoggerFactory
+import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
+import java.io.OutputStream
+import es.weso.wdshex._
+import es.weso.wshex.matcher.Matcher
+import es.weso.wshex.WSchema
+import es.weso.wshex.matcher.Matching
+import es.weso.wshex.matcher.NoMatching
+import es.weso.wdsub.DumpMode._
+import es.weso.wdsub.writer._
+import es.weso.wdsub.DumpOptions
+
+/**
+  * WShEx processor implementation
+  *
+  * @param schema ShEx schema
+  * @param verbose verbose
+  * @param timeout timeout in seconds or 0 if no timeout should be used
+  */
+case class WDTKProcessorImpl(
+    wShEx: WSchema,
+    os: Option[OutputStream],
+    opts: DumpOptions
+) extends WDTKProcessor(wShEx, os.map(DumpWriter.fromOutputStream(_, opts.dumpFormat)), opts) {
+
+  var totalEntities: Int   = 0
+  var matchedEntities: Int = 0
+
+}

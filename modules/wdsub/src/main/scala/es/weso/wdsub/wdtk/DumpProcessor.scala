@@ -54,7 +54,7 @@ object DumpProcessor {
         IO.println(s"Schema: $wshex")
       } else IO.unit
       maybeOut <- acquireOutput(outputPath)
-      shexProcessor = opts.dumpFormat match {
+      /* opts.dumpFormat match {
         case DumpFormat.JSON =>
           new WDTKJsonProcessor(wshex, maybeOut, opts)
         case DumpFormat.Turtle => {
@@ -70,13 +70,14 @@ object DumpProcessor {
         }
         case DumpFormat.Plain =>
           new PlainProcessor(wshex, maybeOut, opts) 
-      }
+      } */
     } yield {
+      val shexProcessor = WDTKProcessor(wshex, maybeOut.map(DumpWriter.fromOutputStream(_, opts.dumpFormat)), opts)
       shexProcessor.open()
       ShExProcessor(shexProcessor, shexProcessor)
     }
 
-  private def acquireDumpWriter(maybeStream: Option[OutputStream], format: DumpFormat): IO[Option[DumpWriter]] =
+/*  private def acquireDumpWriter(maybeStream: Option[OutputStream], format: DumpFormat): IO[Option[DumpWriter]] =
     maybeStream match {
       case None => none[DumpWriter].pure[IO]
       case Some(out) =>
@@ -84,7 +85,7 @@ object DumpProcessor {
           case DumpFormat.JSON => IO(Some(JsonDumpWriter(out)))
           case _               => IO.raiseError(new RuntimeException(s"Not supported yet other output formats: $format"))
         }
-    }
+    } */
 
   private def mkShExProcessor(
       schema: WSchema,

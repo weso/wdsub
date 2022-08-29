@@ -3,10 +3,12 @@ package es.weso.wbmodel.serializer
 import cats.effect._
 import es.weso.wbmodel.EntityDoc
 import cats.implicits._
+import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
+
 
 case class PlainSerializer() extends Serializer {
-  def serialize(entityDoc: EntityDoc): IO[String] =
-    IO.println(s"Plain serializer") *> s"${entityDoc.entityDocument.getEntityId().getId()}".pure[IO]
+  def serialize(entityDocument: EntityDocument): IO[String] =
+    IO.println(s"Plain serializer") *> s"${entityDocument.getEntityId().getId()}".pure[IO]
 
   def start = "".pure[IO]
   def end   = "".pure[IO]

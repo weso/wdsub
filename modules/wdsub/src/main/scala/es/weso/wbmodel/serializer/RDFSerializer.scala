@@ -283,13 +283,13 @@ case class RDFSerializer(format: RDFFormat) extends Serializer {
   def mkEntity(e: EntityDocument): IRI =
     IRI(e.getEntityId().getIri)
 
-  def serialize(entityDoc: EntityDoc): IO[String] = {
+  def serialize(entityDocument: EntityDocument): IO[String] = {
     RDFAsJenaModel.empty.flatMap(
       _.use(
         rdf =>
           for {
             _   <- rdf.addPrefixMap(wikibasePrefixMap)
-            _   <- mkEntityDocument(entityDoc.entityDocument, rdf)
+            _   <- mkEntityDocument(entityDocument, rdf)
             str <- rdf.serialize("TURTLE")
           } yield RDFSerializer.removePrefixes(str)
       )

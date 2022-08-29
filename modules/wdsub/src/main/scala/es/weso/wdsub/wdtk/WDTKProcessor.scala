@@ -22,12 +22,15 @@ import es.weso.wdsub.DumpOptions
   * @param verbose verbose
   * @param timeout timeout in seconds or 0 if no timeout should be used
   */
-abstract class WDTKProcessor(
+case class WDTKProcessor(
     wShEx: WSchema,
     dumpWriter: Option[DumpWriter],
     opts: DumpOptions
 ) extends EntityDocumentDumpProcessor
     with EntityCounter {
+
+  var totalEntities: Int   = 0
+  var matchedEntities: Int = 0
 
   private val matcher     = Matcher(wShEx)
   private lazy val logger = LoggerFactory.getLogger(this.getClass().getCanonicalName())
