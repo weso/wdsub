@@ -1,8 +1,11 @@
-prefix wd:  <http://www.wikidata.org/entity/>
-prefix wdt: <http://www.wikidata.org/prop/direct/>
+prefix wd:   <http://www.wikidata.org/entity/>
+prefix wdt:  <http://www.wikidata.org/prop/direct/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 start = @<Human>
 
 <Human> EXTRA wdt:P31 {
-  wdt:P31 [ wd:Q5 ]
+  rdfs:label [ @en ] ;
+  wdt:P31    [ wd:Q5 ]  ;
+  wdt:P19    .
 }
