@@ -40,7 +40,7 @@ object DumpAction {
       .use(
         serializer =>
           WSchema
-            .fromPath(schemaPath, schemaFormat, VerboseLevel.Info)
+            .fromPath(path = schemaPath, format = schemaFormat, verbose = VerboseLevel.Info)
             .map(FilterBySchema(_, opts, serializer))
       )
 

@@ -1,5 +1,5 @@
 lazy val scala212 = "2.12.16"
-lazy val scala3   = "3.1.3"
+lazy val scala3   = "3.2.0"
 lazy val supportedScalaVersions = List(
   scala212,
   scala3
@@ -7,7 +7,7 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = JavaSpec.temurin("11") // "adopt@1.11"
 
-lazy val shexsVersion = "0.2.9"
+lazy val shexsVersion = "0.2.10"
 lazy val srdfVersion  = "0.1.114"
 lazy val utilsVersion = "0.2.24"
 
@@ -194,12 +194,12 @@ lazy val sharedDependencies = Seq(
 )
 
 lazy val packagingSettings = Seq(
-  mainClass in Compile := Some("es.weso.wdsubmain.Main"),
-  mainClass in assembly := Some("es.weso.wdsubmain.Main"),
-  test in assembly := {},
-  assemblyJarName in assembly := "wdsub.jar",
-  packageSummary in Linux := name.value,
-  packageSummary in Windows := name.value,
+  Compile / mainClass := Some("es.weso.wdsubmain.Main"),
+  assembly / mainClass := Some("es.weso.wdsubmain.Main"),
+  assembly / test := {},
+  assembly / assemblyJarName := "wdsub.jar",
+  Linux / packageSummary := name.value,
+  Windows / packageSummary := name.value,
   packageDescription := name.value
 )
 
@@ -230,11 +230,6 @@ def priorTo2_13(scalaVersion: String): Boolean =
     case _                              => false
   }
 
-/*lazy val wixSettings = Seq(
-  wixProductId := "39b564d5-d381-4282-ada9-87244c76e14b",
-  wixProductUpgradeId := "6a710435-9af4-4adb-a597-98d3dd0bade1"
-)*/
-
 lazy val universalSettings = Seq(
   Universal / name := "wdsub",
   maintainer := "Jose Emilio Labra Gayo"
@@ -250,11 +245,6 @@ lazy val dockerSettings = Seq(
   Docker / daemonUserUid := Some("0"),
   Docker / daemonUser := "root"
 //  dockerUsername := Some("wesogroup")
-)
-
-lazy val warnUnusedImport = Seq(
-  scalacOptions in (Compile, console) ~= { _.filterNot(Set("-Ywarn-unused-import", "-Ywarn-unused:imports")) },
-  scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value
 )
 
 lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
@@ -275,4 +265,4 @@ lazy val commonSettings = compilationSettings ++ sharedDependencies ++ Seq(
       url = url("https://weso.labra.es")
     )
   )
-) ++ warnUnusedImport
+)
