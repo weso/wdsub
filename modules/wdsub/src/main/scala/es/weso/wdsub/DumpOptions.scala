@@ -8,9 +8,9 @@ import org.wikidata.wdtk.datamodel.interfaces.ItemDocument
 import cats.effect._
 import java.io.InputStream
 import java.io.OutputStream
-// import fs2.io.file.Files
 import com.fasterxml.jackson.databind.JsonDeserializer
 import org.wikidata.wdtk.datamodel.helpers
+import es.weso.wbmodel.serializer._
 
 /**
   * Configuration options for DumpOptions
@@ -27,7 +27,7 @@ case class DumpOptions(
     showCounter: Boolean,
     showSchema: Boolean,
     dumpMode: DumpMode,
-    dumpFormat: DumpFormat,
+    dumpFormat: WBSerializeFormat,
     verbose: Boolean
 ) {
   val jsonDeserializer = new helpers.JsonDeserializer(site)
@@ -43,7 +43,7 @@ case class DumpOptions(
   def withShowSchema(sc: Boolean): DumpOptions      = this.copy(showSchema = sc)
   def withVerbose(v: Boolean): DumpOptions          = this.copy(verbose = v)
   def withDumpMode(dm: DumpMode): DumpOptions       = this.copy(dumpMode = dm)
-  def withDumpFormat(df: DumpFormat): DumpOptions   = this.copy(dumpFormat = df)
+  def withDumpFormat(df: WBSerializeFormat): DumpOptions   = this.copy(dumpFormat = df)
 }
 
 object DumpOptions {
@@ -63,7 +63,7 @@ object DumpOptions {
       site = "http://www.wikidata.org/entity/",
       showCounter = true,
       showSchema = false,
-      dumpFormat = DumpFormat.JSON,
+      dumpFormat = WBSerializeFormat.JSON,
       dumpMode = DumpMode.DumpOnlyMatched,
       verbose = false
     )

@@ -12,7 +12,6 @@ import es.weso.wshex.matcher._
 import es.weso.wdsub._
 import es.weso.wbmodel._
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
-
 import java.io._
 import java.nio.file.StandardOpenOption._
 import java.nio.file.{Path, Files => JavaFiles}
@@ -22,6 +21,27 @@ import es.weso.wikibasedel.EntityFetcher
 import es.weso.wdsub.fs2processor._
 import es.weso.wdsub.wdtk.DumpProcessor
 import es.weso.utils.VerboseLevel._
+import es.weso.wbmodel.serializer.WBSerializeFormat
+
+sealed abstract class DumpFormat extends Named {
+  def toWBSerializeFormat: WBSerializeFormat
+}
+object DumpFormat {
+ def availableFormats = List(JSON, Turtle, Plain) 
+ case object JSON extends DumpFormat {
+   override def name = "JSON"
+   override def toWBSerializeFormat: WBSerializeFormat = WBSerializeFormat.JSON
+ }
+ case object Turtle extends DumpFormat {
+  override def name = "TURTLE"
+  override def toWBSerializeFormat: WBSerializeFormat = WBSerializeFormat.Turtle
+ }
+ case object Plain extends DumpFormat {
+  override def name = "PLAIN"
+  override def toWBSerializeFormat: WBSerializeFormat = WBSerializeFormat.Plain
+ }
+}
+
 
 case class ProcessEntity(entity: String)
 
@@ -90,7 +110,7 @@ object Main
           .withCompressOutput(sc)
           .withShowSchema(ss)
           .withDumpMode(dm)
-          .withDumpFormat(df)
+          .withDumpFormat(df.toWBSerializeFormat)
     }
 
   private val countEntities =

@@ -6,7 +6,6 @@ import scala.collection.JavaConverters._
 import org.slf4j.LoggerFactory
 import org.wikidata.wdtk.dumpfiles.EntityTimerProcessor
 import java.io.OutputStream
-import es.weso.wdshex._
 import es.weso.wshex.matcher.Matcher
 import es.weso.wshex.WSchema
 import es.weso.wshex.matcher.Matching
@@ -14,6 +13,8 @@ import es.weso.wshex.matcher.NoMatching
 import es.weso.wdsub.DumpMode._
 import es.weso.wdsub.writer._
 import es.weso.wdsub.DumpOptions
+import es.weso.wshex.matcher._
+import es.weso.wshex.matcher.MatchingError._
 
 /**
   * WShEx processor
@@ -38,9 +39,15 @@ case class WDTKProcessor(
   protected def info(msg: String): Unit =
     if (opts.verbose) logger.info(msg)
 
+  private def safeMatcher(itemDocument: ItemDocument): MatchingStatus = try {
+    matcher.matchStart(itemDocument)
+  } catch {
+    case e: Exception => NoMatching(List(InternalError(s"Exception raised by WShEx matcher: ${e.getMessage()}\nStackTrace: ${e.getStackTrace().map(_.toString).mkString("\n")}")),List())
+  } 
+
   override def processItemDocument(itemDocument: ItemDocument): Unit = {
 
-    matcher.matchStart(itemDocument) match {
+    safeMatcher(itemDocument) match {
       case m: Matching => {
         if (opts.verbose) {
           println(s"Item: ${itemDocument.getEntityId().getId()} matched")

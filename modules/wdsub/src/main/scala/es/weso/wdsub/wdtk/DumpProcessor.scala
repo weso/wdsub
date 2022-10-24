@@ -12,7 +12,6 @@ import org.apache.commons.compress.compressors.gzip._
 import java.nio.file.Files
 import java.nio.file.StandardOpenOption
 import java.io.BufferedOutputStream
-import es.weso.wdshex._
 import org.wikidata.wdtk.datamodel.implementation.SitesImpl
 import org.wikidata.wdtk.rdf.PropertyRegister
 import org.eclipse.rdf4j.rio.RDFFormat
@@ -21,9 +20,7 @@ import es.weso.utils.VerboseLevel
 import es.weso.wshex._
 import es.weso.wdsub.DumpOptions
 import es.weso.wdsub.writer._
-import es.weso.wdsub.DumpResults
-import es.weso.wdsub.LogConfig
-import es.weso.wdsub.DumpFormat
+import es.weso.wdsub._
 
 /**
   * Dump processor using Wikidata toolkit DumpProcessingController
@@ -37,13 +34,6 @@ object DumpProcessor {
     logger.info(msg)
   }
 
-  /*  private def acquireShEx(schemaPath: Path, schemaFormat: WShExFormat, opts: DumpOptions): IO[WSchema] =
-    WSchema.fromPath(
-      schemaPath,
-      schemaFormat,
-      if (opts.verbose) VerboseLevel.Debug else VerboseLevel.Info
-    ) */
-
   private def acquireShExProcessor(
       wshex: WSchema,
       outputPath: Option[Path],
@@ -54,38 +44,11 @@ object DumpProcessor {
         IO.println(s"Schema: $wshex")
       } else IO.unit
       maybeOut <- acquireOutput(outputPath)
-      /* opts.dumpFormat match {
-        case DumpFormat.JSON =>
-          new WDTKJsonProcessor(wshex, maybeOut, opts)
-        case DumpFormat.Turtle => {
-          val out = maybeOut.getOrElse(System.out)
-          new WDTKRDFProcessor(
-            wshex,
-            RDFFormat.TURTLE,
-            out,
-            new SitesImpl(),
-            PropertyRegister.getWikidataPropertyRegister(),
-            opts
-          )
-        }
-        case DumpFormat.Plain =>
-          new PlainProcessor(wshex, maybeOut, opts) 
-      } */
     } yield {
       val shexProcessor = WDTKProcessor(wshex, maybeOut.map(DumpWriter.fromOutputStream(_, opts.dumpFormat)), opts)
       shexProcessor.open()
       ShExProcessor(shexProcessor, shexProcessor)
     }
-
-/*  private def acquireDumpWriter(maybeStream: Option[OutputStream], format: DumpFormat): IO[Option[DumpWriter]] =
-    maybeStream match {
-      case None => none[DumpWriter].pure[IO]
-      case Some(out) =>
-        format match {
-          case DumpFormat.JSON => IO(Some(JsonDumpWriter(out)))
-          case _               => IO.raiseError(new RuntimeException(s"Not supported yet other output formats: $format"))
-        }
-    } */
 
   private def mkShExProcessor(
       schema: WSchema,

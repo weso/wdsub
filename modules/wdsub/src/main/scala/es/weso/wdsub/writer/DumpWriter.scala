@@ -3,23 +3,16 @@ package es.weso.wdsub.writer
 import org.wikidata.wdtk.datamodel.interfaces.EntityDocument
 
 import java.io.OutputStream
-import es.weso.wdsub.DumpFormat
-import es.weso.wdsub.DumpFormat.Turtle
-import es.weso.wbmodel.serializer.Serializer
-import es.weso.wbmodel.serializer.RDFSerializer
-import es.weso.wdsub.DumpFormat.JSON
-import es.weso.wbmodel.serializer.JSONSerializer
 import es.weso.wbmodel._
-import es.weso.wdsub.DumpFormat.Plain
-import es.weso.wbmodel.serializer.PlainSerializer
+import es.weso.wbmodel.serializer._
 import org.eclipse.rdf4j.rio.RDFFormat
 
-case class DumpWriter(os: OutputStream, df: DumpFormat) {
+case class DumpWriter(os: OutputStream, df: WBSerializeFormat) {
 
   val serializer: Serializer = df match {
-    case Turtle => RDFSerializer(RDFFormat.TURTLE)
-    case JSON => JSONSerializer()
-    case Plain => PlainSerializer()
+    case WBSerializeFormat.Turtle => RDFSerializer(RDFFormat.TURTLE)
+    case WBSerializeFormat.JSON => JSONSerializer()
+    case WBSerializeFormat.Plain => PlainSerializer()
   }
 
   def writeEntity(entityDocument: EntityDocument): Unit = {
@@ -36,5 +29,5 @@ case class DumpWriter(os: OutputStream, df: DumpFormat) {
 }
 
 object DumpWriter {
-  def fromOutputStream(os: OutputStream, df: DumpFormat): DumpWriter = DumpWriter(os,df)
+  def fromOutputStream(os: OutputStream, df: WBSerializeFormat): DumpWriter = DumpWriter(os,df)
 }

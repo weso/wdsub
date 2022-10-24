@@ -15,7 +15,7 @@ import es.weso.utils.VerboseLevel
 import es.weso.utils.named._
 import es.weso.wdsub.DumpOptions
 import es.weso.wdsub.DumpMode
-import es.weso.wdsub.DumpFormat
+import es.weso.wbmodel.serializer._
 import es.weso.wbmodel.Value
 import es.weso.wbmodel.serializer._
 import java.io.OutputStream
