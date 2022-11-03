@@ -10,7 +10,7 @@ import org.eclipse.rdf4j.rio.RDFFormat
 case class DumpWriter(os: OutputStream, df: WBSerializeFormat) {
 
   val serializer: Serializer = df match {
-    case WBSerializeFormat.Turtle => RDFSerializer(RDFFormat.TURTLE)
+    case WBSerializeFormat.Turtle => RDFSerializer("TURTLE")
     case WBSerializeFormat.JSON => JSONSerializer()
     case WBSerializeFormat.Plain => PlainSerializer()
   }

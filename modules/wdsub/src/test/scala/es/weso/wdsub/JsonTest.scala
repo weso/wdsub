@@ -13,6 +13,7 @@ import java.io.ByteArrayOutputStream
 import java.io.OutputStream
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.nio.charset.StandardCharsets
+import es.weso.wbmodel.serializer.WBSerializeFormat
 import es.weso.wdsub.writer.DumpWriter
 
 class JsonTest extends FunSuite {
@@ -26,7 +27,7 @@ class JsonTest extends FunSuite {
     val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
     val outStream: OutputStream = new ByteArrayOutputStream()
-    val jsonWriter              = DumpWriter.fromOutputStream(outStream, DumpFormat.JSON)
+    val jsonWriter              = DumpWriter.fromOutputStream(outStream, WBSerializeFormat.JSON)
     jsonWriter.start()
     jsonWriter.writeEntity(itemDocument)
     jsonWriter.end()
@@ -52,7 +53,7 @@ class JsonTest extends FunSuite {
     val itemDocument =
       ItemDocumentBuilder.forItemId(q42).withStatement(statementBuilder.build()).build()
     val outStream: OutputStream = new ByteArrayOutputStream()
-    val jsonWriter              = DumpWriter.fromOutputStream(outStream, DumpFormat.JSON)
+    val jsonWriter              = DumpWriter.fromOutputStream(outStream, WBSerializeFormat.JSON)
     jsonWriter.start()
     jsonWriter.writeEntity(itemDocument)
     jsonWriter.writeEntity(itemDocument)
