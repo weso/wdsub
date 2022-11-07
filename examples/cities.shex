@@ -1,6 +1,12 @@
-prefix :  <http://www.wikidata.org/entity/>
+prefix wd:  <http://www.wikidata.org/entity/>
+prefix wdt: 
+
+start = @<cities> OR @<humans>
 
 <cities> EXTRA :P31 {
-    :P31 @<CityCode>
+    :P31 [ :Q515 ]
 }
-<CityCode> [ :Q515 ]
+
+<humans> EXTRA :P31 {
+    :P31 [ :Q5 ]
+}
