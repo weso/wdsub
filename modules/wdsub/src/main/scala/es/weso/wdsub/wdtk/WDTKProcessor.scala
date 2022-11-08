@@ -42,7 +42,10 @@ case class WDTKProcessor(
   private def safeMatcher(itemDocument: ItemDocument): MatchingStatus = try {
     matcher.matchStart(itemDocument)
   } catch {
-    case e: Exception => NoMatching(List(InternalError(s"Exception raised by WShEx matcher: ${e.getMessage()}\nStackTrace: ${e.getStackTrace().map(_.toString).mkString("\n")}")),List())
+    case e: Exception => {
+      println(s"Exception: ${e.getMessage()} for item: ${itemDocument.getEntityId()}")
+      NoMatching(List(InternalError(s"Exception raised by WShEx matcher: ${e.getMessage()}\nStackTrace: ${e.getStackTrace().map(_.toString).mkString("\n")}")),List())
+    }
   } 
 
   override def processItemDocument(itemDocument: ItemDocument): Unit = {
