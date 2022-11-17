@@ -22,7 +22,8 @@ import es.weso.wdsub.fs2processor._
 import es.weso.wdsub.wdtk.DumpProcessor
 import es.weso.utils.VerboseLevel._
 import es.weso.wbmodel.serializer.WBSerializeFormat
-
+import scala.concurrent.duration.MILLISECONDS
+import scala.concurrent.duration.FiniteDuration
 sealed abstract class DumpFormat extends Named {
   def toWBSerializeFormat: WBSerializeFormat
 }
@@ -72,6 +73,7 @@ object Main
 
   private val verbose     = Opts.flag("verbose", "Verbose mode").orFalse
   private val showCounter = Opts.flag("showCounter", "Show counter at the end of process").orTrue
+  private val showTime = Opts.flag("showTime", "Show processing time").orTrue
   private val showSchema  = Opts.flag("showSchema", "Show schema").orFalse
 
 //  private val compressOutput = Opts.flag("compressOutput", "compress output").orTrue
@@ -102,11 +104,12 @@ object Main
     validatedList("dumpFormat", DumpFormat.availableFormats, Some(DumpFormat.JSON))
 
   private val dumpOpts: Opts[DumpOptions] =
-    (verbose, showCounter, compressOutput, showSchema, dumpMode, dumpFormat).mapN {
-      case (v, sc, co, ss, dm, df) =>
+    (verbose, showCounter, showTime, compressOutput, showSchema, dumpMode, dumpFormat).mapN {
+      case (v, sc, st, co, ss, dm, df) =>
         DumpOptions.default
           .withVerbose(v)
           .withShowCounter(sc)
+          .withShowTime(st)
           .withCompressOutput(sc)
           .withShowSchema(ss)
           .withDumpMode(dm)
@@ -159,14 +162,20 @@ object Main
       _      <- IO.println(s"entity Type: ${entity.getType()}")
     } yield ExitCode.Success
 
+  def getCurrentTime: IO[FiniteDuration] = 
+    IO.realTime
+
   def dump(
       filePath: Path,
       actionOpt: DumpActionOpt,
       maybeOutPath: Option[Path],
       dumpOptions: DumpOptions,
       processor: Processor
-  ): IO[ExitCode] = processor match {
-    case Processor.Fs2 =>
+  ): IO[ExitCode] = for {
+    startTime <- getCurrentTime
+    endTime <- getCurrentTime
+    process <- processor match {
+      case Processor.Fs2 =>
       for {
         action <- actionOpt.toDumpAction(dumpOptions)
         is     <- IO { JavaFiles.newInputStream(filePath) }
@@ -190,6 +199,50 @@ object Main
           case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
         }
       } yield exitCode
-  }
+  } 
+    _ <- if (dumpOptions.showTime) 
+       IO.println(s"""|Start time: ${startTime}
+                     |End time:   ${endTime}
+                     |Difference: ${endTime - startTime}
+                     |""".stripMargin)
+      else 
+        IO.pure(())  
+  } yield ExitCode.Success
 
+/*    getCurrentTime.flatMap(startTime =>     
+    (processor match {
+      case Processor.Fs2 =>
+      for {
+        action <- actionOpt.toDumpAction(dumpOptions)
+        is     <- IO { JavaFiles.newInputStream(filePath) }
+        os <- maybeOutPath match {
+          case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE_NEW)).pure[IO]
+          case None          => none[OutputStream].pure[IO]
+        }
+        refResults <- Ref[IO].of(DumpResults.initial)
+        withEntry = (action.withEntry(refResults) _)
+        results <- IODumpProcessor.process(is, os, action.start, withEntry, action.sep, action.end, refResults, dumpOptions)
+      } yield results.toExitCode
+    case Processor.WDTK =>
+      for {
+        action <- actionOpt.toDumpAction(dumpOptions)
+        exitCode <- action match {
+          case da: DumpAction.FilterBySchema =>
+            for {
+              results <- DumpProcessor
+                .dumpProcess(filePath, maybeOutPath, da.schema, dumpOptions)
+            } yield results.toExitCode
+          case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
+        }
+      } yield exitCode
+  })).flatMap(_ => 
+    getCurrentTime.flatMap(endTime => 
+    if (dumpOptions.showTime) 
+      IO.println(s"""|Start time: ${startTime}
+                     |End time:   ${endTime}
+                     |Difference: ${endTime - startTime}
+                     |""".stripMargin)
+    else IO.pure(())                 
+    ))
+*/
 }

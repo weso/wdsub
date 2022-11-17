@@ -1,0 +1,268 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX :    <http://example.org/>
+
+start= @:active_site OR 
+#       @:human OR
+       @:anatomical_structure OR
+	     @:binding_site OR
+	     @:biological_pathway OR
+       @:biological_process OR
+       @:cellular_component OR
+       @:chemical_compound OR
+       @:chromosome OR
+       @:disease OR
+       @:gene OR
+       @:mechanism_of_action OR
+       @:medication OR
+       @:molecular_function OR
+       @:pharmaceutical_product OR
+       @:pharmacologic_action OR
+       @:protein_domain OR
+       @:protein_family OR
+       @:protein OR
+       @:ribosomal_RNA OR
+       @:sequence_variant OR
+       @:supersecondary_structure OR
+       @:symptom OR
+       @:taxon OR
+       @:therapeutic_use 
+
+#:human EXTRA wdt:P31 {
+#  rdfs:label [ @en @es ] ;
+#  wdt:P31  [ wd:Q5 ]      ;
+#  wdt:P19  @:protein_family *
+#}
+
+:active_site EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;
+  wdt:P31  [ wd:Q423026 ]      ;
+  wdt:P361 @:protein_family * ;
+}
+
+:anatomical_structure EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q4936952 ] ;
+  wdt:P361 @:anatomical_structure * ; 
+  wdt:P527 @:anatomical_structure *
+}
+
+:binding_site EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;
+  wdt:P31  [ wd:Q616005 ] ;
+  wdt:P361 @:protein *;
+  wdt:P361 @:protein_family *;
+  wdt:P361 @:protein_domain *
+}
+
+:biological_pathway EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;
+  wdt:P31 [ wd:Q4915012 ] ;
+  wdt:P361 @:biological_pathway * ; 
+  wdt:P361 @:gene * ; 
+  wdt:P361 @:medication * ; 
+  wdt:P361 @:chemical_compound * ; 
+  wdt:P703  @:taxon * ;
+  wdt:P527 @:disease*;
+  
+}
+
+:biological_process EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [wd:Q2996394];
+  wdt:P527 @:disease *;
+  wdt:P31 @:anatomical_structure *; 
+  wdt:P279 @:biological_process *
+}
+
+:cellular_component EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [wd:Q5058355];
+  wdt:P681 @:cellular_component *;
+  wdt:P361 @:protein *;
+  wdt:P702 @:gene *;
+  wdt:P680 @:molecular_function*;
+  
+}
+
+:chemical_compound EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q11173 ] ;
+  wdt:P2868 @:therapeutic_use * ;
+  wdt:P2868 @:pharmacologic_action * ;
+  wdt:P769  @:therapeutic_use * ;
+  wdt:P769  @:pharmacologic_action * ;
+  wdt:P279  @:pharmacologic_action * ;
+  wdt:P3780 @:pharmaceutical_product * ;
+  wdt:P2175 @:disease * ;
+  wdt:P361  @:biological_pathway * ;
+  wdt:P361  @:medication * ; 
+  wdt:P361 @:molecular_function *;
+  wdt:P703  @:taxon * ;
+  wdt:P3364 @:chemical_compound * ;
+  wdt:P2868 @:mechanism_of_action *;
+  wdt:P769 @:chemical_compound * ;
+}
+
+:chromosome EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [ wd:Q37748 ] ;
+  
+}
+
+:disease EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31   [ wd:Q12136 ] ;
+  wdt:P780  @:disease * ;
+  wdt:P780  @:symptom * ; 
+  wdt:P828  @:taxon * ;
+  wdt:P2293 @:gene * ;
+  wdt:P927  @:anatomical_structure * ;
+  wdt:P2176 @:medication * ;
+  wdt:P2176 @:chemical_compound * ;
+}
+
+:gene EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31   [ wd:Q7187 ] ;
+  wdt:P2293 @:disease *;
+  wdt:P703  @:taxon * ;
+  wdt:P684  @:gene * ; 
+  wdt:P682  @:biological_process ;
+  wdt:P688  @:protein * ;
+  wdt:P527  @:biological_pathway *;
+  wdt:P1057 @:mechanism_of_action ;
+  wdt:P688 @:molecular_function *;
+  wdt:P688 @:cellular_component*;
+}
+
+:mechanism_of_action EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [ wd:Q3271540 ] ;
+  wdt:P1050 @:disease *
+  
+}
+
+:medication EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [ wd:Q12140 ] ;
+  wdt:P2175 @:disease * ;
+  wdt:P3489 @:disease * ;
+  wdt:P3780 @:pharmaceutical_product * ;
+  wdt:P3489  @:medication * ;
+  wdt:P361  @:biological_pathway * ;
+  wdt:P769  @:pharmacologic_action * ;
+  wdt:P769  @:chemical_compound * ;
+  wdt:P769  @:therapeutic_use * ;
+  wdt:P2868 @:pharmacologic_action * ;
+  wdt:P2868 @:therapeutic_use * ;
+  wdt:P279  @:pharmacologic_action * ;
+  wdt:P279  @:therapeutic_use * ;
+  wdt:P2868 @:mechanism_of_action * ;
+  wdt:P2175 @:symptom *
+}
+
+:molecular_function EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q14860489 ] ;
+  wdt:P680 @:molecular_function *;
+  wdt:P702 @:gene*;
+  wdt:P31 @:protein *;
+  wdt:P681 @:cellular_component*
+}
+
+:pharmaceutical_product EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q28885102 ] ;
+  wdt:P3781 @:therapeutic_use * ;
+  wdt:P3781 @:pharmacologic_action * ;
+  wdt:P3781 @:chemical_compound * ;
+  wdt:P4044 @:disease *;
+  wdt:P3781 @:medication * 
+}
+
+:pharmacologic_action EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;
+  wdt:P31 [wd:Q50377224 ] ;
+  wdt:P3780 @:pharmaceutical_product * ;
+  wdt:P2175 @:disease *
+}
+
+:protein_domain EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q898273 ] ;
+  wdt:P527 @:protein_domain * ;
+  wdt:P361 @:protein_domain * ; 
+  
+}
+
+:protein_family EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q417841 ] ;
+  wdt:P527 @:protein * ;
+  wdt:P279 @:protein_family* ;
+}
+
+:protein EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q8054 ] ;
+  wdt:P129 @:medication * ; 
+  wdt:P129 @:protein  * ; 
+  wdt:P129 @:chemical_compound  * ; 
+  wdt:P702 @:gene * ;
+  wdt:P361 @:protein_family * ; 
+  wdt:P527 @:active_site * ;
+  wdt:P527 @:binding_site * ;
+  wdt:P680 @:molecular_function * ;
+  wdt:P682 @:biological_process * ;
+  wdt:P703 @:taxon * ;
+  wdt:P681 @:anatomical_structure * ;
+  wdt:P681 @:protein * ;
+}
+
+:ribosomal_RNA EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31  [ wd:Q28885102 ] ;
+  wdt:P703 @:taxon *
+}
+
+:sequence_variant EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31   [ wd:Q15304597 ] ;
+  wdt:P3355  @:chemical_compound * ; 
+  wdt:P3354 @:chemical_compound * ; 
+  wdt:P3354 @:medication * ; 
+  wdt:P3355 @:medication * ;
+  wdt:P3433 @:gene * ;
+  wdt:P1057 @:chromosome * ;
+}
+
+
+:supersecondary_structure EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [ wd:Q7644128 ] ;
+  wdt:P361 @:protein *;
+  wdt:P361 @:protein_family *;
+  wdt:P361 @:protein_domain *
+}
+
+:symptom EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [ wd:Q169872 ];
+  wdt:P2176 @:chemical_compound *;
+}
+
+# TODO: I removed the type/subclassOf* by now
+:taxon EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31 [ wd:Q16521 ] ; 
+}
+
+:therapeutic_use EXTRA wdt:P31 {
+  rdfs:label [ @en @es ] ;  
+  wdt:P31   [ wd:Q50379781 ] ;
+  wdt:P3781 @:pharmaceutical_product * ;
+  wdt:P2175 @:disease *
+}
