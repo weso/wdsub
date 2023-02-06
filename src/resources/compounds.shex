@@ -1,0 +1,7 @@
+prefix :  <http://www.wikidata.org/entity/>
+
+# Expression that represents all compounds
+# This query requires a 150000 limit in WDQS
+<compounds> {
+    :P31 [ :Q11173 ]
+}

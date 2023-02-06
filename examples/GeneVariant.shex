@@ -1,0 +1,45 @@
+PREFIX xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX ps:   <http://www.wikidata.org/prop/statement/>
+PREFIX p:    <http://www.wikidata.org/prop/>
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+
+start = @<gene> OR @<variant>
+
+<variant>{
+  rdfs:label [ @en ] ? ;  
+  p:P3433 {
+    ps:P3433 @<gene> + ;
+    prov:wasDerivedFrom @<References> + ;
+  } + ;
+  p:P3354 {
+    ps:P3354 . ;
+    pq:P2175 @<disease> +;
+    prov:wasDerivedFrom @<References> + ;
+  } +
+}
+
+<gene> EXTRA wdt:P31 {
+  rdfs:label [ @en ] ? ;  
+  wdt:P31 [ wd:Q7187 ] * ;		# is instance of (P31) gene (Q7187)
+  wdt:P351 . ? ;				# has one or no Entrez Gene ID (P351)
+  p:P2293 {
+    ps:P2293 @<disease> + ;
+    prov:wasDerivedFrom @<References> + ;
+  } + ;
+}
+
+<disease> EXTRA wdt:P31 {
+  rdfs:label [ @en ] ? ;  
+  wdt:P31 [ wd:Q12136 ] * ;		# is instance of (P31) disease (Q12136)
+  wdt:P699 . ? ;				# has one or no Disease Ontology ID (P699)
+}
+
+<References> {
+  pr:P854 . + ;
+}

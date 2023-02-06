@@ -1,6 +1,7 @@
 package es.weso.wdsubmain
 import es.weso.utils.named._
 
+import es.weso.utils.named.Named
 sealed trait Processor extends Named
 
 object Processor {

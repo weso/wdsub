@@ -7,16 +7,16 @@ lazy val supportedScalaVersions = List(
 
 val Java11 = JavaSpec.temurin("11") // "adopt@1.11"
 
-lazy val shexsVersion = "0.2.28"
+lazy val shexsVersion = "0.2.31"
 lazy val srdfVersion  = "0.1.122"
 lazy val utilsVersion = "0.2.24"
 
 // Dependency versions
 lazy val catsVersion       = "2.9.0"
-lazy val catsEffectVersion = "3.4.0"
+lazy val catsEffectVersion = "3.4.4"
 lazy val circeVersion      = "0.14.2"
 lazy val declineVersion    = "2.3.0"
-lazy val fs2Version        = "3.3.0"
+lazy val fs2Version        = "3.4.0"
 lazy val jenaVersion       = "4.3.2"
 lazy val jacksonVersion    = "2.12.3"
 // lazy val log4jVersion          = "2.14.1"
@@ -69,7 +69,7 @@ lazy val MUnitFramework = new TestFramework("munit.Framework")
 
 ThisBuild / githubWorkflowJavaVersions := Seq(Java11)
 
-lazy val wdsubRoot = project
+lazy val wdsub = project
   .in(file("."))
   .enablePlugins(
     DockerPlugin,
@@ -89,19 +89,32 @@ lazy val wdsubRoot = project
     universalSettings,
     dockerSettings
   )
-  .aggregate(wdsub, docs)
-  .dependsOn(wdsub)
+  .aggregate(docs)
   .settings(
     libraryDependencies ++= Seq(
       catsCore,
       catsKernel,
       catsEffect,
+      catsEffect,
+      circeCore,
+      circeGeneric,
+      circeParser,
       decline,
       declineEffect,
+      fs2,
+      fs2io,
       srdf,
       srdfJena,
-      shex
+      shex,
+      // utils % "test -> test; compile -> compile",
+      wshex,
+      wdtk_dumpfiles,
+      wdtk_wikibaseapi,
+      slf4j_api,
+      slf4j_log4j12,
+      log4cats_slf4j
     ),
+    testFrameworks += MUnitFramework,
     fork := true,
     ThisBuild / turbo := true,
     ThisBuild / crossScalaVersions := supportedScalaVersions,
@@ -110,35 +123,6 @@ lazy val wdsubRoot = project
     buildInfoPackage := "buildinfo"
   )
 
-lazy val wdsub = project
-  .in(file("modules/wdsub"))
-  .settings(
-    crossScalaVersions := supportedScalaVersions,
-    commonSettings
-  )
-  .dependsOn()
-  .settings(
-    libraryDependencies ++= Seq(
-      circeCore,
-      circeGeneric,
-      circeParser,
-      catsEffect,
-//      pprint,
-      fs2,
-      fs2io,
-      utils % "test -> test; compile -> compile",
-      srdf,
-      srdfJena,
-      shex,
-      wshex,
-      wdtk_dumpfiles,
-      wdtk_wikibaseapi,
-      slf4j_api,
-      slf4j_log4j12,
-      log4cats_slf4j
-    ),
-    testFrameworks += MUnitFramework
-  )
 
 lazy val docs = project
   .in(file("wdsub-docs"))
@@ -147,14 +131,14 @@ lazy val docs = project
     mdocSettings,
     ScalaUnidoc / unidoc / unidocProjectFilter := inAnyProject -- inProjects(noDocProjects: _*)
   )
-  .dependsOn(wdsub)
+  // .dependsOn(wdsub)
   .enablePlugins(MdocPlugin, DocusaurusPlugin, ScalaUnidocPlugin)
 
 lazy val mdocSettings = Seq(
   mdocVariables := Map(
     "VERSION" -> version.value
   ),
-  ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(wdsub),
+  // ScalaUnidoc / unidoc / unidocProjectFilter := inProjects(wdsub),
   ScalaUnidoc / unidoc / target := (LocalRootProject / baseDirectory).value / "website" / "static" / "api",
   cleanFiles += (ScalaUnidoc / unidoc / target).value,
   docusaurusCreateSite := docusaurusCreateSite

@@ -6,7 +6,6 @@ import cats.implicits._
 import com.monovore.decline._
 import com.monovore.decline.effect._
 import es.weso.utils.decline._
-import es.weso.utils.named._
 import es.weso.wshex._
 import es.weso.wshex.matcher._
 import es.weso.wdsub._
@@ -17,31 +16,12 @@ import java.nio.file.StandardOpenOption._
 import java.nio.file.{Path, Files => JavaFiles}
 import es.weso.utils.VerboseLevel
 import es.weso.wshex.WShExFormat._
-import es.weso.wikibasedel.EntityFetcher
+import es.weso.wikibase.EntityFetcher
 import es.weso.wdsub.fs2processor._
 import es.weso.wdsub.wdtk.DumpProcessor
 import es.weso.utils.VerboseLevel._
-import es.weso.wbmodel.serializer.WBSerializeFormat
-import scala.concurrent.duration.MILLISECONDS
-import scala.concurrent.duration.FiniteDuration
-sealed abstract class DumpFormat extends Named {
-  def toWBSerializeFormat: WBSerializeFormat
-}
-object DumpFormat {
- def availableFormats = List(JSON, Turtle, Plain) 
- case object JSON extends DumpFormat {
-   override def name = "JSON"
-   override def toWBSerializeFormat: WBSerializeFormat = WBSerializeFormat.JSON
- }
- case object Turtle extends DumpFormat {
-  override def name = "TURTLE"
-  override def toWBSerializeFormat: WBSerializeFormat = WBSerializeFormat.Turtle
- }
- case object Plain extends DumpFormat {
-  override def name = "PLAIN"
-  override def toWBSerializeFormat: WBSerializeFormat = WBSerializeFormat.Plain
- }
-}
+import scala.concurrent.duration._ 
+import java.time.Instant
 
 
 case class ProcessEntity(entity: String)
@@ -75,6 +55,7 @@ object Main
   private val showCounter = Opts.flag("showCounter", "Show counter at the end of process").orTrue
   private val showTime = Opts.flag("showTime", "Show processing time").orTrue
   private val showSchema  = Opts.flag("showSchema", "Show schema").orFalse
+  private val mergeOrs  = Opts.flag("mergeOrs", "Merge items in ORs").orFalse
 
 //  private val compressOutput = Opts.flag("compressOutput", "compress output").orTrue
   lazy val booleans = List("true", "false")
@@ -104,8 +85,8 @@ object Main
     validatedList("dumpFormat", DumpFormat.availableFormats, Some(DumpFormat.JSON))
 
   private val dumpOpts: Opts[DumpOptions] =
-    (verbose, showCounter, showTime, compressOutput, showSchema, dumpMode, dumpFormat).mapN {
-      case (v, sc, st, co, ss, dm, df) =>
+    (verbose, showCounter, showTime, compressOutput, showSchema, dumpMode, mergeOrs, dumpFormat).mapN {
+      case (v, sc, st, co, ss, dm, mo, df) =>
         DumpOptions.default
           .withVerbose(v)
           .withShowCounter(sc)
@@ -113,6 +94,7 @@ object Main
           .withCompressOutput(sc)
           .withShowSchema(ss)
           .withDumpMode(dm)
+          .withMergeOrs(mo)
           .withDumpFormat(df.toWBSerializeFormat)
     }
 
@@ -165,6 +147,11 @@ object Main
   def getCurrentTime: IO[FiniteDuration] = 
     IO.realTime
 
+  def showTime(d: FiniteDuration): String = {
+    val t = Instant.ofEpochMilli(d.toMillis)
+    t.toString
+  }
+
   def dump(
       filePath: Path,
       actionOpt: DumpActionOpt,
@@ -201,48 +188,12 @@ object Main
       } yield exitCode
   } 
     _ <- if (dumpOptions.showTime) 
-       IO.println(s"""|Start time: ${startTime}
-                     |End time:   ${endTime}
-                     |Difference: ${endTime - startTime}
+       IO.println(s"""|Start time: ${showTime(startTime)}
+                     |End time:   ${showTime(endTime)}
+                     |Difference: ${(endTime - startTime).toCoarsest}
                      |""".stripMargin)
       else 
         IO.pure(())  
   } yield ExitCode.Success
 
-/*    getCurrentTime.flatMap(startTime =>     
-    (processor match {
-      case Processor.Fs2 =>
-      for {
-        action <- actionOpt.toDumpAction(dumpOptions)
-        is     <- IO { JavaFiles.newInputStream(filePath) }
-        os <- maybeOutPath match {
-          case Some(outPath) => Some(JavaFiles.newOutputStream(outPath, CREATE_NEW)).pure[IO]
-          case None          => none[OutputStream].pure[IO]
-        }
-        refResults <- Ref[IO].of(DumpResults.initial)
-        withEntry = (action.withEntry(refResults) _)
-        results <- IODumpProcessor.process(is, os, action.start, withEntry, action.sep, action.end, refResults, dumpOptions)
-      } yield results.toExitCode
-    case Processor.WDTK =>
-      for {
-        action <- actionOpt.toDumpAction(dumpOptions)
-        exitCode <- action match {
-          case da: DumpAction.FilterBySchema =>
-            for {
-              results <- DumpProcessor
-                .dumpProcess(filePath, maybeOutPath, da.schema, dumpOptions)
-            } yield results.toExitCode
-          case _ => IO.println(s"Not implemented yet") *> ExitCode.Error.pure[IO]
-        }
-      } yield exitCode
-  })).flatMap(_ => 
-    getCurrentTime.flatMap(endTime => 
-    if (dumpOptions.showTime) 
-      IO.println(s"""|Start time: ${startTime}
-                     |End time:   ${endTime}
-                     |Difference: ${endTime - startTime}
-                     |""".stripMargin)
-    else IO.pure(())                 
-    ))
-*/
 }

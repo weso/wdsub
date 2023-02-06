@@ -5,7 +5,6 @@ PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 PREFIX :    <http://example.org/>
 
 start= @:active_site OR 
-#       @:human OR
        @:anatomical_structure OR
 	     @:binding_site OR
 	     @:biological_pathway OR

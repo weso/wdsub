@@ -5,6 +5,7 @@ import cats.implicits._
 import cats.data.Validated
 import es.weso.utils.named._
 
+import es.weso.utils.named.Named
 package object decline {
 
   def validatedList[A <: Named](optName: String, ls: List[A], default: Option[A]): Opts[A] = {

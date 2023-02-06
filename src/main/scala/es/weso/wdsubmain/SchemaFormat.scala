@@ -2,6 +2,7 @@ package es.weso.wdsubmain
 import es.weso.utils.named._
 import es.weso.wshex.WShExFormat
 
+import es.weso.utils.named.Named
 sealed trait SchemaFormat extends Named {
   val wshexFormat: WShExFormat
 }

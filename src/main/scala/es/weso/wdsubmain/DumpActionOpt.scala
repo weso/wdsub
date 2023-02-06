@@ -9,6 +9,7 @@ import es.weso.utils.VerboseLevel
 import cats.implicits._
 import es.weso.utils.named._
 
+import es.weso.utils.named.Named
 sealed abstract class DumpActionOpt extends Named {
   def toDumpAction(opts: DumpOptions): IO[DumpAction]
 }
