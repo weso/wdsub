@@ -1,0 +1,13 @@
+prefix wd:   <http://www.wikidata.org/entity/>
+prefix wdt:  <http://www.wikidata.org/prop/direct/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX p: <http://www.wikidata.org/prop/>
+
+
+start = @<City>
+
+<City> EXTRA wdt:P31 {
+  rdfs:label [ @en @es @ar ] ;
+  p:P31 { ps:P31 [ wd:Q515 ] }  ;
+}

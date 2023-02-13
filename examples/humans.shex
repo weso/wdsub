@@ -1,5 +1,11 @@
-prefix :  <http://www.wikidata.org/entity/>
+prefix wd:   <http://www.wikidata.org/entity/>
+prefix wdt:  <http://www.wikidata.org/prop/direct/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-<ShapeProteinOrGene> {
-    :P31 [ :Q8054 :Q7187 ];
+start = @<Human>
+
+<Human> EXTRA wdt:P31 {
+  rdfs:label [ @en ] ;
+  wdt:P31    [ wd:Q5 ]  ;
+  wdt:P19    .
 }

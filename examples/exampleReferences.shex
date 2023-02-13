@@ -1,0 +1,23 @@
+prefix wd:   <http://www.wikidata.org/entity/>
+prefix wdt:  <http://www.wikidata.org/prop/direct/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix prov: <http://www.w3.org/ns/prov#>
+PREFIX pq: <http://www.wikidata.org/prop/qualifier/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX pr: <http://www.wikidata.org/prop/reference/>
+
+start = @<HumanReferences>
+
+<HumanReferences> EXTRA wdt:P31 p:P31 {
+  rdfs:label [ @en ] ;
+  wdt:P31    [ wd:Q5 ]  ;
+  p:P31 {
+    ps:P31 [ wd:Q5 ] ;
+    prov:wasDerivedFrom @<References> {2}
+  }
+}
+
+<References> {
+  pr:P248 . ; 
+}

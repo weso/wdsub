@@ -1,0 +1,27 @@
+# Motivation: To get all genes from wikidata multiple shapes need to be considered.
+# Take for example the following query: https://w.wiki/5vpa, which returns all the wikidata items with a property for
+# entry gene, but which is missing the instance of (P31) property for gene (Q7187)
+
+# So to fetch more shape than only those annotated with the P31 Q7187 statement. The following
+# Shape Expression is written to fetch all identifiers related to genes
+
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+start = @<Gene_by_ontology> OR @<Gene_by_identifier>
+
+<Gene_by_ontology> {
+    p:P31 {
+       ps:P31 [wd:Q7187] ;
+       prov:wasDerivedFrom . ;
+    } ;
+}
+
+<Gene_by_identifier> {
+    wdt:P351 . 
+    } OR {
+    wdt:P353 .
+    }

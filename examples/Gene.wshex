@@ -1,0 +1,14 @@
+prefix :   <http://www.wikidata.org/entity/>
+
+start = @<Other>
+
+<City> Label (es -> ., en -> /^Oslo/) EXTRA :P31 {
+  :P31 [ :Q515 ] 
+}
+
+<Other> Label (es -> ., en -> .) EXTRA :P19 {
+  :P19 . +
+} OR 
+Label (es -> ., en -> .) EXTRA :P2067 {
+  :P2067 . +  
+}

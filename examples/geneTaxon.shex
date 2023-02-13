@@ -1,0 +1,26 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX :    <http://example.org/>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+# Wikidata SPARQL query that raises timeout: https://w.wiki/6BGL
+start= @:gene OR
+       @:taxon 
+       
+:gene EXTRA wdt:P31 {
+  rdfs:label         [ @en @es @fa @nl ]      ;  
+  schema:description [ @en @es @fa @nl ]      ;
+  skos:altLabel      [ @en @es @fa @nl ] *    ;
+  wdt:P31            [ wd:Q7187 ] ;
+  wdt:P703           @:taxon *    ;
+}
+
+:taxon EXTRA wdt:P31 {
+  rdfs:label [ @en @es @fa @nl ] ;  
+  schema:description [ @en @es @fa @nl ] ;
+  skos:altLabel [ @en @es @fa @nl ] * ;
+  wdt:P31 [ wd:Q16521 ] ; 
+}

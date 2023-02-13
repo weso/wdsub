@@ -1,0 +1,6 @@
+prefix :  <http://www.wikidata.org/entity/>
+
+<Human> {
+ :P31 [ :Q5 ] ;
+ :P19 .
+}

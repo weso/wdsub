@@ -1,0 +1,292 @@
+PREFIX p: <http://www.wikidata.org/prop/>
+PREFIX ps: <http://www.wikidata.org/prop/statement/>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+
+start = @<taxon_by_wd_ontology> OR @<taxon_by_identifier>
+
+<taxon_by_wd_ontology> {
+    wdt:P31  [wd:Q16521] ;
+}
+
+<taxon_by_identifier>
+{wdt:P627 . +;} OR # IUCN taxon ID
+{wdt:P685 . +;} OR # NCBI taxonomy ID
+{wdt:P687 . +;} OR # BHL page ID
+{wdt:P815 . +;} OR # ITIS TSN
+{wdt:P830 . +;} OR # Encyclopedia of Life ID
+{wdt:P838 . +;} OR # BioLib taxon ID
+{wdt:P842 . +;} OR # Fossilworks taxon ID
+{wdt:P846 . +;} OR # GBIF taxon ID
+{wdt:P850 . +;} OR # WoRMS-ID for taxa
+{wdt:P938 . +;} OR # FishBase species ID
+{wdt:P959 . +;} OR # MSW ID
+{wdt:P960 . +;} OR # Tropicos ID
+{wdt:P961 . +;} OR # IPNI plant ID
+{wdt:P962 . +;} OR # MycoBank taxon name ID
+{wdt:P1070 . +;} OR # PlantList-ID
+{wdt:P1076 . +;} OR # ICTV virus ID
+{wdt:P1348 . +;} OR # AlgaeBase URL
+{wdt:P1391 . +;} OR # Index Fungorum ID
+{wdt:P1421 . +;} OR # GRIN URL
+{wdt:P1727 . +;} OR # Flora of North America taxon ID
+{wdt:P1743 . +;} OR # Bradley and Fletcher checklist number
+{wdt:P1744 . +;} OR # Agassiz checklist number
+{wdt:P1745 . +;} OR # VASCAN ID
+{wdt:P1746 . +;} OR # ZooBank ID for name or act
+{wdt:P1747 . +;} OR # Flora of China ID
+{wdt:P1761 . +;} OR # Watson & Dallwitz family ID
+{wdt:P1772 . +;} OR # USDA PLANTS ID
+{wdt:P1832 . +;} OR # GrassBase ID
+{wdt:P1895 . +;} OR # Fauna Europaea ID
+{wdt:P1939 . +;} OR # Dyntaxa ID
+{wdt:P1940 . +;} OR # conifers.org ID
+{wdt:P1991 . +;} OR # LPSN URL
+{wdt:P1992 . +;} OR # Plazi ID
+{wdt:P2024 . +;} OR # German cattle breed ID
+{wdt:P2026 . +;} OR # Avibase ID
+{wdt:P2036 . +;} OR # African Plant Database ID
+{wdt:P2040 . +;} OR # CITES Species+ ID
+{wdt:P2426 . +;} OR # Xeno-canto species ID
+{wdt:P2434 . +;} OR # Panarctic Flora ID
+{wdt:P2455 . +;} OR # Species Profile and Threats Database ID
+{wdt:P2464 . +;} OR # BugGuide taxon ID
+{wdt:P2752 . +;} OR # New Zealand Organisms Register ID
+{wdt:P2794 . +;} OR # Index Hepaticarum ID
+{wdt:P2809 . +;} OR # Australasian Pollen and Spore Atlas Code
+{wdt:P2833 . +;} OR # ARKive ID
+{wdt:P2946 . +;} OR # BacDive ID
+{wdt:P3031 . +;} OR # EPPO Code
+{wdt:P3060 . +;} OR # ButMoth ID
+{wdt:P3064 . +;} OR # LepIndex ID
+{wdt:P3088 . +;} OR # Catalogue of Life in Taiwan ID
+{wdt:P3099 . +;} OR # Internet Bird Collection species ID
+{wdt:P3100 . +;} OR # Flora of Australia ID (old)
+{wdt:P3101 . +;} OR # FloraBase ID
+{wdt:P3102 . +;} OR # Plantarium ID
+{wdt:P3105 . +;} OR # Tela Botanica ID
+{wdt:P3130 . +;} OR # NSW Flora ID
+{wdt:P3151 . +;} OR # iNaturalist taxon ID
+{wdt:P3186 . +;} OR # TAXREF ID
+{wdt:P3240 . +;} OR # NBN System Key
+{wdt:P3288 . +;} OR # World Spider Catalog ID
+{wdt:P3322 . +;} OR # Vlinderstichting-ID
+{wdt:P3380 . +;} OR # FAO 2007 genetic resource ID
+{wdt:P3398 . +;} OR # Butterflies and Moths of North America ID
+{wdt:P3405 . +;} OR # Nederlands Soortenregister ID
+{wdt:P3420 . +;} OR # Calflora ID
+{wdt:P3444 . +;} OR # eBird taxon ID
+{wdt:P3459 . +;} OR # Euring number
+{wdt:P3591 . +;} OR # WCSPF ID
+{wdt:P3594 . +;} OR # Araneae Spider ID
+{wdt:P3606 . +;} OR # BOLD Systems taxon ID
+{wdt:P3746 . +;} OR # Wildflowers of Israel ID
+{wdt:P3795 . +;} OR # Flora of Israel Online plant ID
+{wdt:P4024 . +;} OR # ADW taxon ID
+{wdt:P4122 . +;} OR # PalDat plant ID
+{wdt:P4125 . +;} OR # Titan ID
+{wdt:P4194 . +;} OR # CNPS ID
+{wdt:P4301 . +;} OR # PfaF ID
+{wdt:P4311 . +;} OR # FOIH taxon ID
+{wdt:P4433 . +;} OR # Indian Foundation for Butterflies ID
+{wdt:P4526 . +;} OR # ABA bird ID
+{wdt:P4567 . +;} OR # BTO five-letter code
+{wdt:P4630 . +;} OR # DORIS ID
+{wdt:P4664 . +;} OR # Wiki Aves bird ID
+{wdt:P4715 . +;} OR # Guide to North American Birds ID
+{wdt:P4728 . +;} OR # uBio ID
+{wdt:P4753 . +;} OR # Ecocrop ID
+{wdt:P4758 . +;} OR # MONA ID
+{wdt:P4798 . +;} OR # BTO Birds of Britain ID
+{wdt:P4807 . +;} OR # Fauna Europaea New ID
+{wdt:P4855 . +;} OR # Phasmida Species File ID
+{wdt:P4902 . +;} OR # CONABIO ID
+{wdt:P5003 . +;} OR # Amphibians of India ID
+{wdt:P5036 . +;} OR # AmphibiaWeb Species ID
+{wdt:P5037 . +;} OR # Plants of the World online ID
+{wdt:P5055 . +;} OR # IRMNG ID
+{wdt:P5179 . +;} OR # FloraCatalana ID
+{wdt:P5216 . +;} OR # GONIAT taxon ID
+{wdt:P5221 . +;} OR # Tree of Life Web Project ID
+{wdt:P5257 . +;} OR # BirdLife taxon ID
+{wdt:P5263 . +;} OR # Czech NDOP taxon ID
+{wdt:P5299 . +;} OR # AntWeb ID
+{wdt:P5354 . +;} OR # Amphibian Species of the World ID
+{wdt:P5397 . +;} OR # Tierstimmenarchiv ID
+{wdt:P5473 . +;} OR # The Reptile Database ID
+{wdt:P5626 . +;} OR # Global Invasive Species Database ID
+{wdt:P5683 . +;} OR # iNaturalist observation ID
+{wdt:P5698 . +;} OR # Invasive Species Compendium Datasheet ID
+{wdt:P5862 . +;} OR # Lepidoptera of Belgium ID
+{wdt:P5864 . +;} OR # Enciclovida ID
+{wdt:P5945 . +;} OR # VicFlora ID
+{wdt:P5953 . +;} OR # NT Flora ID
+{wdt:P5984 . +;} OR # APNI ID
+{wdt:P6003 . +;} OR # Center for Biological Diversity ID
+{wdt:P6018 . +;} OR # SeaLifeBase ID
+{wdt:P6019 . +;} OR # Species at Risk public registry ID
+{wdt:P6021 . +;} OR # Hymenoptera Online taxon ID
+{wdt:P6025 . +;} OR # Oiseaux.net ID
+{wdt:P6028 . +;} OR # Hypericum MySpecies ID
+{wdt:P6030 . +;} OR # ECOS ID
+{wdt:P6033 . +;} OR # CMS ID
+{wdt:P6034 . +;} OR # Plant Finder ID
+{wdt:P6035 . +;} OR # C.V. Starr Virtual Herbarium ID
+{wdt:P6036 . +;} OR # Wild Herps ID
+{wdt:P6039 . +;} OR # Australian Faunal Directory ID
+{wdt:P6040 . +;} OR # BirdLife Australia ID
+{wdt:P6041 . +;} OR # John J. Audubon's Birds of America ID
+{wdt:P6042 . +;} OR # Echinoid Directory ID
+{wdt:P6043 . +;} OR # Espèces Envahissantes Outre-mer ID
+{wdt:P6044 . +;} OR # FEIS ID
+{wdt:P6045 . +;} OR # Global Raptor Information Network ID
+{wdt:P6046 . +;} OR # MNHN taxon ID
+{wdt:P6047 . +;} OR # Neotropical Birds ID
+{wdt:P6048 . +;} OR # New Zealand Birds Online ID
+{wdt:P6049 . +;} OR # NOAA Fisheries Species Directory ID
+{wdt:P6050 . +;} OR # OSF Online ID
+{wdt:P6051 . +;} OR # Sea Slug Forum ID
+{wdt:P6052 . +;} OR # Cockroach Species File ID
+{wdt:P6053 . +;} OR # Coreoidea Species File ID
+{wdt:P6054 . +;} OR # GT IBMA ID
+{wdt:P6055 . +;} OR # Mantodea Species File ID
+{wdt:P6056 . +;} OR # Red List of South African Plants ID
+{wdt:P6057 . +;} OR # Systematic Catalog of Culicidae ID
+{wdt:P6061 . +;} OR # Plant Parasites of Europe ID
+{wdt:P6092 . +;} OR # Map of Life ID
+{wdt:P6093 . +;} OR # AfroMoths ID
+{wdt:P6094 . +;} OR # FloraWeb ID
+{wdt:P6096 . +;} OR # FLOW ID
+{wdt:P6098 . +;} OR # Info Flora ID
+{wdt:P6101 . +;} OR # Mushroom Observer ID
+{wdt:P6103 . +;} OR # Michigan Flora ID
+{wdt:P6105 . +;} OR # Observation.org ID
+{wdt:P6114 . +;} OR # Portal to the Flora of Italy ID
+{wdt:P6115 . +;} OR # Central African Plants ID
+{wdt:P6128 . +;} OR # Threatened Species Link ID
+{wdt:P6137 . +;} OR # APA ID
+{wdt:P6139 . +;} OR # Virtual Guide to the Flora of Mongolia ID
+{wdt:P6142 . +;} OR # Verspreidingsatlas.nl ID
+{wdt:P6159 . +;} OR # Atlas of Florida Plants ID
+{wdt:P6161 . +;} OR # Invasive Plant Atlas of the United States ID
+{wdt:P6163 . +;} OR # NAS ID
+{wdt:P6176 . +;} OR # Cal-IPC ID
+{wdt:P6177 . +;} OR # EUNIS ID for species
+{wdt:P6209 . +;} OR # SEINet ID
+{wdt:P6227 . +;} OR # Flora of Wisconsin ID
+{wdt:P6268 . +;} OR # Danmarks svampeatlas ID
+{wdt:P6285 . +;} OR # Weeds in Ontario ID
+{wdt:P6289 . +;} OR # ODNR Division of Wildlife ID
+{wdt:P6341 . +;} OR # IFPNI species ID
+{wdt:P6347 . +;} OR # The White-files species ID
+{wdt:P6349 . +;} OR # Lace Bugs Database ID
+{wdt:P6366 . +;} OR # Microsoft Academic ID
+{wdt:P6376 . +;} OR # Psyl'list species ID
+{wdt:P6408 . +;} OR # COOL species ID
+{wdt:P6433 . +;} OR # Global Species ID
+{wdt:P6481 . +;} OR # Strepsiptera database species ID
+{wdt:P6485 . +;} OR # Brentidae of the world species ID
+{wdt:P6487 . +;} OR # Illustrated catalog of Tessaratomidae species ID
+{wdt:P6516 . +;} OR # ScaleNet ID
+{wdt:P6704 . +;} OR # FrogMAP ID
+{wdt:P6756 . +;} OR # Flora of Australia ID (new)
+{wdt:P6864 . +;} OR # eBiodiversity ID
+{wdt:P6904 . +;} OR # ATRF ID
+{wdt:P6933 . +;} OR # SA Flora ID
+{wdt:P6982 . +;} OR # Australian Faunal Directory publication ID
+{wdt:P7066 . +;} OR # Taxonomicon ID
+{wdt:P7090 . +;} OR # Australian Marine Algal Name Index ID
+{wdt:P7202 . +;} OR # Belgian Species List ID
+{wdt:P7224 . +;} OR # Insects (Insecta) of the World ID
+{wdt:P7254 . +;} OR # Pilze Deutschland ID
+{wdt:P7255 . +;} OR # Moose Deutschland ID
+{wdt:P7472 . +;} OR # National Marine Biological Library  ID
+{wdt:P7496 . +;} OR # NZPCN ID
+{wdt:P7546 . +;} OR # Flowers of India ID
+{wdt:P7552 . +;} OR # Finnish Biodiversity Information Facility's Species List ID
+{wdt:P7715 . +;} OR # World Flora Online ID
+{wdt:P7743 . +;} OR # Microworld ID
+{wdt:P7905 . +;} OR # AnimalBase ID
+{wdt:P8061 . +;} OR # AGROVOC ID
+{wdt:P8145 . +;} OR # Psocodea Species File ID
+{wdt:P8164 . +;} OR # DPVweb ID
+{wdt:P8468 . +;} OR # Queensland Biota ID
+{wdt:P8469 . +;} OR # Australian Weed ID
+{wdt:P8660 . +;} OR # Native Plants Database ID
+{wdt:P8707 . +;} OR # NBIC taxon ID
+{wdt:P8724 . +;} OR # BHL name ID
+{wdt:P8765 . +;} OR # Royal Horticultural Society plant ID
+{wdt:P8792 . +;} OR # Bioweb Ecuador ID
+{wdt:P8892 . +;} OR # edition humboldt digital Flora ID
+{wdt:P8915 . +;} OR # ZOBODAT taxon ID
+{wdt:P9076 . +;} OR # Australian Fungi ID
+{wdt:P9093 . +;} OR # Australian Lichen ID
+{wdt:P9157 . +;} OR # Open Tree of Life ID
+{wdt:P9243 . +;} OR # NParks Flora & Fauna Web ID
+{wdt:P9408 . +;} OR # Washington Flora Checklist ID
+{wdt:P9423 . +;} OR # OregonFlora taxon ID
+{wdt:P9460 . +;} OR # Washington Rare Plant Field Guide ID (PDF version)
+{wdt:P9501 . +;} OR # Oregon Flora Image Project ID
+{wdt:P9503 . +;} OR # MyBIS species ID
+{wdt:P9576 . +;} OR # Danish 2010 redlist identifier
+{wdt:P9580 . +;} OR # Microlepidoptera.nl ID
+{wdt:P9595 . +;} OR # SOR bird ID
+{wdt:P9596 . +;} OR # ToateAnimalele ID
+{wdt:P9608 . +;} OR # Moths and Butterflies of Europe and North Africa ID
+{wdt:P9649 . +;} OR # Dutch Caribbean Species Register ID
+{wdt:P9654 . +;} OR # Burke Herbarium Image Collection ID
+{wdt:P9684 . +;} OR # Idaho Species ID
+{wdt:P9685 . +;} OR # Montana Field Guide species ID
+{wdt:P9690 . +;} OR # E-Fauna BC species ID
+{wdt:P9691 . +;} OR # E-Flora BC species ID
+{wdt:P9741 . +;} OR # Pladias ID
+{wdt:P9799 . +;} OR # Palynodata taxa ID
+{wdt:P9839 . +;} OR # izeltlabuak.hu ID
+{wdt:P9876 . +;} OR # Endemia.nc animal taxon ID
+{wdt:P9889 . +;} OR # NZTCS ID
+{wdt:P9908 . +;} OR # Hardy's Guide to Marine Gastropods URL
+{wdt:P9932 . +;} OR # Vietherb species ID
+{wdt:P9967 . +;} OR # Washington Rare Plant Field Guide ID (Web version)
+{wdt:P10003 . +;} OR # Arachne.org.au ID
+{wdt:P10007 . +;} OR # Birdata ID
+{wdt:P10064 . +;} OR # NWT Species ID
+{wdt:P10191 . +;} OR # All About Birds ID
+{wdt:P10243 . +;} OR # NatureServe Explorer ID
+{wdt:P10331 . +;} OR # Washington Native Plant Society Plant Directory ID
+{wdt:P10333 . +;} OR # New York Flora Atlas ID
+{wdt:P10366 . +;} OR # Gardens Navigator ID
+{wdt:P10420 . +;} OR # Index to Organism Names ID
+{wdt:P10528 . +;} OR # Madrean Discovery Expeditions Flora Database ID
+{wdt:P10529 . +;} OR # Madrean Discovery Expeditions Fauna Database ID
+{wdt:P10534 . +;} OR # Australian Reptile Online Database ID
+{wdt:P10538 . +;} OR # Leafsnap ID
+{wdt:P10561 . +;} OR # Virginia Tech Dendrology Factsheets ID
+{wdt:P10585 . +;} OR # Catalogue of Life ID
+{wdt:P10701 . +;} OR # Reflora ID
+{wdt:P10709 . +;} OR # North Carolina Extension Gardener Plant Toolbox ID
+{wdt:P10711 . +;} OR # Invasive.org species ID
+{wdt:P10778 . +;} OR # CPNI ID
+{wdt:P10791 . +;} OR # PlantFiles taxon ID
+{wdt:P10792 . +;} OR # Garden.org Plants Database ID
+{wdt:P10793 . +;} OR # Woody Plants Database ID
+{wdt:P10794 . +;} OR # Macaulay Library taxon ID
+{wdt:P10833 . +;} OR # Great Plant Picks ID
+{wdt:P10835 . +;} OR # UK Beetles ID
+{wdt:P10907 . +;} OR # Paleobiology Database ID
+{wdt:P10921 . +;} OR # AEDA taxonomic keyword ID
+{wdt:P10931 . +;} OR # ZOBODAT publication ID
+{wdt:P10943 . +;} OR # Rare Plant Fact Sheets ID
+{wdt:P11022 . +;} OR # Garden Plant Finder ID
+{wdt:P11043 . +;} OR # Hesperomys taxon ID
+{wdt:P11044 . +;} OR # Colorado Plant Database ID
+{wdt:P11067 . +;} OR # UConn Plant Database ID
+{wdt:P11076 . +;} OR # Biota Information System of New Mexico species ID
+{wdt:P11078 . +;} OR # Naturbasen species ID
+{wdt:P11082 . +;} OR # Woody Plants Database cultivar ID
+{wdt:P11083 . +;} OR # Maryland Plant Atlas ID
+{wdt:P11084 . +;} OR # Maryland Biodiversity Project species ID
+{wdt:P11087 . +;} OR # eGardenGo plant ID
+{wdt:P11092 . +;} OR # Nebraska Invasive Species Program species ID
+{wdt:P11114 . +;} OR # Illinois Plants ID
+{wdt:P11189 . +;} # Louisiana Plant ID
