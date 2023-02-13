@@ -1,4 +1,4 @@
-package es.weso.wdshex
+package es.weso.wshex
 import munit._
 import es.weso.wshex.matcher.Matcher
 
