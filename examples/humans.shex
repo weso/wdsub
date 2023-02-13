@@ -1,6 +1,5 @@
 prefix :  <http://www.wikidata.org/entity/>
 
-<Human> {
-    :P31 [ :Q5 ] ;
-    :P19 .
+<ShapeProteinOrGene> {
+    :P31 [ :Q8054 :Q7187 ];
 }
