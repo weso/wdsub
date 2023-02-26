@@ -1,7 +1,7 @@
 # wdsub
-This project is a Wikibase Subsetting tool based on [Shape Expressions(ShEx)](http://www.shex.io).
+This project is a Wikibase Subsetting tool based on [Shape Expressions (ShEx)](http://www.shex.io).
 
-The project processes wikidata dumps and extracts a subset based on a Shape Expression.
+The project processes Wikidata dumps and extracts a subset based on a Shape Expression.
 
 ## Usage as a command line tool
 
@@ -60,13 +60,13 @@ The dump options are:
      --out <file>, -o <file>
          output path
      --verbose
-         Verbose mode
+         verbose mode
      --showCounter
-         Show counter at the end of process
+         show counter at the end of process
      --compressOutput <string>
-         Compress output. Possible values: true,false
+         compress output. Possible values: true,false
      --showSchema
-         Show schema
+         show schema
      --dumpMode <string>
          dumpMode. Possible values: OnlyMatched,WholeEntity,OnlyId
      --dumpFormat <string>
@@ -77,7 +77,7 @@ The dump options are:
 
 ## Usage from docker
 
-The docker image is published as [wesogroup/wdsub](https://hub.docker.com/repository/docker/wesogroup/wdsub)
+The docker image is published as [wesogroup/wdsub](https://hub.docker.com/repository/docker/wesogroup/wdsub).
 
 In order to process dumps from docker, you can run:
 
@@ -88,18 +88,19 @@ docker run -d -v [folder-with-dumps]:/data -v [folder-with-schemas]:/shex -v [ou
 
 ## Building and compiling
 
-### Prerrequisites: Install scala
+### Prerequisites: Install Scala
 
-The tool has been implemented in [Scala](https://www.scala-lang.org/) and uses  [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you first need to install sbt. 
+The tool has been implemented in [Scala](https://www.scala-lang.org/) and uses [sbt](https://www.scala-sbt.org/) for compilation. In order to create a standalone binary, you first need to install sbt. 
 
-Install instructions scala:
+Install instructions Scala:
 * Linux: https://www.scala-sbt.org/1.x/docs/Installing-sbt-on-Linux.html
 
 ### Clone this repository
-Once scala is installed clone this repository from github.
+Once Scala is installed, clone this repository from GitHub.
 ```
 git clone https://github.com/weso/wdsub.git
 ``` 
+
 ### Go to the cloned directory
 ``` 
 cd wdsub
@@ -117,7 +118,7 @@ Once it has been run, the binary will be available as a compressed file at:
 target/universal/wdsubroot-version.zip
 ```
 
-Once that file is uncompressed, the executable script is in folder `bin` and is called `wdsubroot`
+Once that file is uncompressed, the executable script is in folder `bin` and is called `wdsubroot`.
 
 ### Publish docker image
 
@@ -135,7 +136,7 @@ sbt docker:publish
 
 ## More information
 
-Another tool that creates subsets from wikidata dumps is [WDumper](https://github.com/bennofs/wdumper)
+Another tool that creates subsets from wikidata dumps is [WDumper](https://github.com/bennofs/wdumper).
 
 ## Author & contributors
 
